@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStuffsTable extends Migration
+class CreateResponsabilitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateStuffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stuffs', function (Blueprint $table) {
+        Schema::create('responsabilities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('school_id');
+            $table->integer('school_id')->nullable(); //Se for nulo valerá para todas as escolas.
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateStuffsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stuffs');
+        Schema::dropIfExists('responsabilities');
     }
 }

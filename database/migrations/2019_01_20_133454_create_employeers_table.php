@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStuffsTable extends Migration
+class CreateEmployeersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateStuffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stuffs', function (Blueprint $table) {
+        Schema::create('employeers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->integer('employeer_data_id');
+            $table->integer('responsability_id');
+            $table->integer('birth_certificate_id');
+            $table->integer('address_id');
+            $table->integer('general_registration_id')->nullable(); //Quando for nulo é uma instituição.
             $table->integer('school_id');
             $table->timestamps();
         });
@@ -28,6 +32,6 @@ class CreateStuffsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stuffs');
+        Schema::dropIfExists('employeers');
     }
 }

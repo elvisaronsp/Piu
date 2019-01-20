@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSecretariesTable extends Migration
+class CreateBirthCertificatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class CreateSecretariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('secretaries', function (Blueprint $table) {
+        Schema::create('birth_certificates', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('book');
+            $table->string('birth_number');
+            $table->string('leaf');
+            $table->string('term');
+            $table->date('emission');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateSecretariesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('secretaries');
+        Schema::dropIfExists('birth_certificates');
     }
 }
