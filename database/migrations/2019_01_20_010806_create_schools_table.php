@@ -16,6 +16,11 @@ class CreateSchoolsTable extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('code')->nullable();
+            $table->integer('address_id');
+            $table->string('act_creation')->nullable();
+            $table->date('act_creation_date')->nullable();
+            $table->string('direc_number')->nullable();
             $table->string('logo');
             $table->string('city_logo')->nullable();
             $table->timestamps();
