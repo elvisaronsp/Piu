@@ -25,7 +25,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 import LoginComponent from './components/LoginComponent';
 import AddressComponent from './components/AddressComponent';
-import SchoolRegisterComponent from './components/SchoolRegisterComponent';
+import SchoolComponent from './components/SchoolComponent';
+import UserComponent from './components/UserComponent';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,5 +36,5 @@ import SchoolRegisterComponent from './components/SchoolRegisterComponent';
 
 const app = new Vue({
     el: '#app',
-    components: { LoginComponent, AddressComponent, SchoolRegisterComponent }
+    components: { LoginComponent, AddressComponent, SchoolComponent, UserComponent }
 });

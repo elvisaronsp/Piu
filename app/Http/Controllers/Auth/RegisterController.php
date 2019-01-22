@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\School;
+use App\Addreess;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,9 +51,26 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            //User
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            //Address
+            'street' => ['required'],
+            'state' => ['required'],
+            'city' => ['required'],
+            'cod_postal' => ['required'],
+            'number' => ['required'],
+            'complement' => '',
+            //School
+            'name' => ['required', 'string', 'max:255'],
+            'code' => ['required', 'string', 'max:255'],
+            'act_creation' => ['required'],
+            'act_creation_date' => ['required'],
+            'direc_number' => ['required'],
+            'logo' => ['required'],
+            'logo_city' => ['required'],
+            'address_id' => ['required']
+            //
         ]);
     }
 
@@ -63,10 +82,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $logo = $data['logo']->file('logo')->store('logos');
+        $logo_city = $data['logo_city']->file('logo_city')->store('logos_cities');
+        $address = Address::create([
+          'street' => $data['street'],
+          'state' => $data['state'],
+          'city' => $data['city'],
+          'cod_postal' => $data['cod_postal'],
+          'number' => $data['number'],
+          'complement' => $data['complement'],
+        ]);
+
+        $school = School::create([
+          'name' => $data['name'],
+          'code' => $data['code'],
+          'act_creation' => $data['act_creation'],
+          'act_creation_date' => $data['act_creation_date'],
+          'direc_number' => $data['direc_number'],
+          'logo' => $logo,
+          'logo_city' => $logo_city,
+          'address_id' => $address->id
+        ]);
+        $user = User::create([
+            //'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'school_id' => $school->id
         ]);
+
+        return $user;
     }
 }

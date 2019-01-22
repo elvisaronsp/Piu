@@ -19,7 +19,7 @@ class CreateEmployeersTable extends Migration
             $table->integer('responsability_id');
             $table->integer('birth_certificate_id');
             $table->integer('address_id');
-            $table->integer('general_registration_id')->nullable(); //Quando for nulo é uma instituição.
+            $table->integer('general_registration_id'); //Quando for nulo é uma instituição.
             $table->integer('school_id');
             $table->timestamps();
         });
