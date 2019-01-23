@@ -48,7 +48,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="city_logo">Logotipo do município</label>
-          <input class="form-control-file" type="file" name="city_logo" v-on:change="city_logo" value="">
+          <input class="form-control-file" type="file" name="logo_city" v-on:change="logo_city" value="">
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
           act_creation_date: '',
           direc_number: '',
           logo: '',
-          city_logo: ''
+          logo_city: ''
         }
       }
     }

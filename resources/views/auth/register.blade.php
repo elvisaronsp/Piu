@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container">
-    <form action="/register" method="post">
+    <error-component :errors="{{ $errors }}"></error-component>
+    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="row justify-content-center">
         <div class="col-md-8">

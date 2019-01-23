@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\School;
-use App\Addreess;
+use App\Address;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -60,6 +61,7 @@ class RegisterController extends Controller
             'city' => ['required'],
             'cod_postal' => ['required'],
             'number' => ['required'],
+            'neighborhood' => ['required'],
             'complement' => '',
             //School
             'name' => ['required', 'string', 'max:255'],
@@ -69,7 +71,6 @@ class RegisterController extends Controller
             'direc_number' => ['required'],
             'logo' => ['required'],
             'logo_city' => ['required'],
-            'address_id' => ['required']
             //
         ]);
     }
@@ -82,8 +83,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $logo = $data['logo']->file('logo')->store('logos');
-        $logo_city = $data['logo_city']->file('logo_city')->store('logos_cities');
+        $logo = Storage::putFile('logos', $data['logo']);
+        $logo_city = Storage::putFile('logos_cities', $data['logo_city']);
         $address = Address::create([
           'street' => $data['street'],
           'state' => $data['state'],
@@ -91,6 +92,7 @@ class RegisterController extends Controller
           'cod_postal' => $data['cod_postal'],
           'number' => $data['number'],
           'complement' => $data['complement'],
+          'neighborhood' => $data['neighborhood']
         ]);
 
         $school = School::create([
