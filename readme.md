@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/JJS4ntos/SchoolManager.svg?branch=master)](https://travis-ci.org/JJS4ntos/SchoolManager)
 
-Sistema para gerenciar escolas ou instituições de ensino, fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.
+Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.
 
 ### Principais diretrizes
 
