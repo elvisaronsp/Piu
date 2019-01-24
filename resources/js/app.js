@@ -20,14 +20,16 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('login', require('./components/LoginComponent.vue'));
 
-import LoginComponent from './components/LoginComponent';
-import AddressComponent from './components/AddressComponent';
-import SchoolComponent from './components/SchoolComponent';
-import UserComponent from './components/UserComponent';
-import ErrorComponent from './components/ErrorComponent';
+import LoginComponent from './forms/LoginComponent';
+import AddressComponent from './forms/AddressComponent';
+import SchoolComponent from './forms/SchoolComponent';
+import UserComponent from './forms/UserComponent';
+import ErrorComponent from './forms/ErrorComponent';
+import VocationComponent from './forms/VocationComponent';
+import EmployeerDataComponent from './forms/EmployeerDataComponent';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,5 +39,6 @@ import ErrorComponent from './components/ErrorComponent';
 
 const app = new Vue({
     el: '#app',
-    components: { LoginComponent, AddressComponent, SchoolComponent, UserComponent, ErrorComponent }
+    components: { LoginComponent, AddressComponent, SchoolComponent, UserComponent, ErrorComponent, EmployeerDataComponent },
+    
 });

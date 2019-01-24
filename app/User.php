@@ -10,6 +10,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public static $rules = [
+      'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+      'password' => ['required', 'string', 'min:6', 'confirmed'],
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +32,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function employer(){
+      return $this->belongsTo('App\Employeer');
+    }
+
+    public function school(){
+      return $this->belongsTo('App\School');
+    }
+
 }

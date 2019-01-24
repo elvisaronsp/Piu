@@ -53,24 +53,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             //User
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            User::$rules,
             //Address
-            'street' => ['required'],
-            'state' => ['required'],
-            'city' => ['required'],
-            'cod_postal' => ['required'],
-            'number' => ['required'],
-            'neighborhood' => ['required'],
-            'complement' => '',
+            Address::$rules,
             //School
-            'name' => ['required', 'string', 'max:255'],
-            'code' => ['required', 'string', 'max:255'],
-            'act_creation' => ['required'],
-            'act_creation_date' => ['required'],
-            'direc_number' => ['required'],
-            'logo' => ['required'],
-            'logo_city' => ['required'],
+            School::$rules
             //
         ]);
     }

@@ -23,7 +23,7 @@ class CreateEmployeerDatasTable extends Migration
             $table->string('contract');
             $table->string('statutory');
             $table->integer('workload');
-            $table->string('shift');
+            //$table->string('vocation_id')->nullable();
             $table->longText('observations')->nullable();
             $table->timestamps();
         });
