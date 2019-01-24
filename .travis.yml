@@ -16,8 +16,10 @@ before_script:
   - mysql -e 'create database testing;'
   - npm install npm@latest -g
   - npm install
+  - php artisan telescope:install
   - php artisan key:generate
   - php artisan migrate --step
+  - php artisan db:seed
 script:
   - vendor/bin/phpunit --coverage-text
   - npm run production
