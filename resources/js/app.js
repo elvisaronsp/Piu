@@ -30,6 +30,8 @@ import UserComponent from './forms/UserComponent';
 import ErrorComponent from './forms/ErrorComponent';
 import VocationComponent from './forms/VocationComponent';
 import EmployeerDataComponent from './forms/EmployeerDataComponent';
+import ButtonBarComponent from './components/ButtonBarComponent';
+import SelectAjaxComponent from './forms/elements/SelectAjaxComponent';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -39,6 +41,9 @@ import EmployeerDataComponent from './forms/EmployeerDataComponent';
 
 const app = new Vue({
     el: '#app',
-    components: { LoginComponent, AddressComponent, SchoolComponent, UserComponent, ErrorComponent, EmployeerDataComponent },
-    
+    components: {
+                  LoginComponent, AddressComponent, SchoolComponent, UserComponent,
+                  ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent
+                },
+
 });

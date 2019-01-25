@@ -26,18 +26,21 @@
         </select>
       </div>
       <div class="form-group col-md-6">
+        <select-ajax-component url="/api/responsabilities/get" name="responsability_id"></select-ajax-component>
+      </div>
+      <div class="form-group col-md-6">
         <label for="formation">Formação</label>
-        <input type="text" name="formation" v-model="formation" required>
+        <input class="form-control" type="text" name="formation" v-model="formation" required>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-6">
         <label for="specialization">Especialização</label>
-        <input type="text" name="specialization" v-model="specialization">
+        <input class="form-control" type="text" name="specialization" v-model="specialization">
       </div>
       <div class="form-group col-md-6">
         <label for="contract">Contrato</label>
-        <input type="text" name="contract" v-model="contract" required>
+        <input class="form-control" type="text" name="contract" v-model="contract" required>
       </div>
     </div>
     <div class="row">
@@ -54,6 +57,8 @@
 </template>
 
 <script>
+import SelectAjaxComponent from './elements/SelectAjaxComponent';
+
 export default {
   data(){
     return {
@@ -66,6 +71,9 @@ export default {
       statutory: '',
       workload: ''
     }
+  },
+  components: {
+    SelectAjaxComponent
   }
 }
 </script>

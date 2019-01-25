@@ -51,7 +51,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make($data, array_merge(
             //User
             User::$rules,
             //Address
@@ -59,7 +59,7 @@ class RegisterController extends Controller
             //School
             School::$rules
             //
-        ]);
+        ));
     }
 
     /**

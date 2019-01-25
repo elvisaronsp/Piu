@@ -20,13 +20,7 @@
       </div>
       <div class="row justify-content-center">
       </div>
-      <div class="row justify-content-center">
-        <div class="col-md-8 card">
-          <div class="card-body">
-            <button class="btn btn-primary" type="submit">Registrar instituição</button>
-          </div>
-        </div>
-      </div>
+      
     </form>
 </div>
 @endsection

@@ -17,12 +17,12 @@ class EmployeerController extends Controller
     }
 
     public function create(Request $request){
-
+      return view('employeer.create');
     }
 
     public function store(EmployeerStoreRequest $request){
       $data = $request->validated();
-      $address = Address::create($data); 
+      $address = Address::create($data);
       $birth_certificate = BirthCertificate::create($data);
       $general_registration = GeneralRegistration::create($data);
       $employer_data = EmployeerData::create($data);
