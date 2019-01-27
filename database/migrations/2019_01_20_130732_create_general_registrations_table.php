@@ -18,7 +18,7 @@ class CreateGeneralRegistrationsTable extends Migration
             $table->string('registration_number');
             //$table->string('state');
             $table->string('emitter');
-            $table->date('emission');
+            $table->date('registration_emission');
             $table->string('cpf');
             $table->timestamps();
         });

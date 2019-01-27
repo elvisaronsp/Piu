@@ -19,4 +19,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/employeer/store', 'EmployeerController@store')->name('employeer.store');
-Route::get('/api/responsability/get', 'ResponsabilityController@get');

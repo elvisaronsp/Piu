@@ -19,7 +19,7 @@ class CreateBirthCertificatesTable extends Migration
             $table->string('birth_number');
             $table->string('leaf');
             $table->string('term');
-            $table->date('emission');
+            $table->date('birth_emission');
             $table->timestamps();
         });
     }

@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneralRegistration extends Model
 {
+
+    protected $fillable = ['registration_number', 'emitter', 'registration_emission', 'cpf'];
+
     public static $rules = [
       'registration_number' => 'required',
       'emitter' => 'required',
-      'emission' => 'required',
-      'cpf' => 'unique:general_registrations|required'
+      'registration_emission' => 'required',
+      'cpf' => 'required'
     ];
 }

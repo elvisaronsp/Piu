@@ -72,15 +72,7 @@ class RegisterController extends Controller
     {
         $logo = Storage::putFile('logos', $data['logo']);
         $logo_city = Storage::putFile('logos_cities', $data['logo_city']);
-        $address = Address::create([
-          'street' => $data['street'],
-          'state' => $data['state'],
-          'city' => $data['city'],
-          'cod_postal' => $data['cod_postal'],
-          'number' => $data['number'],
-          'complement' => $data['complement'],
-          'neighborhood' => $data['neighborhood']
-        ]);
+        $address = Address::create($data);
 
         $school = School::create([
           'name' => $data['name'],
@@ -93,7 +85,6 @@ class RegisterController extends Controller
           'address_id' => $address->id
         ]);
         $user = User::create([
-            //'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'school_id' => $school->id

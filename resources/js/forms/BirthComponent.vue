@@ -22,11 +22,11 @@
       </div>
       <div class="form-group col-md-4">
         <label for="term">Termo</label>
-        <input type="text" name="termo" v-model="term">
+        <input type="text" name="term" v-model="term">
       </div>
       <div class="form-group col-md-4">
         <label for="emission">Emissão</label>
-        <input type="date" name="emission" v-model="emission">
+        <input type="date" name="birth_emission" v-model="birth_emission">
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
         birth_number: '',
         leaf: '',
         term: '',
-        emission: ''
+        birth_emission: ''
       }
     }
 }

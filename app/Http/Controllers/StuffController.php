@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Stuff;
+use Auth;
 
 class StuffController extends Controller
 {
@@ -11,9 +13,11 @@ class StuffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $school_id = Auth::user()->school_id;
+        $stuffs = Stuff::where('school_id', $school_id)->get();
+        return response()->json($stuffs);
     }
 
     /**
@@ -21,9 +25,9 @@ class StuffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('stuff.create');
     }
 
     /**
@@ -35,17 +39,9 @@ class StuffController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $data = $request->validate($request->json());
+        $stuff = Stuff::create($data);
+        return response()->json($stuff);
     }
 
     /**
@@ -54,9 +50,10 @@ class StuffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $stuff = Stuff::findOrFail($id);
+        return view('stuff.edit')->with('stuff', $stuff);
     }
 
     /**
@@ -68,7 +65,9 @@ class StuffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $stuff = Stuff::findOrFail($id);
+        $stuff = $request->input('title');
+        $stuff->save();
     }
 
     /**
@@ -77,8 +76,10 @@ class StuffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $stuff = Stuff::findOrFail($id);
+        $stuff->delete();
+        return response()->json('Apagado com sucesso!');
     }
 }

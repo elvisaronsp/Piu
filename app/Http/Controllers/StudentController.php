@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Student;
 
 class StudentController extends Controller
 {
@@ -11,9 +12,11 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $school_id = Auth::user()->school_id;
+        $students = Student::where('school_id', $school_id)->get();
+        return response()->json($students);
     }
 
     /**
@@ -21,9 +24,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -32,9 +35,11 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentStoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $student = Student::create($data);
+        return response()->json($student);
     }
 
     /**
@@ -54,9 +59,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        return view('student.edit');
     }
 
     /**
@@ -68,7 +73,8 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        // TODO: update address, birth_certificate and most attributes
     }
 
     /**
@@ -77,8 +83,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $student->delete();
+        return response()-json('Apagado com sucesso!');
     }
 }

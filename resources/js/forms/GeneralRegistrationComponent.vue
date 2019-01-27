@@ -18,7 +18,7 @@
     <div class="row">
       <div class="form-group col-md-4">
         <label for="emission">Data de emissão</label>
-        <input type="date" name="emission" v-model="emission" required>
+        <input type="date" name="registration_emission" v-model="registration_emission" required>
       </div>
       <div class="form-group col-md-6">
         <label for="cpf">CPF</label>
@@ -34,7 +34,7 @@ export default {
     return {
       registration_number: '',
       emitter: '',
-      emission: '',
+      registration_emission: '',
       cpf: '',
     }
   }

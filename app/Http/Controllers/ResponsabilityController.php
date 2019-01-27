@@ -10,9 +10,7 @@ use Auth;
 class ResponsabilityController extends Controller
 {
     public function get(Request $request){
-      $responsabilities =  ResponsabilityResource::collection(
-                                Responsability::whereNull('school_id')->get()
-                           );
+      $responsabilities =  Responsability::whereNull('school_id')->get();
       return response()->json($responsabilities);
     }
 }

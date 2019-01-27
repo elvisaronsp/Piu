@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeerData extends Model
 {
+
+    protected $fillable = ['sus_card', 'allergic', 'breed', 'formation', 'specialization',
+                           'contract', 'statutory', 'workload', 'observations'];
+
     public static $rules = [
       'sus_card' => 'required',
       'allergic' => '',
@@ -13,7 +17,7 @@ class EmployeerData extends Model
       'formation' => 'required',
       'specialization' => '',
       'contract' => '',
-      'statutary' => 'required',
+      'statutory' => 'required',
       'workload' => 'required',
       'observations' => ''
     ];

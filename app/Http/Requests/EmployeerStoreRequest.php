@@ -6,6 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\EmployeerData;
 use App\GeneralRegistration;
 use App\BirthCertificate;
+use App\Address;
+use App\Employeer;
+use App\User;
 
 class EmployeerStoreRequest extends FormRequest
 {
@@ -16,7 +19,7 @@ class EmployeerStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +29,9 @@ class EmployeerStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return array_merge(
+            #Address
+            Address::$rules,
 
             # Employeers data
             EmployeerData::$rules,
@@ -35,8 +40,14 @@ class EmployeerStoreRequest extends FormRequest
             GeneralRegistration::$rules,
 
             #Birth BirthCertificate
-            BirthCertificate::$rules
+            BirthCertificate::$rules,
 
-        ];
+            #Employeers
+            Employeer::$rules,
+
+            #user
+            User::$rules
+
+        );
     }
 }

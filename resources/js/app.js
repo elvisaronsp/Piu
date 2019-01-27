@@ -32,6 +32,8 @@ import VocationComponent from './forms/VocationComponent';
 import EmployeerDataComponent from './forms/EmployeerDataComponent';
 import ButtonBarComponent from './components/ButtonBarComponent';
 import SelectAjaxComponent from './forms/elements/SelectAjaxComponent';
+import BirthComponent from './forms/BirthComponent';
+import GeneralRegistrationComponent from './forms/GeneralRegistrationComponent';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -43,7 +45,8 @@ const app = new Vue({
     el: '#app',
     components: {
                   LoginComponent, AddressComponent, SchoolComponent, UserComponent,
-                  ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent
+                  ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent,
+                  BirthComponent, GeneralRegistrationComponent
                 },
 
 });
