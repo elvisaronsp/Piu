@@ -17,6 +17,7 @@ before_script:
   - npm install npm@latest -g
   - npm install
   - php artisan telescope:install
+  - npm install --save laravel-vue-pagination
   - php artisan key:generate
   - php artisan migrate --step
   - php artisan db:seed

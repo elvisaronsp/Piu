@@ -2525,8 +2525,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    DinamicTableComponent: _DinamicTableComponent__WEBPACK_IMPORTED_MODULE_0__["default"] //, Pagination
-
+    DinamicTableComponent: _DinamicTableComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Pagination: Pagination
   }
 });
 
@@ -39035,7 +39035,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("dinamic-table-component", { attrs: { data: _vm.data } })],
+    [
+      _c("dinamic-table-component", { attrs: { data: _vm.data } }),
+      _vm._v(" "),
+      _c("pagination", {
+        attrs: { data: _vm.data },
+        on: { "pagination-change-page": _vm.getResults }
+      })
+    ],
     1
   )
 }

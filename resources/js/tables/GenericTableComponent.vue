@@ -1,7 +1,7 @@
 <template>
   <div>
     <dinamic-table-component :data="data"></dinamic-table-component>
-    <!--<pagination :data="data" @pagination-change-page="getResults"></pagination>-->
+    <pagination :data="data" @pagination-change-page="getResults"></pagination>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
 		}
   },
   components: {
-    DinamicTableComponent //, Pagination
+    DinamicTableComponent, Pagination
   }
 }
 </script>
