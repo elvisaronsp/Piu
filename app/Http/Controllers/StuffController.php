@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Stuff;
 use Auth;
+use App\Http\Resources\StuffCollection;
 
 class StuffController extends Controller
 {
@@ -17,7 +18,8 @@ class StuffController extends Controller
     {
         $school_id = Auth::user()->school_id;
         $stuffs = Stuff::where('school_id', $school_id)->orWhere('school_id', null)->paginate(25);
-        return response()->json($stuffs);
+        $resource = new StuffCollection($stuffs);
+        return $resource;
     }
 
     /**

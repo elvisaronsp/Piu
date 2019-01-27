@@ -24,7 +24,7 @@ export default {
     getResults(page = 1) {
 			axios.get('/' + this.entity + '?page=' + page)
 				.then(response => {
-					this.data = response.data;
+          this.data = response.data;
 				});
 		}
   },

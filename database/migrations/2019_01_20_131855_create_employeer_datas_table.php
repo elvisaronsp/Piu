@@ -15,6 +15,7 @@ class CreateEmployeerDatasTable extends Migration
     {
         Schema::create('employeer_datas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('sus_card');
             $table->string('allergic')->nullable();
             $table->string('breed');

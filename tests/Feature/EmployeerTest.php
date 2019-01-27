@@ -53,7 +53,8 @@ class EmployeerTest extends TestCase
           'email' => $user->email,
           'password' => '12345678',
           'password_confirmation' => '12345678',
-          'school_id'=> 1
+          'school_id'=> 1,
+          'name' => 'João do teste'
         ]);
         $response->assertStatus(200);
     }

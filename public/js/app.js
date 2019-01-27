@@ -2074,6 +2074,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2472,7 +2478,7 @@ __webpack_require__.r(__webpack_exports__);
         break;
       }
 
-      return Object.values(newValue)[1];
+      console.log(Object.values(newValue.data[0]));
     }
   }
 });
@@ -39174,6 +39180,8 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "form-group col-md-6" }, [
         _c("label", { attrs: { for: "sus_card" } }, [_vm._v("Cartão do SUS")]),
@@ -39437,6 +39445,21 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("h1", { staticClass: "display-4" }, [_vm._v("Dados do funcionário")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "form-group col-md-12" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Nome completo")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "name", required: "" }
+        })
       ])
     ])
   }
@@ -40272,8 +40295,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("table", { staticClass: "table table-responsive" }, [
-      _c("thead", [
+    _c("table", { staticClass: "table table-responsive table-striped" }, [
+      _c("thead", { staticStyle: { "background-color": "white" } }, [
         _c(
           "tr",
           _vm._l(_vm.attributes, function(attribute) {
@@ -40287,7 +40310,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(Object.values(_vm.data)[1], function(value, key, index) {
+        _vm._l(Object.values(_vm.data)[0], function(value, key, index) {
           return _c(
             "tr",
             _vm._l(value, function(v) {

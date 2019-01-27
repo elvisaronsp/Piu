@@ -11,6 +11,7 @@ use App\Http\Requests\EmployeerStoreRequest;
 use App\User;
 use App\GeneralRegistration;
 use Auth;
+use App\Http\Resources\EmployeerCollection;
 
 class EmployeerController extends Controller
 {
@@ -20,8 +21,11 @@ class EmployeerController extends Controller
       $employeers = Employeer::join('users', 'users.employeer_id', '=', 'employeers.id')
                              ->where('school_id', $school_id)
                              ->paginate(20);
+      $resource = new EmployeerCollection($employeers);
       //return view('employeer.index')->with('employeers', $employeers);
-      return response()->json($employeers);
+      return
+      $resource;
+      //return $resource;
     }
 
     public function create(Request $request){

@@ -12,4 +12,24 @@ class Employeer extends Model
       'responsability_id'=> 'required'
     ];
 
+    public function employeer_data(){
+      return $this->belongsTo('App\EmployeerData');
+    }
+
+    public function responsability(){
+      return $this->belongsTo('App\Responsability');
+    }
+
+    public function birth_certificate(){
+      return $this->belongsTo('App\BirthCertificate');
+    }
+
+    public function address(){
+      return $this->belongsTo('App\Address');
+    }
+
+    public function general_registration(){
+      return $this->belongsTo('App\GeneralRegistration');
+    }
+
 }

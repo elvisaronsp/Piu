@@ -6,6 +6,12 @@
       </div>
     </div>
     <div class="row">
+      <div class="form-group col-md-12">
+        <label for="name">Nome completo</label>
+        <input class="form-control" type="text" name="name" required>
+      </div>
+    </div>
+    <div class="row">
       <div class="form-group col-md-6">
         <label for="sus_card">Cartão do SUS</label>
         <input class="form-control" type="text" v-model="sus_card" name="sus_card" required>
