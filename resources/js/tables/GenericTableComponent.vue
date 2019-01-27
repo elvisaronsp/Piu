@@ -1,14 +1,14 @@
 <template>
   <div>
     <dinamic-table-component :data="data"></dinamic-table-component>
-    <pagination :data="data" @pagination-change-page="getResults"></pagination>
+    <!--<pagination :data="data" @pagination-change-page="getResults"></pagination>-->
   </div>
 </template>
 
 <script>
 
 import DinamicTableComponent from './DinamicTableComponent';
-import Pagination from 'laravel-vue-pagination';
+//import Pagination from 'laravel-vue-pagination';
 
 export default {
   props: ['entity'],
@@ -29,7 +29,7 @@ export default {
 		}
   },
   components: {
-    DinamicTableComponent, Pagination
+    DinamicTableComponent //, Pagination
   }
 }
 </script>
