@@ -16,7 +16,12 @@ class EmployeerController extends Controller
 {
 
     public function index(Request $request){
-
+      $school_id = Auth::user()->school_id;
+      $employeers = Employeer::join('users', 'users.employeer_id', '=', 'employeers.id')
+                             ->where('school_id', $school_id)
+                             ->paginate(20);
+      //return view('employeer.index')->with('employeers', $employeers);
+      return response()->json($employeers);
     }
 
     public function create(Request $request){

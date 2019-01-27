@@ -16,7 +16,7 @@ class CreateStuffsTable extends Migration
         Schema::create('stuffs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('school_id');
+            $table->integer('school_id')->nullable();
             $table->timestamps();
         });
     }

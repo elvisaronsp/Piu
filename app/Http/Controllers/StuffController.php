@@ -16,7 +16,7 @@ class StuffController extends Controller
     public function index(Request $request)
     {
         $school_id = Auth::user()->school_id;
-        $stuffs = Stuff::where('school_id', $school_id)->get();
+        $stuffs = Stuff::where('school_id', $school_id)->orWhere('school_id', null)->paginate(25);
         return response()->json($stuffs);
     }
 
