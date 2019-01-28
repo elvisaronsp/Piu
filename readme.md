@@ -25,6 +25,7 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 Em desenvolvimento...
 
 ```sh
+$ composer create-project piu/piu
 $ npm install
 $ php artisan migrate
 $ npm run dev
