@@ -1,4 +1,4 @@
-# SchoolManager
+# Piu
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/d5755aea0800cbdf5c96/maintainability)](https://codeclimate.com/github/JJS4ntos/SchoolManager/maintainability)
 [![Build Status](https://travis-ci.org/JJS4ntos/Piu.svg?branch=master)](https://travis-ci.org/JJS4ntos/Piu)
@@ -26,7 +26,7 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 Em desenvolvimento...
 
 ```sh
-$ composer create-project piu/piu
+$ composer install
 $ npm install
 $ php artisan migrate
 $ npm run dev
