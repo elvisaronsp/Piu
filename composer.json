@@ -1,10 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "piu/piu",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Simple and escalable manager school",
     "keywords": [
-        "framework",
-        "laravel"
+        "school",
+        "manager",
+        "piu"
     ],
     "license": "MIT",
     "require": {
