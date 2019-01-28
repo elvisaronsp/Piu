@@ -24,6 +24,7 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 Em desenvolvimento...
 
 ```sh
+$ npm install
 $ php artisan migrate
 $ npm run dev
 $ php artisan serve
@@ -33,5 +34,4 @@ Em produção...
 
 ```sh
 $ php artisan migrate
-$ npm run production
 ```
