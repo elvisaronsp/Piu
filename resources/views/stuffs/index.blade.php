@@ -2,7 +2,7 @@
   $buttons = [
     [
       'name' => '',
-      'url' => route("employeer.create"),
+      'url' => route("stuffs.create"),
       'feather_icon' => 'plus-circle'
     ]
   ];

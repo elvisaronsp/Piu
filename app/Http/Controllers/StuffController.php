@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Stuff;
 use Auth;
 use App\Http\Resources\StuffCollection;
+use App\Http\Requests\StuffStoreRequest;
 
 class StuffController extends Controller
 {
@@ -29,7 +30,7 @@ class StuffController extends Controller
      */
     public function create(Request $request)
     {
-        return view('stuff.create');
+        return view('stuffs.create');
     }
 
     /**
@@ -38,10 +39,10 @@ class StuffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StuffStoreRequest $request)
     {
         //
-        $data = $request->validate($request->json());
+        $data = $request->validated();
         $stuff = Stuff::create($data);
         return response()->json($stuff);
     }

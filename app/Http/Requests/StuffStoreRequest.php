@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Stuff;
 
 class StuffStoreRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StuffStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,6 @@ class StuffStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Stuff::$rules;
     }
 }

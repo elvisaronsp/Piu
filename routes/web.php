@@ -24,3 +24,5 @@ Route::get('/employeers/create', 'EmployeerController@create')->name('employeer.
 Route::get('/responsabilities/get', 'ResponsabilityController@get');
 Route::get('/stuffs', 'StuffController@index');
 Route::get('/students', 'StudentController@index');
+Route::get('/stuffs/create', 'StuffController@create')->name('stuffs.create');
+Route::post('/stuffs/store', 'StuffController@store')->name('stuffs.store');
