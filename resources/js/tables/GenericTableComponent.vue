@@ -8,7 +8,7 @@
 <script>
 
 import DinamicTableComponent from './DinamicTableComponent';
-//import Pagination from 'laravel-vue-pagination';
+import Pagination from 'laravel-vue-pagination';
 
 export default {
   props: ['entity'],

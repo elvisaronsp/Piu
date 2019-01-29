@@ -36,6 +36,8 @@ import BirthComponent from './forms/BirthComponent';
 import GeneralRegistrationComponent from './forms/GeneralRegistrationComponent';
 import DinamicTableComponent from './tables/DinamicTableComponent';
 import GenericTableComponent from './tables/GenericTableComponent';
+import OptionsBarComponent from './components/OptionsBarComponent';
+import StudentComponent from './components/OptionsBarComponent';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -49,7 +51,7 @@ const app = new Vue({
                   LoginComponent, AddressComponent, SchoolComponent, UserComponent,
                   ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent,
                   BirthComponent, GeneralRegistrationComponent, DinamicTableComponent,
-                  GenericTableComponent
+                  GenericTableComponent, OptionsBarComponent, StudentComponent
                 },
 
 });

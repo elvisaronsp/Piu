@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\Http\Resources\StudentCollection;
+use Auth;
 
 class StudentController extends Controller
 {
@@ -15,8 +17,9 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $school_id = Auth::user()->school_id;
-        $students = Student::where('school_id', $school_id)->get();
-        return response()->json($students);
+        $students = Student::where('school_id', $school_id)->paginate(25);
+        $resource = new StudentCollection($students);
+        return $resource;
     }
 
     /**
@@ -26,7 +29,7 @@ class StudentController extends Controller
      */
     public function create(Request $request)
     {
-        return view('student.create');
+        return view('students.create');
     }
 
     /**

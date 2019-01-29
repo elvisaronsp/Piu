@@ -8,21 +8,21 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label for="registration_number">RG</label>
-        <input type="text" name="registration_number" v-model="registration_number" required>
+        <input class="form-control" type="text" name="registration_number" v-model="registration_number" required>
       </div>
       <div class="form-group col-md-4">
         <label for="emitter">Orgão emissor</label>
-        <input type="text" name="emitter" v-model="emitter" required>
+        <input class="form-control" type="text" name="emitter" v-model="emitter" required>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-md-4">
         <label for="emission">Data de emissão</label>
-        <input type="date" name="registration_emission" v-model="registration_emission" required>
+        <input class="form-control" type="date" name="registration_emission" v-model="registration_emission" required>
       </div>
       <div class="form-group col-md-6">
         <label for="cpf">CPF</label>
-        <input type="text" name="cpf" v-model="cpf" required>
+        <input class="form-control" type="text" name="cpf" v-model="cpf" required>
       </div>
     </div>
   </div>

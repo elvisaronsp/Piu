@@ -23,8 +23,7 @@ class EmployeerController extends Controller
                              ->paginate(20);
       $resource = new EmployeerCollection($employeers);
       //return view('employeer.index')->with('employeers', $employeers);
-      return
-      $resource;
+      return $resource;
       //return $resource;
     }
 

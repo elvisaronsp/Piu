@@ -20,6 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('born_in');
             $table->integer('address_id');
             $table->integer('birth_certificate_id');
+            $table->integer('school_id');
             $table->timestamps();
         });
     }
