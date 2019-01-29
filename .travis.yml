@@ -18,6 +18,7 @@ before_script:
   - npm install
   - php artisan telescope:install
   - npm install --save laravel-vue-pagination
+  - npm install --save feather-icons vue-feather
   - php artisan key:generate
   - php artisan migrate --step
   - php artisan db:seed
