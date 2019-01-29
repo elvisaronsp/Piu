@@ -15,12 +15,10 @@
         <div class="col-md-8">
           <user-component></user-component>
         </div>
+        <div class="col-md-8">
+          <button-bar-component button-label="Registrar instituição"></button-bar-component>      
+        </div>
       </div>
-      <div class="row justify-content-center">
-      </div>
-      <div class="row justify-content-center">
-      </div>
-      
     </form>
 </div>
 @endsection
