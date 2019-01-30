@@ -28,7 +28,7 @@ class EmployeerController extends Controller
     }
 
     public function create(Request $request){
-      return view('employeer.create');
+      return view('employeers.create');
     }
 
     public function store(EmployeerStoreRequest $request){

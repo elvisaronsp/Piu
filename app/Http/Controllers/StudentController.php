@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\BirthCertificate;
+use App\Address;
+use App\Http\Requests\StudentStoreRequest;
 use App\Http\Resources\StudentCollection;
 use Auth;
 
@@ -41,8 +44,13 @@ class StudentController extends Controller
     public function store(StudentStoreRequest $request)
     {
         $data = $request->validated();
+        $address = Address::create($data);
+        $data['address_id'] = $address->id;
+        $birth = BirthCertificate::create($data);
+        $data['birth_certificate_id'] = $address->id;
+        $data['school_id'] = Auth::user()->school_id;
         $student = Student::create($data);
-        return response()->json($student);
+        return redirect('/');
     }
 
     /**

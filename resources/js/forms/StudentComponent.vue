@@ -1,39 +1,37 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 form-group ">
         <label>Nome</label>
-        <input class="form-control" type="text" name="name" placeholder="Nome do aluno">
+        <input class="form-control" type="text" name="name" v-model="name" placeholder="Nome do aluno">
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 form-group">
         <label>Sexo</label>
-        <select class="form-control" name="genre">
-          <option>Selecione o sexo do aluno</option>
+        <select class="form-control" name="genre" v-model="genre">
+          <option value="">Selecione o sexo do aluno</option>
           <option value="Masculino">Masculino</option>
           <option value="Feminino">Feminino</option>
         </select>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 form-group">
         <label>Data de nascimento</label>
-        <input class="form-control" type="date" name="birth_in">
+        <input class="form-control" type="date" name="born_in" v-model="born_in">
       </div>
     </div>
-    <address-component></address-component>
-    <birth-component></birth-component>
   </div>
 </template>
 
 <script>
 
-import AddressComponent from './AddressComponent';
-import BirthComponent from './AddressComponent';
-
 export default {
-  components: {
-    AddressComponent,
-    BirthComponent
+  data(){
+    return {
+      name: '',
+      genre: '',
+      born_in: '',
+    }
   }
 }
 </script>

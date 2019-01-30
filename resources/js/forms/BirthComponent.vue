@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <h1 class="display-4">Certidão de nascimento</h1>
+        <hr>
       </div>
     </div>
     <div class="row">

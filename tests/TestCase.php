@@ -18,4 +18,10 @@ abstract class TestCase extends BaseTestCase
         $this->withoutExceptionHandling();
     }
 
+    public function authenticated(){
+      $user = factory(User::class)->create();
+      $response = $this->actingAs($user)->followingRedirects();
+      return $response;
+    }
+
 }

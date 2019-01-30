@@ -44,7 +44,7 @@ class StuffController extends Controller
         //
         $data = $request->validated();
         $stuff = Stuff::create($data);
-        return response()->json($stuff);
+        return redirect('/');
     }
 
     /**

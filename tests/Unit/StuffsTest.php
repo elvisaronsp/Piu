@@ -34,10 +34,4 @@ class StuffsTest extends TestCase
       $response->assertStatus(200);
     }
 
-    private function authenticated(){
-      $user = factory(User::class)->create();
-      $response = $this->actingAs($user)->followingRedirects();
-      return $response;
-    }
-
 }

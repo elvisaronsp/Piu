@@ -3,12 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Student;
-use App\BirthCertificate;
-use App\Address;
+use App\Group;
 
-
-class StudentStoreRequest extends FormRequest
+class GroupStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +24,6 @@ class StudentStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return array_merge(
-          Student::$rules,
-          Address::$rules,
-          BirthCertificate::$rules
-        );
+        return Group::$rules;
     }
 }

@@ -11,8 +11,6 @@ class Student extends Model
 
     public static $rules = [
       'name' => 'required',
-      'address_id' => 'required',
-      'birth_certificate_id'=> 'required',
       'born_in' => 'required',
       'genre' => 'required'
     ];

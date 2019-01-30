@@ -8,7 +8,7 @@
 </div>
 <div class="container">
   <div class="row justify-content-center">
-    <form class="col-md-8" action="{{ route('employeer.store') }}" method="post">
+    <form class="col-md-8" action="{{ route('employeers.store') }}" method="post">
       @csrf
       <div class="row">
         <div class="col-md-12 justify-content-center">
