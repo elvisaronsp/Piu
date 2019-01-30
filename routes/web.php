@@ -42,3 +42,4 @@ Route::post('/groups/store', 'GroupController@store')->name('groups.store');
 
 #StudentGroup
 Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
+Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');

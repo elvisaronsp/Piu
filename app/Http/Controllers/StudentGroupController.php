@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\StudentGroup;
 use App\Http\Resources\StudentGroupCollection;
+use App\Http\Resources\StudentGroup;
 use Auth;
 
 class StudentGroupController extends Controller
@@ -19,4 +20,11 @@ class StudentGroupController extends Controller
       $resource = new StudentGroupCollection($students);
       return $resource;
     }
+
+    public function store(Request $request){
+      $data = $request->all();
+      $studentGroup = StudentGroup::create($group);
+      return
+    }
+
 }
