@@ -1,4 +1,6 @@
-# Piu
+<p align="center">
+  <img src="https://github.com/JJS4ntos/Piu/blob/master/piu-logo.png" height="200"/>
+</p>
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/d5755aea0800cbdf5c96/maintainability)](https://codeclimate.com/github/JJS4ntos/SchoolManager/maintainability)
 [![Build Status](https://travis-ci.org/JJS4ntos/Piu.svg?branch=master)](https://travis-ci.org/JJS4ntos/Piu)
@@ -14,7 +16,7 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 
   - Agilidade na inserção de dados.
   - Facilidade na leitura dos dados.
-  - Portabilidade diferentes modelos de ensino.
+  - Portabilidade em diferentes modelos de ensino.
 
 
 ### Requisitos
