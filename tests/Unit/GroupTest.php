@@ -15,11 +15,11 @@ class GroupTest extends TestCase
      */
      public function testIndex(){
        $response = $this->authenticated()->get('/groups');
-       $this->assertStatus(200);
+       $response->assertStatus(200);
      }
 
      public function testCreate(){
        $response = $this->authenticated()->get('/groups/create');
-       $this->assertStatus(200);
+       $response->assertStatus(200);
      }
 }

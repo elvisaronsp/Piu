@@ -15,12 +15,12 @@ class StudentTest extends TestCase
      */
     public function testIndex(){
       $response = $this->authenticated()->get('/students');
-      $this->assertStatus(200);
+      $response->assertStatus(200);
     }
 
     public function testCreate(){
       $response = $this->authenticated()->get('/students/create');
-      $this->assertStatus(200);
+      $response->assertStatus(200);
     }
 
 }

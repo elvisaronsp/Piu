@@ -46,7 +46,7 @@ class EmployeerController extends Controller
       $data['school_id'] = Auth::user()->school_id;
       $data['password'] = bcrypt($data['password']);
       $user = User::create($data);
-      return redirect('/home');
+      return redirect('/');
     }
 
 }
