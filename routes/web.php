@@ -39,3 +39,6 @@ Route::post('/stuffs/store', 'StuffController@store')->name('stuffs.store');
 Route::get('/groups', 'GroupController@index')->name('groups.index');
 Route::get('/groups/create', 'GroupController@create')->name('groups.create');
 Route::post('/groups/store', 'GroupController@store')->name('groups.store');
+
+#StudentGroup
+Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
