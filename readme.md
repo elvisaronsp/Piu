@@ -19,7 +19,7 @@
     </a>
 </p>
 
-<h1 align="center">Atenção - Sistema em desenvolvimento</h1>
+<h3 align="center">Atenção - Sistema em desenvolvimento</h3>
 
 Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.
 
