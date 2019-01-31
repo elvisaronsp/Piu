@@ -18,7 +18,7 @@ class StudentGroupController extends Controller
                               ->select('student_groups.*')
                               ->paginate(25);
       $resource = new StudentGroupCollection($students);
-      return $resource;
+      return view('student_groups.index')->with('resource', $resource);
     }
 
     public function store(Request $request){

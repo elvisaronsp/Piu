@@ -4,11 +4,13 @@
       <thead style="background-color: white">
         <tr>
           <th scope="col" v-for="attribute in attributes">{{ attribute }}</th>
+          <th scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(value, key, index) in data_computed[0]">
           <td v-for="v in value">{{ v }}</td>
+          <table-action-component :data="value" :entity="entity"></table-action-component>
         </tr>
       </tbody>
     </table>
@@ -21,8 +23,18 @@
 </template>
 
 <script>
+  import TableActionComponent from './TableActionComponent';
+
   export default {
-    props: ['data'],
+    components: {
+      TableActionComponent
+    },
+    props: ['data', 'entity'],
+    data(){
+      return {
+
+      }
+    },
     computed: {
       data_computed: function(){
         if(this.data !== undefined){
@@ -47,6 +59,6 @@
         }
         return attributes;
       }
-    },
+    }
   }
 </script>

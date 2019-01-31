@@ -12,8 +12,12 @@ class GroupController extends Controller
 {
 
     public function index(Request $request){
+      $s = $request->input('s');
       $user = Auth::user();
-      $classes = Group::where('school_id', $user->id)->paginate(25);
+      $classes = Group::where([
+                                ['school_id', '=', $user->id],
+                                ['title', 'like', '%'.$s.'%'],
+                              ])->paginate(10);
       $resource = new GroupCollection($classes);
       return $resource;
     }

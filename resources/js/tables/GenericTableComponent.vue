@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dinamic-table-component :data="data"></dinamic-table-component>
+    <dinamic-table-component :data="data" :entity="entity"></dinamic-table-component>
     <pagination :data="data" @pagination-change-page="getResults"></pagination>
   </div>
 </template>

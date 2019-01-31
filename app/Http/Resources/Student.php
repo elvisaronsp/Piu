@@ -15,6 +15,7 @@ class Student extends JsonResource
     public function toArray($request)
     {
         return [
+          'id' => $this->id,
           'nome' => $this->name,
           'sexo' => $this->genre,
           //'rua'

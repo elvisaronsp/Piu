@@ -15,7 +15,8 @@ class Stuff extends JsonResource
     public function toArray($request)
     {
         return [
-            'título' => $this->title 
+            'id' => $this->id,
+            'título' => $this->title
         ];
     }
 }
