@@ -7,10 +7,6 @@
   </div>
 </div>
 <div class="container">
-  <div class="row">-
-    <div class="col-md-4">
-      <list-search-component entity="groups"></list-search-component>
-    </div>
-  </div>
+  
 </div>
 @endsection

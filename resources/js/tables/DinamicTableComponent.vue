@@ -59,6 +59,9 @@
         }
         return attributes;
       }
+    },
+    methods:{
+
     }
   }
 </script>
