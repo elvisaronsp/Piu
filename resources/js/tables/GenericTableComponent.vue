@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dinamic-table-component :data="data" :entity="entity"></dinamic-table-component>
+    <dinamic-table-component :data="data" :entity="entity" :custom="custom"></dinamic-table-component>
     <pagination :data="data" @pagination-change-page="getResults"></pagination>
   </div>
 </template>
@@ -11,7 +11,7 @@ import DinamicTableComponent from './DinamicTableComponent';
 import Pagination from 'laravel-vue-pagination';
 
 export default {
-  props: ['entity', 'url', 'manual', 'manualData'],
+  props: ['entity', 'url', 'manual', 'manualData', 'custom'],
   data(){
     return {
       data: {}

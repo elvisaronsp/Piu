@@ -50,6 +50,7 @@ import StudentGroupComponent from './forms/StudentGroupComponent';
  *  or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
+Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 Vue.prototype.$table_custom = {
  students: [
    {

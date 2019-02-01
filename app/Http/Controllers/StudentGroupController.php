@@ -7,6 +7,7 @@ use App\StudentGroup;
 use App\Http\Resources\StudentGroupCollection;
 use App\Http\Resources\StudentGroup as StudentGroupResource;
 use Auth;
+use App\Http\Requests\StudentGroupStore;
 
 class StudentGroupController extends Controller
 {
@@ -28,7 +29,7 @@ class StudentGroupController extends Controller
       return view('student_groups.index')->with('resource', $resource);
     }
 
-    public function store(Request $request){
+    public function store(StudentGroupStore $request){
       $data = $request->all();
       $studentGroup = StudentGroup::create($group);
       return new StudentGroupResource($studentGroup);
