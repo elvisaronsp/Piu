@@ -37,7 +37,7 @@ export default {
     return {
       search: '',
       result: [],
-      manual: []
+      manual: [],
     }
   },
   components: {
@@ -67,9 +67,10 @@ export default {
   },
   methods:{
     selected_button: function(r, event){
-      url = this.urlFetchManual.replace(':id:', r.id);
-      axios.get(url).then(response => (this.manual = response));
-      console.log('Item selecionado '+r.id);
+      console.log(this.urlFetchManual);
+      let url = this.urlFetchManual.replace(':id:', r.id);
+      axios.get(url).then(response => (this.manual = response.data));
+      console.log(this.manual);
     }
   },
   props: ['entity', 'url', 'urlFetchManual']

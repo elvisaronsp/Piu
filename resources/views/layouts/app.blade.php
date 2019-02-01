@@ -82,6 +82,7 @@
         </nav>
 
         <main class="py-4">
+            <modals-container></modals-container>
             @yield('content')
         </main>
     </div>

@@ -42,12 +42,31 @@ import StudentComponent from './forms/StudentComponent';
 import StuffComponent from './forms/StuffComponent';
 import GroupComponent from './forms/GroupComponent';
 import ListSearchComponent from './components/ListSearchComponent';
-
+import VModal from 'vue-js-modal';
+import StudentGroupComponent from './forms/StudentGroupComponent';
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
  *  the page. Then, you may begin adding components to this application
  *  or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
+Vue.prototype.$table_custom = {
+ students: [
+   {
+       type: 'warning',
+       title: 'Matricular em uma turma',
+       icon: 'log-in',
+       click: function(){
+                app.$modal.show(StudentGroupComponent, null, {
+                                  draggable: true,
+                                  classes: 'p-4 v--modal',
+                                  width: '600',
+                                  height: '450'
+                                });
+              }
+   }
+ ]
+};
 
 const app = new Vue({
     el: '#app',
@@ -56,7 +75,7 @@ const app = new Vue({
                   ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent,
                   BirthComponent, GeneralRegistrationComponent, DinamicTableComponent,
                   GenericTableComponent, OptionsBarComponent, StudentComponent, StuffComponent,
-                  GroupComponent, ListSearchComponent
+                  GroupComponent, ListSearchComponent, VModal
                 },
 
 });

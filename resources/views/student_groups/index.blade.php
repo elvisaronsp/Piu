@@ -7,6 +7,6 @@
   </div>
 </div>
 <div class="container">
-  <list-search-component entity="groups" url="groups?s=" url-fetch-manual=""></list-search-component>
+  <list-search-component entity="groups" url="groups?s=" url-fetch-manual="/students/?group_id=:id:"></list-search-component>
 </div>
 @endsection

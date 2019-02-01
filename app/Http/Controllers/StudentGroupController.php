@@ -11,10 +11,17 @@ use Auth;
 class StudentGroupController extends Controller
 {
     public function index(Request $request){
+      $where = ['group_id', 'like', '%%'];
+      if($group_id = $request->input('group_id')){
+        $where = ['group_id', '=', $group_id];
+      }
       $user = Auth::user();
       $students = StudentGroup::join('groups', 'groups.id', '=', 'student_groups.group_id')
                               ->join('schools', 'schools.id', '=', 'groups.school_id')
-                              ->where('schools.id', $user->school_id)
+                              ->where([
+                                  ['schools.id', '=', $user->school_id],
+                                  $where
+                              ])
                               ->select('student_groups.*')
                               ->paginate(25);
       $resource = new StudentGroupCollection($students);
