@@ -11,7 +11,7 @@ import DinamicTableComponent from './DinamicTableComponent';
 import Pagination from 'laravel-vue-pagination';
 
 export default {
-  props: ['entity', 'url'],
+  props: ['entity', 'url', 'manual', 'manualData'],
   data(){
     return {
       data: {}
@@ -22,16 +22,18 @@ export default {
   },
   methods: {
     getResults(page = 1) {
-      let url = '';
-      if(this.url !== undefined){
-        url = '/' + this.url + '&page=' + page;
-      }else{
-        url = '/' + this.entity + '?page=' + page;
-      }
-			axios.get(url)
-				.then(response => {
+      if(this.manual == false || this.manual == undefined){
+        let url = '';
+        if(this.url !== undefined){
+          url = '/' + this.url + '&page=' + page;
+        }else{
+          url = '/' + this.entity + '?page=' + page;
+        }
+        axios.get(url)
+        .then(response => {
           this.data = response.data;
-				});
+        });
+      }
 		}
   },
   components: {
@@ -39,6 +41,3 @@ export default {
   }
 }
 </script>
-
-<style lang="css" scoped>
-</style>

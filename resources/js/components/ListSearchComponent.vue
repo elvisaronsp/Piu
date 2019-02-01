@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="col-md-7">
-      <generic-table-component :entity="entity"></generic-table-component>
+      <generic-table-component :entity="entity" :url="url" :manual="true" :manual-data="manual"></generic-table-component>
     </div>
   </div>
 </template>
@@ -36,7 +36,8 @@ export default {
   data(){
     return {
       search: '',
-      result: []
+      result: [],
+      manual: []
     }
   },
   components: {
@@ -66,9 +67,11 @@ export default {
   },
   methods:{
     selected_button: function(r, event){
+      url = this.urlFetchManual.replace(':id:', r.id);
+      axios.get(url).then(response => (this.manual = response));
       console.log('Item selecionado '+r.id);
     }
   },
-  props: ['entity']
+  props: ['entity', 'url', 'urlFetchManual']
 }
 </script>
