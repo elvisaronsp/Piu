@@ -57,12 +57,16 @@ Vue.prototype.$table_custom = {
        type: 'warning',
        title: 'Matricular em uma turma',
        icon: 'log-in',
-       click: function(){
-                app.$modal.show(StudentGroupComponent, null, {
+       click: function(id){
+                app.$modal.show(StudentGroupComponent,
+                                {
+                                  entityId: id
+                                },
+                                {
                                   draggable: true,
                                   classes: 'p-4 v--modal',
                                   width: '600',
-                                  height: '450'
+                                  height: '270'
                                 });
               }
    }

@@ -2,7 +2,7 @@
   <td>
     <a :class="'btn btn-primary btn-sm mr-1'" :href="editLink" title="Editar"><feather type="edit-2"></feather></a>
     <button :onclick="deleteEntity" :class="'btn btn-danger btn-sm mr-1'" title="Excluir"><feather type="delete"></feather></button>
-    <a v-for="c in custom" :class="'btn btn-sm mr-1 btn-'+c.type" v-on:click="c.click" :href="c.url" :title="c.title"><feather :type="c.icon"></feather></a>
+    <a v-for="c in custom" :class="'btn btn-sm mr-1 btn-'+c.type" v-on:click="c.click(data.id)" :href="c.url" :title="c.title"><feather :type="c.icon"></feather></a>
   </td>
 </template>
 

@@ -1,13 +1,16 @@
 <template>
   <div>
-  	<h2>Selecione a turma</h2>
+  	<h2>Matricular aluno</h2>
   	<hr>
   	<div class="form-group">
   		<label>Selecione a turma</label>
   		<v-select v-model="group" :options="groups"></v-select>
   	</div>
   	<div class="form-group">
-  		<button class="btn btn-primary" v-on:click="matricular"></button>
+  		<button :class="'btn btn-'+buttonStatus" v-on:click="matricular" :disabled="disabled">
+        <span v-show="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        {{ text }}
+      </button>
   	</div>
   </div>
 </template>
@@ -21,9 +24,21 @@ export default {
 	data(){
 		return {
 			fetched_groups: [],
-			group: ''
+			group: '',
+      loading: false,
+      text: 'Matricular aluno',
+      buttonStatus: 'primary',
+      disabled: false
 		};
 	},
+  watch: {
+    loading: function(newValue){
+      if(newValue){
+        this.text = 'Matriculando aluno';
+        this.disabled = true;
+      }
+    }
+  },
 	computed: {
 		groups: function(){
 			let groups = [];
@@ -35,7 +50,7 @@ export default {
 	},
 	mounted(){
 		this.loadGroups();
-		console.log(this.$parent);
+		console.log(this.entityId);
 	},
 	methods: {
 		loadGroups: function(){
@@ -43,12 +58,19 @@ export default {
 				 .then(response => (this.fetched_groups = response.data.data));
 		},
 		matricular: function(){
+      this.loading = true;
 			axios.post('/student-groups/store', {
 				_token: this.$csrf,
-				student_group_id: this.group
-
-			});
+				group_id: this.group.value,
+        student_id: this.entityId
+			}).then(response => {
+          this.buttonStatus = 'success';
+          this.text = 'Aluno cadastrado com sucesso!';
+          this.disabled = true;
+          this.loading = false;
+      });
 		}
-	}
+	},
+  props: ['entityId']
 }
 </script>

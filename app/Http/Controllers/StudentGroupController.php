@@ -31,7 +31,7 @@ class StudentGroupController extends Controller
 
     public function store(StudentGroupStore $request){
       $data = $request->all();
-      $studentGroup = StudentGroup::create($group);
+      $studentGroup = StudentGroup::create($data);
       return new StudentGroupResource($studentGroup);
     }
 

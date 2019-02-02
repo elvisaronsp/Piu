@@ -2556,6 +2556,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2564,8 +2567,20 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fetched_groups: [],
-      group: ''
+      group: '',
+      loading: false,
+      text: 'Matricular aluno',
+      buttonStatus: 'primary',
+      disabled: false
     };
+  },
+  watch: {
+    loading: function loading(newValue) {
+      if (newValue) {
+        this.text = 'Matriculando aluno';
+        this.disabled = true;
+      }
+    }
   },
   computed: {
     groups: function groups() {
@@ -2585,7 +2600,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.loadGroups();
-    console.log(this.$parent);
+    console.log(this.entityId);
   },
   methods: {
     loadGroups: function loadGroups() {
@@ -2596,12 +2611,22 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     matricular: function matricular() {
+      var _this2 = this;
+
+      this.loading = true;
       axios.post('/student-groups/store', {
         _token: this.$csrf,
-        student_group_id: this.group
+        group_id: this.group.value,
+        student_id: this.entityId
+      }).then(function (response) {
+        _this2.buttonStatus = 'success';
+        _this2.text = 'Aluno cadastrado com sucesso!';
+        _this2.disabled = true;
+        _this2.loading = false;
       });
     }
-  }
+  },
+  props: ['entityId']
 });
 
 /***/ }),
@@ -37791,7 +37816,7 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.7
+ * @version 1.14.6
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -38359,11 +38384,7 @@ function isFixed(element) {
   if (getStyleComputedProperty(element, 'position') === 'fixed') {
     return true;
   }
-  var parentNode = getParentNode(element);
-  if (!parentNode) {
-    return false;
-  }
-  return isFixed(parentNode);
+  return isFixed(getParentNode(element));
 }
 
 /**
@@ -39019,23 +39040,18 @@ function getRoundedOffsets(data, shouldRound) {
   var _data$offsets = data.offsets,
       popper = _data$offsets.popper,
       reference = _data$offsets.reference;
-  var round = Math.round,
-      floor = Math.floor;
 
+
+  var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
+  var isVariation = data.placement.indexOf('-') !== -1;
+  var sameWidthOddness = reference.width % 2 === popper.width % 2;
+  var bothOddWidth = reference.width % 2 === 1 && popper.width % 2 === 1;
   var noRound = function noRound(v) {
     return v;
   };
 
-  var referenceWidth = round(reference.width);
-  var popperWidth = round(popper.width);
-
-  var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
-  var isVariation = data.placement.indexOf('-') !== -1;
-  var sameWidthParity = referenceWidth % 2 === popperWidth % 2;
-  var bothOddWidth = referenceWidth % 2 === 1 && popperWidth % 2 === 1;
-
-  var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthParity ? round : floor;
-  var verticalToInteger = !shouldRound ? noRound : round;
+  var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthOddness ? Math.round : Math.floor;
+  var verticalToInteger = !shouldRound ? noRound : Math.round;
 
   return {
     left: horizontalToInteger(bothOddWidth && !isVariation && shouldRound ? popper.left - 1 : popper.left),
@@ -41287,38 +41303,38 @@ var render = function() {
               0
             )
           : _vm.result.length == 0 && _vm.search.length > 0
-          ? _c("div", [
-              _c(
-                "div",
-                {
-                  staticClass: "alert alert-warning",
-                  attrs: { role: "alert" }
-                },
-                [
-                  _c("feather", { attrs: { type: "frown", size: "15px" } }),
-                  _vm._v(" Não encontramos nada parecido.\n        ")
-                ],
-                1
-              )
-            ])
-          : _c("div", [
-              _c(
-                "div",
-                {
-                  staticClass: "alert alert-primary",
-                  attrs: { role: "alert" }
-                },
-                [
-                  _c("feather", {
-                    attrs: { type: "alert-circle", size: "15px" }
-                  }),
-                  _vm._v(
-                    " Inicie a pesquisa para a exibição dos resultados.\n        "
-                  )
-                ],
-                1
-              )
-            ])
+            ? _c("div", [
+                _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-warning",
+                    attrs: { role: "alert" }
+                  },
+                  [
+                    _c("feather", { attrs: { type: "frown", size: "15px" } }),
+                    _vm._v(" Não encontramos nada parecido.\n        ")
+                  ],
+                  1
+                )
+              ])
+            : _c("div", [
+                _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-primary",
+                    attrs: { role: "alert" }
+                  },
+                  [
+                    _c("feather", {
+                      attrs: { type: "alert-circle", size: "15px" }
+                    }),
+                    _vm._v(
+                      " Inicie a pesquisa para a exibição dos resultados.\n        "
+                    )
+                  ],
+                  1
+                )
+              ])
       ])
     ]),
     _vm._v(" "),
@@ -42905,7 +42921,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h2", [_vm._v("Selecione a turma")]),
+    _c("h2", [_vm._v("Matricular aluno")]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -42930,10 +42946,29 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("button", {
-        staticClass: "btn btn-primary",
-        on: { click: _vm.matricular }
-      })
+      _c(
+        "button",
+        {
+          class: "btn btn-" + _vm.buttonStatus,
+          attrs: { disabled: _vm.disabled },
+          on: { click: _vm.matricular }
+        },
+        [
+          _c("span", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.loading,
+                expression: "loading"
+              }
+            ],
+            staticClass: "spinner-border spinner-border-sm",
+            attrs: { role: "status", "aria-hidden": "true" }
+          }),
+          _vm._v("\n      " + _vm._s(_vm.text) + "\n    ")
+        ]
+      )
     ])
   ])
 }
@@ -43420,7 +43455,11 @@ var render = function() {
           {
             class: "btn btn-sm mr-1 btn-" + c.type,
             attrs: { href: c.url, title: c.title },
-            on: { click: c.click }
+            on: {
+              click: function($event) {
+                c.click(_vm.data.id)
+              }
+            }
           },
           [_c("feather", { attrs: { type: c.icon } })],
           1
@@ -54793,12 +54832,14 @@ Vue.prototype.$table_custom = {
     type: 'warning',
     title: 'Matricular em uma turma',
     icon: 'log-in',
-    click: function click() {
-      app.$modal.show(_forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_20__["default"], null, {
+    click: function click(id) {
+      app.$modal.show(_forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_20__["default"], {
+        entityId: id
+      }, {
         draggable: true,
         classes: 'p-4 v--modal',
         width: '600',
-        height: '450'
+        height: '270'
       });
     }
   }]
@@ -56285,8 +56326,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/Piu/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/Piu/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/school_manager/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/school_manager/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
