@@ -19,8 +19,21 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
+        $g = $request->input('group_id');
+        $s = $request->input('student_name');
         $school_id = Auth::user()->school_id;
-        $students = Student::where('school_id', $school_id)->paginate(25);
+        $where  = [
+          ['students.school_id', '=', $school_id]
+        ];
+        if($g){
+          $where[] = ['student_groups.group_id', '=', $g];
+        }
+        if($s){
+          $where[] = ['students.name', 'like', '%'.$s.'%'];
+        }
+        $students = Student::join('student_groups', 'students.id', '=', 'student_groups.student_id')
+                            ->where($where)
+                            ->paginate(25);
         $resource = new StudentCollection($students);
         return $resource;
     }

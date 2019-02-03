@@ -1,0 +1,30 @@
+<template>
+  <div class="row">
+    <div v-if="data_computed == undefined || data_computed <= 0" class="card col-md-12">
+      <div class="card-body">
+        Nada encontrado por aqui.
+      </div>
+    </div>
+    <div v-else class="card mb-1 col-md-12" v-for="d in data_computed">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ d | title }}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    props: ['data'],
+    computed: {
+      data_computed: function(){
+        return this.data.data;
+      }
+    }
+  }
+</script>

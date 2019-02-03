@@ -20,6 +20,12 @@ export default {
   mounted(){
     this.getResults();
   },
+  watch: {
+    manualData: function(newValue){
+      console.log(newValue.data);
+      this.data = this.manualData;
+    }
+  },
   methods: {
     getResults(page = 1) {
       if(this.manual == false || this.manual == undefined){

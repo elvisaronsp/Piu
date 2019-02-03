@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="form-group col-md-4">
-      <input class="form-control" type="text" v-model="search" placeholder="Digite o que está procurando...">
+      <input class="form-control mb-1" type="text" v-model="search" placeholder="Digite o que está procurando...">
       <div class="list-group">
         <div v-if="result.length > 0">
           <button v-for="r in result" v-on:click="selected_button(r)" class="list-group-item list-group-item-action">
@@ -23,7 +23,8 @@
       </div>
     </div>
     <div class="col-md-7">
-      <generic-table-component :entity="entity" :url="url" :manual="true" :manual-data="manual"></generic-table-component>
+      <!--<generic-table-component :entity="entity" :url="url" :manual="true" :manual-data="manual"></generic-table-component>-->
+      <list-card-component :data="manual"></list-card-component>
     </div>
   </div>
 </template>
@@ -31,31 +32,18 @@
 <script>
 import Feather from 'vue-feather';
 import GenericTableComponent from '../tables/GenericTableComponent';
+import ListCardComponent from '../components/ListCardComponent';
 
 export default {
   data(){
     return {
       search: '',
       result: [],
-      manual: [],
+      manual: {},
     }
   },
   components: {
-    Feather, GenericTableComponent
-  },
-  filters: {
-    title: function(r){
-      if(r.title !== undefined){
-        return r.title;
-      }else if(r.name !== undefined){
-        return r.name;
-      }else if(r.título){
-        return r.título;
-      }else if(r.nome){
-        return r.nome;
-      }
-      return 'Title not found!';
-    }
+    Feather, GenericTableComponent, ListCardComponent
   },
   watch: {
     search: function(newValue){
@@ -67,10 +55,10 @@ export default {
   },
   methods:{
     selected_button: function(r, event){
-      console.log(this.urlFetchManual);
       let url = this.urlFetchManual.replace(':id:', r.id);
-      axios.get(url).then(response => (this.manual = response.data));
-      console.log(this.manual);
+      axios.get(url).then(response => {
+        this.manual = response.data;
+      });
     }
   },
   props: ['entity', 'url', 'urlFetchManual']

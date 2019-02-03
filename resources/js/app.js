@@ -22,7 +22,7 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('login', require('./components/LoginComponent.vue'));
-
+import './filters';
 import LoginComponent from './forms/LoginComponent';
 import AddressComponent from './forms/AddressComponent';
 import SchoolComponent from './forms/SchoolComponent';
@@ -44,6 +44,8 @@ import GroupComponent from './forms/GroupComponent';
 import ListSearchComponent from './components/ListSearchComponent';
 import VModal from 'vue-js-modal';
 import StudentGroupComponent from './forms/StudentGroupComponent';
+import ListCardComponent from './components/ListCardComponent';
+
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
  *  the page. Then, you may begin adding components to this application
@@ -80,7 +82,7 @@ const app = new Vue({
                   ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent,
                   BirthComponent, GeneralRegistrationComponent, DinamicTableComponent,
                   GenericTableComponent, OptionsBarComponent, StudentComponent, StuffComponent,
-                  GroupComponent, ListSearchComponent, VModal
+                  GroupComponent, ListSearchComponent, VModal, ListCardComponent
                 },
 
 });
