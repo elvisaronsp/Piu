@@ -40,6 +40,7 @@ export default {
       search: '',
       result: [],
       manual: {},
+      parentId: 0
     }
   },
   mounted(){
@@ -63,6 +64,7 @@ export default {
       let url = this.urlFetchManual.replace(':id:', r.id);
       axios.get(url).then(response => {
         this.manual = response.data;
+        this.parentId = r.id;
       });
     }
   },

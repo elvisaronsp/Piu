@@ -14,6 +14,11 @@ class Grade extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'Lançado por' => $this->employeer->name,
+            'Nota' => $this->value,
+            'Turma' => $this->student_group->group->title,
+            'Data de lançamento' => $this->created->format('d/m/Y H:i')
+        ];
     }
 }

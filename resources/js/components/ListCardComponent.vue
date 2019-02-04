@@ -12,7 +12,7 @@
         </h5>
         <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <button v-for="e in $entities[entity]" v-on:click="e.click(d.id)" :class="'btn btn-'+e.style">{{ e.label }}</button>
+        <button v-for="e in $entities[entity]" v-on:click="e.click(d.id, parentId)" :class="'btn btn-'+e.style">{{ e.label }}</button>
       </div>
     </div>
   </div>
@@ -21,9 +21,13 @@
   /*
     Este componente carrega resultados de uma pesquisa em uma série de cards que correspondem a cada unidade de registro retornado.
     As opções do card ficam no arquivo entities.js no índice da respectiva entidade.
+    Propriedades:
+      data: São os dados que deverão ser carregados,
+      entity: A entidade que será carregada,
+      parentId: Id do dono das entidades. Ex.: Se as entidades são alunos eles podem pertencer a uma determinada turma.
   */
   export default {
-    props: ['data', 'entity'],
+    props: ['data', 'entity', 'parentId'],
     computed: {
       data_computed: function(){
         return this.data.data;

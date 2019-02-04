@@ -10,21 +10,27 @@
       <div class="col-md-3">
         <div class="form-group">
           <label><b>Nota</b></label>
-          <the-mask :mask="['#.##', '##.##']" v-model="" class="form-control" placeholder="0.00"/>
+          <the-mask :mask="['#.##', '##.##']" v-model="grade" class="form-control" placeholder="0.00"/>
         </div>
       </div>
     </div>
+    <button :class="'btn btn-'+style" v-on:click="submit" :disabled="disabled">
+      Aplicar nota
+    </button>
   </div>
 </template>
 <script>
   import vSelect from 'vue-select';
   export default {
-    props: ['studentId'],
+    props: ['studentId', 'groupId'],
     data: function(){
       return {
         stuffs: [],
         stuff: '',
-        nota: ''
+        grade: '',
+        style: 'primary',
+        text: 'Aplicar nota',
+        disabled: false
       }
     },
     mounted(){
@@ -36,7 +42,21 @@
     },
     methods:{
       submit: function(){
-        
+        if(numeral(this.grade).value() <= 10){
+          axios.post('/grades/store', {
+            _token: this.$csrf,
+            stuff_id: this.stuff,
+            group_id: this.groupId,
+            student_id: this.studentId,
+            value: grade 
+          }).then(response => {
+            this.disabled = true;
+            this.text = 'Nota aplicada com sucesso!';
+          });
+        }else{
+          this.style = 'danger';
+          this.text = 'Você não pode dar uma nota maior que 10! (Corrija e tente novamente)';
+        }
       }
     }
   }
