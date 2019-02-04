@@ -12,6 +12,7 @@ use App\User;
 use App\GeneralRegistration;
 use Auth;
 use App\Http\Resources\EmployeerCollection;
+use Flash;
 
 class EmployeerController extends Controller
 {
@@ -46,6 +47,7 @@ class EmployeerController extends Controller
       $data['school_id'] = Auth::user()->school_id;
       $data['password'] = bcrypt($data['password']);
       $user = User::create($data);
+      Flash::success('Funcionário cadastrado com sucesso!');
       return redirect('/');
     }
 

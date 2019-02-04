@@ -83,6 +83,7 @@
 
         <main class="py-4">
             <modals-container></modals-container>
+            @include('flash::message')
             @yield('content')
         </main>
     </div>

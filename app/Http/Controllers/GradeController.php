@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Grade;
 use App\Http\Requests\GradeStoreRequest;
+use App\Http\Resources\Grade as GradeResource;
+use App\Http\Resources\GradeCollection;
+use App\StudentGroup;
 
 class GradeController extends Controller
 {
@@ -23,10 +26,20 @@ class GradeController extends Controller
 			  ->where($where)
 			  ->select(['grades.*'])
 			  ->get();
+        return new GradeCollection($grades);
     }
 
     public function store(GradeStoreRequest $request){
-
+        $data = $request->json();
+        $data['employeer_id'] = Auth::user()->employeer_id;
+        $studentGroup = StudentGroup::where([
+                                        ['enabled', '=', true],
+                                        ['student_id', '=', $data['student_id']],
+                                        ['group_id', '=', $data['group_id']]
+                                    ])->firstOrFail();
+        $data['student_group_id'] = $studentGroup->id;
+        $result = Grade::create($data);
+        return new GradeResource($result);
     }
 
 }
