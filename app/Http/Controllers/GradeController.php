@@ -13,7 +13,7 @@ class GradeController extends Controller
 {
 
     public function index(Request $request){
-    	$where = []
+    	$where = [];
     	if($request->has('student_id')){
     		$where[] = ['student_groups.student_id', '=', $request->input('student_id')];	
     	}
