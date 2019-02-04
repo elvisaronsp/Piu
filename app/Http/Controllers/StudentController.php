@@ -113,4 +113,9 @@ class StudentController extends Controller
         $student->delete();
         return response()-json('Apagado com sucesso!');
     }
+
+    public function report_card(Request $request, $id){
+        $student = Student::findOrFail($id);
+        return view('students.report_card')->with('student', $student);
+    }
 }

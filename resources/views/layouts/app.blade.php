@@ -50,9 +50,6 @@
                             @endif
                         @else
                             <li class="nav-item">
-                              <a class="nav-link" href="#">Boletim</a>
-                            </li>
-                            <li class="nav-item">
                               <a class="nav-link" href="#">Exportar dados</a>
                             </li>
                             <li class="nav-item">
@@ -80,10 +77,8 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             <modals-container></modals-container>
-            @include('flash::message')
             @yield('content')
         </main>
     </div>

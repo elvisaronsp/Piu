@@ -30,6 +30,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/students', 'StudentController@index')->name('students.index');
   Route::get('/students/create', 'StudentController@create')->name('students.create');
   Route::post('/students/store', 'StudentController@store')->name('students.store');
+  Route::get('/report-card/{id}', 'StudentController@report_card')->name('students.report_card');
 
   # Stuffs
   Route::get('/stuffs', 'StuffController@index')->name('stuffs.index');
@@ -44,4 +45,6 @@ Route::group(['middleware'=> ['auth']], function(){
   #StudentGroup
   Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
   Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');
+
+
 });
