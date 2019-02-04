@@ -23,4 +23,8 @@ class Student extends Model
       return $this->belongsTo('App\BirthCertificate');
     }
 
+    public function student_group(){
+      return $this->hasMany('App\StudentGroup');
+    }
+
 }

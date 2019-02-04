@@ -12,15 +12,18 @@
         </h5>
         <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+        <button v-for="e in $entities[entity]" v-on:click="e.click(d.id)" :class="'btn btn-'+e.style">{{ e.label }}</button>
       </div>
     </div>
   </div>
 </template>
 <script>
+  /*
+    Este componente carrega resultados de uma pesquisa em uma série de cards que correspondem a cada unidade de registro retornado.
+    As opções do card ficam no arquivo entities.js no índice da respectiva entidade.
+  */
   export default {
-    props: ['data'],
+    props: ['data', 'entity'],
     computed: {
       data_computed: function(){
         return this.data.data;

@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-7">
       <!--<generic-table-component :entity="entity" :url="url" :manual="true" :manual-data="manual"></generic-table-component>-->
-      <list-card-component :data="manual"></list-card-component>
+      <list-card-component :data="manual" :entity="listEntity"></list-card-component>
     </div>
   </div>
 </template>
@@ -40,6 +40,11 @@ export default {
       search: '',
       result: [],
       manual: {},
+    }
+  },
+  mounted(){
+    if(this.listEntity == undefined){
+      this.listEntity = this.entity;
     }
   },
   components: {
@@ -61,6 +66,13 @@ export default {
       });
     }
   },
-  props: ['entity', 'url', 'urlFetchManual']
+  /*
+    A listEntity por padrão é definida como entity, mas também pode ser definida como uma entidade separada que funciona
+    em comum acordo com o urlFetchManual, este, por sua vez, fica encarregado de carregar uma pesquisa com essas outras entidades
+    de acordo com a entidade principal selecionada.
+    Por exemplo: As entidades principais são turmas, após listadas, quando clicadas elas disparam um evento que usa o urlFetchManual
+    para carregar os alunos daquela turma.
+  */
+  props: ['entity', 'url', 'urlFetchManual', 'listEntity']
 }
 </script>

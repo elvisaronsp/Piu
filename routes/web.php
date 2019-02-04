@@ -14,32 +14,34 @@
 #Auth Routes
 Auth::routes();
 
-#Home
-Route::get('/', 'HomeController@index')->name('home');
+Route::group(['middleware'=> ['auth']], function(){
+  #Home
+  Route::get('/', 'HomeController@index')->name('home');
 
-# Employeers
-Route::post('/employeer/store', 'EmployeerController@store')->name('employeers.store');
-Route::get('/employeers', 'EmployeerController@index')->name('employeers.index');
-Route::get('/employeers/create', 'EmployeerController@create')->name('employeers.create');
+  # Employeers
+  Route::post('/employeer/store', 'EmployeerController@store')->name('employeers.store');
+  Route::get('/employeers', 'EmployeerController@index')->name('employeers.index');
+  Route::get('/employeers/create', 'EmployeerController@create')->name('employeers.create');
 
-# Responsabilities
-Route::get('/responsabilities/get', 'ResponsabilityController@get');
+  # Responsabilities
+  Route::get('/responsabilities/get', 'ResponsabilityController@get');
 
-# Students
-Route::get('/students', 'StudentController@index')->name('students.index');
-Route::get('/students/create', 'StudentController@create')->name('students.create');
-Route::post('/students/store', 'StudentController@store')->name('students.store');
+  # Students
+  Route::get('/students', 'StudentController@index')->name('students.index');
+  Route::get('/students/create', 'StudentController@create')->name('students.create');
+  Route::post('/students/store', 'StudentController@store')->name('students.store');
 
-# Stuffs
-Route::get('/stuffs', 'StuffController@index')->name('stuffs.index');
-Route::get('/stuffs/create', 'StuffController@create')->name('stuffs.create');
-Route::post('/stuffs/store', 'StuffController@store')->name('stuffs.store');
+  # Stuffs
+  Route::get('/stuffs', 'StuffController@index')->name('stuffs.index');
+  Route::get('/stuffs/create', 'StuffController@create')->name('stuffs.create');
+  Route::post('/stuffs/store', 'StuffController@store')->name('stuffs.store');
 
-#Classes/Groups
-Route::get('/groups', 'GroupController@index')->name('groups.index');
-Route::get('/groups/create', 'GroupController@create')->name('groups.create');
-Route::post('/groups/store', 'GroupController@store')->name('groups.store');
+  #Classes/Groups
+  Route::get('/groups', 'GroupController@index')->name('groups.index');
+  Route::get('/groups/create', 'GroupController@create')->name('groups.create');
+  Route::post('/groups/store', 'GroupController@store')->name('groups.store');
 
-#StudentGroup
-Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
-Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');
+  #StudentGroup
+  Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
+  Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');
+});

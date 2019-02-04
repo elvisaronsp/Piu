@@ -12,3 +12,7 @@ Vue.filter('title', r => {
   }
   return 'Title not found!';
 });
+
+Vue.filter('extractKey', obj => {
+  return Object.keys(obj)[0];
+});

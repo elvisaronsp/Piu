@@ -4,7 +4,7 @@
   	<hr>
   	<div class="form-group">
   		<label>Selecione a turma</label>
-  		<v-select v-model="group" :options="groups"></v-select>
+  		<v-select v-model="group" :options="toVSelectData(groups)"></v-select>
   	</div>
   	<div class="form-group">
   		<button :class="'btn btn-'+buttonStatus" v-on:click="matricular" :disabled="disabled">
@@ -39,15 +39,6 @@ export default {
       }
     }
   },
-	computed: {
-		groups: function(){
-			let groups = [];
-			if(this.fetched_groups !== undefined){
-				this.fetched_groups.forEach((item, key) => groups.push({label: item["título"], value: item.id}));
-			}
-			return groups;
-		}
-	},
 	mounted(){
 		this.loadGroups();
 		console.log(this.entityId);

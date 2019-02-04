@@ -22,7 +22,35 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('login', require('./components/LoginComponent.vue'));
+import VModal from 'vue-js-modal';
+import VueTheMask from 'vue-the-mask';
+Vue.use(VueTheMask);
+
+Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
+Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+Vue.prototype.$table_custom = {
+  students: [
+    {
+      type: 'warning',
+      title: 'Matricular em uma turma',
+      icon: 'log-in',
+      click: function(id){
+        app.$modal.show(StudentGroupComponent,
+          {
+            entityId: id
+          },
+          {
+            draggable: true,
+            classes: 'p-4 v--modal',
+            width: '600',
+            height: '270'
+          });
+        }
+      }
+  ]
+};
 import './filters';
+import './entities';
 import LoginComponent from './forms/LoginComponent';
 import AddressComponent from './forms/AddressComponent';
 import SchoolComponent from './forms/SchoolComponent';
@@ -42,39 +70,27 @@ import StudentComponent from './forms/StudentComponent';
 import StuffComponent from './forms/StuffComponent';
 import GroupComponent from './forms/GroupComponent';
 import ListSearchComponent from './components/ListSearchComponent';
-import VModal from 'vue-js-modal';
 import StudentGroupComponent from './forms/StudentGroupComponent';
 import ListCardComponent from './components/ListCardComponent';
+import GradeComponent from './forms/GradeComponent';
 
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
  *  the page. Then, you may begin adding components to this application
  *  or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
-Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-Vue.prototype.$table_custom = {
- students: [
-   {
-       type: 'warning',
-       title: 'Matricular em uma turma',
-       icon: 'log-in',
-       click: function(id){
-                app.$modal.show(StudentGroupComponent,
-                                {
-                                  entityId: id
-                                },
-                                {
-                                  draggable: true,
-                                  classes: 'p-4 v--modal',
-                                  width: '600',
-                                  height: '270'
-                                });
-              }
-   }
- ]
-};
-
+Vue.mixin({
+  methods: {
+    toVSelectData(data){
+      let result = [];
+      console.log(data);
+      if(data !== undefined){
+        data.forEach((item, key) => result.push({label: item["título"], value: item.id}));
+      }
+      return result;
+    }
+  }
+});
 const app = new Vue({
     el: '#app',
     components: {
@@ -82,7 +98,6 @@ const app = new Vue({
                   ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent,
                   BirthComponent, GeneralRegistrationComponent, DinamicTableComponent,
                   GenericTableComponent, OptionsBarComponent, StudentComponent, StuffComponent,
-                  GroupComponent, ListSearchComponent, VModal, ListCardComponent
-                },
-
+                  GroupComponent, ListSearchComponent, VModal, ListCardComponent, GradeComponent
+                }
 });
