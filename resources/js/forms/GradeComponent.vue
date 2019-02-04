@@ -10,7 +10,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label><b>Nota</b></label>
-          <the-mask :mask="['#.##', '##.##']" class="form-control" placeholder="0.00"/>
+          <the-mask :mask="['#.##', '##.##']" v-model="" class="form-control" placeholder="0.00"/>
         </div>
       </div>
     </div>
@@ -23,7 +23,8 @@
     data: function(){
       return {
         stuffs: [],
-        stuff: ''
+        stuff: '',
+        nota: ''
       }
     },
     mounted(){
