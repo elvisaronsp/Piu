@@ -16,6 +16,6 @@ class GradeCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection
-        ]
+        ];
     }
 }
