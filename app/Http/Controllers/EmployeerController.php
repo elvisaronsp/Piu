@@ -12,7 +12,6 @@ use App\User;
 use App\GeneralRegistration;
 use Auth;
 use App\Http\Resources\EmployeerCollection;
-use Flash;
 
 class EmployeerController extends Controller
 {
@@ -23,9 +22,7 @@ class EmployeerController extends Controller
                              ->where('school_id', $school_id)
                              ->paginate(20);
       $resource = new EmployeerCollection($employeers);
-      //return view('employeer.index')->with('employeers', $employeers);
       return $resource;
-      //return $resource;
     }
 
     public function create(Request $request){
@@ -47,8 +44,7 @@ class EmployeerController extends Controller
       $data['school_id'] = Auth::user()->school_id;
       $data['password'] = bcrypt($data['password']);
       $user = User::create($data);
-      Flash::success('Funcionário cadastrado com sucesso!');
-      return redirect('/');
+      return redirect('/')->with('status', 'Funcionário criado com sucesso!');
     }
 
 }
