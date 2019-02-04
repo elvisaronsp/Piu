@@ -8,9 +8,6 @@
     <a href="https://travis-ci.org/JJS4ntos/Piu">
         <img src="https://travis-ci.org/JJS4ntos/Piu.svg?branch=master">
     </a>
-    <a href="https://www.codacy.com/app/JJS4ntos/SchoolManager?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JJS4ntos/SchoolManager&amp;utm_campaign=Badge_Grade">
-        <img src="https://api.codacy.com/project/badge/Grade/ac3402e466834c1c8b89c80b256f4e11"/>
-    </a>
     <a href="https://www.codefactor.io/repository/github/jjs4ntos/piu">
         <img src="https://www.codefactor.io/repository/github/jjs4ntos/piu/badge" alt="CodeFactor" />
     </a> 
