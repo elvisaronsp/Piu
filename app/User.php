@@ -45,4 +45,14 @@ class User extends Authenticatable
       return $this->belongsTo('App\School');
     }
 
+    /*
+      Retorna 0 se o employeer for uma instituição (super user)
+    */
+    public function getEmployeerIdAttribute($employeer_id){
+      if($employeer_id == null){
+        return 0;
+      }
+      return $employeer_id;
+    }
+
 }

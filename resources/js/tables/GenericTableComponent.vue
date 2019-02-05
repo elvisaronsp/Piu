@@ -22,7 +22,6 @@ export default {
   },
   watch: {
     manualData: function(newValue){
-      console.log(newValue.data);
       this.data = this.manualData;
     }
   },

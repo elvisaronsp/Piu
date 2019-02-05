@@ -21,6 +21,7 @@ class StudentController extends Controller
     {
         $g = $request->input('group_id');
         $s = $request->input('student_name');
+        $student_group_id = $request->input('student_group_id');
         $school_id = Auth::user()->school_id;
         $where  = [
           ['students.school_id', '=', $school_id]

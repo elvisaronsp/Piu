@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-7">
       <!--<generic-table-component :entity="entity" :url="url" :manual="true" :manual-data="manual"></generic-table-component>-->
-      <list-card-component :data="manual" :entity="listEntity"></list-card-component>
+      <list-card-component :data="manual" :entity="listEntity" :parentId="parentId"></list-card-component>
     </div>
   </div>
 </template>

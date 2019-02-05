@@ -6,7 +6,6 @@
  */
 
 require('./bootstrap');
-require('numeral');
 
 window.Vue = require('vue');
 
@@ -18,11 +17,9 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//Vue.component('login', require('./components/LoginComponent.vue'));
 import VModal from 'vue-js-modal';
 import VueTheMask from 'vue-the-mask';
 Vue.use(VueTheMask);
@@ -50,30 +47,9 @@ Vue.prototype.$table_custom = {
       }
   ]
 };
+
 import './filters';
 import './entities';
-import LoginComponent from './forms/LoginComponent';
-import AddressComponent from './forms/AddressComponent';
-import SchoolComponent from './forms/SchoolComponent';
-import UserComponent from './forms/UserComponent';
-import ErrorComponent from './forms/ErrorComponent';
-import VocationComponent from './forms/VocationComponent';
-import EmployeerDataComponent from './forms/EmployeerDataComponent';
-import ButtonBarComponent from './components/ButtonBarComponent';
-import SelectAjaxComponent from './forms/elements/SelectAjaxComponent';
-import BirthComponent from './forms/BirthComponent';
-import GeneralRegistrationComponent from './forms/GeneralRegistrationComponent';
-import DinamicTableComponent from './tables/DinamicTableComponent';
-import GenericTableComponent from './tables/GenericTableComponent';
-import TableActionComponent from './tables/TableActionComponent';
-import OptionsBarComponent from './components/OptionsBarComponent';
-import StudentComponent from './forms/StudentComponent';
-import StuffComponent from './forms/StuffComponent';
-import GroupComponent from './forms/GroupComponent';
-import ListSearchComponent from './components/ListSearchComponent';
-import StudentGroupComponent from './forms/StudentGroupComponent';
-import ListCardComponent from './components/ListCardComponent';
-import GradeComponent from './forms/GradeComponent';
 
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
@@ -94,11 +70,4 @@ Vue.mixin({
 });
 const app = new Vue({
     el: '#app',
-    components: {
-                  LoginComponent, AddressComponent, SchoolComponent, UserComponent,
-                  ErrorComponent, EmployeerDataComponent, ButtonBarComponent, SelectAjaxComponent,
-                  BirthComponent, GeneralRegistrationComponent, DinamicTableComponent,
-                  GenericTableComponent, OptionsBarComponent, StudentComponent, StuffComponent,
-                  GroupComponent, ListSearchComponent, VModal, ListCardComponent, GradeComponent
-                }
 });

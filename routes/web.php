@@ -44,7 +44,11 @@ Route::group(['middleware'=> ['auth']], function(){
 
   #StudentGroup
   Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
+  Route::get('/student-groups/json', 'StudentGroupController@indexJson')->name('student_groups.json');
   Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');
 
+  #Grade
+  Route::post('/grades/store', 'GradeController@store')->name('grades.store');
+  Route::get('/grades', 'GradeController@index')->name('grades.index');
 
 });
