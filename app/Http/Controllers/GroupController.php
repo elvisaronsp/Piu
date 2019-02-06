@@ -33,4 +33,10 @@ class GroupController extends Controller
       return redirect('/');
     }
 
+    public function destroy(Request $request, $id){
+      $group = Group::findOrFail($id);
+      $group->delete();
+      return response('Turma apagada com sucesso!', 200);
+    }
+
 }

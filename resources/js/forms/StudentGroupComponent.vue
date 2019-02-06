@@ -4,10 +4,10 @@
   	<hr>
   	<div class="form-group">
   		<label>Selecione a turma</label>
-  		<v-select v-model="group" :options="toVSelectData(groups)"></v-select>
+  		<v-select v-model="group" maxHeight="80px" placeholder="Selecione a turma" :options="toVSelectData(fetched_groups)"></v-select>
   	</div>
   	<div class="form-group">
-  		<button :class="'btn btn-'+buttonStatus" v-on:click="matricular" :disabled="disabled">
+  		<button class="btn btn-primary" v-on:click="matricular" :disabled="disabled">
         <span v-show="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         {{ text }}
       </button>
@@ -55,10 +55,13 @@ export default {
 				group_id: this.group.value,
         student_id: this.entityId
 			}).then(response => {
-          this.buttonStatus = 'success';
-          this.text = 'Aluno cadastrado com sucesso!';
-          this.disabled = true;
+          this.text = 'Matricular aluno';
+          this.disabled = false;
           this.loading = false;
+      }).catch(err => {
+        this.disabled = false;
+        this.loading = false;
+        this.showMessage('Ops! Há um problema aqui', err.response.data);
       });
 		}
 	},

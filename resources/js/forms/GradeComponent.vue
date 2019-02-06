@@ -4,7 +4,7 @@
     <hr>
     <div class="form-group">
       <label><b>Matéria</b></label>
-      <v-select v-model="stuff" :options="stuffs"></v-select>
+      <v-select v-model="stuff" maxHeight="150px" placeholder="Selecione a matéria" :options="stuffs"></v-select>
     </div>
     <div class="row">
       <div class="col-md-3">

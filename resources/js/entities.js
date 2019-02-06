@@ -3,7 +3,7 @@ import GradeComponent from './forms/GradeComponent';
 import StudentGradesComponent from './specified/StudentGradesComponent';
 import VModal from 'vue-js-modal'
 
-Vue.use(VModal, {dynamic: true, injectModalsContainer: true});
+Vue.use(VModal, {dynamic: true, injectModalsContainer: true, dialog: true});
 
 const entities = new Vue({});
 

@@ -2775,10 +2775,14 @@ __webpack_require__.r(__webpack_exports__);
         group_id: this.group.value,
         student_id: this.entityId
       }).then(function (response) {
-        _this2.buttonStatus = 'success';
-        _this2.text = 'Aluno cadastrado com sucesso!';
-        _this2.disabled = true;
+        _this2.text = 'Matricular aluno';
+        _this2.disabled = false;
         _this2.loading = false;
+      }).catch(function (err) {
+        _this2.disabled = false;
+        _this2.loading = false;
+
+        _this2.showMessage('Ops! Há um problema aqui', err.response.data);
       });
     }
   },
@@ -3165,7 +3169,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
- //import VModal from 'vue-js-modal';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3180,9 +3183,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteEntity: function deleteEntity() {
+      var _this = this;
+
       if (confirm('Deseja realmente excluir?')) {
-        axios.post('/' + entity + '/delete/' + data.id).then(function (response) {
-          console.log(response.data);
+        var url = '/' + this.entity + '/destroy/' + this.data.id;
+        axios.post(url, {
+          _token: this.$csrf
+        }).then(function (response) {
+          _this.showMessage('Concluído', response.data);
+        }).catch(function (err) {
+          return _this.showMessage('Ops! Ocorreu um problema', err.response.data);
         });
       }
     }
@@ -42754,7 +42764,11 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("v-select", {
-          attrs: { options: _vm.stuffs },
+          attrs: {
+            maxHeight: "150px",
+            placeholder: "Selecione a matéria",
+            options: _vm.stuffs
+          },
           model: {
             value: _vm.stuff,
             callback: function($$v) {
@@ -43383,7 +43397,11 @@ var render = function() {
         _c("label", [_vm._v("Selecione a turma")]),
         _vm._v(" "),
         _c("v-select", {
-          attrs: { options: _vm.toVSelectData(_vm.groups) },
+          attrs: {
+            maxHeight: "80px",
+            placeholder: "Selecione a turma",
+            options: _vm.toVSelectData(_vm.fetched_groups)
+          },
           model: {
             value: _vm.group,
             callback: function($$v) {
@@ -43400,7 +43418,7 @@ var render = function() {
       _c(
         "button",
         {
-          class: "btn btn-" + _vm.buttonStatus,
+          staticClass: "btn btn-primary",
           attrs: { disabled: _vm.disabled },
           on: { click: _vm.matricular }
         },
@@ -43940,8 +43958,9 @@ var render = function() {
       _c(
         "button",
         {
-          class: "btn btn-danger btn-sm mr-1",
-          attrs: { onclick: _vm.deleteEntity, title: "Excluir" }
+          staticClass: "btn btn-danger btn-sm mr-1",
+          attrs: { title: "Excluir" },
+          on: { click: _vm.deleteEntity }
         },
         [_c("feather", { attrs: { type: "delete" } })],
         1
@@ -43951,6 +43970,7 @@ var render = function() {
         return _c(
           "a",
           {
+            key: c.id,
             class: "btn btn-sm mr-1 btn-" + c.type,
             attrs: { href: c.url, title: c.title },
             on: {
@@ -55324,8 +55344,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _filters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filters */ "./resources/js/filters.js");
-/* harmony import */ var _entities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./entities */ "./resources/js/entities.js");
+/* harmony import */ var _forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/StudentGroupComponent */ "./resources/js/forms/StudentGroupComponent.vue");
+/* harmony import */ var _filters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filters */ "./resources/js/filters.js");
+/* harmony import */ var _entities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entities */ "./resources/js/entities.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55349,6 +55370,7 @@ files.keys().map(function (key) {
 });
 
 
+
 Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a, {
   dynamic: true,
@@ -55361,13 +55383,13 @@ Vue.prototype.$table_custom = {
     title: 'Matricular em uma turma',
     icon: 'log-in',
     click: function click(id) {
-      app.$modal.show(StudentGroupComponent, {
+      app.$modal.show(_forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         entityId: id
       }, {
         draggable: true,
         classes: 'p-4 v--modal',
         width: '600',
-        height: '270'
+        height: 'auto'
       });
     }
   }]
@@ -55396,6 +55418,15 @@ Vue.mixin({
       }
 
       return result;
+    },
+    showMessage: function showMessage(title, message) {
+      app.$modal.show('dialog', {
+        title: title,
+        text: message,
+        buttons: [{
+          title: 'Entendi'
+        }]
+      });
     }
   }
 });
@@ -55760,7 +55791,8 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_3___default.a, {
   dynamic: true,
-  injectModalsContainer: true
+  injectModalsContainer: true,
+  dialog: true
 });
 var entities = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {

@@ -78,9 +78,10 @@
             </div>
         </nav>
         <main class="py-4">
-            <modals-container></modals-container>
             @yield('content')
         </main>
+        <modals-container></modals-container>
+        <v-dialog/>
     </div>
 </body>
 </html>

@@ -112,7 +112,7 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $student->delete();
-        return response()-json('Apagado com sucesso!');
+        return response()-json('Estudante apagado com sucesso!');
     }
 
     public function report_card(Request $request, $id){

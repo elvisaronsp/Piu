@@ -22,6 +22,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 import VModal from 'vue-js-modal';
 import VueTheMask from 'vue-the-mask';
+import StudentGroupComponent from './forms/StudentGroupComponent';
 Vue.use(VueTheMask);
 
 Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
@@ -41,7 +42,7 @@ Vue.prototype.$table_custom = {
             draggable: true,
             classes: 'p-4 v--modal',
             width: '600',
-            height: '270'
+            height: 'auto'
           });
         }
       }
@@ -65,6 +66,17 @@ Vue.mixin({
         data.forEach((item, key) => result.push({label: item["título"], value: item.id}));
       }
       return result;
+    },
+    showMessage(title, message){
+      app.$modal.show('dialog', {
+        title: title,
+        text: message,
+        buttons: [
+          {
+            title: 'Entendi'
+          }
+       ]
+      });
     }
   }
 });

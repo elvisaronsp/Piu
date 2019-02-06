@@ -38,8 +38,16 @@ class StudentGroupController extends Controller
 
     public function store(StudentGroupStore $request){
       $data = $request->all();
-      $studentGroup = StudentGroup::create($data);
-      return new StudentGroupResource($studentGroup);
+      $studentGroup = StudentGroup::where([
+                        ['group_id', '=', $data['group_id']],
+                        ['student_id', '=', $data['student_id']],
+                        ['enabled', '=', true]
+                      ])->first();
+      if(!$studentGroup){
+        $studentGroup = StudentGroup::create($data);
+        return new StudentGroupResource($studentGroup);
+      }
+      return response('Aluno já matriculado nesta turma', 406);
     }
 
 }
