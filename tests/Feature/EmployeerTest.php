@@ -23,7 +23,7 @@ class EmployeerTest extends TestCase
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)->followingRedirects();
         $user = factory(User::class)->make();
-        $response = $response->post('/employeer/store',[
+        $response = $response->post(route('employeers.store'),[
           'registration_number' => '123456789',
           'emitter' => 'SSP',
           'registration_emission' => '2000-01-12',
