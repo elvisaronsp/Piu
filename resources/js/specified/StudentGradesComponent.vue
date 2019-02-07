@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-md-11">
+      <div class="col-md-12">
         <h3>Notas do aluno</h3>
         <p class="text-muted">{{ studentName }}</p>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-md-11">
+      <div class="col-md-12">
         <generic-table-component entity="grades" :data="grades"></generic-table-component>
       </div>
     </div>

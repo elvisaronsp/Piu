@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Grade extends Model
 {
 
-    protected $fillable = ['student_group_id', 'employeer_id', 'value', 'stuff_id'];
+    protected $fillable = ['student_group_id', 'employeer_id', 'value', 'stuff_id', 'unit_id'];
 
     public static $rules = [
+      'student_group_id' => 'required',
+      'stuff_id' => 'required',
+      'unit_id' => 'required',
     	'value' => 'required|numeric'
     ];
 
@@ -23,6 +26,10 @@ class Grade extends Model
 
     public function stuff(){
       return $this->belongsTo('App\Stuff');
+    }
+
+    public function unit(){
+      return $this->belongsTo('App\Unit');
     }
 
 }

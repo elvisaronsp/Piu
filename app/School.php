@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Events\SchoolCreated;
 
 class School extends Model
 {
@@ -17,5 +18,9 @@ class School extends Model
       'direc_number' => ['required'],
       'logo' => ['required'],
       'logo_city' => ['required'],
+    ];
+
+    protected $dispatchesEvents = [
+      'created' => SchoolCreated::class
     ];
 }

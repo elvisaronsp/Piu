@@ -57,4 +57,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/grades', 'GradeController@index')->name('grades.index');
   Route::post('/grades/destroy/{id}', 'GroupController@destroy')->name('grades.destroy');
 
+  # Unit
+  Route::get('/units', 'UnitController@index');
+  Route::post('/units/store', 'UnitController@store');
+
 });

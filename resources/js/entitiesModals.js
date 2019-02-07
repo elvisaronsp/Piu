@@ -15,7 +15,7 @@ Vue.prototype.$entities = {
             entities.$modal.show(GradeComponent, {studentGroupId: id}, {
               draggable: true,
               classes: 'p-4 v--modal',
-              height: '400'
+              height: '450'
             });
           },
           style: 'primary'
@@ -27,7 +27,7 @@ Vue.prototype.$entities = {
             draggable: true,
             classes: 'p-4 v--modal',
             height: 'auto',
-            width: '60%',
+            width: '65%',
             scrollable: true
           });
         },

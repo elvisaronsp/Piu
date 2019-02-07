@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGradesTable extends Migration
+class CreateUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('grades', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('stuff_id');
-            $table->decimal('value', 8, 2);
-            $table->integer('student_group_id');
-            $table->integer('unit_id');
-            $table->integer('employeer_id'); //Quem deu a nota para ele
+            $table->string('title');
+            $table->integer('school_id')->nullable(); //Quando nulo, é válido para todas as instituições.
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateGradesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grades');
+        Schema::dropIfExists('units');
     }
 }

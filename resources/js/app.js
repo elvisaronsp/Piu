@@ -50,7 +50,8 @@ Vue.prototype.$table_custom = {
 };
 
 import './filters';
-import './entities';
+import './entitiesModals';
+import './routes';
 
 /**
  *  Next, we will create a fresh Vue application instance and attach it to

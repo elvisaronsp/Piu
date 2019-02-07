@@ -19,6 +19,7 @@ class Grade extends JsonResource
             'Nota' => $this->value,
             'Matéria' => $this->stuff->title,
             'Turma' => $this->student_group->group->title,
+            'Período' => $this->unit->title,
             'Data de lançamento' => $this->created_at->format('d/m/Y H:i')
         ];
     }

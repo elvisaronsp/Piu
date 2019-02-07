@@ -2439,14 +2439,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['studentGroupId'],
   data: function data() {
     return {
       stuffs: [],
+      units: [],
       stuff: '',
       grade: '',
+      unit: '',
       style: 'primary',
       text: 'Realizar lançamento',
       disabled: false
@@ -2455,8 +2461,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/stuffs').then(function (response) {
+    axios.get(this.$routes.stuffs.index).then(function (response) {
       return _this.stuffs = _this.toVSelectData(response.data.data);
+    });
+    axios.get(this.$routes.units.index).then(function (response) {
+      return _this.units = _this.toVSelectData(response.data.data);
     });
   },
   components: {
@@ -2464,7 +2473,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     notFilled: function notFilled() {
-      return this.grade == '' || this.stuff == '';
+      return this.grade == '' || this.stuff == '' || this.unit == '';
     }
   },
   methods: {
@@ -2472,10 +2481,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (parseFloat(this.grade) <= 10) {
-        axios.post('/grades/store', {
+        axios.post(this.$routes.grades.store, {
           _token: this.$csrf,
           stuff_id: this.stuff.value,
           student_group_id: this.studentGroupId,
+          unit_id: this.unit.value,
           value: this.grade
         }).then(function (response) {
           _this2.disabled = true;
@@ -42781,13 +42791,37 @@ var render = function() {
       1
     ),
     _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("v-select", {
+          attrs: {
+            maxHeight: "150px",
+            placeholder: "Selecione a unidade",
+            options: _vm.units
+          },
+          model: {
+            value: _vm.unit,
+            callback: function($$v) {
+              _vm.unit = $$v
+            },
+            expression: "unit"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-3" }, [
         _c(
           "div",
           { staticClass: "form-group" },
           [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("the-mask", {
               staticClass: "form-control",
@@ -42827,6 +42861,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [_c("b", [_vm._v("Matéria")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Unidade")])])
   },
   function() {
     var _vm = this
@@ -43788,7 +43828,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-11" }, [
+      _c("div", { staticClass: "col-md-12" }, [
         _c("h3", [_vm._v("Notas do aluno")]),
         _vm._v(" "),
         _c("p", { staticClass: "text-muted" }, [
@@ -43800,7 +43840,7 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c(
         "div",
-        { staticClass: "col-md-11" },
+        { staticClass: "col-md-12" },
         [
           _c("generic-table-component", {
             attrs: { entity: "grades", data: _vm.grades }
@@ -55346,7 +55386,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/StudentGroupComponent */ "./resources/js/forms/StudentGroupComponent.vue");
 /* harmony import */ var _filters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filters */ "./resources/js/filters.js");
-/* harmony import */ var _entities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entities */ "./resources/js/entities.js");
+/* harmony import */ var _entitiesModals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entitiesModals */ "./resources/js/entitiesModals.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55394,6 +55435,7 @@ Vue.prototype.$table_custom = {
     }
   }]
 };
+
 
 
 /**
@@ -55770,10 +55812,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/entities.js":
-/*!**********************************!*\
-  !*** ./resources/js/entities.js ***!
-  \**********************************/
+/***/ "./resources/js/entitiesModals.js":
+/*!****************************************!*\
+  !*** ./resources/js/entitiesModals.js ***!
+  \****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -55804,7 +55846,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
       }, {
         draggable: true,
         classes: 'p-4 v--modal',
-        height: '400'
+        height: '450'
       });
     },
     style: 'primary'
@@ -55817,7 +55859,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
         draggable: true,
         classes: 'p-4 v--modal',
         height: 'auto',
-        width: '60%',
+        width: '65%',
         scrollable: true
       });
     },
@@ -56959,6 +57001,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectAjaxComponent_vue_vue_type_template_id_6a67eb72___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/routes.js":
+/*!********************************!*\
+  !*** ./resources/js/routes.js ***!
+  \********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
+  stuffs: {
+    index: '/stuffs',
+    store: '/stuffs/store',
+    destroy: '/stuffs/destroy/:id:',
+    edit: '/stuffs/edit/:id:'
+  },
+  grades: {
+    index: '/grades',
+    store: '/grades/store',
+    destroy: '/grades/destroy/:id:',
+    edit: '/grades/edit/:id:'
+  },
+  employeers: {
+    index: '/employeers',
+    store: '/employeers/store',
+    destroy: '/employeers/destroy/:id:',
+    edit: '/employeers/edit/:id:'
+  },
+  schools: {
+    index: '/schools',
+    store: '/schools/store',
+    destroy: '/schools/destroy/:id:',
+    edit: '/schools/edit/:id:'
+  },
+  students: {
+    index: '/students',
+    store: '/students/store',
+    destroy: '/students/destroy/:id:',
+    edit: '/students/edit/:id:'
+  },
+  units: {
+    index: '/units',
+    store: '/units/store',
+    destroy: '/units/destroy/:id:',
+    edit: '/units/edit/:id:'
+  }
+};
 
 /***/ }),
 
