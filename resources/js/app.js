@@ -23,8 +23,8 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 import VModal from 'vue-js-modal';
 import VueTheMask from 'vue-the-mask';
 import StudentGroupComponent from './forms/StudentGroupComponent';
-Vue.use(VueTheMask);
 
+Vue.use(VueTheMask);
 Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
 Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 Vue.prototype.$table_custom = {
@@ -52,35 +52,14 @@ Vue.prototype.$table_custom = {
 import './filters';
 import './entitiesModals';
 import './routes';
+import './mixins';
 
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
  *  the page. Then, you may begin adding components to this application
  *  or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.mixin({
-  methods: {
-    toVSelectData(data){
-      let result = [];
-      console.log(data);
-      if(data !== undefined){
-        data.forEach((item, key) => result.push({label: item["título"], value: item.id}));
-      }
-      return result;
-    },
-    showMessage(title, message){
-      app.$modal.show('dialog', {
-        title: title,
-        text: message,
-        buttons: [
-          {
-            title: 'Entendi'
-          }
-       ]
-      });
-    }
-  }
-});
+
 const app = new Vue({
     el: '#app',
 });

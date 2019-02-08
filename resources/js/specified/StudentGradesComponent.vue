@@ -1,5 +1,6 @@
 <template>
   <div>
+    <grade-chart-component></grade-chart-component>
     <div class="row justify-content-center">
       <div class="col-md-12">
         <h3>Notas do aluno</h3>
@@ -14,7 +15,8 @@
   </div>
 </template>
 <script>
-  import GenericTableComponent from '../tables/GenericTableComponent';
+  //import GenericTableComponent from '../tables/GenericTableComponent';
+  //import StudentGradeChartComponent from './StudentGradeChartComponent';
 
   export default {
     props: ['studentGroupId'],

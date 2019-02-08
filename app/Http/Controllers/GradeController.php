@@ -39,6 +39,13 @@ class GradeController extends Controller
         $data['student_group_id'] = $studentGroup->id;
         $result = Grade::create($data);
         return new GradeResource($result);
-    }
+	}
+	
+	public function dataChart(Request $request, $student_group_id){
+		$school_id = Auth::user()->school_id;
+		$result = Grade::where('student_group_id', $student_group_id)
+					   ->get();
+		return response($result, 200);
+	}
 
 }

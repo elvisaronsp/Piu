@@ -4,7 +4,7 @@
       <input class="form-control mb-1" type="text" v-model="search" placeholder="Digite o que está procurando...">
       <div class="list-group">
         <div v-if="result.length > 0">
-          <button v-for="r in result" v-on:click="selected_button(r)" class="list-group-item list-group-item-action">
+          <button v-for="r in result" v-on:click="selected_button(r)" class="list-group-item list-group-item-action" :key="r.id">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">{{ r | title }}</h5>
             </div>

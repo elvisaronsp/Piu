@@ -18,5 +18,6 @@ class UnitController extends Controller
         $result = Unit::where($where)->orWhere('school_id', null)->get();
         return new UnitCollection($result);
     }
+    
 
 }
