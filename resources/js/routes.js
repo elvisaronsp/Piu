@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
 Vue.prototype.$routes = {
     stuffs: {
@@ -36,6 +36,12 @@ Vue.prototype.$routes = {
         store: '/units/store',
         destroy: '/units/destroy/:id:',
         edit: '/units/edit/:id:'
-    }
+    },
+   responsability: {
+        index: '/responsabilities',
+        store: '/responsabilities/store',
+        destroy: '/responsabilities/destroy/:id:',
+        edit: '/responsabilities/edit/:id:'
+   }
 
-}
+};

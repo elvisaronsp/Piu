@@ -25,7 +25,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/employeers/destroy/{id}', 'EmployeerController@destroy')->name('employeers.destroy');
 
   # Responsabilities
-  Route::get('/responsabilities/get', 'ResponsabilityController@get');
+  Route::get('/responsabilities/index', 'ResponsabilityController@index');
 
   # Students
   Route::get('/students', 'StudentController@index')->name('students.index');

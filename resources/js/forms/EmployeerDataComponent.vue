@@ -32,7 +32,7 @@
         </select>
       </div>
       <div class="form-group col-md-6">
-        <select-ajax-component url="/api/responsability/get" name="responsability_id" placeholder="Selecione o cargo" label="Cargo"></select-ajax-component>
+        <select-ajax-component :url="this.$routes.responsability.index" name="responsability_id" placeholder="Selecione o cargo" label="Cargo"></select-ajax-component>
       </div>
       <div class="form-group col-md-6">
         <label for="formation">Formação</label>
