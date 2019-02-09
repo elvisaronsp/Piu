@@ -1780,13 +1780,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       color: 'lightblue',
       size: '11px',
-      units: '',
-      grades: ''
+      units: {},
+      grades: {}
     };
   },
   computed: {
     loading: function loading() {
-      return !this.labels && !this.datasets;
+      return Object.keys(this.units).length <= 0 || Object.keys(this.grades).length <= 0;
     },
     labels: function labels() {
       if (!this.units == '') {
@@ -1797,6 +1797,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     datasets: function datasets() {
       return false; //TODO: Função para listar as notas e relacionar com o label correspondente.
+    }
+  },
+  watch: {
+    units: function units(newValue) {
+      console.log(newValue);
+    },
+    labels: function labels(newValue) {
+      console.log(newValue);
     }
   },
   methods: {
@@ -1812,6 +1820,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    console.log(+' Largura');
     this.loadData();
   }
 });
@@ -75260,7 +75269,7 @@ var render = function() {
             attrs: { loading: this.loading, color: _vm.color, size: _vm.size }
           })
         : _c("line-chart-component", {
-            attrs: { labels: _vm.labels, datasets: _vm.datasets }
+            attrs: { labels: this.labels, datasets: this.datasets }
           })
     ],
     1

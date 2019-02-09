@@ -1,7 +1,7 @@
 <template>
     <div>
         <pulse-loader v-if="this.loading" :loading="this.loading" :color="color" :size="size"></pulse-loader>
-        <line-chart-component v-else :labels="labels" :datasets="datasets"></line-chart-component>
+        <line-chart-component v-else :labels="this.labels" :datasets="this.datasets"></line-chart-component>
     </div>
 </template>
 <script>
@@ -16,13 +16,13 @@ export default {
         return {
           color: 'lightblue',
           size: '11px',
-          units: '',
-          grades: ''
+          units: {},
+          grades: {}
         }
     }, 
     computed: {
         loading: function() {
-            return !this.labels && !this.datasets;
+            return Object.keys(this.units).length <= 0 || Object.keys(this.grades).length <= 0;
         },
         labels: function(){
             if(!this.units == ''){
@@ -34,6 +34,14 @@ export default {
            return false; //TODO: Função para listar as notas e relacionar com o label correspondente.
         }
     },
+    watch: {
+       units: function(newValue){
+         console.log(newValue);
+       },
+       labels: function(newValue){
+         console.log(newValue);
+       }
+    },
     methods: {
         loadData: function() {
             axios.get(this.$routes.units.index)
@@ -43,6 +51,7 @@ export default {
         }
     },
     mounted(){
+        console.log( + ' Largura');
         this.loadData();
     }
 }

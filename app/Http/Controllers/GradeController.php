@@ -43,8 +43,12 @@ class GradeController extends Controller
 	
 	public function dataChart(Request $request, $student_group_id){
 		$school_id = Auth::user()->school_id;
-		$result = Grade::where('student_group_id', $student_group_id)
-					   ->get();
+		$result = Grade::join('units', 'units.id', '=', 'grades.unit_id')
+              ->where([
+                ['student_group_id', '=', $student_group_id],
+              ])
+              ->groupBy('unit_id')
+					    ->get();
 		return response($result, 200);
 	}
 
