@@ -1764,8 +1764,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_spinner_src_PulseLoader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-spinner/src/PulseLoader.vue */ "./node_modules/vue-spinner/src/PulseLoader.vue");
-var _this = undefined;
-
 //
 //
 //
@@ -1788,7 +1786,7 @@ var _this = undefined;
   },
   computed: {
     loading: function loading() {
-      return this.labels == '' && this.datasets == '';
+      return !this.labels && !this.datasets;
     },
     labels: function labels() {
       if (!this.units == '') {
@@ -1797,15 +1795,18 @@ var _this = undefined;
 
       return false;
     },
-    datasets: function datasets() {//TODO: Função para listar as notas e relacionar com o label correspondente.
+    datasets: function datasets() {
+      return false; //TODO: Função para listar as notas e relacionar com o label correspondente.
     }
   },
   methods: {
     loadData: function loadData() {
-      axios.get(_this.$routes.unit.index).then(function (response) {
+      var _this = this;
+
+      axios.get(this.$routes.units.index).then(function (response) {
         return _this.units = response.data.data;
       });
-      axios.get(_this.$routes.grades.index).then(function (response) {
+      axios.get(this.$routes.grades.index).then(function (response) {
         return _this.grades = response.data.data;
       });
     }
@@ -2856,7 +2857,6 @@ __webpack_require__.r(__webpack_exports__);
       group: '',
       loading: false,
       text: 'Matricular aluno',
-      buttonStatus: 'primary',
       disabled: false
     };
   },
@@ -2870,13 +2870,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.loadGroups();
-    console.log(this.entityId);
   },
   methods: {
     loadGroups: function loadGroups() {
       var _this = this;
 
-      axios.get('/groups').then(function (response) {
+      axios.get(this.$routes.groups.index).then(function (response) {
         return _this.fetched_groups = response.data.data;
       });
     },
@@ -2892,6 +2891,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.text = 'Matricular aluno';
         _this2.disabled = false;
         _this2.loading = false;
+
+        _this2.showMessage('Parabéns!', 'Aluno matriculado com sucesso!');
       }).catch(function (err) {
         _this2.disabled = false;
         _this2.loading = false;
@@ -3064,7 +3065,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -75255,9 +75255,9 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.loading
+      this.loading
         ? _c("pulse-loader", {
-            attrs: { loading: _vm.loading, color: _vm.color, size: _vm.size }
+            attrs: { loading: this.loading, color: _vm.color, size: _vm.size }
           })
         : _c("line-chart-component", {
             attrs: { labels: _vm.labels, datasets: _vm.datasets }
@@ -77655,36 +77655,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("grade-chart-component"),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("h3", [_vm._v("Notas do aluno")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-muted" }, [
-            _vm._v(_vm._s(_vm.studentName))
-          ])
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("h3", [_vm._v("Notas do aluno")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-muted" }, [
+          _vm._v(_vm._s(_vm.studentName))
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-12" },
-          [
-            _c("generic-table-component", {
-              attrs: { entity: "grades", data: _vm.grades }
-            })
-          ],
-          1
-        )
       ])
-    ],
-    1
-  )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        [
+          _c("generic-table-component", {
+            attrs: { entity: "grades", data: _vm.grades }
+          })
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -90017,15 +90011,15 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/StudentGroupComponent */ "./resources/js/forms/StudentGroupComponent.vue");
-/* harmony import */ var _filters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filters */ "./resources/js/filters.js");
-/* harmony import */ var _entitiesModals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entitiesModals */ "./resources/js/entitiesModals.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
-/* harmony import */ var _mixins__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mixins */ "./resources/js/mixins.js");
+/* harmony import */ var _filters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filters */ "./resources/js/filters.js");
+/* harmony import */ var _entitiesModals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entitiesModals */ "./resources/js/entitiesModals.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
+/* harmony import */ var _mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mixins */ "./resources/js/mixins.js");
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./forms/StudentGroupComponent */ "./resources/js/forms/StudentGroupComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -90050,8 +90044,12 @@ files.keys().map(function (key) {
 
 
 
-Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default.a);
-Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a, {
+
+
+
+
+Vue.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_5___default.a);
+Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_4___default.a, {
   dynamic: true,
   injectModalsContainer: true
 });
@@ -90062,7 +90060,7 @@ Vue.prototype.$table_custom = {
     title: 'Matricular em uma turma',
     icon: 'log-in',
     click: function click(id) {
-      app.$modal.show(_forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      app.$modal.show(_forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
         entityId: id
       }, {
         draggable: true,
@@ -90073,10 +90071,6 @@ Vue.prototype.$table_custom = {
     }
   }]
 };
-
-
-
-
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
  *  the page. Then, you may begin adding components to this application
@@ -90555,13 +90549,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _forms_GradeComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms/GradeComponent */ "./resources/js/forms/GradeComponent.vue");
 /* harmony import */ var _specified_StudentGradesComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./specified/StudentGradesComponent */ "./resources/js/specified/StudentGradesComponent.vue");
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _charts_GradeChartComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./charts/GradeChartComponent */ "./resources/js/charts/GradeChartComponent.vue");
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_3___default.a, {
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_4___default.a, {
   dynamic: true,
   injectModalsContainer: true,
   dialog: true
@@ -90594,6 +90590,20 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
       });
     },
     style: 'warning'
+  }, {
+    label: 'Gráfico de rendimento',
+    click: function click(id, parentId) {
+      entities.$modal.show(_charts_GradeChartComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        studentGroupId: id
+      }, {
+        draggable: true,
+        classes: 'p-4 v--modal',
+        height: 'auto',
+        width: '65%',
+        scrollable: true
+      });
+    },
+    style: 'info'
   }]
 };
 
@@ -91746,6 +91756,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   methods: {
     toVSelectData: function toVSelectData(data) {
@@ -91831,6 +91842,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
     store: '/responsabilities/store',
     destroy: '/responsabilities/destroy/:id:',
     edit: '/responsabilities/edit/:id:'
+  },
+  groups: {
+    index: '/groups',
+    store: '/groups/store',
+    destroy: '/groups/destroy/:id:',
+    edit: '/groups/edit/:id:'
   }
 };
 

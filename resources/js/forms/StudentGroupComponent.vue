@@ -27,7 +27,6 @@ export default {
 			group: '',
       loading: false,
       text: 'Matricular aluno',
-      buttonStatus: 'primary',
       disabled: false
 		};
 	},
@@ -41,11 +40,10 @@ export default {
   },
 	mounted(){
 		this.loadGroups();
-		console.log(this.entityId);
 	},
 	methods: {
 		loadGroups: function(){
-			axios.get('/groups')
+			axios.get(this.$routes.groups.index)
 				 .then(response => (this.fetched_groups = response.data.data));
 		},
 		matricular: function(){
@@ -55,9 +53,10 @@ export default {
 				group_id: this.group.value,
         student_id: this.entityId
 			}).then(response => {
-          this.text = 'Matricular aluno';
-          this.disabled = false;
-          this.loading = false;
+        this.text = 'Matricular aluno';
+        this.disabled = false;
+        this.loading = false;
+        this.showMessage('Parabéns!', 'Aluno matriculado com sucesso!');
       }).catch(err => {
         this.disabled = false;
         this.loading = false;

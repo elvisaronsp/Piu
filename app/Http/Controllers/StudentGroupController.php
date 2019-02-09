@@ -33,7 +33,7 @@ class StudentGroupController extends Controller
                               ->select('student_groups.*')
                               ->paginate(25);
       $resource = new StudentGroupCollection($students);
-      return $resource;
+      return response($resource, 200);
     }
 
     public function store(StudentGroupStore $request){

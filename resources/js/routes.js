@@ -37,11 +37,17 @@ Vue.prototype.$routes = {
         destroy: '/units/destroy/:id:',
         edit: '/units/edit/:id:'
     },
-   responsability: {
+    responsability: {
         index: '/responsabilities',
         store: '/responsabilities/store',
         destroy: '/responsabilities/destroy/:id:',
         edit: '/responsabilities/edit/:id:'
-   }
+    },
+    groups: {
+        index: '/groups',
+        store: '/groups/store',
+        destroy: '/groups/destroy/:id:',
+        edit: '/groups/edit/:id:'
+    }
 
 };

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <grade-chart-component></grade-chart-component>
     <div class="row justify-content-center">
       <div class="col-md-12">
         <h3>Notas do aluno</h3>

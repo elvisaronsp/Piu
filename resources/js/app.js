@@ -17,8 +17,12 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i);
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+import './filters';
+import './entitiesModals';
+import './routes';
+import './mixins';
 
 import VModal from 'vue-js-modal';
 import VueTheMask from 'vue-the-mask';
@@ -49,10 +53,7 @@ Vue.prototype.$table_custom = {
   ]
 };
 
-import './filters';
-import './entitiesModals';
-import './routes';
-import './mixins';
+
 
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
