@@ -1,19 +1,14 @@
 <script>
-    import { Line } from 'vue-chartjs';
+    import { Bar } from 'vue-chartjs';
     export default {
-        extends: Line,
+        extends: Bar,
         props: ['datasets', 'labels', 'styles'],
         data() {
             return {
                 chartData: {
                     dataCollection: {
-                        labels: this.labels,
-                        datasets: this.datasets //this.datasets
-                                /*[{
-                                    label: 'Primeira informação',
-                                    backgroundColor: 'red',
-                                    data: [33, 44, 54, 55]
-                                }]*/
+                        labels: '',
+                        datasets: this.datasets
                     }
                 },
                 options: {

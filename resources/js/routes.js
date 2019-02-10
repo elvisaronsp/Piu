@@ -11,7 +11,8 @@ Vue.prototype.$routes = {
         index: '/grades',
         store: '/grades/store',
         destroy: '/grades/destroy/:id:',
-        edit: '/grades/edit/:id:'
+        edit: '/grades/edit/:id:',
+        datachart: '/grades/data-chart/:student_group_id:'
     },
     employeers: {
         index: '/employeers',

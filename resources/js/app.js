@@ -23,6 +23,7 @@ import './filters';
 import './entitiesModals';
 import './routes';
 import './mixins';
+import './colors';
 
 import VModal from 'vue-js-modal';
 import VueTheMask from 'vue-the-mask';

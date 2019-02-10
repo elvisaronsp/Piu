@@ -8,7 +8,7 @@
           </div>
           <div class="col-md-6 text-right">
             <div class="btn-group" role="group" aria-label="Opções">
-              <a v-for="button in buttons" class="btn btn-primary btn-small w-100" :href="button.url">
+              <a v-for="button in buttons" class="btn btn-primary btn-small w-100" :key="button.id" :href="button.url">
                 <feather :type="button.feather_icon"></feather> {{ button.name }}
               </a>
             </div>

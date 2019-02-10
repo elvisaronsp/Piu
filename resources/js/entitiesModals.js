@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import GradeComponent from './forms/GradeComponent';
 import StudentGradesComponent from './specified/StudentGradesComponent';
-import GradeChartComponent from './charts/GradeChartComponent';
+import UnitChartComponent from './charts/UnitChartComponent';
 import VModal from 'vue-js-modal';
 
 Vue.use(VModal, {dynamic: true, injectModalsContainer: true, dialog: true});
@@ -33,16 +33,17 @@ Vue.prototype.$entities = {
           });
         },
         style: 'warning'
-      },
+      }
+    ],
+    groups: [
       {
         label: 'Gráfico de rendimento',
         click: (id, parentId) => {
-          entities.$modal.show(GradeChartComponent, {studentGroupId: id}, {
+          entities.$modal.show(UnitChartComponent, {groupId: id}, {
             draggable: true,
             classes: 'p-4 v--modal',
-            height: 'auto',
-            width: '65%',
-            scrollable: true
+            height: '400px',
+            width: '90%'
           });
         },
         style: 'info'

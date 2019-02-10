@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="col-md-7">
-      <!--<generic-table-component :entity="entity" :url="url" :manual="true" :manual-data="manual"></generic-table-component>-->
+      <list-header-component :entity="entity" :entity-id="parentId"></list-header-component>
       <list-card-component :data="manual" :entity="listEntity" :parentId="parentId"></list-card-component>
     </div>
   </div>
@@ -33,6 +33,7 @@
 import Feather from 'vue-feather';
 import GenericTableComponent from '../tables/GenericTableComponent';
 import ListCardComponent from '../components/ListCardComponent';
+import ListHeaderComponent from '../components/ListHeaderComponent';
 
 export default {
   data(){
@@ -49,7 +50,7 @@ export default {
     }
   },
   components: {
-    Feather, GenericTableComponent, ListCardComponent
+    Feather, GenericTableComponent, ListCardComponent, ListHeaderComponent
   },
   watch: {
     search: function(newValue){
@@ -69,7 +70,7 @@ export default {
     }
   },
   /*
-    A listEntity por padrão é definida como entity, mas também pode ser definida como uma entidade separada que funciona
+    A listEntity por padrão é definida por entity, mas também pode ser definida como uma entidade separada que funciona
     em comum acordo com o urlFetchManual, este, por sua vez, fica encarregado de carregar uma pesquisa com essas outras entidades
     de acordo com a entidade principal selecionada.
     Por exemplo: As entidades principais são turmas, após listadas, quando clicadas elas disparam um evento que usa o urlFetchManual
