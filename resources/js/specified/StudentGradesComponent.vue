@@ -14,8 +14,7 @@
   </div>
 </template>
 <script>
-  //import GenericTableComponent from '../tables/GenericTableComponent';
-  //import StudentGradeChartComponent from './StudentGradeChartComponent';
+  import GenericTableComponent from '../tables/GenericTableComponent';
 
   export default {
     props: ['studentGroupId'],
