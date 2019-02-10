@@ -78,6 +78,11 @@
             </div>
         </nav>
         <main class="py-4">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                @include('flash::message')
+              </div>
+            </div>
             @yield('content')
         </main>
         <modals-container></modals-container>
