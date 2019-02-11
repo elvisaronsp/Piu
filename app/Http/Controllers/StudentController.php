@@ -21,7 +21,7 @@ class StudentController extends Controller
     {
         $group_id = $request->input('group_id');
         $student_name = $request->input('student_name');
-        $student_group_id = $request->input('student_group_id');
+        //$student_group_id = $request->input('student_group_id');
         $school_id = Auth::user()->school_id;
         $where  = [
           ['students.school_id', '=', $school_id]
@@ -32,13 +32,13 @@ class StudentController extends Controller
         $students = null;
         if($group_id){
           $where[] = ['student_groups.group_id', '=', $group_id];
-          $students = Student::join('student_groups', 'students.id', '=', 'student_groups.student_id');
+          $students = Student::join('student_groups', 'students.id', '=', 'student_groups.student_id')
+                              ->where($where)
+                              ->paginate(10);
         }else{
-          $students = new Student();
-        }
-        $students = $students->where($where)
-                             ->paginate(25);
-        
+          $students = Student::where($where)
+                              ->paginate(10);
+        }       
         $resource = new StudentCollection($students);
         return $resource;
     }

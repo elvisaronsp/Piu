@@ -62,7 +62,8 @@ export default {
   },
   methods:{
     selected_button: function(r, event){
-      let url = this.urlFetchManual.replace(':id:', r.id);
+      let url = this.$routes.base + this.urlFetchManual.replace(':id:', r.id);
+      console.log(url);
       axios.get(url).then(response => {
         this.manual = response.data;
         this.parentId = r.id;
