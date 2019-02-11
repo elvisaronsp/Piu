@@ -44,7 +44,7 @@ Vue.prototype.$entities = {
             {
               draggable: true,
               classes: 'p-4 v--modal',
-              height: '400px',
+              height: '450px',
               width: '90%'
             }
           );

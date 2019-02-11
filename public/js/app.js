@@ -1782,8 +1782,21 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  watch: {
+    datasets: function datasets(newValue) {
+      this.loadData();
+    },
+    labels: function labels(newValue) {
+      this.loadData();
+    }
+  },
+  methods: {
+    loadData: function loadData() {
+      this.renderChart(this.chartData.dataCollection, this.options);
+    }
+  },
   mounted: function mounted() {
-    this.renderChart(this.chartData.dataCollection, this.options);
+    this.loadData();
   }
 });
 
@@ -1876,27 +1889,26 @@ __webpack_require__.r(__webpack_exports__);
       return this.fetched_data.lenght <= 0;
     },
     datasets: function datasets() {
-      //let aprovados = [];
-      //let reprovados = [];
-      var result = [];
+      var aprovados = {
+        label: 'Aprovados',
+        //this.fetched_data[i].label,
+        backgroundColor: 'lightgreen',
+        data: [20, 5, 4]
+      };
+      var reprovados = {
+        label: 'Reprovados',
+        //this.fetched_data[i].label,
+        backgroundColor: 'red',
+        data: [25, 5, 8]
+      };
 
       for (var i = 0; i < this.fetched_data.length; i++) {
-        result.push({
-          label: 't',
-          //this.fetched_data[i].label,
-          backgroundColor: 'lightblue',
-          data: [this.fetched_data[i].aprovados]
-        });
-        result.push({
-          label: 't',
-          //this.fetched_data[i].label,
-          backgroundColor: 'red',
-          data: [this.fetched_data[i].reprovados]
-        });
+        //aprovados.data.push(this.fetched_data[i].aprovados);
+        //reprovados.data.push(this.fetched_data[i].reprovados);
         this.labels.push(this.fetched_data[i].title);
       }
 
-      return result;
+      return [aprovados, reprovados];
     }
   },
   methods: {
@@ -90997,7 +91009,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
       }, {
         draggable: true,
         classes: 'p-4 v--modal',
-        height: '400px',
+        height: '450px',
         width: '90%'
       });
     },

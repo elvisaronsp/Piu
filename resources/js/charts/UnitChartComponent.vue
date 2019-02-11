@@ -33,23 +33,22 @@ export default {
             return this.fetched_data.lenght <= 0;
         },
         datasets: function(){
-            //let aprovados = [];
-            //let reprovados = [];
-            let result = [];
+            let aprovados = {
+                               label: 'Aprovados',//this.fetched_data[i].label,
+                               backgroundColor: 'lightgreen',
+                               data: [20, 5, 4],
+                            };
+            let reprovados = {
+                               label: 'Reprovados',//this.fetched_data[i].label,
+                               backgroundColor: 'red',
+                               data: [25, 5, 8],
+                             };
             for(let i= 0; i < this.fetched_data.length; i++){
-                result.push({
-                   label: 't',//this.fetched_data[i].label,
-                   backgroundColor: 'lightblue',
-                   data: [this.fetched_data[i].aprovados] ,
-                });
-                result.push({
-                   label: 't',//this.fetched_data[i].label,
-                   backgroundColor: 'red',
-                   data: [this.fetched_data[i].reprovados] ,
-                });
+                //aprovados.data.push(this.fetched_data[i].aprovados);
+                //reprovados.data.push(this.fetched_data[i].reprovados);
                 this.labels.push(this.fetched_data[i].title);
             }
-            return result;
+            return [aprovados, reprovados];
         },
     },
     methods: {

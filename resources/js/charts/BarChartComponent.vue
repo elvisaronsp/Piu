@@ -17,8 +17,21 @@
                 }
             };
         },
-        mounted(){
+        watch: {
+          datasets: function(newValue){
+            this.loadData();
+          },
+          labels: function(newValue){
+            this.loadData();
+          }
+        },
+        methods:{
+          loadData(){
             this.renderChart(this.chartData.dataCollection, this.options);
+          }
+        },
+        mounted(){
+            this.loadData();
         }
     }
 </script>
