@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/JJS4ntos/Piu/blob/master/piu-logo.png" height="200"/>
+  <img src="https://github.com/JJS4ntos/Piu/blob/master/piu.svg" height="200"/>
 </p>
 <p align="center">
     <a href="https://codeclimate.com/github/JJS4ntos/SchoolManager/maintainability">
