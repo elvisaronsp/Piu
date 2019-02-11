@@ -7,7 +7,7 @@
     <div>
         <pulse-loader v-if="this.loading" :loading="this.loading" :color="color" :size="size"></pulse-loader>
         <div v-else class="container">
-            <bar-chart-component :labels="this.labels" :datasets="this.datasets"></bar-chart-component>
+            <bar-chart-component :chart-data="datacollection" :options="options"></bar-chart-component>
         </div>
     </div>
 </template>
@@ -25,40 +25,56 @@ export default {
           color: 'lightblue',
           size: '11px',
           fetched_data: {},
-          labels: []
+          datacollection: null,
+          options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
         }
     },
     computed: {
         loading: function() {
-            return this.fetched_data.lenght <= 0;
+            return this.datacollection == null;
         },
-        datasets: function(){
-            let aprovados = {
-                               label: 'Aprovados',//this.fetched_data[i].label,
-                               backgroundColor: 'lightgreen',
-                               data: [20, 5, 4],
-                            };
-            let reprovados = {
-                               label: 'Reprovados',//this.fetched_data[i].label,
-                               backgroundColor: 'red',
-                               data: [25, 5, 8],
-                             };
-            for(let i= 0; i < this.fetched_data.length; i++){
-                //aprovados.data.push(this.fetched_data[i].aprovados);
-                //reprovados.data.push(this.fetched_data[i].reprovados);
-                this.labels.push(this.fetched_data[i].title);
-            }
-            return [aprovados, reprovados];
-        },
+    },
+    watch: {
+      fetched_data: function(newValue){
+        if(newValue !== undefined && newValue.length > 0){
+          this.fillData();
+        }
+      }
     },
     methods: {
         loadData: function() {
             axios.get(this.$routes.grades.datachart.replace(':group_id:', this.groupId).replace(':unit_id:', this.unitId))
                     .then(response => (this.fetched_data = response.data));
+        },
+        fillData: function(){
+            let aprovados = {
+                               label: 'Aprovados',//this.fetched_data[i].label,
+                               backgroundColor: 'lightgreen',
+                               data: [],
+                            };
+            let reprovados = {
+                               label: 'Reprovados',//this.fetched_data[i].label,
+                               backgroundColor: 'red',
+                               data: [],
+                             };
+            let labels = [];
+            for(let i= 0; i < this.fetched_data.length; i++){
+                aprovados.data.push(parseFloat(this.fetched_data[i].aprovados));
+                reprovados.data.push(parseFloat(this.fetched_data[i].reprovados));
+                labels.push(this.fetched_data[i].title);
+            }
+            this.datacollection = {
+                labels: labels,
+                datasets: [aprovados, reprovados]
+            };
         }
     },
     mounted(){
         this.loadData();
+        this.fillData();
     }
 }
 </script>

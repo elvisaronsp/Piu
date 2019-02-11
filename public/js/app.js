@@ -1765,38 +1765,15 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactiveProp;
 /* harmony default export */ __webpack_exports__["default"] = ({
   extends: vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Bar"],
-  props: ['datasets', 'labels', 'styles'],
-  data: function data() {
-    return {
-      chartData: {
-        dataCollection: {
-          labels: this.labels,
-          datasets: this.datasets
-        }
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    };
-  },
-  watch: {
-    datasets: function datasets(newValue) {
-      this.loadData();
-    },
-    labels: function labels(newValue) {
-      this.loadData();
-    }
-  },
-  methods: {
-    loadData: function loadData() {
-      this.renderChart(this.chartData.dataCollection, this.options);
-    }
-  },
+  mixins: [reactiveProp],
+  props: ['options'],
   mounted: function mounted() {
-    this.loadData();
+    // this.chartData is created in the mixin.
+    // If you want to pass options please create a local options object
+    this.renderChart(this.chartData, this.options);
   }
 });
 
@@ -1881,34 +1858,23 @@ __webpack_require__.r(__webpack_exports__);
       color: 'lightblue',
       size: '11px',
       fetched_data: {},
-      labels: []
+      datacollection: null,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
     };
   },
   computed: {
     loading: function loading() {
-      return this.fetched_data.lenght <= 0;
-    },
-    datasets: function datasets() {
-      var aprovados = {
-        label: 'Aprovados',
-        //this.fetched_data[i].label,
-        backgroundColor: 'lightgreen',
-        data: [20, 5, 4]
-      };
-      var reprovados = {
-        label: 'Reprovados',
-        //this.fetched_data[i].label,
-        backgroundColor: 'red',
-        data: [25, 5, 8]
-      };
-
-      for (var i = 0; i < this.fetched_data.length; i++) {
-        //aprovados.data.push(this.fetched_data[i].aprovados);
-        //reprovados.data.push(this.fetched_data[i].reprovados);
-        this.labels.push(this.fetched_data[i].title);
+      return this.datacollection == null;
+    }
+  },
+  watch: {
+    fetched_data: function fetched_data(newValue) {
+      if (newValue !== undefined && newValue.length > 0) {
+        this.fillData();
       }
-
-      return [aprovados, reprovados];
     }
   },
   methods: {
@@ -1918,10 +1884,37 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(this.$routes.grades.datachart.replace(':group_id:', this.groupId).replace(':unit_id:', this.unitId)).then(function (response) {
         return _this.fetched_data = response.data;
       });
+    },
+    fillData: function fillData() {
+      var aprovados = {
+        label: 'Aprovados',
+        //this.fetched_data[i].label,
+        backgroundColor: 'lightgreen',
+        data: []
+      };
+      var reprovados = {
+        label: 'Reprovados',
+        //this.fetched_data[i].label,
+        backgroundColor: 'red',
+        data: []
+      };
+      var labels = [];
+
+      for (var i = 0; i < this.fetched_data.length; i++) {
+        aprovados.data.push(parseFloat(this.fetched_data[i].aprovados));
+        reprovados.data.push(parseFloat(this.fetched_data[i].reprovados));
+        labels.push(this.fetched_data[i].title);
+      }
+
+      this.datacollection = {
+        labels: labels,
+        datasets: [aprovados, reprovados]
+      };
     }
   },
   mounted: function mounted() {
     this.loadData();
+    this.fillData();
   }
 });
 
@@ -3184,16 +3177,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/StudentGradesComponent.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/StudentGradesComponent.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentGradesComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/students/StudentGradesComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tables_GenericTableComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tables/GenericTableComponent */ "./resources/js/tables/GenericTableComponent.vue");
+/* harmony import */ var _tables_GenericTableComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tables/GenericTableComponent */ "./resources/js/tables/GenericTableComponent.vue");
 //
 //
 //
@@ -3246,6 +3239,82 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _charts_UnitChartComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../charts/UnitChartComponent */ "./resources/js/charts/UnitChartComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['groupId'],
+  components: {
+    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  data: function data() {
+    return {
+      units: [],
+      unit: null
+    };
+  },
+  computed: {
+    disabled: function disabled() {
+      return this.unit == null || this.groupId == null;
+    }
+  },
+  methods: {
+    loadUnits: function loadUnits() {
+      var _this = this;
+
+      axios.get(this.$routes.base + '/units/').then(function (response) {
+        return _this.units = response.data.data;
+      }).catch(function (err) {
+        return showMessage('Ops! Algo de errado aconteceu', err);
+      });
+    },
+    chartGenerate: function chartGenerate() {
+      this.$modal.show(_charts_UnitChartComponent__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        groupId: this.groupId,
+        unitId: this.unit.value
+      }, {
+        draggable: true,
+        classes: 'p-4 v--modal',
+        height: '450px',
+        width: '90%'
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadUnits();
   }
 });
 
@@ -75392,7 +75461,10 @@ var render = function() {
             { staticClass: "container" },
             [
               _c("bar-chart-component", {
-                attrs: { labels: this.labels, datasets: this.datasets }
+                attrs: {
+                  "chart-data": _vm.datacollection,
+                  options: _vm.options
+                }
               })
             ],
             1
@@ -77907,10 +77979,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/StudentGradesComponent.vue?vue&type=template&id=74e28e83&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/StudentGradesComponent.vue?vue&type=template&id=74e28e83& ***!
-  \************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentGradesComponent.vue?vue&type=template&id=9332a8a0&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/students/StudentGradesComponent.vue?vue&type=template&id=9332a8a0& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -77948,6 +78020,83 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=template&id=514dd408&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=template&id=514dd408& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        [
+          _c("v-select", {
+            attrs: {
+              "max-height": "200px",
+              placeholder: "Selecione a unidade",
+              options: _vm.toVSelectData(_vm.units)
+            },
+            model: {
+              value: _vm.unit,
+              callback: function($$v) {
+                _vm.unit = $$v
+              },
+              expression: "unit"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12 mt-1" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { disabled: _vm.disabled },
+            on: { click: _vm.chartGenerate }
+          },
+          [_vm._v("Gerar gráfico")]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h3", [_vm._v("Visualizar gráfico de rendimento")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-muted" }, [
+        _vm._v(
+          "Acompanhe o rendimento da sua turma através de um gráfico simples e auto-explicativo."
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -90243,7 +90392,8 @@ var map = {
 	"./forms/VocationComponent.vue": "./resources/js/forms/VocationComponent.vue",
 	"./forms/elements/SelectAjaxComponent.vue": "./resources/js/forms/elements/SelectAjaxComponent.vue",
 	"./screens/SearchEntityList.vue": "./resources/js/screens/SearchEntityList.vue",
-	"./specified/StudentGradesComponent.vue": "./resources/js/specified/StudentGradesComponent.vue",
+	"./specified/students/StudentGradesComponent.vue": "./resources/js/specified/students/StudentGradesComponent.vue",
+	"./specified/units/SelectUnitChartComponent.vue": "./resources/js/specified/units/SelectUnitChartComponent.vue",
 	"./tables/DinamicTableComponent.vue": "./resources/js/tables/DinamicTableComponent.vue",
 	"./tables/GenericTableComponent.vue": "./resources/js/tables/GenericTableComponent.vue",
 	"./tables/TableActionComponent.vue": "./resources/js/tables/TableActionComponent.vue"
@@ -90957,8 +91107,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _forms_GradeComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms/GradeComponent */ "./resources/js/forms/GradeComponent.vue");
-/* harmony import */ var _specified_StudentGradesComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./specified/StudentGradesComponent */ "./resources/js/specified/StudentGradesComponent.vue");
-/* harmony import */ var _charts_UnitChartComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./charts/UnitChartComponent */ "./resources/js/charts/UnitChartComponent.vue");
+/* harmony import */ var _specified_students_StudentGradesComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./specified/students/StudentGradesComponent */ "./resources/js/specified/students/StudentGradesComponent.vue");
+/* harmony import */ var _specified_units_SelectUnitChartComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./specified/units/SelectUnitChartComponent */ "./resources/js/specified/units/SelectUnitChartComponent.vue");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_4__);
 
@@ -90988,7 +91138,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
   }, {
     label: 'Ver notas',
     click: function click(id, parentId) {
-      entities.$modal.show(_specified_StudentGradesComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      entities.$modal.show(_specified_students_StudentGradesComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         studentGroupId: id
       }, {
         draggable: true,
@@ -91003,14 +91153,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
   groups: [{
     label: 'Gráfico de rendimento',
     click: function click(id, parentId) {
-      entities.$modal.show(_charts_UnitChartComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        groupId: id,
-        unitId: 1
+      entities.$modal.show(_specified_units_SelectUnitChartComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        groupId: id
       }, {
         draggable: true,
         classes: 'p-4 v--modal',
-        height: '450px',
-        width: '90%'
+        height: '300px',
+        width: '40%'
       });
     },
     style: 'info'
@@ -92367,18 +92516,18 @@ component.options.__file = "resources/js/screens/SearchEntityList.vue"
 
 /***/ }),
 
-/***/ "./resources/js/specified/StudentGradesComponent.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/specified/StudentGradesComponent.vue ***!
-  \***********************************************************/
+/***/ "./resources/js/specified/students/StudentGradesComponent.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/specified/students/StudentGradesComponent.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StudentGradesComponent_vue_vue_type_template_id_74e28e83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentGradesComponent.vue?vue&type=template&id=74e28e83& */ "./resources/js/specified/StudentGradesComponent.vue?vue&type=template&id=74e28e83&");
-/* harmony import */ var _StudentGradesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentGradesComponent.vue?vue&type=script&lang=js& */ "./resources/js/specified/StudentGradesComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _StudentGradesComponent_vue_vue_type_template_id_9332a8a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentGradesComponent.vue?vue&type=template&id=9332a8a0& */ "./resources/js/specified/students/StudentGradesComponent.vue?vue&type=template&id=9332a8a0&");
+/* harmony import */ var _StudentGradesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentGradesComponent.vue?vue&type=script&lang=js& */ "./resources/js/specified/students/StudentGradesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -92388,8 +92537,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _StudentGradesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _StudentGradesComponent_vue_vue_type_template_id_74e28e83___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _StudentGradesComponent_vue_vue_type_template_id_74e28e83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _StudentGradesComponent_vue_vue_type_template_id_9332a8a0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StudentGradesComponent_vue_vue_type_template_id_9332a8a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -92399,38 +92548,107 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/specified/StudentGradesComponent.vue"
+component.options.__file = "resources/js/specified/students/StudentGradesComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/specified/StudentGradesComponent.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/specified/StudentGradesComponent.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
+/***/ "./resources/js/specified/students/StudentGradesComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/specified/students/StudentGradesComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./StudentGradesComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/StudentGradesComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentGradesComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentGradesComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/specified/StudentGradesComponent.vue?vue&type=template&id=74e28e83&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/specified/StudentGradesComponent.vue?vue&type=template&id=74e28e83& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/specified/students/StudentGradesComponent.vue?vue&type=template&id=9332a8a0&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/specified/students/StudentGradesComponent.vue?vue&type=template&id=9332a8a0& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_template_id_74e28e83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./StudentGradesComponent.vue?vue&type=template&id=74e28e83& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/StudentGradesComponent.vue?vue&type=template&id=74e28e83&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_template_id_74e28e83___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_template_id_9332a8a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentGradesComponent.vue?vue&type=template&id=9332a8a0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentGradesComponent.vue?vue&type=template&id=9332a8a0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_template_id_9332a8a0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_template_id_74e28e83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradesComponent_vue_vue_type_template_id_9332a8a0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/specified/units/SelectUnitChartComponent.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/specified/units/SelectUnitChartComponent.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SelectUnitChartComponent_vue_vue_type_template_id_514dd408___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectUnitChartComponent.vue?vue&type=template&id=514dd408& */ "./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=template&id=514dd408&");
+/* harmony import */ var _SelectUnitChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectUnitChartComponent.vue?vue&type=script&lang=js& */ "./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SelectUnitChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SelectUnitChartComponent_vue_vue_type_template_id_514dd408___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SelectUnitChartComponent_vue_vue_type_template_id_514dd408___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/specified/units/SelectUnitChartComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectUnitChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectUnitChartComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectUnitChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=template&id=514dd408&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=template&id=514dd408& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectUnitChartComponent_vue_vue_type_template_id_514dd408___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectUnitChartComponent.vue?vue&type=template&id=514dd408& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/units/SelectUnitChartComponent.vue?vue&type=template&id=514dd408&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectUnitChartComponent_vue_vue_type_template_id_514dd408___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectUnitChartComponent_vue_vue_type_template_id_514dd408___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

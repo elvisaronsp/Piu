@@ -1,37 +1,15 @@
 <script>
-    import { Bar } from 'vue-chartjs';
+    import { Bar, mixins } from 'vue-chartjs'
+    const { reactiveProp } = mixins
+
     export default {
-        extends: Bar,
-        props: ['datasets', 'labels', 'styles'],
-        data() {
-            return {
-                chartData: {
-                    dataCollection: {
-                        labels: this.labels,
-                        datasets: this.datasets
-                    }
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                }
-            };
-        },
-        watch: {
-          datasets: function(newValue){
-            this.loadData();
-          },
-          labels: function(newValue){
-            this.loadData();
-          }
-        },
-        methods:{
-          loadData(){
-            this.renderChart(this.chartData.dataCollection, this.options);
-          }
-        },
-        mounted(){
-            this.loadData();
-        }
+      extends: Bar,
+      mixins: [reactiveProp],
+      props: ['options'],
+      mounted () {
+        // this.chartData is created in the mixin.
+        // If you want to pass options please create a local options object
+        this.renderChart(this.chartData, this.options)
+      }
     }
 </script>
