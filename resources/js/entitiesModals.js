@@ -39,12 +39,15 @@ Vue.prototype.$entities = {
       {
         label: 'Gráfico de rendimento',
         click: (id, parentId) => {
-          entities.$modal.show(UnitChartComponent, {groupId: id}, {
-            draggable: true,
-            classes: 'p-4 v--modal',
-            height: '400px',
-            width: '90%'
-          });
+          entities.$modal.show(UnitChartComponent,
+            {groupId: id, unitId: 1},
+            {
+              draggable: true,
+              classes: 'p-4 v--modal',
+              height: '400px',
+              width: '90%'
+            }
+          );
         },
         style: 'info'
       }

@@ -7,7 +7,7 @@
             return {
                 chartData: {
                     dataCollection: {
-                        labels: '',
+                        labels: this.labels,
                         datasets: this.datasets
                     }
                 },

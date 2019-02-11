@@ -12,7 +12,7 @@ Vue.prototype.$routes = {
         store: '/grades/store',
         destroy: '/grades/destroy/:id:',
         edit: '/grades/edit/:id:',
-        datachart: '/grades/data-chart/:student_group_id:'
+        datachart: '/grades/data-chart/:group_id:/:unit_id:'
     },
     employeers: {
         index: '/employeers',

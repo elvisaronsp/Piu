@@ -1772,7 +1772,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       chartData: {
         dataCollection: {
-          labels: '',
+          labels: this.labels,
           datasets: this.datasets
         }
       },
@@ -1858,7 +1858,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['groupId'],
+  props: ['groupId', 'unitId'],
   components: {
     PulseLoader: vue_spinner_src_PulseLoader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     BarChartComponent: _BarChartComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -1867,50 +1867,49 @@ __webpack_require__.r(__webpack_exports__);
     return {
       color: 'lightblue',
       size: '11px',
-      datachart: {}
+      fetched_data: {},
+      labels: []
     };
   },
   computed: {
     loading: function loading() {
-      //return Object.keys(this.datasets).length <= 0;
-      return false;
-    }
-    /*datasets: function(){
-        let result = [];
-        for(let i=0; i < this.datachart.length; i++){
-            result.push({
-               label: this.datachart[i].label,
-               backgroundColor: this.$colors.units[i],
-               data: this.datachart[i].notas.split(','),
-               fill: false
-            })
-        }
-        return result; //TODO: Função para listar as notas e relacionar com o label correspondente.
-    },*/
+      return this.fetched_data.lenght <= 0;
+    },
+    datasets: function datasets() {
+      //let aprovados = [];
+      //let reprovados = [];
+      var result = [];
 
+      for (var i = 0; i < this.fetched_data.length; i++) {
+        result.push({
+          label: 't',
+          //this.fetched_data[i].label,
+          backgroundColor: 'lightblue',
+          data: [this.fetched_data[i].aprovados]
+        });
+        result.push({
+          label: 't',
+          //this.fetched_data[i].label,
+          backgroundColor: 'red',
+          data: [this.fetched_data[i].reprovados]
+        });
+        this.labels.push(this.fetched_data[i].title);
+      }
+
+      return result;
+    }
   },
   methods: {
-    /*loadData: function() {
-        axios.get(this.$routes.grades.datachart.replace(':student_group_id:', this.studentGroupId))
-                .then(response => (this.datachart = response.data));
-    },
-    labels: function(data){
-        let ls= [];
-        for (let i = 0; i < this.datachart.data.length; i++) {
-            ls.push('Nota '+i);
-        }              
-        console.log(ls);
-        return ls;
-    }*/
-  },
-  watch: {
-    groupId: function groupId(newValue) {
-      console.log(newValue);
+    loadData: function loadData() {
+      var _this = this;
+
+      axios.get(this.$routes.grades.datachart.replace(':group_id:', this.groupId).replace(':unit_id:', this.unitId)).then(function (response) {
+        return _this.fetched_data = response.data;
+      });
     }
   },
   mounted: function mounted() {
-    //this.loadData();
-    console.log(this.groupId);
+    this.loadData();
   }
 });
 
@@ -75366,7 +75365,16 @@ var render = function() {
         ? _c("pulse-loader", {
             attrs: { loading: this.loading, color: _vm.color, size: _vm.size }
           })
-        : _c("div", { staticClass: "container" })
+        : _c(
+            "div",
+            { staticClass: "container" },
+            [
+              _c("bar-chart-component", {
+                attrs: { labels: this.labels, datasets: this.datasets }
+              })
+            ],
+            1
+          )
     ],
     1
   )
@@ -90261,7 +90269,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
     label: 'Gráfico de rendimento',
     click: function click(id, parentId) {
       entities.$modal.show(_charts_UnitChartComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        groupId: id
+        groupId: id,
+        unitId: 1
       }, {
         draggable: true,
         classes: 'p-4 v--modal',
@@ -91548,7 +91557,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
     store: '/grades/store',
     destroy: '/grades/destroy/:id:',
     edit: '/grades/edit/:id:',
-    datachart: '/grades/data-chart/:student_group_id:'
+    datachart: '/grades/data-chart/:group_id:/:unit_id:'
   },
   employeers: {
     index: '/employeers',

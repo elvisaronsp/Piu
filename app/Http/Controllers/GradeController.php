@@ -10,6 +10,7 @@ use App\Http\Resources\GradeCollection;
 use App\StudentGroup;
 use Auth;
 use DB;
+use App\Option;
 
 class GradeController extends Controller
 {
@@ -41,10 +42,15 @@ class GradeController extends Controller
       $result = Grade::create($data);
       return new GradeResource($result);
 	}
-	
+
 	public function dataChart(Request $request, $group_id, $unit_id){
 		$school_id = Auth::user()->school_id;
-    //var_dump(array($group_id, $unit_id));
+    $nota_minima = Option::where('name', 'student_grade_min')->first();
+    if(!$nota_minima){
+      $nota_minima = 5;
+    }else{
+      $nota_minima = $nota_minima->value;
+    }
 		$result = Grade::join('units', 'units.id', '=', 'grades.unit_id')
                     ->join('student_groups', 'student_groups.id', '=', 'grades.student_group_id')
                     ->join('students', 'students.id', '=', 'student_groups.student_id')
@@ -54,7 +60,11 @@ class GradeController extends Controller
                       ['groups.id', '=', $group_id],
                       //['units.id', '=', $unit_id]
                     ])
-                    ->select('stuffs.title', DB::raw('COUNT(grades.value > 5) as aprovados'), 'students.name')
+                    ->select(
+                              'stuffs.title',
+                              DB::raw("SUM(CASE WHEN grades.value < '{$nota_minima}' THEN 1 ELSE 0 END) AS reprovados"),
+                              DB::raw("SUM(CASE WHEN grades.value >= '{$nota_minima}' THEN 1 ELSE 0 END) AS aprovados")
+                            )
                     ->groupBy('stuffs.id')
                     ->get();
 		return response($result, 200);

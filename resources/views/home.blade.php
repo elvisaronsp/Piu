@@ -26,6 +26,9 @@
       <div class="tab-pane fade" id="v-pills-students" role="tabpanel" aria-labelledby="v-pills-students-tab">
           @include('students.index')
       </div>
+      <div class="tab-pane fade" id="v-pills-groups" role="tabpanel" aria-labelledby="v-pills-groups-tab">
+          @include('groups.index')
+      </div>
       <div class="tab-pane fade" id="v-pills-configurations" role="tabpanel" aria-labelledby="v-pills-configurations-tab">
           @include('options.index')
       </div>
