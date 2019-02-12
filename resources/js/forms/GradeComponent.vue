@@ -19,12 +19,15 @@
       </div>
     </div>
     <button :class="'btn btn-'+style" v-on:click="submit" :disabled="disabled || notFilled">
+      <moon-loader :loading="loading" color="lightskyblue" size="14px"></moon-loader>
       {{ text }}
     </button>
   </div>
 </template>
 <script>
   import vSelect from 'vue-select';
+  import MoonLoader from 'vue-spinner/src/MoonLoader.vue'
+
   export default {
     props: ['studentGroupId'],
     data: function(){
@@ -36,7 +39,8 @@
         unit: '',
         style: 'primary',
         text: 'Realizar lançamento',
-        disabled: false
+        disabled: false,
+        loading: false
       }
     },
     mounted(){
@@ -46,7 +50,7 @@
            .then(response => ( this.units = this.toVSelectData(response.data.data) ) );
     },
     components: {
-      vSelect
+      vSelect, MoonLoader
     },
     computed: {
       notFilled: function(){
@@ -56,6 +60,9 @@
     methods:{
       submit: function(){
         if(parseFloat(this.grade) <= 10){
+          this.loading = true;
+          this.text = '';
+          this.disabled = true;
           axios.post(this.$routes.grades.store, {
             _token: this.$csrf,
             stuff_id: this.stuff.value,
@@ -67,8 +74,11 @@
             this.text = 'Nota aplicada com sucesso!';
             this.style = 'success';
             this.$modal.hide('modals-container');
+            this.loading = false;
           }).catch(err => {
-            console.log(err);
+            this.disabled = false;
+            this.text = 'Realizar lançamento';
+            showMessage('Ops! Algo de errado aconteceu', err);
           });
         }else{
           this.style = 'danger';
