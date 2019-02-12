@@ -28,7 +28,11 @@
                       {{ config('app.name', 'Laravel') }}
                     @endguest
                     @auth
-                      <img src="{{ Auth::user()->school->urlLogo() }}" height="70" alt="">
+                        @if(Auth::user()->school)
+                            <img src="{{ Auth::user()->school->urlLogo() }}" height="70" alt="">
+                        @else
+                            It's a test!
+                        @endif
                     @endauth
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
