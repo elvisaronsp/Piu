@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Events\SchoolCreated;
+use Storage;
 
 class School extends Model
 {
@@ -23,4 +24,9 @@ class School extends Model
     protected $dispatchesEvents = [
       'created' => SchoolCreated::class
     ];
+  
+    public function urlLogo(){
+        return "/images/{$this->logo}";
+    }
+
 }

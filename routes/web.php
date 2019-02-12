@@ -62,9 +62,12 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/units', 'UnitController@index')->name('units.index');
   Route::post('/units/store', 'UnitController@store')->name('units.store');
   
-  # Options
+  # Option
   Route::get('/options', 'OptionController@index')->name('options.index');
   Route::post('/options/store', 'OptionController@store')->name('options.store');
   Route::get('/options/create', 'OptionController@create')->name('options.create');
+  
+  # Image
+  Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.show');
   
 });
