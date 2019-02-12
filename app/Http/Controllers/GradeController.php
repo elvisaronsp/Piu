@@ -62,8 +62,8 @@ class GradeController extends Controller
                     ])
                     ->select(
                               'stuffs.title',
-                              DB::raw("SUM(CASE WHEN grades.value < '{$nota_minima}' THEN 1 ELSE 0 END) AS reprovados"),
-                              DB::raw("SUM(CASE WHEN grades.value >= '{$nota_minima}' THEN 1 ELSE 0 END) AS aprovados")
+                              DB::raw("SUM(CASE WHEN grades.value < '{$nota_minima}' && units.id = {$unit_id} THEN 1 ELSE 0 END) AS reprovados"),
+                              DB::raw("SUM(CASE WHEN grades.value >= '{$nota_minima}' && units.id = {$unit_id} THEN 1 ELSE 0 END) AS aprovados")
                             )
                     ->groupBy('stuffs.id')
                     ->get();
