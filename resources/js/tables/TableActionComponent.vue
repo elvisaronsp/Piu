@@ -29,6 +29,7 @@ export default {
               })
              .then(response => {
                 this.showMessage('Concluído', response.data);
+                window.location.reload();
              })
              .catch(err => this.showMessage('Ops! Ocorreu um problema', err.response.data));
       }
