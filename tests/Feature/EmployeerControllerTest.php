@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use App\User;
 use Faker\Generator as Faker;
 
-class EmployeerTest extends TestCase
+class EmployeerControllerTest extends TestCase
 {
     use WithoutMiddleware;
 

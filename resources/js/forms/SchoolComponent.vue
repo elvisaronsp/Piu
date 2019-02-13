@@ -42,13 +42,13 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="logo">Logotipo</label>
-          <input class="form-control-file" type="file" name="logo" v-on:change="logo" value="">
+          <input class="form-control-file" type="file" name="logo" v-on:change="logo" value="" required>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="city_logo">Logotipo do município</label>
-          <input class="form-control-file" type="file" name="logo_city" v-on:change="logo_city" value="">
+          <input class="form-control-file" type="file" name="logo_city" v-on:change="logo_city" value="" required>
         </div>
       </div>
     </div>

@@ -49,7 +49,11 @@ Vue.prototype.$routes = {
         index: '/groups',
         store: '/groups/store',
         destroy: '/groups/destroy/:id:',
-        edit: '/groups/edit/:id:'
+        edit: '/groups/edit/:id:',
+        ata: '/groups/ata/:id:'
+    },
+    images: {
+        show: '/images/:fileName:'
     }
 
 };

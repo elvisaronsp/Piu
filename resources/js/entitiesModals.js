@@ -49,7 +49,14 @@ Vue.prototype.$entities = {
             }
           );
         },
+        style: 'primary'
+      },
+      {
+        label: 'ATA',
+        click: (id, parentId) => {
+          window.location = entities.$routes.groups.ata.replace(':id:', id);
+        },
         style: 'info'
       }
-    ]
+    ],
 };

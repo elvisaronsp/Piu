@@ -41,4 +41,13 @@ class GroupController extends Controller
       return redirect('/');
     }
 
+    public function ata(Request $request, $id){
+      $school_id = Auth::user()->school_id;
+      $group = Group::where([
+                  ['id', '=', $id],
+                  ['school_id', '=', $school_id]
+                ])->with('school')->first();
+      return view('groups.ata')->with('group', $group);
+    }
+
 }

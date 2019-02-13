@@ -45,6 +45,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/groups/create', 'GroupController@create')->name('groups.create');
   Route::post('/groups/store', 'GroupController@store')->name('groups.store');
   Route::post('/groups/destroy/{id}', 'GroupController@destroy')->name('groups.destroy');
+  Route::get('/groups/ata/{id}', 'GroupController@ata')->name('groups.ata');
 
   # StudentGroup
   Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
