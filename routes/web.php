@@ -61,13 +61,15 @@ Route::group(['middleware'=> ['auth']], function(){
   # Unit
   Route::get('/units', 'UnitController@index')->name('units.index');
   Route::post('/units/store', 'UnitController@store')->name('units.store');
-  
+  Route::post('/units/destroy/{id}', 'UnitController@destroy')->name('unit.destroy');
+
   # Option
   Route::get('/options', 'OptionController@index')->name('options.index');
   Route::post('/options/store', 'OptionController@store')->name('options.store');
   Route::get('/options/create', 'OptionController@create')->name('options.create');
-  
+  Route::post('/options/destroy/{id}', 'OptionController@destroy')->name('options.destroy');
+
   # Image
   Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.show');
-  
+
 });

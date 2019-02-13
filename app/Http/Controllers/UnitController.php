@@ -19,4 +19,11 @@ class UnitController extends Controller
         return new UnitCollection($result);
     }
 
+    public function destroy(Request $request, $id){
+      $unit = Unit::findOrFail($id);
+      $unit->delete();
+      Flash::success('Unidade apagada com sucesso!');
+      return redirect('/');
+    }
+
 }

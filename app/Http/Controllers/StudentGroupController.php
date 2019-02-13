@@ -50,4 +50,11 @@ class StudentGroupController extends Controller
       return response('Aluno já matriculado nesta turma', 406);
     }
 
+    public function destroy(Request $request, $id){
+      $studentGroup = StudentGroup::findOrFail($id);
+      $studentGroup->delete();
+      Flash::success('Aluno desmatriculado com sucesso!');
+      return redirect('/');
+    }
+
 }

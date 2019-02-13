@@ -12,6 +12,7 @@ use App\User;
 use App\GeneralRegistration;
 use Auth;
 use App\Http\Resources\EmployeerCollection;
+use Flash;
 
 class EmployeerController extends Controller
 {
@@ -44,7 +45,15 @@ class EmployeerController extends Controller
       $data['school_id'] = Auth::user()->school_id;
       $data['password'] = bcrypt($data['password']);
       $user = User::create($data);
-      return redirect('/')->with('status', 'Funcionário criado com sucesso!');
+      Flash::success('Funcionário criado com sucesso!');
+      return redirect('/');
+    }
+
+    public function destroy(Request $request, $id){
+      $employeer = Employeer::findOrFail($id);
+      $employeer->delete();
+      Flash::success('Funcionário apagado com sucesso!');
+      return redirect('/');
     }
 
 }

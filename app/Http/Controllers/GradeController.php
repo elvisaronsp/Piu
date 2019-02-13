@@ -11,6 +11,7 @@ use App\StudentGroup;
 use Auth;
 use DB;
 use App\Option;
+use Flash;
 
 class GradeController extends Controller
 {
@@ -42,6 +43,13 @@ class GradeController extends Controller
       $result = Grade::create($data);
       return new GradeResource($result);
 	}
+
+  public function destroy(Request $request, $id){
+    $grade = Grade::findOrFail($id);
+    $grade->delete();
+    Flash::success('Nota apagada com sucesso!');
+    return redirect('/');
+  }
 
 	public function dataChart(Request $request, $group_id, $unit_id){
 		$school_id = Auth::user()->school_id;

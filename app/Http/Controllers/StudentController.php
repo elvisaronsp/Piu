@@ -9,6 +9,7 @@ use App\Address;
 use App\Http\Requests\StudentStoreRequest;
 use App\Http\Resources\StudentCollection;
 use Auth;
+use Flash;
 
 class StudentController extends Controller
 {
@@ -38,7 +39,7 @@ class StudentController extends Controller
         }else{
           $students = Student::where($where)
                               ->paginate(10);
-        }       
+        }
         $resource = new StudentCollection($students);
         return $resource;
     }
@@ -116,7 +117,8 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $student->delete();
-        return response()-json('Estudante apagado com sucesso!');
+        Flash::success('Estudante apagado com sucesso!');
+        return redirect('/');
     }
 
     public function report_card(Request $request, $id){

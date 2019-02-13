@@ -7,6 +7,7 @@ use App\Http\Resources\GroupCollection;
 use Auth;
 use App\Group;
 use App\Http\Requests\GroupStoreRequest;
+use Flash;
 
 class GroupController extends Controller
 {
@@ -36,7 +37,8 @@ class GroupController extends Controller
     public function destroy(Request $request, $id){
       $group = Group::findOrFail($id);
       $group->delete();
-      return response('Turma apagada com sucesso!', 200);
+      Flash::success('Turma apagada com sucesso!');
+      return redirect('/');
     }
 
 }

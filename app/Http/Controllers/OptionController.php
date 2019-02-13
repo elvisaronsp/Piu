@@ -33,4 +33,11 @@ class OptionController extends Controller
       return view('options.create');
     }
 
+    public function destroy(Request $request, $id){
+      $option = Option::findOrFail($id);
+      $option->delete();
+      Flash::success('Opção apagada com sucesso!');
+      return redirect('/');
+    }
+
 }
