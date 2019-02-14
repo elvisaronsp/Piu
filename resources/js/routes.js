@@ -54,6 +54,12 @@ Vue.prototype.$routes = {
     },
     images: {
         show: '/images/:fileName:'
+    },
+    options: {
+        index: '/options',
+        store: '/options/store',
+        destroy: '/options/destroy/:id:'
+
     }
 
 };

@@ -1,16 +1,16 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <student-ata-header :group="group"></student-ata-header>
+      <student-ata-header-component :group="group"></student-ata-header-component>
     </div>
   </div>
 </template>
 <script>
-  import StudentAtaHeader from './StudentAtaHeader';
+  import StudentAtaHeaderComponent from './StudentAtaHeaderComponent';
   export default {
     props: ['group'],
     components: {
-      StudentAtaHeader
+      StudentAtaHeaderComponent
     }
   }
 </script>

@@ -10502,3 +10502,10 @@ a.text-dark:focus {
   width: 100%;
 }
 
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
+
