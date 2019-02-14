@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Grade;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\GradeSaved as GradeSavedNotification;
+use App\Notifications\GradeUpdated as GradeUpdatedNotification;
 use Auth;
 
 class GradeObserver
@@ -38,7 +39,8 @@ class GradeObserver
      */
     public function updated(Grade $grade)
     {
-        //
+        $this->setSchoolEmail();
+        $this->notify(new GradeUpdatedNotification($grade));
     }
 
     /**
@@ -49,7 +51,8 @@ class GradeObserver
      */
     public function deleted(Grade $grade)
     {
-        //
+        $this->setSchoolEmail();
+        $this->notify(new GradeDeletedNotification($grade));
     }
 
     /**

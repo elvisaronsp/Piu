@@ -7,9 +7,10 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class GradeSaved extends Notification
+class GradeDeleted extends Notification
 {
     use Queueable;
+
     private $grade = null;
 
     /**
@@ -44,8 +45,8 @@ class GradeSaved extends Notification
       $employeer = $this->grade->employeer_id;
       return (new MailMessage)
              ->greeting('Olá,')
-             ->line("A nota do aluno {$this->grade->student_group->student->name} foi lançada e é {$this->grade->value}.")
-             ->line("O funcionário que realizou o lançamento foi {$employeer == 0? 'A instituição':$this->grade->employeer->name }.")
+             ->line("A nota do aluno {$this->grade->student_group->student->name} foi excluída.")
+             ->line("O funcionário que realizou a exclusão foi {$employeer == 0? 'A instituição':$this->grade->employeer->name }.")
              //->action('View Invoice', $url)
              ->line('Att');
     }

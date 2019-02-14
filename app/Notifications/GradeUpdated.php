@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class GradeSaved extends Notification
+class GradeUpdated extends Notification
 {
     use Queueable;
     private $grade = null;
@@ -41,13 +41,13 @@ class GradeSaved extends Notification
      */
     public function toMail($notifiable)
     {
-      $employeer = $this->grade->employeer_id;
-      return (new MailMessage)
-             ->greeting('Olá,')
-             ->line("A nota do aluno {$this->grade->student_group->student->name} foi lançada e é {$this->grade->value}.")
-             ->line("O funcionário que realizou o lançamento foi {$employeer == 0? 'A instituição':$this->grade->employeer->name }.")
-             //->action('View Invoice', $url)
-             ->line('Att');
+        $employeer = $this->grade->employeer_id;
+        return (new MailMessage)
+               ->greeting('Olá,')
+               ->line("A nota do aluno {$this->grade->student_group->student->name} foi atualizada para {$this->grade->value}.")
+               ->line("O funcionário que realizou a alteração foi {$employeer == 0? 'A instituição':$this->grade->employeer->name }.")
+               //->action('View Invoice', $url)
+               ->line('Att');
     }
 
     /**
