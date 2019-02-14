@@ -28,8 +28,9 @@ import './colors';
 import VModal from 'vue-js-modal';
 import VueTheMask from 'vue-the-mask';
 import StudentGroupComponent from './forms/StudentGroupComponent';
+import VueMoment from 'vue-moment';
 
-
+Vue.use(VueMoment);
 Vue.use(VueTheMask);
 Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
 Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

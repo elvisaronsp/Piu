@@ -48,4 +48,15 @@ class OptionController extends Controller
       return redirect('/');
     }
 
+    public function update(Request $request, $name){
+      $school_id = Auth::user()->school_id;
+      $option = Option::where([
+                  ['name', '=', $name],
+                  ['school_id', '=', $school_id]
+                ])->firstOrFail();
+      $option->fill($request->all());
+      $option->save();
+      return $option;
+    }
+
 }

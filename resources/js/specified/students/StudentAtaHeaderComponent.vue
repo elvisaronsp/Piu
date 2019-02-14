@@ -1,37 +1,59 @@
 <template>
   <div class="row">
     <div class="col-md-2">
-      <img :src="logo" width="200" alt="school logo">
+      <img :src="logo" height="130" alt="school logo">
     </div>
     <div class="col-md-8">
       <div class="row justify-content-center">
         <div class="col-md-10">
           <h2>
-            <live-edit :v-model="title" :editable="true" placeholder="Título" value=""></live-edit>
+            <input type="text" placeholder="Título" class="live-edit" v-model="title">
           </h2>
           <h3>
-            <live-edit :v-model="subtitle" :editable="true" placeholder="Subtítulo" value=""></live-edit>
+            <input type="text" placeholder="Subtítulo" class="live-edit" v-model="subtitle">
           </h3>
           <h3> {{ group.school.name }} </h3>
+          <div class="row">
+            <div class="col-md-4">
+              ATA DE RESULTADOS FINAIS
+              <p>{{ new Date() | moment('YYYY') }}</p>
+            </div>
+            <div class="col-md-3">
+              ATO DE CRIAÇÃO
+              <p>{{ group.school.act_creation }}</p>
+            </div>
+            <div class="col-md-3">
+              CÓDIGO
+              <p>{{ group.school.code }}</p>
+            </div>
+            <div class="col-md-2">
+              D.O.
+              <p>{{ group.school.direc_number }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <textarea type="text" placeholder="Observações" class="live-edit" v-model="observations" rows="3">
+                {{ observations }}
+              </textarea>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-2">
-      <img :src="city_logo" width="200" alt="city logo">
+      <img :src="city_logo" height="130" alt="city logo">
     </div>
   </div>
 </template>
 <script>
-  import LiveEdit from '../../components/LiveEdit'
   export default {
     props: ['group'],
-    components: {
-      LiveEdit
-    },
     data: function(){
       return {
         title: '',
-        subtitle: ''
+        subtitle: '',
+        observations: ''
       }
     },
     computed: {
@@ -48,18 +70,25 @@
       },
       subtitle: function(newValue){
         this.saveOption('ata_header_subtitle', newValue);
+      },
+      observations: function(newValue){
+        this.saveOption('ata_header_observations', newValue);
       }
     },
     methods: {
       loadOption(n) {
-          return axios.get(this.$routes.options.index, {name: n});
+          return axios.get(this.$routes.options.index+'?name='+n);
       },
       saveOption(n, v) {
-          return axios.post('/options/store',
-          {
-              _token: this.$csrf,
-              name: n,
-              value: v
+          return axios.post(this.$routes.options.store, {
+            _token: this.$csrf,
+            name: n,
+            value: v
+          }).catch(err => {
+            axios.post(this.$routes.options.update.replace(':name:', n), {
+              value: v,
+              _token: this.$csrf
+            })
           });
       }
     },
@@ -68,10 +97,16 @@
          if(response.data.data.length == 1){
            this.title = response.data.data[0].valor
          }
+         console.log(this.title);
       });
       this.loadOption('ata_header_subtitle').then(response =>{
-         if(response.data.data.length > 0){
+         if(response.data.data.length == 1){
            this.subtitle = response.data.data[0].valor
+         }
+      });
+      this.loadOption('ata_header_observations').then(response =>{
+         if(response.data.data.length == 1){
+           this.observations = response.data.data[0].valor
          }
       });
     }

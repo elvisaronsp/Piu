@@ -69,6 +69,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/options/store', 'OptionController@store')->name('options.store');
   Route::get('/options/create', 'OptionController@create')->name('options.create');
   Route::post('/options/destroy/{id}', 'OptionController@destroy')->name('options.destroy');
+  Route::post('/options/update/{name}', 'OptionController@update')->name('options.update');
 
   # Image
   Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.show');

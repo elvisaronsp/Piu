@@ -58,6 +58,7 @@ Vue.prototype.$routes = {
     options: {
         index: '/options',
         store: '/options/store',
+        update: '/options/update/:name:',
         destroy: '/options/destroy/:id:'
 
     }
