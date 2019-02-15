@@ -57,7 +57,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/grades/store', 'GradeController@store')->name('grades.store');
   Route::get('/grades', 'GradeController@index')->name('grades.index');
   Route::post('/grades/destroy/{id}', 'GradeController@destroy')->name('grades.destroy');
-  Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart');
+  Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart')->name('grades.datachart');
+  Route::get('/grades/ata/{group_id}/{unit_id}', 'GradeController@dataAta')->name('grades.ata');
 
   # Unit
   Route::get('/units', 'UnitController@index')->name('units.index');

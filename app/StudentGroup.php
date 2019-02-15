@@ -16,4 +16,8 @@ class StudentGroup extends Model
       return $this->belongsTo('App\Group');
     }
 
+    public function grades(){
+      return $this->hasMany('App\Grade');
+    }
+
 }

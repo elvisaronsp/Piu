@@ -78,4 +78,11 @@ class GradeController extends Controller
 		return response($result, 200);
 	}
 
+  public function dataAta(Request $request, $group_id, $unit_id){
+    $grades = StudentGroup::where('group_id', $group_id)->with(['grades'=> function($query)use($unit_id){
+               $query->where('unit_id', $unit_id)->groupBy('grades.stuff_id');
+              }, 'grades.stuff:id,title'])->get();
+    return response($grades, 200);
+  }
+
 }
