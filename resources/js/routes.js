@@ -13,7 +13,8 @@ Vue.prototype.$routes = {
         store: '/grades/store',
         destroy: '/grades/destroy/:id:',
         edit: '/grades/edit/:id:',
-        datachart: '/grades/data-chart/:group_id:/:unit_id:'
+        datachart: '/grades/data-chart/:group_id:/:unit_id:',
+        ata: '/grades/ata/:group_id:'
     },
     employeers: {
         index: '/employeers',
@@ -50,7 +51,7 @@ Vue.prototype.$routes = {
         store: '/groups/store',
         destroy: '/groups/destroy/:id:',
         edit: '/groups/edit/:id:',
-        ata: '/groups/ata/:id:'
+        ata: '/groups/ata/:id:',
     },
     images: {
         show: '/images/:fileName:'

@@ -78,10 +78,13 @@ class GradeController extends Controller
 		return response($result, 200);
 	}
 
-  public function dataAta(Request $request, $group_id, $unit_id){
-    $grades = StudentGroup::where('group_id', $group_id)->with(['grades'=> function($query)use($unit_id){
-               $query->where('unit_id', $unit_id)->groupBy('grades.stuff_id');
-              }, 'grades.stuff:id,title'])->get();
+  public function dataAta(Request $request, $group_id){
+    $grades = StudentGroup::where('group_id', $group_id)->with(
+              ['grades' => function($query){
+                $query->select('id', DB::raw('SUM(grades.value) as nota_total'),
+                                'student_group_id', 'stuff_id')->groupBy('stuff_id');
+              }, 'grades.stuff:id,title', 'student:id,name,genre'])
+              ->get();
     return response($grades, 200);
   }
 

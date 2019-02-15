@@ -59,7 +59,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                              <a class="nav-link" href="#">Exportar dados</a>
+                              <!--<a class="nav-link" href="#">Exportar dados</a>-->
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" href="{{ route('student_groups.index') }}">Gerenciar turmas</a>

@@ -3242,6 +3242,116 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['group'],
+  data: function data() {
+    return {
+      student_groups: [],
+      student_min_grade: 5
+    };
+  },
+  computed: {
+    stuffs: function stuffs() {
+      var stuffs = [];
+
+      if (this.student_groups.length > 0) {
+        for (var g in this.student_groups[0].grades) {
+          var stuff = this.student_groups[0].grades[g].stuff.title;
+          stuffs.push(stuff);
+        }
+      }
+
+      return stuffs;
+    },
+    rows: function rows() {
+      var rows = [];
+
+      if (this.student_groups.length > 0) {
+        for (var r in this.student_groups) {
+          var resultado = false;
+          var sg = this.student_groups[r];
+          var row = [sg.student.name, sg.student.genre];
+
+          for (var g in sg.grades) {
+            var nota_total = sg.grades[g].nota_total;
+
+            if (resultado !== 'REPROVADO') {
+              resultado = nota_total >= this.student_min_grade ? 'APROVADO' : 'REPROVADO';
+            }
+
+            row.push(nota_total);
+          }
+
+          row.push(resultado);
+          rows.push(row);
+        }
+      }
+
+      return rows;
+    }
+  },
+  methods: {
+    cellClass: function cellClass(column) {
+      if (!isNaN(column)) {
+        if (column < this.student_min_grade) {
+          return 'table-danger';
+        } else {
+          return 'table-success';
+        }
+      }
+
+      return '';
+    },
+    loadData: function loadData() {
+      var _this = this;
+
+      axios.get(this.$routes.grades.ata.replace(':group_id:', this.group.id)).then(function (response) {
+        _this.student_groups = response.data;
+      }).catch(function (err) {
+        showMessage('Ops! Algo errado ocorreu', err);
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.loadData();
+    this.loadOption('student_min_grade').then(function (response) {
+      if (response.data[0] != undefined) {
+        _this2.student_min_grade = _this2.response.data[0].valor;
+      }
+    }).catch(function (err) {
+      _this2.student_min_grade = 5;
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentAtaComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/students/StudentAtaComponent.vue?vue&type=script&lang=js& ***!
@@ -3252,6 +3362,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StudentAtaHeaderComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentAtaHeaderComponent */ "./resources/js/specified/students/StudentAtaHeaderComponent.vue");
+//
 //
 //
 //
@@ -3278,6 +3389,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -3354,43 +3466,22 @@ __webpack_require__.r(__webpack_exports__);
       this.saveOption('ata_header_observations', newValue);
     }
   },
-  methods: {
-    loadOption: function loadOption(n) {
-      return axios.get(this.$routes.options.index + '?name=' + n);
-    },
-    saveOption: function saveOption(n, v) {
-      var _this = this;
-
-      return axios.post(this.$routes.options.store, {
-        _token: this.$csrf,
-        name: n,
-        value: v
-      }).catch(function (err) {
-        axios.post(_this.$routes.options.update.replace(':name:', n), {
-          value: v,
-          _token: _this.$csrf
-        });
-      });
-    }
-  },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     this.loadOption('ata_header_title').then(function (response) {
       if (response.data.data.length == 1) {
-        _this2.title = response.data.data[0].valor;
+        _this.title = response.data.data[0].valor;
       }
-
-      console.log(_this2.title);
     });
     this.loadOption('ata_header_subtitle').then(function (response) {
       if (response.data.data.length == 1) {
-        _this2.subtitle = response.data.data[0].valor;
+        _this.subtitle = response.data.data[0].valor;
       }
     });
     this.loadOption('ata_header_observations').then(function (response) {
       if (response.data.data.length == 1) {
-        _this2.observations = response.data.data[0].valor;
+        _this.observations = response.data.data[0].valor;
       }
     });
   }
@@ -78495,6 +78586,64 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("table", { staticClass: "table table-hover table-sm" }, [
+    _c(
+      "tbody",
+      [
+        _c(
+          "tr",
+          [
+            _c("th", [_vm._v("Nome")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Sexo")]),
+            _vm._v(" "),
+            _vm._l(_vm.stuffs, function(s) {
+              return _c("th", [_vm._v(" " + _vm._s(s) + " ")])
+            }),
+            _vm._v(" "),
+            _c("th", [_vm._v("Resultado")])
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.rows, function(row) {
+          return _c(
+            "tr",
+            _vm._l(row, function(column) {
+              return _c("td", { class: _vm.cellClass(column) }, [
+                _vm._v(_vm._s(column))
+              ])
+            }),
+            0
+          )
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentAtaComponent.vue?vue&type=template&id=b66e7860&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/specified/students/StudentAtaComponent.vue?vue&type=template&id=b66e7860& ***!
@@ -78514,7 +78663,11 @@ var render = function() {
     _c(
       "div",
       { staticClass: "card-body" },
-      [_c("student-ata-header-component", { attrs: { group: _vm.group } })],
+      [
+        _c("student-ata-header-component", { attrs: { group: _vm.group } }),
+        _vm._v(" "),
+        _c("student-ata-body-component", { attrs: { group: _vm.group } })
+      ],
       1
     )
   ])
@@ -78598,6 +78751,10 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("h3", [_vm._v(" " + _vm._s(_vm.group.school.name) + " ")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-muted" }, [
+            _vm._v("Turma: " + _vm._s(_vm.group.title))
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-4" }, [
@@ -95181,6 +95338,7 @@ var map = {
 	"./forms/VocationComponent.vue": "./resources/js/forms/VocationComponent.vue",
 	"./forms/elements/SelectAjaxComponent.vue": "./resources/js/forms/elements/SelectAjaxComponent.vue",
 	"./screens/SearchEntityList.vue": "./resources/js/screens/SearchEntityList.vue",
+	"./specified/students/StudentAtaBodyComponent.vue": "./resources/js/specified/students/StudentAtaBodyComponent.vue",
 	"./specified/students/StudentAtaComponent.vue": "./resources/js/specified/students/StudentAtaComponent.vue",
 	"./specified/students/StudentAtaHeaderComponent.vue": "./resources/js/specified/students/StudentAtaHeaderComponent.vue",
 	"./specified/students/StudentGradesComponent.vue": "./resources/js/specified/students/StudentGradesComponent.vue",
@@ -97290,6 +97448,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 
       return result;
     },
+    loadOption: function loadOption(n) {
+      return axios.get(this.$routes.options.index + '?name=' + n);
+    },
+    saveOption: function saveOption(n, v) {
+      var _this = this;
+
+      return axios.post(this.$routes.options.store, {
+        _token: this.$csrf,
+        name: n,
+        value: v
+      }).catch(function (err) {
+        axios.post(_this.$routes.options.update.replace(':name:', n), {
+          value: v,
+          _token: _this.$csrf
+        });
+      });
+    },
     showMessage: function showMessage(title, message) {
       app.$modal.show('dialog', {
         title: title,
@@ -97330,7 +97505,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
     store: '/grades/store',
     destroy: '/grades/destroy/:id:',
     edit: '/grades/edit/:id:',
-    datachart: '/grades/data-chart/:group_id:/:unit_id:'
+    datachart: '/grades/data-chart/:group_id:/:unit_id:',
+    ata: '/grades/ata/:group_id:'
   },
   employeers: {
     index: '/employeers',
@@ -97411,6 +97587,75 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 component.options.__file = "resources/js/screens/SearchEntityList.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/specified/students/StudentAtaBodyComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/specified/students/StudentAtaBodyComponent.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StudentAtaBodyComponent_vue_vue_type_template_id_5d161bce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce& */ "./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce&");
+/* harmony import */ var _StudentAtaBodyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentAtaBodyComponent.vue?vue&type=script&lang=js& */ "./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StudentAtaBodyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StudentAtaBodyComponent_vue_vue_type_template_id_5d161bce___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StudentAtaBodyComponent_vue_vue_type_template_id_5d161bce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/specified/students/StudentAtaBodyComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentAtaBodyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentAtaBodyComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentAtaBodyComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentAtaBodyComponent_vue_vue_type_template_id_5d161bce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/specified/students/StudentAtaBodyComponent.vue?vue&type=template&id=5d161bce&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentAtaBodyComponent_vue_vue_type_template_id_5d161bce___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentAtaBodyComponent_vue_vue_type_template_id_5d161bce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
