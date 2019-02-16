@@ -52,6 +52,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/student-groups/json', 'StudentGroupController@indexJson')->name('student_groups.json');
   Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');
   Route::post('/student-groups/destroy/{id}', 'StudentGroupController@destroy')->name('student_group.destroy');
+  Route::get('/student-groups/boletim/{id}', 'StudentGroupController@boletim')->name('student_group.boletim');
 
   # Grade
   Route::post('/grades/store', 'GradeController@store')->name('grades.store');

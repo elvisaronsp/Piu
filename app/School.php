@@ -24,9 +24,13 @@ class School extends Model
     protected $dispatchesEvents = [
       'created' => SchoolCreated::class
     ];
-  
+
     public function urlLogo(){
         return "/images/{$this->logo}";
+    }
+
+    public function address(){
+      return $this->belongsTo('App\Address');
     }
 
 }

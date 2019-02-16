@@ -93,18 +93,18 @@ class GradeController extends Controller
   }
 
   public function dataBoletim(Request $request, $student_group_id){
-    $grades = StudentGroup::where('id', $student_group_id)->with([
-                          /*[
-                            'grades'=> function($query){
-                                $query->select('id','student_group_id','unit_id','stuff_id','value')
-                                      ->orderBy('stuff_id');
-                            },
-                            'grades.unit:id,title',
-                            'grades.stuff:id,title',*/
-                            'group:id,title',
+    $grades = StudentGroup::where('id', $student_group_id)
+                          ->with([
+                            'group:id,title,school_id',
+                            'group.school:id,name,address_id,logo,city_logo',
+                            'group.school.address',
                             'group.stuffs:id,title,group_id',
-                            'group.stuffs.grades:id,value,stuff_id',
-                            //'student:id,name'
+                            'group.stuffs.grades' => function($query)use($student_group_id){
+                              $query->select('id', 'value', 'stuff_id', 'unit_id')
+                                    ->where('student_group_id', $student_group_id)
+                                    ->groupBy('unit_id');
+                            },
+                            'group.stuffs.grades.unit:id,title'
                           ])->first();
     return response($grades, 200);
   }

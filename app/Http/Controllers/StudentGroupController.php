@@ -57,4 +57,8 @@ class StudentGroupController extends Controller
       return redirect('/');
     }
 
+    public function boletim(Request $request, $student_group_id){
+      return view('student_groups.boletim')->with('student_group_id', $student_group_id);
+    }
+
 }
