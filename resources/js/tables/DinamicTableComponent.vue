@@ -4,7 +4,7 @@
       <thead style="background-color: white">
         <tr>
           <th scope="col" v-for="attribute in attributes">{{ attribute }}</th>
-          <th scope="col">Ações</th>
+          <th scope="col">ações</th>
         </tr>
       </thead>
       <tbody>

@@ -31,13 +31,14 @@ class GroupController extends Controller
       $data = $request->validated();
       $data['school_id'] = Auth::user()->school_id;
       Group::create($data);
+      Flash::success("Turma {$data['title']} criada com sucesso!");
       return redirect('/');
     }
 
     public function destroy(Request $request, $id){
       $group = Group::findOrFail($id);
+      Flash::success("Turma {$group->title} apagada com sucesso!");
       $group->delete();
-      Flash::success('Turma apagada com sucesso!');
       return redirect('/');
     }
 

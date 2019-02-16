@@ -13,7 +13,7 @@ Vue.prototype.$entities = {
       {
           label: 'Lançar notas',
           click: (id, parentId) => {
-            entities.$modal.show(GradeComponent, {studentGroupId: id}, {
+            entities.$modal.show(GradeComponent, {studentGroupId: id, groupId: parentId}, {
               draggable: true,
               classes: 'p-4 v--modal',
               height: '450'

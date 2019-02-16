@@ -29,7 +29,7 @@
   import MoonLoader from 'vue-spinner/src/MoonLoader.vue'
 
   export default {
-    props: ['studentGroupId'],
+    props: ['studentGroupId', 'groupId'],
     data: function(){
       return {
         stuffs: [],
@@ -44,7 +44,7 @@
       }
     },
     mounted(){
-      axios.get(this.$routes.stuffs.index)
+      axios.get(this.$routes.stuffs.index+'?group_id='+this.groupId)
            .then(response => ( this.stuffs = this.toVSelectData(response.data.data) ) );
       axios.get(this.$routes.units.index)
            .then(response => ( this.units = this.toVSelectData(response.data.data) ) );
@@ -70,11 +70,8 @@
             unit_id: this.unit.value,
             value: this.grade
           }).then(response => {
-            this.disabled = true;
-            this.text = 'Nota aplicada com sucesso!';
-            this.style = 'success';
-            this.$modal.hide('modals-container');
-            this.loading = false;
+            this.showMessage('Concluído', 'Nota lançada com sucesso!');
+            this.clearForm();
           }).catch(err => {
             this.disabled = false;
             this.text = 'Realizar lançamento';
@@ -84,6 +81,14 @@
           this.style = 'danger';
           this.text = 'Você não pode dar uma nota maior que 10! (Corrija e tente novamente)';
         }
+      },
+      clearForm(){
+        this.disabled = false;
+        this.loading = false;
+        this.stuff = '';
+        this.unit = '';
+        this.grade = '';
+        this.text = 'Realizar lançamento';
       }
     }
   }

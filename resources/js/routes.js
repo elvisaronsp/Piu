@@ -14,7 +14,8 @@ Vue.prototype.$routes = {
         destroy: '/grades/destroy/:id:',
         edit: '/grades/edit/:id:',
         datachart: '/grades/data-chart/:group_id:/:unit_id:',
-        ata: '/grades/ata/:group_id:'
+        ata: '/grades/ata/:group_id:',
+        boletim: '/grades/boletim/:student_group_id:'
     },
     employeers: {
         index: '/employeers',

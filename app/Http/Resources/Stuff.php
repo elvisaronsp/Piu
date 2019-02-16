@@ -16,6 +16,7 @@ class Stuff extends JsonResource
     {
         return [
             'id' => $this->id,
+            'turma' => $this->group->title,
             'título' => $this->title
         ];
     }

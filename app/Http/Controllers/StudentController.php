@@ -69,7 +69,8 @@ class StudentController extends Controller
         $data['birth_certificate_id'] = $address->id;
         $data['school_id'] = Auth::user()->school_id;
         $student = Student::create($data);
-        return redirect('/');
+        Flash::success('Estudante cadastrado com sucesso! Não esqueça de matriculá-lo em uma turma.');
+        return redirect('/students/create');
     }
 
     /**

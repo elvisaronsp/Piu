@@ -79,12 +79,33 @@ class GradeController extends Controller
 	}
 
   public function dataAta(Request $request, $group_id){
-    $grades = StudentGroup::where('group_id', $group_id)->with(
-              ['grades' => function($query){
-                $query->select('id', DB::raw('SUM(grades.value) as nota_total'),
-                                'student_group_id', 'stuff_id')->groupBy('stuff_id');
-              }, 'grades.stuff:id,title', 'student:id,name,genre'])
-              ->get();
+    try{
+      $grades = StudentGroup::where('group_id', $group_id)->with(
+        ['grades' => function($query){
+          $query->select('id', DB::raw('SUM(grades.value) as nota_total'),
+          'student_group_id', 'stuff_id')->groupBy('stuff_id');
+        }, 'grades.stuff:id,title', 'student:id,name,genre'])
+        ->get();
+        return response($grades, 200);
+    }catch(\Exception $e){
+        return response($e, 500);
+    }
+  }
+
+  public function dataBoletim(Request $request, $student_group_id){
+    $grades = StudentGroup::where('id', $student_group_id)->with([
+                          /*[
+                            'grades'=> function($query){
+                                $query->select('id','student_group_id','unit_id','stuff_id','value')
+                                      ->orderBy('stuff_id');
+                            },
+                            'grades.unit:id,title',
+                            'grades.stuff:id,title',*/
+                            'group:id,title',
+                            'group.stuffs:id,title,group_id',
+                            'group.stuffs.grades:id,value,stuff_id',
+                            //'student:id,name'
+                          ])->first();
     return response($grades, 200);
   }
 

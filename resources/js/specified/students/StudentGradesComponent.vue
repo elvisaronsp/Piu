@@ -8,7 +8,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-md-12">
-        <generic-table-component entity="grades" :data="grades"></generic-table-component>
+        <generic-table-component entity="grades" manual="true" :manual-data="grades"></generic-table-component>
       </div>
     </div>
   </div>
@@ -35,7 +35,8 @@
     },
     methods:{
       getGrades: function(){
-        axios.get('/grades?student_group_id='+ this.student_group_id)
+        let url = this.$routes.grades.index+'?student_group_id='+ this.studentGroupId;
+        axios.get(url)
               .then(response => (this.grades = response.data))
               .catch(err => console.log(err));
       },
