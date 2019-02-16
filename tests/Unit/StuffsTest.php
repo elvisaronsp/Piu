@@ -29,7 +29,8 @@ class StuffsTest extends TestCase
 
     public function testStore(){
       $response = $this->authenticated()->post('/stuffs/store', [
-        'title'=> 'testing...'
+        'title' => 'testing...',
+        'group_id' => 0
       ]);
       $response->assertStatus(200);
     }
