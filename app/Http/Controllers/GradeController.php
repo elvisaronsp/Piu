@@ -109,4 +109,9 @@ class GradeController extends Controller
     return response($grades, 200);
   }
 
+  # Dá acesso ao estudante através de CPF consultar a sua nota
+  public function studentBoletim(Request $request){
+    return view('grades.student_boletim');
+  }
+
 }

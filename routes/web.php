@@ -14,6 +14,8 @@
 #Auth Routes
 Auth::routes();
 
+Route::get('/grades/student-boletim', 'GradeController@studentBoletim')->name('grades.student_boletim');
+
 Route::group(['middleware'=> ['auth']], function(){
   #Home
   Route::get('/', 'HomeController@index')->name('home');

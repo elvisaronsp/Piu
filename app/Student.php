@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
 
-    protected $fillable = ['name', 'address_id', 'birth_certificate_id', 'born_in', 'genre', 'school_id'];
+    protected $fillable = ['name', 'address_id', 'birth_certificate_id', 'born_in', 'genre', 'school_id', 'general_registration_id'];
 
     public static $rules = [
       'name' => 'required',
@@ -25,6 +25,10 @@ class Student extends Model
 
     public function student_group(){
       return $this->hasMany('App\StudentGroup');
+    }
+
+    public function general_registration(){
+      return $this->belongsTo('App\GeneralRegistration');
     }
 
 }
