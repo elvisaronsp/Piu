@@ -39,7 +39,7 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 
 ### Requisitos
 
-    Requer a instalação da versão estável do [Node.js](https://nodejs.org/).
+    Requer a instalação da versão estável do [Node.js](https://nodejs.org/). (Somente em desenvolvimento)
     Requer Php >= 7.1.3.
 
 ### Instalação
