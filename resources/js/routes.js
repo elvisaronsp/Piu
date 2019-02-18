@@ -8,6 +8,9 @@ Vue.prototype.$routes = {
         destroy: '/stuffs/destroy/:id:',
         edit: '/stuffs/edit/:id:'
     },
+    student_groups: {
+      indexJson: '/student-groups/json'
+    },
     grades: {
         index: '/grades',
         store: '/grades/store',
