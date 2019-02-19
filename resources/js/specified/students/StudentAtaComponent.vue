@@ -2,6 +2,7 @@
   <div class="card">
     <div class="card-body">
       <student-ata-header-component :group="group"></student-ata-header-component>
+      <student-ata-body-component :group="group"></student-ata-body-component>
     </div>
   </div>
 </template>

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import GradeComponent from './forms/GradeComponent';
 import StudentGradesComponent from './specified/students/StudentGradesComponent';
+import StudentBoletimComponent from './specified/students/StudentBoletimComponent';
 import SelectUnitChartComponent from './specified/units/SelectUnitChartComponent';
 import VModal from 'vue-js-modal';
 
@@ -13,7 +14,7 @@ Vue.prototype.$entities = {
       {
           label: 'Lançar notas',
           click: (id, parentId) => {
-            entities.$modal.show(GradeComponent, {studentGroupId: id}, {
+            entities.$modal.show(GradeComponent, {studentGroupId: id, groupId: parentId}, {
               draggable: true,
               classes: 'p-4 v--modal',
               height: '450'
@@ -22,7 +23,7 @@ Vue.prototype.$entities = {
           style: 'primary'
       },
       {
-        label: 'Ver notas',
+        label: 'Notas lançadas',
         click: (id, parentId) => {
           entities.$modal.show(StudentGradesComponent, {studentGroupId: id}, {
             draggable: true,
@@ -33,6 +34,19 @@ Vue.prototype.$entities = {
           });
         },
         style: 'warning'
+      },
+      {
+        label: 'Boletim',
+        click: (id, parentId) => {
+          entities.$modal.show(StudentBoletimComponent, {studentGroupId: id}, {
+            draggable: true,
+            classes: 'p-4 v--modal',
+            height: 'auto',
+            width: '70%',
+            scrollable: true
+          });
+        },
+        style: 'success'
       }
     ],
     groups: [

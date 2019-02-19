@@ -8,12 +8,17 @@ Vue.prototype.$routes = {
         destroy: '/stuffs/destroy/:id:',
         edit: '/stuffs/edit/:id:'
     },
+    student_groups: {
+      indexJson: '/student-groups/json'
+    },
     grades: {
         index: '/grades',
         store: '/grades/store',
         destroy: '/grades/destroy/:id:',
         edit: '/grades/edit/:id:',
-        datachart: '/grades/data-chart/:group_id:/:unit_id:'
+        datachart: '/grades/data-chart/:group_id:/:unit_id:',
+        ata: '/grades/ata/:group_id:',
+        boletim: '/grades/boletim/:student_group_id:'
     },
     employeers: {
         index: '/employeers',
@@ -50,7 +55,7 @@ Vue.prototype.$routes = {
         store: '/groups/store',
         destroy: '/groups/destroy/:id:',
         edit: '/groups/edit/:id:',
-        ata: '/groups/ata/:id:'
+        ata: '/groups/ata/:id:',
     },
     images: {
         show: '/images/:fileName:'
@@ -60,7 +65,9 @@ Vue.prototype.$routes = {
         store: '/options/store',
         update: '/options/update/:name:',
         destroy: '/options/destroy/:id:'
-
+    },
+    schools: {
+      index: '/schools'
     }
 
 };

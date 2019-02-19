@@ -5,6 +5,7 @@
 @section('form_content')
 <student-component></student-component>
 <birth-component></birth-component>
+<general-registration-component></general-registration-component>
 <address-component></address-component>
 <button-bar-component button-label="Registrar aluno"></button-bar-component>
 @endsection

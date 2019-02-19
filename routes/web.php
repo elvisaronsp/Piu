@@ -14,6 +14,10 @@
 #Auth Routes
 Auth::routes();
 
+Route::get('/grades/student-boletim', 'GradeController@studentBoletim')->name('grades.student_boletim');
+Route::get('/schools', 'SchoolController@index')->name('school.index');
+Route::get('/groups', 'GroupController@index')->name('groups.index');
+
 Route::group(['middleware'=> ['auth']], function(){
   #Home
   Route::get('/', 'HomeController@index')->name('home');
@@ -41,7 +45,6 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/stuffs/destroy/{id}', 'StuffController@destroy')->name('stuffs.destroy');
 
   # Classes/Groups
-  Route::get('/groups', 'GroupController@index')->name('groups.index');
   Route::get('/groups/create', 'GroupController@create')->name('groups.create');
   Route::post('/groups/store', 'GroupController@store')->name('groups.store');
   Route::post('/groups/destroy/{id}', 'GroupController@destroy')->name('groups.destroy');
@@ -52,12 +55,15 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/student-groups/json', 'StudentGroupController@indexJson')->name('student_groups.json');
   Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');
   Route::post('/student-groups/destroy/{id}', 'StudentGroupController@destroy')->name('student_group.destroy');
+  Route::get('/student-groups/boletim/{id}', 'StudentGroupController@boletim')->name('student_group.boletim');
 
   # Grade
   Route::post('/grades/store', 'GradeController@store')->name('grades.store');
   Route::get('/grades', 'GradeController@index')->name('grades.index');
   Route::post('/grades/destroy/{id}', 'GradeController@destroy')->name('grades.destroy');
-  Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart');
+  Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart')->name('grades.datachart');
+  Route::get('/grades/ata/{group_id}/', 'GradeController@dataAta')->name('grades.ata');
+  Route::get('/grades/boletim/{student_group_id}', 'GradeController@dataBoletim')->name('grades.boletim');
 
   # Unit
   Route::get('/units', 'UnitController@index')->name('units.index');
@@ -73,5 +79,8 @@ Route::group(['middleware'=> ['auth']], function(){
 
   # Image
   Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.show');
+
+  #School
+
 
 });

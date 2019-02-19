@@ -78,4 +78,40 @@ class GradeController extends Controller
 		return response($result, 200);
 	}
 
+  public function dataAta(Request $request, $group_id){
+    try{
+      $grades = StudentGroup::where('group_id', $group_id)->with(
+        ['grades' => function($query){
+          $query->select('id', DB::raw('SUM(grades.value) as nota_total'),
+          'student_group_id', 'stuff_id')->groupBy('stuff_id');
+        }, 'grades.stuff:id,title', 'student:id,name,genre'])
+        ->get();
+        return response($grades, 200);
+    }catch(\Exception $e){
+        return response($e, 500);
+    }
+  }
+
+  public function dataBoletim(Request $request, $student_group_id){
+    $grades = StudentGroup::where('id', $student_group_id)
+                          ->with([
+                            'group:id,title,school_id',
+                            'group.school:id,name,address_id,logo,city_logo',
+                            'group.school.address',
+                            'group.stuffs:id,title,group_id',
+                            'group.stuffs.grades' => function($query)use($student_group_id){
+                              $query->select('id', 'value', 'stuff_id', 'unit_id')
+                                    ->where('student_group_id', $student_group_id)
+                                    ->groupBy('unit_id');
+                            },
+                            'group.stuffs.grades.unit:id,title'
+                          ])->first();
+    return response($grades, 200);
+  }
+
+  # Dá acesso ao estudante através de CPF consultar a sua nota
+  public function studentBoletim(Request $request){
+    return view('grades.student_boletim');
+  }
+
 }

@@ -13,12 +13,25 @@ class GroupController extends Controller
 {
 
     public function index(Request $request){
+      $school_id = null;
       $s = $request->input('s');
-      $user = Auth::user();
+      if($request->has('school_id')){
+        $school_id = $request->input('school_id');
+      }else{
+        if(Auth::check()){
+          $user = Auth::user();
+          $school_id = $user->id;
+        }else{
+          return response('Unauthorized', 401);
+        }
+      }
       $classes = Group::where([
-                                ['school_id', '=', $user->id],
+                                ['school_id', '=', $school_id],
                                 ['title', 'like', '%'.$s.'%'],
-                              ])->paginate(10);
+                              ]);
+      if($request->has('school_id')){
+        $classes = $classes->paginate(10);
+      }
       $resource = new GroupCollection($classes);
       return $resource;
     }
@@ -31,13 +44,14 @@ class GroupController extends Controller
       $data = $request->validated();
       $data['school_id'] = Auth::user()->school_id;
       Group::create($data);
+      Flash::success("Turma {$data['title']} criada com sucesso!");
       return redirect('/');
     }
 
     public function destroy(Request $request, $id){
       $group = Group::findOrFail($id);
+      Flash::success("Turma {$group->title} apagada com sucesso!");
       $group->delete();
-      Flash::success('Turma apagada com sucesso!');
       return redirect('/');
     }
 

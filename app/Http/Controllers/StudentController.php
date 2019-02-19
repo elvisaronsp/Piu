@@ -10,6 +10,7 @@ use App\Http\Requests\StudentStoreRequest;
 use App\Http\Resources\StudentCollection;
 use Auth;
 use Flash;
+use App\GeneralRegistration;
 
 class StudentController extends Controller
 {
@@ -68,8 +69,11 @@ class StudentController extends Controller
         $birth = BirthCertificate::create($data);
         $data['birth_certificate_id'] = $address->id;
         $data['school_id'] = Auth::user()->school_id;
+        $general_registration = GeneralRegistration::create($data);
+        $data['general_registration_id'] = $general_registration->id;
         $student = Student::create($data);
-        return redirect('/');
+        Flash::success('Estudante cadastrado com sucesso! Não esqueça de matriculá-lo em uma turma.');
+        return redirect('/students/create');
     }
 
     /**

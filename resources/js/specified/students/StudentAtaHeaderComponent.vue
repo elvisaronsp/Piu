@@ -13,6 +13,7 @@
             <input type="text" placeholder="Subtítulo" class="live-edit" v-model="subtitle">
           </h3>
           <h3> {{ group.school.name }} </h3>
+          <p class="text-muted">Turma: {{ group.title }}</p>
           <div class="row">
             <div class="col-md-4">
               ATA DE RESULTADOS FINAIS
@@ -75,29 +76,11 @@
         this.saveOption('ata_header_observations', newValue);
       }
     },
-    methods: {
-      loadOption(n) {
-          return axios.get(this.$routes.options.index+'?name='+n);
-      },
-      saveOption(n, v) {
-          return axios.post(this.$routes.options.store, {
-            _token: this.$csrf,
-            name: n,
-            value: v
-          }).catch(err => {
-            axios.post(this.$routes.options.update.replace(':name:', n), {
-              value: v,
-              _token: this.$csrf
-            })
-          });
-      }
-    },
     mounted(){
       this.loadOption('ata_header_title').then(response =>{
          if(response.data.data.length == 1){
            this.title = response.data.data[0].valor
          }
-         console.log(this.title);
       });
       this.loadOption('ata_header_subtitle').then(response =>{
          if(response.data.data.length == 1){

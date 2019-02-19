@@ -7,6 +7,7 @@ use App\Stuff;
 use Auth;
 use App\Http\Resources\StuffCollection;
 use App\Http\Requests\StuffStoreRequest;
+use Flash;
 
 class StuffController extends Controller
 {
@@ -18,7 +19,17 @@ class StuffController extends Controller
     public function index(Request $request)
     {
         $school_id = Auth::user()->school_id;
-        $stuffs = Stuff::where('school_id', $school_id)->orWhere('school_id', null)->paginate(25);
+        $where = [
+          ['schools.id', '=', $school_id]
+        ];
+        if($group_id = $request->input('group_id')){
+          $where[] = ['stuffs.group_id', '=', $group_id];
+        }
+        $stuffs = Stuff::join('groups', 'groups.id', '=', 'stuffs.group_id')
+                       ->join('schools', 'groups.school_id', 'schools.id')
+                       ->where($where)
+                       ->select('stuffs.*')
+                       ->paginate(25);
         $resource = new StuffCollection($stuffs);
         return $resource;
     }
@@ -44,7 +55,8 @@ class StuffController extends Controller
         //
         $data = $request->validated();
         $stuff = Stuff::create($data);
-        return redirect('/');
+        Flash::success("Matéria {$data['title']} criada com sucesso!");
+        return redirect('/stuffs/create');
     }
 
     /**
