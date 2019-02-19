@@ -15,6 +15,8 @@
 Auth::routes();
 
 Route::get('/grades/student-boletim', 'GradeController@studentBoletim')->name('grades.student_boletim');
+Route::get('/schools', 'SchoolController@index')->name('school.index');
+Route::get('/groups', 'GroupController@index')->name('groups.index');
 
 Route::group(['middleware'=> ['auth']], function(){
   #Home
@@ -43,7 +45,6 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/stuffs/destroy/{id}', 'StuffController@destroy')->name('stuffs.destroy');
 
   # Classes/Groups
-  Route::get('/groups', 'GroupController@index')->name('groups.index');
   Route::get('/groups/create', 'GroupController@create')->name('groups.create');
   Route::post('/groups/store', 'GroupController@store')->name('groups.store');
   Route::post('/groups/destroy/{id}', 'GroupController@destroy')->name('groups.destroy');
@@ -78,5 +79,8 @@ Route::group(['middleware'=> ['auth']], function(){
 
   # Image
   Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.show');
+
+  #School
+
 
 });

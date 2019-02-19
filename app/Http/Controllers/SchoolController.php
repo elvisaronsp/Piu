@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\School;
+use App\Http\Resources\SchoolCollection;
 
 class SchoolController extends Controller
 {
@@ -11,9 +13,20 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $where = [];
+        $schools = null;
+        if($request->has('name')){
+          $where[] = ['name', 'like', '%'.$request->input('name').'%'];
+        }
+        if(count($where) > 0){
+          $schools = School::where($where)->paginate(10);
+        }else {
+          $schools = School::orderBy('id', 'desc')->paginate(10);
+        }
+        $result = new SchoolCollection($schools);
+        return response($result, 200);
     }
 
     /**

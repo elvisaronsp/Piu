@@ -65,7 +65,9 @@ Vue.prototype.$routes = {
         store: '/options/store',
         update: '/options/update/:name:',
         destroy: '/options/destroy/:id:'
-
+    },
+    schools: {
+      index: '/schools'
     }
 
 };

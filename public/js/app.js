@@ -3698,6 +3698,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3707,11 +3715,42 @@ __webpack_require__.r(__webpack_exports__);
     return {
       school: '',
       group: '',
-      cpf: ''
+      cpf: '',
+      schools_fetched: [],
+      groups_fetched: []
     };
   },
+  watch: {
+    school: function school(newValue) {
+      this.loadGroup();
+    }
+  },
+  computed: {
+    groups: function groups() {
+      return this.toVSelectData(this.groups_fetched);
+    },
+    schools: function schools() {
+      return this.toVSelectData(this.schools_fetched);
+    }
+  },
   methods: {
-    loadBoletim: function loadBoletim() {}
+    loadBoletim: function loadBoletim() {},
+    loadSchools: function loadSchools(search, loading) {
+      var _this = this;
+
+      loading(true);
+      axios.get(this.$routes.schools.index + '?name=' + search).then(function (response) {
+        _this.schools_fetched = response.data.data;
+        loading(false);
+      });
+    },
+    loadGroup: function loadGroup() {
+      var _this2 = this;
+
+      axios.get(this.$routes.groups.index + '?school_id=' + this.school.value).then(function (response) {
+        _this2.groups_fetched = response.data.data;
+      });
+    }
   }
 });
 
@@ -79102,16 +79141,31 @@ var render = function() {
         [
           _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a escola")]),
           _vm._v(" "),
-          _c("v-select", {
-            attrs: { options: ["foo", "bar"] },
-            model: {
-              value: _vm.school,
-              callback: function($$v) {
-                _vm.school = $$v
-              },
-              expression: "school"
-            }
-          })
+          _c(
+            "v-select",
+            {
+              attrs: { options: _vm.schools },
+              on: { search: _vm.loadSchools },
+              model: {
+                value: _vm.school,
+                callback: function($$v) {
+                  _vm.school = $$v
+                },
+                expression: "school"
+              }
+            },
+            [
+              _c(
+                "span",
+                { attrs: { slot: "no-options" }, slot: "no-options" },
+                [
+                  _vm._v(
+                    "\n          Nenhuma escola encontrada. Digite o nome para buscar\n        "
+                  )
+                ]
+              )
+            ]
+          )
         ],
         1
       ),
@@ -79122,16 +79176,30 @@ var render = function() {
         [
           _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a turma")]),
           _vm._v(" "),
-          _c("v-select", {
-            attrs: { options: ["foo", "bar"] },
-            model: {
-              value: _vm.group,
-              callback: function($$v) {
-                _vm.group = $$v
-              },
-              expression: "group"
-            }
-          })
+          _c(
+            "v-select",
+            {
+              attrs: { options: _vm.groups },
+              model: {
+                value: _vm.group,
+                callback: function($$v) {
+                  _vm.group = $$v
+                },
+                expression: "group"
+              }
+            },
+            [
+              _c(
+                "span",
+                { attrs: { slot: "no-options" }, slot: "no-options" },
+                [
+                  _vm._v(
+                    "\n          Nenhuma turma encontrada. Digite o nome para buscar\n        "
+                  )
+                ]
+              )
+            ]
+          )
         ],
         1
       )
@@ -97707,8 +97775,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = _defineProperty({
   base: 'http://' + window.location.host,
   //hack to work on codeanywhere
   stuffs: {
@@ -97716,6 +97786,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
     store: '/stuffs/store',
     destroy: '/stuffs/destroy/:id:',
     edit: '/stuffs/edit/:id:'
+  },
+  student_groups: {
+    indexJson: '/student-groups/json'
   },
   grades: {
     index: '/grades',
@@ -97772,7 +97845,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
     update: '/options/update/:name:',
     destroy: '/options/destroy/:id:'
   }
-};
+}, "schools", {
+  index: '/schools'
+});
 
 /***/ }),
 
