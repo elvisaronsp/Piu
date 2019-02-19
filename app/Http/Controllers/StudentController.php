@@ -125,4 +125,5 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         return view('students.report_card')->with('student', $student);
     }
+    
 }
