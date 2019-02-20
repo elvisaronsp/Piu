@@ -11,7 +11,12 @@ class UnitController extends Controller
 {
 
     public function index(Request $request){
-        $school_id = Auth::user()->school_id;
+        $school_id = '';
+        if(Auth::check()){
+            $school_id = Auth::user()->school_id;
+        }else{
+            $request->input('school_id');
+        }
         $where = [
             ['school_id', '=', $school_id]
         ];

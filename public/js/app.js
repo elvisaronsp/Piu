@@ -2587,6 +2587,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2595,6 +2596,11 @@ __webpack_require__.r(__webpack_exports__);
       registration_emission: '',
       cpf: ''
     };
+  },
+  filters: {
+    cleanCPF: function cleanCPF(cpf) {
+      this.cpf.replace('.', '').replace('-', '');
+    }
   }
 });
 
@@ -3524,7 +3530,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['studentGroupId'],
+  props: ['studentGroupId', 'schoolId'],
   data: function data() {
     return {
       units: [],
@@ -3585,7 +3591,7 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (err) {
         return showMessage('Ops! Algo de errado aconteceu', err);
       });
-      axios.get(this.$routes.units.index).then(function (response) {
+      axios.get(this.$routes.units.index + '?school_id=' + this.schoolId).then(function (response) {
         return _this.units = response.data.data;
       }).catch(function (err) {
         return showMessage('Ops! Algo de errado aconteceu', err);
@@ -3678,6 +3684,27 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _StudentBoletimComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentBoletimComponent */ "./resources/js/specified/students/StudentBoletimComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3707,9 +3734,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
+    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a,
+    StudentBoletimComponent: _StudentBoletimComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -3717,7 +3746,9 @@ __webpack_require__.r(__webpack_exports__);
       group: '',
       cpf: '',
       schools_fetched: [],
-      groups_fetched: []
+      groups_fetched: [],
+      student_group_id: '',
+      found: undefined
     };
   },
   watch: {
@@ -3734,21 +3765,34 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    loadBoletim: function loadBoletim() {},
-    loadSchools: function loadSchools(search, loading) {
+    loadBoletim: function loadBoletim() {
       var _this = this;
+
+      axios.get(this.$routes.student_groups.indexJson + '?group_id=' + this.group.value + '&cpf=' + this.cpf + '&school_id=' + this.school.value).then(function (response) {
+        console.log(response.data);
+
+        if (response.data.data[0] !== undefined) {
+          _this.student_group_id = response.data.data[0].id;
+          _this.found = true;
+        } else {
+          _this.found = false;
+        }
+      });
+    },
+    loadSchools: function loadSchools(search, loading) {
+      var _this2 = this;
 
       loading(true);
       axios.get(this.$routes.schools.index + '?name=' + search).then(function (response) {
-        _this.schools_fetched = response.data.data;
+        _this2.schools_fetched = response.data.data;
         loading(false);
       });
     },
     loadGroup: function loadGroup() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get(this.$routes.groups.index + '?school_id=' + this.school.value).then(function (response) {
-        _this2.groups_fetched = response.data.data;
+        _this3.groups_fetched = response.data.data;
       });
     }
   }
@@ -77485,7 +77529,6 @@ var render = function() {
             attrs: {
               placeholder: "Digite o CPF",
               mask: ["###.###.###-##"],
-              name: "cpf",
               required: ""
             },
             model: {
@@ -77495,6 +77538,11 @@ var render = function() {
               },
               expression: "cpf"
             }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "cpf" },
+            domProps: { value: _vm.cpf }
           })
         ],
         1
@@ -78173,7 +78221,12 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "name", placeholder: "Nome do aluno" },
+          attrs: {
+            type: "text",
+            name: "name",
+            placeholder: "Nome do aluno",
+            required: ""
+          },
           domProps: { value: _vm.name },
           on: {
             input: function($event) {
@@ -78203,7 +78256,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { name: "genre" },
+            attrs: { name: "genre", required: "" },
             on: {
               change: function($event) {
                 var $$selectedVal = Array.prototype.filter
@@ -78247,7 +78300,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "date", name: "born_in" },
+          attrs: { type: "date", name: "born_in", required: "" },
           domProps: { value: _vm.born_in },
           on: {
             input: function($event) {
@@ -79024,7 +79077,7 @@ var render = function() {
               _c("th", [_vm._v("Disciplinas")]),
               _vm._v(" "),
               _vm._l(_vm.units, function(u) {
-                return _c("th", [_vm._v(_vm._s(u["título"]))])
+                return _c("th", { key: u.id }, [_vm._v(_vm._s(u["título"]))])
               }),
               _vm._v(" "),
               _c("th", [_vm._v("Resultado Final")])
@@ -79038,11 +79091,12 @@ var render = function() {
           _vm._l(_vm.data_fetched.group.stuffs, function(s) {
             return _c(
               "tr",
+              { key: s.id },
               [
                 _c("td", [_vm._v(_vm._s(s.title))]),
                 _vm._v(" "),
                 _vm._l(s.grades, function(g) {
-                  return _c("td", [_vm._v(_vm._s(g.value))])
+                  return _c("td", { key: g.id }, [_vm._v(_vm._s(g.value))])
                 }),
                 _vm._v(" "),
                 _vm._l(_vm.units.length - s.grades.length, function(r) {
@@ -79133,100 +79187,139 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "form-group col-md-6" },
-        [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a escola")]),
-          _vm._v(" "),
-          _c(
-            "v-select",
-            {
-              attrs: { options: _vm.schools },
-              on: { search: _vm.loadSchools },
-              model: {
-                value: _vm.school,
-                callback: function($$v) {
-                  _vm.school = $$v
-                },
-                expression: "school"
-              }
-            },
-            [
-              _c(
-                "span",
-                { attrs: { slot: "no-options" }, slot: "no-options" },
-                [
-                  _vm._v(
-                    "\n          Nenhuma escola encontrada. Digite o nome para buscar\n        "
-                  )
-                ]
-              )
-            ]
-          )
-        ],
-        1
-      ),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "form-group col-md-6" },
+          [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a escola")]),
+            _vm._v(" "),
+            _c(
+              "v-select",
+              {
+                attrs: { options: _vm.schools },
+                on: { search: _vm.loadSchools },
+                model: {
+                  value: _vm.school,
+                  callback: function($$v) {
+                    _vm.school = $$v
+                  },
+                  expression: "school"
+                }
+              },
+              [
+                _c(
+                  "span",
+                  { attrs: { slot: "no-options" }, slot: "no-options" },
+                  [
+                    _vm._v(
+                      "\n            Nenhuma escola encontrada. Digite o nome para buscar\n          "
+                    )
+                  ]
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-6" },
+          [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a turma")]),
+            _vm._v(" "),
+            _c(
+              "v-select",
+              {
+                attrs: { options: _vm.groups },
+                model: {
+                  value: _vm.group,
+                  callback: function($$v) {
+                    _vm.group = $$v
+                  },
+                  expression: "group"
+                }
+              },
+              [
+                _c(
+                  "span",
+                  { attrs: { slot: "no-options" }, slot: "no-options" },
+                  [
+                    _vm._v(
+                      "\n            Nenhuma turma encontrada. Digite o nome para buscar\n          "
+                    )
+                  ]
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-6" },
-        [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a turma")]),
-          _vm._v(" "),
-          _c(
-            "v-select",
-            {
-              attrs: { options: _vm.groups },
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-6 form-group" },
+          [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Digite o seu CPF")]),
+            _vm._v(" "),
+            _c("the-mask", {
+              staticClass: "form-control",
+              attrs: { mask: ["###.###.###-##"] },
               model: {
-                value: _vm.group,
+                value: _vm.cpf,
                 callback: function($$v) {
-                  _vm.group = $$v
+                  _vm.cpf = $$v
                 },
-                expression: "group"
+                expression: "cpf"
               }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-lg",
+              on: { click: _vm.loadBoletim }
             },
-            [
-              _c(
-                "span",
-                { attrs: { slot: "no-options" }, slot: "no-options" },
-                [
-                  _vm._v(
-                    "\n          Nenhuma turma encontrada. Digite o nome para buscar\n        "
-                  )
-                ]
-              )
-            ]
+            [_vm._v("\n          Buscar boletim\n        ")]
           )
-        ],
-        1
-      )
+        ])
+      ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-6 form-group" },
-        [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Digite o seu CPF")]),
-          _vm._v(" "),
-          _c("the-mask", {
-            staticClass: "form-control",
-            attrs: { mask: ["###.###.###-##"] },
-            model: {
-              value: _vm.cpf,
-              callback: function($$v) {
-                _vm.cpf = $$v
-              },
-              expression: "cpf"
-            }
-          })
-        ],
-        1
-      )
-    ])
+    _c(
+      "div",
+      { staticClass: "col-md-12" },
+      [
+        _vm.found !== undefined || _vm.found == true
+          ? _c("student-boletim-component", {
+              attrs: {
+                "student-group-id": _vm.student_group_id,
+                "school-id": _vm.school.value
+              }
+            })
+          : _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _vm.found == false
+                  ? _c("p", [_vm._v("Boletim não encontrado")])
+                  : _c("p", [
+                      _vm._v("Preencha o formulário para buscar o boletim")
+                    ])
+              ])
+            ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []

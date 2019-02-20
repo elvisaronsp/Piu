@@ -17,17 +17,36 @@ class StudentGroupController extends Controller
     }
 
     public function indexJson(Request $request){
-      $user = Auth::user();
-      $where = [
-        ['schools.id', '=', $user->school_id]
-      ];
+      $where = [];
+      if(Auth::check()){
+        $user = Auth::user();
+        $where = [
+          ['schools.id', '=', $user->school_id]
+        ];
+      }else{
+        if($request->has('school_id')){
+          $where = [
+            ['schools.id', '=', $request->input('school_id')]
+          ];
+        }else {
+          return response('Unauthorized', 401);
+        }
+      }
       if($request->has('group_id')){
         $where[] = ['group_id', '=', $request->input('group_id')];
+      }
+      if($request->has('student_id')){
+        $where[] = ['student_id', '=', $request->input('student_id')];
+      }
+      if($request->has('cpf')){
+        $where[] = ['general_registrations.cpf', '=', $request->input('cpf')];
       }
       if($request->has('student_group_id')){
         $where[] = ['student_groups.id', '=', $request->input('student_group_id')];
       }
       $students = StudentGroup::join('groups', 'groups.id', '=', 'student_groups.group_id')
+                              ->join('students', 'students.id', '=', 'student_groups.student_id')
+                              ->join('general_registrations', 'general_registrations.id', '=', 'students.general_registration_id')
                               ->join('schools', 'schools.id', '=', 'groups.school_id')
                               ->where($where)
                               ->select('student_groups.*')

@@ -22,7 +22,8 @@
       </div>
       <div class="form-group col-md-4">
         <label for="cpf">CPF</label>
-        <the-mask class="form-control" placeholder="Digite o CPF" :mask="['###.###.###-##']" name="cpf" v-model="cpf" required/>
+        <the-mask class="form-control" placeholder="Digite o CPF" :mask="['###.###.###-##']" v-model="cpf" required/>
+        <input type="hidden" name="cpf" :value="cpf">
       </div>
     </div>
   </div>
@@ -36,6 +37,11 @@ export default {
       emitter: '',
       registration_emission: '',
       cpf: '',
+    }
+  },
+  filters: {
+    cleanCPF: function(cpf){
+      this.cpf.replace('.', '').replace('-', '');
     }
   }
 }
