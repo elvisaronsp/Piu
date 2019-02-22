@@ -2,6 +2,9 @@ import Vue from 'vue';
 
 Vue.prototype.$routes = {
     base: 'http://'+window.location.host, //hack to work on codeanywhere
+    address:{
+        index: '/address/:id:'
+    },
     stuffs: {
         index: '/stuffs',
         store: '/stuffs/store',

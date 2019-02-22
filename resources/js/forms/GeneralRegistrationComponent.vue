@@ -31,6 +31,16 @@
 
 <script>
 export default {
+  props: ['generalRegistration'],
+  mounted() {
+    let gr = this.generalRegistration;
+    if(gr){
+      this.registration_number = gr.registration_number;
+      this.emitter = gr.emitter;
+      this.registration_emission = gr.registration_emission;
+      this.cpf = gr.cpf;
+    }
+  },
   data(){
     return {
       registration_number: '',

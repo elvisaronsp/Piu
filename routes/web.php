@@ -38,6 +38,8 @@ Route::group(['middleware'=> ['auth']], function(){
 
   # Students
   Route::get('/students', 'StudentController@index')->name('students.index');
+  Route::get('/students/edit/{id}', 'StudentController@edit')->name('students.edit');
+  Route::post('/students/update', 'StudentController@update')->name('students.update');
   Route::get('/students/create', 'StudentController@create')->name('students.create');
   Route::post('/students/store', 'StudentController@store')->name('students.store');
   Route::get('/report-card/{id}', 'StudentController@report_card')->name('students.report_card');
@@ -67,7 +69,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/grades/destroy/{id}', 'GradeController@destroy')->name('grades.destroy');
   Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart')->name('grades.datachart');
   Route::get('/grades/ata/{group_id}/', 'GradeController@dataAta')->name('grades.ata');
-  
+
 
   # Unit
   Route::post('/units/store', 'UnitController@store')->name('units.store');

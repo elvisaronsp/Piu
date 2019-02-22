@@ -2174,9 +2174,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
 //
 //
 //
@@ -2236,99 +2233,112 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
-  data: function data() {
-    var _ref;
+  props: ['address'],
+  mounted: function mounted() {
+    var address = this.address;
 
-    return _ref = {
+    if (address) {
+      this.street = address.street;
+      this.city = address.city;
+      this.cod_postal = address.cod_postal;
+      this.state = address.state;
+      this.neighborhood = address.neighborhood;
+      this.number = address.number;
+      this.complement = address.complement;
+    }
+  },
+  data: function data() {
+    return {
       street: '',
       city: '',
-      codpostal: '',
+      cod_postal: '',
       state: '',
       neighborhood: '',
-      number: ''
-    }, _defineProperty(_ref, "state", ''), _defineProperty(_ref, "complement", ''), _defineProperty(_ref, "states", [{
-      value: "AC",
-      text: "Acre"
-    }, {
-      value: "AL",
-      text: "Alagoas"
-    }, {
-      value: "AP",
-      text: "Amapá"
-    }, {
-      value: "AM",
-      text: "Amazonas"
-    }, {
-      value: "BA",
-      text: "Bahia"
-    }, {
-      value: "CE",
-      text: "Ceará"
-    }, {
-      value: "DF",
-      text: "Distrito Federal"
-    }, {
-      value: "ES",
-      text: "Espírito Santo"
-    }, {
-      value: "GO",
-      text: "Goiás"
-    }, {
-      value: "MA",
-      text: "Maranhão"
-    }, {
-      value: "MT",
-      text: "Mato Grosso"
-    }, {
-      value: "MS",
-      text: "Mato Grosso do Sul"
-    }, {
-      value: "MG",
-      text: "Minas Gerais"
-    }, {
-      value: "PA",
-      text: "Pará"
-    }, {
-      value: "PB",
-      text: "Paraíba"
-    }, {
-      value: "PR",
-      text: "Paraná"
-    }, {
-      value: "PE",
-      text: "Pernambuco"
-    }, {
-      value: "PI",
-      text: "Piauí"
-    }, {
-      value: "RJ",
-      text: "Rio de Janeiro"
-    }, {
-      value: "RN",
-      text: "Rio Grande do Norte"
-    }, {
-      value: "RS",
-      text: "Rio Grande do Sul"
-    }, {
-      value: "RO",
-      text: "Rondônia"
-    }, {
-      value: "RR",
-      text: "Roraima"
-    }, {
-      value: "SC",
-      text: "Santa Catarina"
-    }, {
-      value: "SP",
-      text: "São Paulo"
-    }, {
-      value: "SE",
-      text: "Sergipe"
-    }, {
-      value: "TO",
-      text: "Tocantins"
-    }]), _ref;
+      number: '',
+      complement: '',
+      states: [{
+        value: "AC",
+        text: "Acre"
+      }, {
+        value: "AL",
+        text: "Alagoas"
+      }, {
+        value: "AP",
+        text: "Amapá"
+      }, {
+        value: "AM",
+        text: "Amazonas"
+      }, {
+        value: "BA",
+        text: "Bahia"
+      }, {
+        value: "CE",
+        text: "Ceará"
+      }, {
+        value: "DF",
+        text: "Distrito Federal"
+      }, {
+        value: "ES",
+        text: "Espírito Santo"
+      }, {
+        value: "GO",
+        text: "Goiás"
+      }, {
+        value: "MA",
+        text: "Maranhão"
+      }, {
+        value: "MT",
+        text: "Mato Grosso"
+      }, {
+        value: "MS",
+        text: "Mato Grosso do Sul"
+      }, {
+        value: "MG",
+        text: "Minas Gerais"
+      }, {
+        value: "PA",
+        text: "Pará"
+      }, {
+        value: "PB",
+        text: "Paraíba"
+      }, {
+        value: "PR",
+        text: "Paraná"
+      }, {
+        value: "PE",
+        text: "Pernambuco"
+      }, {
+        value: "PI",
+        text: "Piauí"
+      }, {
+        value: "RJ",
+        text: "Rio de Janeiro"
+      }, {
+        value: "RN",
+        text: "Rio Grande do Norte"
+      }, {
+        value: "RS",
+        text: "Rio Grande do Sul"
+      }, {
+        value: "RO",
+        text: "Rondônia"
+      }, {
+        value: "RR",
+        text: "Roraima"
+      }, {
+        value: "SC",
+        text: "Santa Catarina"
+      }, {
+        value: "SP",
+        text: "São Paulo"
+      }, {
+        value: "SE",
+        text: "Sergipe"
+      }, {
+        value: "TO",
+        text: "Tocantins"
+      }]
+    };
   }
 });
 
@@ -2378,6 +2388,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['birth'],
+  mounted: function mounted() {
+    var birth = this.birth;
+
+    if (birth) {
+      this.book = birth.book;
+      this.birth_number = birth.birth_number;
+      this.leaf = birth.leaf;
+      this.term = birth.term;
+      this.birth_emission = birth.birth_emission;
+    }
+  },
   data: function data() {
     return {
       book: '',
@@ -2589,6 +2611,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['generalRegistration'],
+  mounted: function mounted() {
+    var gr = this.generalRegistration;
+
+    if (gr) {
+      this.registration_number = gr.registration_number;
+      this.emitter = gr.emitter;
+      this.registration_emission = gr.registration_emission;
+      this.cpf = gr.cpf;
+    }
+  },
   data: function data() {
     return {
       registration_number: '',
@@ -2948,9 +2981,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['student'],
+  mounted: function mounted() {
+    var s = this.student;
+
+    if (s) {
+      this.id = s.id;
+      this.name = s.name;
+      this.genre = s.genre;
+      this.born_in = s.born_in;
+    }
+  },
   data: function data() {
     return {
+      id: '',
       name: '',
       genre: '',
       born_in: ''
@@ -76613,39 +76659,34 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "codpostal" } }, [
-            _vm._v("Código postal")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.codpostal,
-                expression: "codpostal"
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "codpostal" } }, [
+              _vm._v("Código postal")
+            ]),
+            _vm._v(" "),
+            _c("the-mask", {
+              staticClass: "form-control",
+              attrs: {
+                mask: ["#####-###"],
+                type: "text",
+                name: "cod_postal",
+                placeholder: "Digite o código postal",
+                required: ""
+              },
+              model: {
+                value: _vm.cod_postal,
+                callback: function($$v) {
+                  _vm.cod_postal = $$v
+                },
+                expression: "cod_postal"
               }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "cod_postal",
-              value: "",
-              placeholder: "Digite o código postal",
-              required: ""
-            },
-            domProps: { value: _vm.codpostal },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.codpostal = $event.target.value
-              }
-            }
-          })
-        ])
+            })
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6" }, [
@@ -78234,6 +78275,27 @@ var render = function() {
                 return
               }
               _vm.name = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.id,
+              expression: "id"
+            }
+          ],
+          attrs: { type: "hidden", name: "student_id" },
+          domProps: { value: _vm.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.id = $event.target.value
             }
           }
         })
@@ -97878,6 +97940,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = _defineProperty({
   base: 'http://' + window.location.host,
   //hack to work on codeanywhere
+  address: {
+    index: '/address/:id:'
+  },
   stuffs: {
     index: '/stuffs',
     store: '/stuffs/store',
