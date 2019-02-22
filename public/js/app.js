@@ -96567,6 +96567,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
       });
     },
     style: 'success'
+  }, {
+    label: 'Cancelar matrícula',
+    click: function click(id, parentId) {},
+    style: 'danger'
   }],
   groups: [{
     label: 'Gráfico de rendimento',
