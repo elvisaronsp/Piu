@@ -3,9 +3,18 @@
 namespace App\Observers;
 
 use App\School;
+use Bouncer;
 
 class SchoolObserver
 {
+
+    private $entities = [
+      'admin' => 'Administrator',
+      'secretary' => 'Secretary',
+      'teacher' => 'Teacher',
+      'general-secretary' => 'General Secretary'
+    ];
+
     /**
      * Handle the school "created" event.
      *
@@ -14,7 +23,45 @@ class SchoolObserver
      */
     public function created(School $school)
     {
-        //
+      $roles = $this->createRoles();
+      $abilities = $this->createAbilities();
+      Bouncer::allow('admin')->toOwnEverything();
+      $teacher_abilities = [
+                              'add-grades', 'delete-grades', 'edit-grades', 'view-grades'
+                          ];
+      $secretary_abilities = [
+                              'add-groups', 'view-groups', 'edit-groups', 'add-students', 'view-students', 'delete-students',
+                              'edit-students', 'view-employeers', 'add-employeers', 'edit-employeers', 'stuffs.view', 'stuffs.add',
+                              'stuffs.delete', 'stuffs.edit'
+                            ];
+      Bouncer::allow('secretary')->to($secretary_abilities);
+      Bouncer::allow('teacher')->to($teacher_abilities);
+    }
+
+    private function createRoles(){
+      $createds = [];
+      foreach ($this->entities as $name => $title) {
+        $createds[$name] = Bouncer::role()->firstOrCreate([
+          'name' => $name,
+          'title' => $title,
+        ]);
+      }
+      return $createds;
+    }
+
+    public function createAbilities(){
+      $entities = ['students', 'grades', 'stuffs', 'groups', 'options', 'employeers'];
+      $actions = ['view'=> 'View', 'delete'=> 'Delete', 'edit'=> 'Edit', 'add'=>'Add'];
+      $createds = [];
+      foreach ($entities as $entity) {
+        foreach ($actions as $name => $title) {
+          $createds["$actions-$entity"] = Bouncer::ability()->firstOrCreate([
+            'name' => "$name-$entity",
+            'title' => "$title $entity"
+          ]);
+        }
+      }
+      return $createds;
     }
 
     /**
