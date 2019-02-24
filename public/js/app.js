@@ -2487,8 +2487,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['roles'],
   data: function data() {
     return {
       sus_card: '',
@@ -77175,21 +77181,29 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form-group col-md-6" },
-        [
-          _c("select-ajax-component", {
-            attrs: {
-              url: this.$routes.responsability.index,
-              name: "responsability_id",
-              placeholder: "Selecione o cargo",
-              label: "Cargo"
-            }
-          })
-        ],
-        1
-      ),
+      _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("label", [_vm._v("Cargo")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { name: "role", placeholder: "Selecione o cargo" }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("Selecione o cargo")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.roles, function(r) {
+              return _c("option", { domProps: { value: r.name } }, [
+                _vm._v(_vm._s(r.title))
+              ])
+            })
+          ],
+          2
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-6" }, [
         _c("label", { attrs: { for: "formation" } }, [_vm._v("Formação")]),

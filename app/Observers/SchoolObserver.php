@@ -28,14 +28,18 @@ class SchoolObserver
       Bouncer::allow('admin')->toOwnEverything();
       $teacher_abilities = [
                               'add-grades', 'delete-grades', 'edit-grades', 'view-grades'
-                          ];
+                           ];
       $secretary_abilities = [
                               'add-groups', 'view-groups', 'edit-groups', 'add-students', 'view-students', 'delete-students',
-                              'edit-students', 'view-employeers', 'add-employeers', 'edit-employeers', 'stuffs.view', 'stuffs.add',
-                              'stuffs.delete', 'stuffs.edit'
+                              'edit-students', 'view-employeers', 'add-employeers', 'edit-employeers', 'view-stuffs', 'add-stuffs',
+                              'delete-stuffs', 'edit-stuffs'
                             ];
-      Bouncer::allow('secretary')->to($secretary_abilities);
-      Bouncer::allow('teacher')->to($teacher_abilities);
+      foreach ($teacher_abilities as $ability) {
+        Bouncer::allow('secretary')->to($ability);
+      }
+      foreach ($secretary_abilities as $ability) {
+        Bouncer::allow('teacher')->to($ability);
+      }
     }
 
     private function createRoles(){
@@ -55,7 +59,7 @@ class SchoolObserver
       $createds = [];
       foreach ($entities as $entity) {
         foreach ($actions as $name => $title) {
-          $createds["$actions-$entity"] = Bouncer::ability()->firstOrCreate([
+          $createds["$name-$entity"] = Bouncer::ability()->firstOrCreate([
             'name' => "$name-$entity",
             'title' => "$title $entity"
           ]);

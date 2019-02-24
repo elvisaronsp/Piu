@@ -32,7 +32,12 @@
         </select>
       </div>
       <div class="form-group col-md-6">
-        <select-ajax-component :url="this.$routes.responsability.index" name="responsability_id" placeholder="Selecione o cargo" label="Cargo"></select-ajax-component>
+        <!--<select-ajax-component :url="this.$routes.responsability.index" name="responsability_id" placeholder="Selecione o cargo" label="Cargo"></select-ajax-component>-->
+        <label>Cargo</label>
+        <select class="form-control" name="role" placeholder="Selecione o cargo">
+          <option value="">Selecione o cargo</option>
+          <option v-for="r in roles" :value="r.name">{{ r.title }}</option>
+        </select>
       </div>
       <div class="form-group col-md-6">
         <label for="formation">Formação</label>
@@ -66,6 +71,7 @@
 import SelectAjaxComponent from './elements/SelectAjaxComponent';
 
 export default {
+  props: ['roles'],
   data(){
     return {
       sus_card: '',
