@@ -34,6 +34,17 @@
 </template>
 <script>
 export default {
+    props:['birth'],
+    mounted() {
+      let birth = this.birth;
+      if(birth){
+        this.book = birth.book;
+        this.birth_number = birth.birth_number;
+        this.leaf = birth.leaf;
+        this.term = birth.term;
+        this.birth_emission = birth.birth_emission;
+      }
+    },
     data(){
       return {
         book: '',

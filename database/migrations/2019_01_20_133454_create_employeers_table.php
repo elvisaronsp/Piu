@@ -16,7 +16,7 @@ class CreateEmployeersTable extends Migration
         Schema::create('employeers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employeer_data_id');
-            $table->integer('responsability_id');
+            //$table->integer('responsability_id');
             $table->integer('birth_certificate_id');
             $table->integer('address_id');
             $table->integer('general_registration_id'); //Quando for nulo é uma instituição.

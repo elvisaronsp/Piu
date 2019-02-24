@@ -23,14 +23,14 @@
         <thead>
           <tr>
             <th>Disciplinas</th>
-            <th v-for="u in units">{{ u['título'] }}</th>
+            <th v-for="u in units" :key="u.id">{{ u['título'] }}</th>
             <th>Resultado Final</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="s in data_fetched.group.stuffs">
+          <tr v-for="s in data_fetched.group.stuffs" :key="s.id">
             <td>{{ s.title }}</td>
-            <td v-for="g in s.grades">{{ g.value }}</td>
+            <td v-for="g in s.grades" :key="g.id">{{ g.value }}</td>
             <td v-for="r in (units.length - s.grades.length)"> - </td>
             <td>{{ result(s.grades) }}</td>
           </tr>
@@ -41,7 +41,7 @@
 </template>
 <script>
   export default{
-    props: ['studentGroupId'],
+    props: ['studentGroupId', 'schoolId'],
     data(){
       return {
         units: [],
@@ -95,7 +95,7 @@
         axios.get(url)
               .then(response => this.data_fetched = response.data)
               .catch(err => showMessage('Ops! Algo de errado aconteceu', err));
-        axios.get(this.$routes.units.index)
+        axios.get(this.$routes.units.index+'?school_id='+this.schoolId)
               .then(response => this.units = response.data.data)
               .catch(err => showMessage('Ops! Algo de errado aconteceu', err));
       }

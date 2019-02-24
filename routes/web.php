@@ -17,6 +17,11 @@ Auth::routes();
 Route::get('/grades/student-boletim', 'GradeController@studentBoletim')->name('grades.student_boletim');
 Route::get('/schools', 'SchoolController@index')->name('school.index');
 Route::get('/groups', 'GroupController@index')->name('groups.index');
+Route::get('/student-groups/json', 'StudentGroupController@indexJson')->name('student_groups.json');
+Route::get('/grades/boletim/{student_group_id}', 'GradeController@dataBoletim')->name('grades.boletim');
+Route::get('/units', 'UnitController@index')->name('units.index');
+# Image
+Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.show');
 
 Route::group(['middleware'=> ['auth']], function(){
   #Home
@@ -33,6 +38,8 @@ Route::group(['middleware'=> ['auth']], function(){
 
   # Students
   Route::get('/students', 'StudentController@index')->name('students.index');
+  Route::get('/students/edit/{id}', 'StudentController@edit')->name('students.edit');
+  Route::post('/students/update', 'StudentController@update')->name('students.update');
   Route::get('/students/create', 'StudentController@create')->name('students.create');
   Route::post('/students/store', 'StudentController@store')->name('students.store');
   Route::get('/report-card/{id}', 'StudentController@report_card')->name('students.report_card');
@@ -52,7 +59,6 @@ Route::group(['middleware'=> ['auth']], function(){
 
   # StudentGroup
   Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index');
-  Route::get('/student-groups/json', 'StudentGroupController@indexJson')->name('student_groups.json');
   Route::post('/student-groups/store', 'StudentGroupController@store')->name('student_groups.store');
   Route::post('/student-groups/destroy/{id}', 'StudentGroupController@destroy')->name('student_group.destroy');
   Route::get('/student-groups/boletim/{id}', 'StudentGroupController@boletim')->name('student_group.boletim');
@@ -63,10 +69,9 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/grades/destroy/{id}', 'GradeController@destroy')->name('grades.destroy');
   Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart')->name('grades.datachart');
   Route::get('/grades/ata/{group_id}/', 'GradeController@dataAta')->name('grades.ata');
-  Route::get('/grades/boletim/{student_group_id}', 'GradeController@dataBoletim')->name('grades.boletim');
+
 
   # Unit
-  Route::get('/units', 'UnitController@index')->name('units.index');
   Route::post('/units/store', 'UnitController@store')->name('units.store');
   Route::post('/units/destroy/{id}', 'UnitController@destroy')->name('unit.destroy');
 
@@ -76,9 +81,6 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/options/create', 'OptionController@create')->name('options.create');
   Route::post('/options/destroy/{id}', 'OptionController@destroy')->name('options.destroy');
   Route::post('/options/update/{name}', 'OptionController@update')->name('options.update');
-
-  # Image
-  Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.show');
 
   #School
 

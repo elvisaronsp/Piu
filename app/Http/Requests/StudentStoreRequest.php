@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Student;
 use App\BirthCertificate;
 use App\Address;
-
+use App\GeneralRegistration;
 
 class StudentStoreRequest extends FormRequest
 {
@@ -30,7 +30,8 @@ class StudentStoreRequest extends FormRequest
         return array_merge(
           Student::$rules,
           Address::$rules,
-          BirthCertificate::$rules
+          BirthCertificate::$rules,
+          GeneralRegistration::$rules
         );
     }
 }

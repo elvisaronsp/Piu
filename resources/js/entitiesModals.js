@@ -47,6 +47,13 @@ Vue.prototype.$entities = {
           });
         },
         style: 'success'
+      },
+      {
+        label: 'Cancelar matrícula',
+        click: (id, parentId) => {
+          
+        },
+        style: 'danger'
       }
     ],
     groups: [

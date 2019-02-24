@@ -16,7 +16,7 @@
             <error-component :errors="{{ $errors }}"></error-component>
           @endif
           <address-component></address-component>
-          <employeer-data-component></employeer-data-component>
+          <employeer-data-component :roles="{{ $roles }}"></employeer-data-component>
           <birth-component></birth-component>
           <general-registration-component></general-registration-component>
           <user-component></user-component>

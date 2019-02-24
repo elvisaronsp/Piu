@@ -12,7 +12,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="codpostal">Código postal</label>
-          <input class="form-control" type="text" name="cod_postal" value="" v-model="codpostal" placeholder="Digite o código postal" required>
+          <the-mask :mask="['#####-###']" class="form-control" type="text" name="cod_postal" v-model="cod_postal" placeholder="Digite o código postal" required />
         </div>
       </div>
       <div class="col-md-6">
@@ -53,25 +53,32 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
     export default {
+        props: ['address'],
         mounted() {
-
+          let address = this.address;
+          if(address){
+            this.street = address.street;
+            this.city = address.city;
+            this.cod_postal = address.cod_postal;
+            this.state = address.state;
+            this.neighborhood = address.neighborhood;
+            this.number = address.number;
+            this.complement = address.complement;
+          }
         },
-
         data(){
           return {
               street: '',
               city: '',
-              codpostal: '',
+              cod_postal: '',
               state: '',
               neighborhood: '',
               number: '',
-              state: '',
               complement: '',
               states: [
                 { value: "AC", text: "Acre" },

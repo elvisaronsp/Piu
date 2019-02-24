@@ -17,7 +17,7 @@ class Employeer extends JsonResource
       return [
         'id' => $this->id,
         'nome' => $this->employeer_data->name,
-        'cargo' => $this->responsability->title,
+        'cargo' => __($this->role()->title),
         'carga horária' => $this->employeer_data->workload.'h semanais'
       ];
     }

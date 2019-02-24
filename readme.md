@@ -23,10 +23,12 @@
     <a href="https://packagist.org/packages/piu/piu/license">
         <img src="https://poser.pugx.org/piu/piu/license" alt="Latest Unstable Version">
     </a>
-    <a href="https://www.codacy.com/app/JJS4ntos/SchoolManager?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JJS4ntos/SchoolManager&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/ac3402e466834c1c8b89c80b256f4e11"/></a>
 </p>
 
 <h3 align="center">Atenção - Sistema em desenvolvimento</h3>
+<p align="center">
+    <img src="https://github.com/JJS4ntos/Piu/blob/master/piu.gif">
+</p>
 
 Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.
 

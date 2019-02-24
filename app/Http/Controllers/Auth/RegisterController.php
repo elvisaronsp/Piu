@@ -89,7 +89,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'school_id' => $school->id
         ]);
-
+        $user->assign('admin');
         return $user;
     }
 }

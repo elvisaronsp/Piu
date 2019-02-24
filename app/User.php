@@ -5,17 +5,17 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRolesAndAbilities;
 
-    //Erro está por aqui
     public static $rules = [
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       'password' => ['required', 'string', 'min:6', 'confirmed'],
       'employeer_id' => '',
-      //'school_id' => 'required',
       'password_confirmation' => ['required', 'min:6', 'same:password'] //Não sei se precisa disso aqui
     ];
 

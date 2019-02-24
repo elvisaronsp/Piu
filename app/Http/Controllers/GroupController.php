@@ -31,6 +31,8 @@ class GroupController extends Controller
                               ]);
       if($request->has('school_id')){
         $classes = $classes->paginate(10);
+      }else{
+        $classes = $classes->get();
       }
       $resource = new GroupCollection($classes);
       return $resource;

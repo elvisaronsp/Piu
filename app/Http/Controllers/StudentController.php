@@ -76,15 +76,15 @@ class StudentController extends Controller
         return redirect('/students/create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function update(Request $request){
+      $data = $request->all();
+      $student = Student::findOrFail($data['student_id']);
+      $student->update($data);
+      $student->birth_certificate->update($data);
+      $student->general_registration->update($data);
+      $student->address->update($data);
+      Flash::success('Estudante atualizado com sucesso!');
+      return redirect()->back();
     }
 
     /**
@@ -95,20 +95,12 @@ class StudentController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        return view('student.edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+        $school_id = Auth::user()->school_id;
         $student = Student::findOrFail($id);
-        // TODO: update address, birth_certificate and most attributes
+        if($student->school_id !== $school_id){
+          return response('Unauthorized', 401);
+        }
+        return view('students.edit')->with('student', $student);
     }
 
     /**

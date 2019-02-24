@@ -2174,9 +2174,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
 //
 //
 //
@@ -2236,99 +2233,112 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
-  data: function data() {
-    var _ref;
+  props: ['address'],
+  mounted: function mounted() {
+    var address = this.address;
 
-    return _ref = {
+    if (address) {
+      this.street = address.street;
+      this.city = address.city;
+      this.cod_postal = address.cod_postal;
+      this.state = address.state;
+      this.neighborhood = address.neighborhood;
+      this.number = address.number;
+      this.complement = address.complement;
+    }
+  },
+  data: function data() {
+    return {
       street: '',
       city: '',
-      codpostal: '',
+      cod_postal: '',
       state: '',
       neighborhood: '',
-      number: ''
-    }, _defineProperty(_ref, "state", ''), _defineProperty(_ref, "complement", ''), _defineProperty(_ref, "states", [{
-      value: "AC",
-      text: "Acre"
-    }, {
-      value: "AL",
-      text: "Alagoas"
-    }, {
-      value: "AP",
-      text: "Amapá"
-    }, {
-      value: "AM",
-      text: "Amazonas"
-    }, {
-      value: "BA",
-      text: "Bahia"
-    }, {
-      value: "CE",
-      text: "Ceará"
-    }, {
-      value: "DF",
-      text: "Distrito Federal"
-    }, {
-      value: "ES",
-      text: "Espírito Santo"
-    }, {
-      value: "GO",
-      text: "Goiás"
-    }, {
-      value: "MA",
-      text: "Maranhão"
-    }, {
-      value: "MT",
-      text: "Mato Grosso"
-    }, {
-      value: "MS",
-      text: "Mato Grosso do Sul"
-    }, {
-      value: "MG",
-      text: "Minas Gerais"
-    }, {
-      value: "PA",
-      text: "Pará"
-    }, {
-      value: "PB",
-      text: "Paraíba"
-    }, {
-      value: "PR",
-      text: "Paraná"
-    }, {
-      value: "PE",
-      text: "Pernambuco"
-    }, {
-      value: "PI",
-      text: "Piauí"
-    }, {
-      value: "RJ",
-      text: "Rio de Janeiro"
-    }, {
-      value: "RN",
-      text: "Rio Grande do Norte"
-    }, {
-      value: "RS",
-      text: "Rio Grande do Sul"
-    }, {
-      value: "RO",
-      text: "Rondônia"
-    }, {
-      value: "RR",
-      text: "Roraima"
-    }, {
-      value: "SC",
-      text: "Santa Catarina"
-    }, {
-      value: "SP",
-      text: "São Paulo"
-    }, {
-      value: "SE",
-      text: "Sergipe"
-    }, {
-      value: "TO",
-      text: "Tocantins"
-    }]), _ref;
+      number: '',
+      complement: '',
+      states: [{
+        value: "AC",
+        text: "Acre"
+      }, {
+        value: "AL",
+        text: "Alagoas"
+      }, {
+        value: "AP",
+        text: "Amapá"
+      }, {
+        value: "AM",
+        text: "Amazonas"
+      }, {
+        value: "BA",
+        text: "Bahia"
+      }, {
+        value: "CE",
+        text: "Ceará"
+      }, {
+        value: "DF",
+        text: "Distrito Federal"
+      }, {
+        value: "ES",
+        text: "Espírito Santo"
+      }, {
+        value: "GO",
+        text: "Goiás"
+      }, {
+        value: "MA",
+        text: "Maranhão"
+      }, {
+        value: "MT",
+        text: "Mato Grosso"
+      }, {
+        value: "MS",
+        text: "Mato Grosso do Sul"
+      }, {
+        value: "MG",
+        text: "Minas Gerais"
+      }, {
+        value: "PA",
+        text: "Pará"
+      }, {
+        value: "PB",
+        text: "Paraíba"
+      }, {
+        value: "PR",
+        text: "Paraná"
+      }, {
+        value: "PE",
+        text: "Pernambuco"
+      }, {
+        value: "PI",
+        text: "Piauí"
+      }, {
+        value: "RJ",
+        text: "Rio de Janeiro"
+      }, {
+        value: "RN",
+        text: "Rio Grande do Norte"
+      }, {
+        value: "RS",
+        text: "Rio Grande do Sul"
+      }, {
+        value: "RO",
+        text: "Rondônia"
+      }, {
+        value: "RR",
+        text: "Roraima"
+      }, {
+        value: "SC",
+        text: "Santa Catarina"
+      }, {
+        value: "SP",
+        text: "São Paulo"
+      }, {
+        value: "SE",
+        text: "Sergipe"
+      }, {
+        value: "TO",
+        text: "Tocantins"
+      }]
+    };
   }
 });
 
@@ -2378,6 +2388,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['birth'],
+  mounted: function mounted() {
+    var birth = this.birth;
+
+    if (birth) {
+      this.book = birth.book;
+      this.birth_number = birth.birth_number;
+      this.leaf = birth.leaf;
+      this.term = birth.term;
+      this.birth_emission = birth.birth_emission;
+    }
+  },
   data: function data() {
     return {
       book: '',
@@ -2465,8 +2487,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['roles'],
   data: function data() {
     return {
       sus_card: '',
@@ -2587,7 +2615,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['generalRegistration'],
+  mounted: function mounted() {
+    var gr = this.generalRegistration;
+
+    if (gr) {
+      this.registration_number = gr.registration_number;
+      this.emitter = gr.emitter;
+      this.registration_emission = gr.registration_emission;
+      this.cpf = gr.cpf;
+    }
+  },
   data: function data() {
     return {
       registration_number: '',
@@ -2595,6 +2635,11 @@ __webpack_require__.r(__webpack_exports__);
       registration_emission: '',
       cpf: ''
     };
+  },
+  filters: {
+    cleanCPF: function cleanCPF(cpf) {
+      this.cpf.replace('.', '').replace('-', '');
+    }
   }
 });
 
@@ -2942,9 +2987,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['student'],
+  mounted: function mounted() {
+    var s = this.student;
+
+    if (s) {
+      this.id = s.id;
+      this.name = s.name;
+      this.genre = s.genre;
+      this.born_in = s.born_in;
+    }
+  },
   data: function data() {
     return {
+      id: '',
       name: '',
       genre: '',
       born_in: ''
@@ -3524,7 +3582,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['studentGroupId'],
+  props: ['studentGroupId', 'schoolId'],
   data: function data() {
     return {
       units: [],
@@ -3585,7 +3643,7 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (err) {
         return showMessage('Ops! Algo de errado aconteceu', err);
       });
-      axios.get(this.$routes.units.index).then(function (response) {
+      axios.get(this.$routes.units.index + '?school_id=' + this.schoolId).then(function (response) {
         return _this.units = response.data.data;
       }).catch(function (err) {
         return showMessage('Ops! Algo de errado aconteceu', err);
@@ -3678,6 +3736,27 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _StudentBoletimComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentBoletimComponent */ "./resources/js/specified/students/StudentBoletimComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3707,9 +3786,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
+    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a,
+    StudentBoletimComponent: _StudentBoletimComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -3717,7 +3798,9 @@ __webpack_require__.r(__webpack_exports__);
       group: '',
       cpf: '',
       schools_fetched: [],
-      groups_fetched: []
+      groups_fetched: [],
+      student_group_id: '',
+      found: undefined
     };
   },
   watch: {
@@ -3734,21 +3817,34 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    loadBoletim: function loadBoletim() {},
-    loadSchools: function loadSchools(search, loading) {
+    loadBoletim: function loadBoletim() {
       var _this = this;
+
+      axios.get(this.$routes.student_groups.indexJson + '?group_id=' + this.group.value + '&cpf=' + this.cpf + '&school_id=' + this.school.value).then(function (response) {
+        console.log(response.data);
+
+        if (response.data.data[0] !== undefined) {
+          _this.student_group_id = response.data.data[0].id;
+          _this.found = true;
+        } else {
+          _this.found = false;
+        }
+      });
+    },
+    loadSchools: function loadSchools(search, loading) {
+      var _this2 = this;
 
       loading(true);
       axios.get(this.$routes.schools.index + '?name=' + search).then(function (response) {
-        _this.schools_fetched = response.data.data;
+        _this2.schools_fetched = response.data.data;
         loading(false);
       });
     },
     loadGroup: function loadGroup() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get(this.$routes.groups.index + '?school_id=' + this.school.value).then(function (response) {
-        _this2.groups_fetched = response.data.data;
+        _this3.groups_fetched = response.data.data;
       });
     }
   }
@@ -76569,39 +76665,34 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "codpostal" } }, [
-            _vm._v("Código postal")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.codpostal,
-                expression: "codpostal"
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", { attrs: { for: "codpostal" } }, [
+              _vm._v("Código postal")
+            ]),
+            _vm._v(" "),
+            _c("the-mask", {
+              staticClass: "form-control",
+              attrs: {
+                mask: ["#####-###"],
+                type: "text",
+                name: "cod_postal",
+                placeholder: "Digite o código postal",
+                required: ""
+              },
+              model: {
+                value: _vm.cod_postal,
+                callback: function($$v) {
+                  _vm.cod_postal = $$v
+                },
+                expression: "cod_postal"
               }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "cod_postal",
-              value: "",
-              placeholder: "Digite o código postal",
-              required: ""
-            },
-            domProps: { value: _vm.codpostal },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.codpostal = $event.target.value
-              }
-            }
-          })
-        ])
+            })
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6" }, [
@@ -77090,21 +77181,29 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form-group col-md-6" },
-        [
-          _c("select-ajax-component", {
-            attrs: {
-              url: this.$routes.responsability.index,
-              name: "responsability_id",
-              placeholder: "Selecione o cargo",
-              label: "Cargo"
-            }
-          })
-        ],
-        1
-      ),
+      _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("label", [_vm._v("Cargo")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { name: "role", placeholder: "Selecione o cargo" }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("Selecione o cargo")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.roles, function(r) {
+              return _c("option", { domProps: { value: r.name } }, [
+                _vm._v(_vm._s(r.title))
+              ])
+            })
+          ],
+          2
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-6" }, [
         _c("label", { attrs: { for: "formation" } }, [_vm._v("Formação")]),
@@ -77485,7 +77584,6 @@ var render = function() {
             attrs: {
               placeholder: "Digite o CPF",
               mask: ["###.###.###-##"],
-              name: "cpf",
               required: ""
             },
             model: {
@@ -77495,6 +77593,11 @@ var render = function() {
               },
               expression: "cpf"
             }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "cpf" },
+            domProps: { value: _vm.cpf }
           })
         ],
         1
@@ -78173,7 +78276,12 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "name", placeholder: "Nome do aluno" },
+          attrs: {
+            type: "text",
+            name: "name",
+            placeholder: "Nome do aluno",
+            required: ""
+          },
           domProps: { value: _vm.name },
           on: {
             input: function($event) {
@@ -78181,6 +78289,27 @@ var render = function() {
                 return
               }
               _vm.name = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.id,
+              expression: "id"
+            }
+          ],
+          attrs: { type: "hidden", name: "student_id" },
+          domProps: { value: _vm.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.id = $event.target.value
             }
           }
         })
@@ -78203,7 +78332,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { name: "genre" },
+            attrs: { name: "genre", required: "" },
             on: {
               change: function($event) {
                 var $$selectedVal = Array.prototype.filter
@@ -78247,7 +78376,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "date", name: "born_in" },
+          attrs: { type: "date", name: "born_in", required: "" },
           domProps: { value: _vm.born_in },
           on: {
             input: function($event) {
@@ -79024,7 +79153,7 @@ var render = function() {
               _c("th", [_vm._v("Disciplinas")]),
               _vm._v(" "),
               _vm._l(_vm.units, function(u) {
-                return _c("th", [_vm._v(_vm._s(u["título"]))])
+                return _c("th", { key: u.id }, [_vm._v(_vm._s(u["título"]))])
               }),
               _vm._v(" "),
               _c("th", [_vm._v("Resultado Final")])
@@ -79038,11 +79167,12 @@ var render = function() {
           _vm._l(_vm.data_fetched.group.stuffs, function(s) {
             return _c(
               "tr",
+              { key: s.id },
               [
                 _c("td", [_vm._v(_vm._s(s.title))]),
                 _vm._v(" "),
                 _vm._l(s.grades, function(g) {
-                  return _c("td", [_vm._v(_vm._s(g.value))])
+                  return _c("td", { key: g.id }, [_vm._v(_vm._s(g.value))])
                 }),
                 _vm._v(" "),
                 _vm._l(_vm.units.length - s.grades.length, function(r) {
@@ -79133,100 +79263,139 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "form-group col-md-6" },
-        [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a escola")]),
-          _vm._v(" "),
-          _c(
-            "v-select",
-            {
-              attrs: { options: _vm.schools },
-              on: { search: _vm.loadSchools },
-              model: {
-                value: _vm.school,
-                callback: function($$v) {
-                  _vm.school = $$v
-                },
-                expression: "school"
-              }
-            },
-            [
-              _c(
-                "span",
-                { attrs: { slot: "no-options" }, slot: "no-options" },
-                [
-                  _vm._v(
-                    "\n          Nenhuma escola encontrada. Digite o nome para buscar\n        "
-                  )
-                ]
-              )
-            ]
-          )
-        ],
-        1
-      ),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "form-group col-md-6" },
+          [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a escola")]),
+            _vm._v(" "),
+            _c(
+              "v-select",
+              {
+                attrs: { options: _vm.schools },
+                on: { search: _vm.loadSchools },
+                model: {
+                  value: _vm.school,
+                  callback: function($$v) {
+                    _vm.school = $$v
+                  },
+                  expression: "school"
+                }
+              },
+              [
+                _c(
+                  "span",
+                  { attrs: { slot: "no-options" }, slot: "no-options" },
+                  [
+                    _vm._v(
+                      "\n            Nenhuma escola encontrada. Digite o nome para buscar\n          "
+                    )
+                  ]
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-6" },
+          [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a turma")]),
+            _vm._v(" "),
+            _c(
+              "v-select",
+              {
+                attrs: { options: _vm.groups },
+                model: {
+                  value: _vm.group,
+                  callback: function($$v) {
+                    _vm.group = $$v
+                  },
+                  expression: "group"
+                }
+              },
+              [
+                _c(
+                  "span",
+                  { attrs: { slot: "no-options" }, slot: "no-options" },
+                  [
+                    _vm._v(
+                      "\n            Nenhuma turma encontrada. Digite o nome para buscar\n          "
+                    )
+                  ]
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-6" },
-        [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Seleciona a turma")]),
-          _vm._v(" "),
-          _c(
-            "v-select",
-            {
-              attrs: { options: _vm.groups },
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-6 form-group" },
+          [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Digite o seu CPF")]),
+            _vm._v(" "),
+            _c("the-mask", {
+              staticClass: "form-control",
+              attrs: { mask: ["###.###.###-##"] },
               model: {
-                value: _vm.group,
+                value: _vm.cpf,
                 callback: function($$v) {
-                  _vm.group = $$v
+                  _vm.cpf = $$v
                 },
-                expression: "group"
+                expression: "cpf"
               }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-lg",
+              on: { click: _vm.loadBoletim }
             },
-            [
-              _c(
-                "span",
-                { attrs: { slot: "no-options" }, slot: "no-options" },
-                [
-                  _vm._v(
-                    "\n          Nenhuma turma encontrada. Digite o nome para buscar\n        "
-                  )
-                ]
-              )
-            ]
+            [_vm._v("\n          Buscar boletim\n        ")]
           )
-        ],
-        1
-      )
+        ])
+      ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-6 form-group" },
-        [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Digite o seu CPF")]),
-          _vm._v(" "),
-          _c("the-mask", {
-            staticClass: "form-control",
-            attrs: { mask: ["###.###.###-##"] },
-            model: {
-              value: _vm.cpf,
-              callback: function($$v) {
-                _vm.cpf = $$v
-              },
-              expression: "cpf"
-            }
-          })
-        ],
-        1
-      )
-    ])
+    _c(
+      "div",
+      { staticClass: "col-md-12" },
+      [
+        _vm.found !== undefined || _vm.found == true
+          ? _c("student-boletim-component", {
+              attrs: {
+                "student-group-id": _vm.student_group_id,
+                "school-id": _vm.school.value
+              }
+            })
+          : _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _vm.found == false
+                  ? _c("p", [_vm._v("Boletim não encontrado")])
+                  : _c("p", [
+                      _vm._v("Preencha o formulário para buscar o boletim")
+                    ])
+              ])
+            ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -96474,6 +96643,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
       });
     },
     style: 'success'
+  }, {
+    label: 'Cancelar matrícula',
+    click: function click(id, parentId) {},
+    style: 'danger'
   }],
   groups: [{
     label: 'Gráfico de rendimento',
@@ -97781,6 +97954,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = _defineProperty({
   base: 'http://' + window.location.host,
   //hack to work on codeanywhere
+  address: {
+    index: '/address/:id:'
+  },
   stuffs: {
     index: '/stuffs',
     store: '/stuffs/store',

@@ -57,10 +57,10 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
                                 </li>
                             @endif
-                        @else
                             <li class="nav-item">
-                              <!--<a class="nav-link" href="#">Exportar dados</a>-->
+                              <a class="nav-link" href="{{ route('grades.student_boletim') }}">Consultar boletim</a>
                             </li>
+                        @else
                             <li class="nav-item">
                               <a class="nav-link" href="{{ route('student_groups.index') }}">Gerenciar turmas</a>
                             </li>

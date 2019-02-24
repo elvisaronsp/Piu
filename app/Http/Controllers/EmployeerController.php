@@ -27,7 +27,8 @@ class EmployeerController extends Controller
     }
 
     public function create(Request $request){
-      return view('employeers.create');
+      $roles = $this->getRoles();
+      return view('employeers.create')->with('roles', $roles);
     }
 
     public function store(EmployeerStoreRequest $request){
@@ -45,6 +46,7 @@ class EmployeerController extends Controller
       $data['school_id'] = Auth::user()->school_id;
       $data['password'] = bcrypt($data['password']);
       $user = User::create($data);
+      $user->assign($data['role']);
       Flash::success('Funcionário criado com sucesso!');
       return redirect('/');
     }

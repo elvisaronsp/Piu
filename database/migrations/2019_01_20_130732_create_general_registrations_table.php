@@ -16,7 +16,6 @@ class CreateGeneralRegistrationsTable extends Migration
         Schema::create('general_registrations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('registration_number');
-            //$table->string('state');
             $table->string('emitter');
             $table->date('registration_emission');
             $table->string('cpf');

@@ -101,8 +101,8 @@ class GradeController extends Controller
                             'group.stuffs:id,title,group_id',
                             'group.stuffs.grades' => function($query)use($student_group_id){
                               $query->select('id', 'value', 'stuff_id', 'unit_id')
-                                    ->where('student_group_id', $student_group_id)
-                                    ->groupBy('unit_id');
+                                    ->where('student_group_id', $student_group_id);
+                                    //->groupBy('stuff_id', '');
                             },
                             'group.stuffs.grades.unit:id,title'
                           ])->first();
