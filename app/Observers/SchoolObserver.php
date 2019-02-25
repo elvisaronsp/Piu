@@ -23,22 +23,28 @@ class SchoolObserver
      */
     public function created(School $school)
     {
-      $roles = $this->createRoles();
+      //$roles = $this->createRoles();
       $abilities = $this->createAbilities();
-      Bouncer::allow('admin')->toOwnEverything();
+      $general_abilities = ['group-managment', 'control-painel'];
+      foreach($abilities as $ability){
+        Bouncer::allow('admin')->to($ability['name']);
+      }
+      foreach($general_abilities as $ability){
+        Bouncer::allow('admin')->to($ability);
+      }
       $teacher_abilities = [
-                              'add-grades', 'delete-grades', 'edit-grades', 'view-grades'
+                              'add-grades', 'delete-grades', 'edit-grades', 'view-grades', 'group-managment'
                            ];
       $secretary_abilities = [
                               'add-groups', 'view-groups', 'edit-groups', 'add-students', 'view-students', 'delete-students',
                               'edit-students', 'view-employeers', 'add-employeers', 'edit-employeers', 'view-stuffs', 'add-stuffs',
-                              'delete-stuffs', 'edit-stuffs'
+                              'delete-stuffs', 'edit-stuffs', 'control-painel'
                             ];
-      foreach ($teacher_abilities as $ability) {
-        Bouncer::allow('secretary')->to($ability);
+      foreach ($teacher_abilities as $key => $ability) {
+        Bouncer::allow('teacher')->to($key);
       }
-      foreach ($secretary_abilities as $ability) {
-        Bouncer::allow('teacher')->to($ability);
+      foreach ($secretary_abilities as $key => $ability) {
+        Bouncer::allow('secretary')->to($key);
       }
     }
 
@@ -54,7 +60,7 @@ class SchoolObserver
     }
 
     public function createAbilities(){
-      $entities = ['students', 'grades', 'stuffs', 'groups', 'options', 'employeers'];
+      $entities = ['students', 'grades', 'stuffs', 'groups', 'options', 'employeers', 'student_groups', 'units'];
       $actions = ['view'=> 'View', 'delete'=> 'Delete', 'edit'=> 'Edit', 'add'=>'Add'];
       $createds = [];
       foreach ($entities as $entity) {
