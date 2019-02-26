@@ -2779,6 +2779,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -77789,7 +77798,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "form-group col-md-8" }, [
+      _c("div", { staticClass: "form-group col-md-6" }, [
         _c("label", [_vm._v("Título da turma")]),
         _vm._v(" "),
         _c("input", {
@@ -77802,7 +77811,12 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "title", placeholder: "Ex.: 8º ano" },
+          attrs: {
+            type: "text",
+            name: "title",
+            placeholder: "Ex.: 8º ano",
+            required: ""
+          },
           domProps: { value: _vm.title },
           on: {
             input: function($event) {
@@ -77813,11 +77827,38 @@ var render = function() {
             }
           }
         })
-      ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Turno")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { name: "shift", required: "" } },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Selecione o turno")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "morning" } }, [_vm._v("Matutino")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "afternoon" } }, [
+            _vm._v("Vespertino")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "nocturnal" } }, [_vm._v("Noturno")])
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

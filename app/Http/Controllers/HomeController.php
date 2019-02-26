@@ -24,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        if($user->can('control-panel')){
+          return view('home');
+        }else{
+          return redirect('/student-groups');
+        }
     }
 }

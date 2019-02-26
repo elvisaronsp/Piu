@@ -8,5 +8,14 @@
   "Remember Me": "Lembrar de mim",
   "Forgot Your Password?": "Esqueceu sua senha?",
   "Login": "Entrar",
-  "Sign-in": "Acessar conta"
+  "Sign-in": "Acessar conta",
+  "Logout": "Sair",
+  "Unauthorized": "Não autorizado",
+  "Sorry, you are not authorized to access this page.": "Desculpe, você não tem autorização para acessar esta página.",
+  "Sorry, you are forbidden from accessing this page.": "Desculpe, o seu acesso à essa página foi negado.",
+  "Forbidden": "Acesso não autorizado",
+  "This action is unauthorized.": "Você não tem autorização para fazer isto.",
+  "morning": "matutino",
+  "afternoon": "vespertino",
+  "nocturnal": "noturno"
 }
