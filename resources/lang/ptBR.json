@@ -2,5 +2,11 @@
   "Teacher":"Professor",
   "Secretary": "Secretário",
   "General Secretary": "Secretário Estadual",
-  "Administrator": "Administrador"
+  "Administrator": "Administrador",
+  "E-Mail Address": "E-mail",
+  "Password": "Senha",
+  "Remember Me": "Lembrar de mim",
+  "Forgot Your Password?": "Esqueceu sua senha?",
+  "Login": "Entrar",
+  "Sign-in": "Acessar conta"
 }

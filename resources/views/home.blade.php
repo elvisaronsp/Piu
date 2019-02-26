@@ -3,27 +3,24 @@
 @php
   use Silber\Bouncer\Database\Ability;
   $user = Auth::user();
-  function ability($name){
-    return Ability::where('name', $name)->firstOrFail();
-  }
 @endphp
 <div class="row">
   <div class="col-3 text-center p-4">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Principal</a>
-      @if($user->can(ability('view-employeers')) || $user->isAn('admin'))
+      @if($user->can('view-employeers') || $user->isAn('admin'))
         <a class="nav-link" id="v-pills-employeers-tab" data-toggle="pill" href="#v-pills-employeers" role="tab" aria-controls="v-pills-employeers" aria-selected="false">Funcionários</a>
       @endif
-      @if($user->can(ability('view-stuffs')) || $user->isAn('admin'))
+      @if($user->can('view-stuffs') || $user->isAn('admin'))
         <a class="nav-link" id="v-pills-stuffs-tab" data-toggle="pill" href="#v-pills-stuffs" role="tab" aria-controls="v-pills-stuffs" aria-selected="false">Matérias</a>
       @endif
-      @if($user->can(ability('view-students')) || $user->isAn('admin'))
+      @if($user->can('view-students') || $user->isAn('admin'))
         <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab" aria-controls="v-pills-students" aria-selected="false">Alunos</a>
       @endif
-      @if($user->can(ability('view-groups')) || $user->isAn('admin'))
+      @if($user->can('view-groups') || $user->isAn('admin'))
         <a class="nav-link" id="v-pills-groups-tab" data-toggle="pill" href="#v-pills-groups" role="tab" aria-controls="v-pills-groups" aria-selected="false">Turmas</a>
       @endif
-      @if($user->can(ability('view-options')) || $user->isAn('admin'))
+      @if($user->can('view-options') || $user->isAn('admin'))
         <a class="nav-link" id="v-pills-configurations-tab" data-toggle="pill" href="#v-pills-configurations" role="tab" aria-controls="v-pills-configurations" aria-selected="false">Configurações</a>
       @endif
     </div>

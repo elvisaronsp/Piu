@@ -7,6 +7,7 @@ use App\Grade;
 use App\Observers\GradeObserver;
 use App\School;
 use App\Observers\SchoolObserver;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         Grade::observe(GradeObserver::class);
         School::observe(SchoolObserver::class);
     }
