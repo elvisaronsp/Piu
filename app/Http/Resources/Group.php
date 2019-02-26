@@ -16,7 +16,8 @@ class Group extends JsonResource
     {
         return [
           'id' => $this->id,
-          'título' => $this->title
+          'título' => $this->title,
+          'turno' => __($this->shift)
         ];
     }
 }

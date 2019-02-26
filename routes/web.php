@@ -25,7 +25,7 @@ Route::get('/images/{folder}/{fileName}', 'ImageController@show')->name('images.
 
 Route::group(['middleware'=> ['auth']], function(){
   # Home
-  Route::get('/', 'HomeController@index')->name('home')->middleware('can:control-panel');
+  Route::get('/', 'HomeController@index')->name('home');
 
   # Employeers
   Route::post('/employeers/store', 'EmployeerController@store')->name('employeers.store');

@@ -23,7 +23,15 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                  @if(!Auth::check())
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                  @else
+                    @if(Auth::user()->isAn('admin') || Auth::user()->isAn('secretary'))
+                      <a class="navbar-brand" href="{{ url('/') }}">
+                    @else
+                      <a class="navbar-brand" href="{{ url('/student-groups') }}">
+                    @endif
+                  @endif
                     @guest
                       {{ config('app.name', 'Laravel') }}
                     @endguest

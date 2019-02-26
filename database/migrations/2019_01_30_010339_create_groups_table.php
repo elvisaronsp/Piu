@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('school_id');
+            $table->enum('shift', ['morning', 'afternoon', 'nocturnal']);
             $table->timestamps();
         });
     }
