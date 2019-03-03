@@ -4,5 +4,5 @@
 @section('route', route('stuffs.update'))
 @section('form_content')
 <stuff-component :stuff="{{ $stuff }}"></stuff-component>
-<button-bar-component button-label="Registrar matéria"></button-bar-component>
+<button-bar-component button-label="Atualizar matéria"></button-bar-component>
 @endsection

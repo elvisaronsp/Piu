@@ -7,5 +7,5 @@
 <employeer-data-component :employeer="{{ $employeer->employeer_data }}" :roles="{{ $roles }}" role="{{ $employeer->role()->name }}"></employeer-data-component>
 <birth-component :birth="{{ $employeer->birth_certificate }}"></birth-component>
 <general-registration-component :general-registration="{{ $employeer->general_registration }}"></general-registration-component>
-<button-bar-component button-label="Registrar funcionário"></button-bar-component>
+<button-bar-component button-label="Atualizar funcionário"></button-bar-component>
 @endsection

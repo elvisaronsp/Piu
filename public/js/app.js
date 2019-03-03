@@ -2802,11 +2802,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['group'],
   data: function data() {
     return {
-      title: ''
+      g: {
+        id: '',
+        title: '',
+        shift: ''
+      }
     };
+  },
+  mounted: function mounted() {
+    if (this.group) {
+      this.g = this.group;
+    }
   }
 });
 
@@ -77878,8 +77889,29 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.title,
-              expression: "title"
+              value: _vm.g.id,
+              expression: "g.id"
+            }
+          ],
+          attrs: { type: "hidden", name: "id" },
+          domProps: { value: _vm.g.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.g, "id", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.g.title,
+              expression: "g.title"
             }
           ],
           staticClass: "form-control",
@@ -77889,48 +77921,71 @@ var render = function() {
             placeholder: "Ex.: 8º ano",
             required: ""
           },
-          domProps: { value: _vm.title },
+          domProps: { value: _vm.g.title },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.title = $event.target.value
+              _vm.$set(_vm.g, "title", $event.target.value)
             }
           }
         })
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("label", [_vm._v("Turno")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.g.shift,
+                expression: "g.shift"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "shift", required: "" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.g,
+                  "shift",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("Selecione o turno")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "morning" } }, [_vm._v("Matutino")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "afternoon" } }, [
+              _vm._v("Vespertino")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "nocturnal" } }, [_vm._v("Noturno")])
+          ]
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-6" }, [
-      _c("label", [_vm._v("Turno")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        { staticClass: "form-control", attrs: { name: "shift", required: "" } },
-        [
-          _c("option", { attrs: { value: "" } }, [_vm._v("Selecione o turno")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "morning" } }, [_vm._v("Matutino")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "afternoon" } }, [
-            _vm._v("Vespertino")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "nocturnal" } }, [_vm._v("Noturno")])
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

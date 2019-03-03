@@ -57,6 +57,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/groups/store', 'GroupController@store')->name('groups.store')->middleware('can:add-groups');
   Route::post('/groups/destroy/{id}', 'GroupController@destroy')->name('groups.destroy')->middleware('can:delete-groups');
   Route::get('/groups/ata/{id}', 'GroupController@ata')->name('groups.ata');
+  Route::get('/groups/edit/{id}', 'GroupController@edit')->name('groups.edit')->middleware('can:edit-groups');
+  Route::post('/groups/update', 'GroupController@update')->name('groups.update')->middleware('can:edit-groups');
 
   # StudentGroup
   Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index')->middleware('can:view-student_groups');
