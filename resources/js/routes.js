@@ -71,7 +71,11 @@ Vue.prototype.$routes = {
         destroy: '/options/destroy/:id:'
     },
     schools: {
-      index: '/schools'
+        index: '/schools'
+    },
+    statistic: {
+        studentsCount: '/statistic/students/count',
+        groupsCount: '/statistic/groups/count',
+        employeersCount: '/statistic/employeers/count',
     }
-
 };

@@ -87,7 +87,9 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/options/destroy/{id}', 'OptionController@destroy')->name('options.destroy')->middleware('can:delete-options');
   Route::post('/options/update/{name}', 'OptionController@update')->name('options.update')->middleware('can:edit-options');
 
-  #School
-
+  # Statistic
+  Route::get('/statistic/students/count', 'StatisticController@studentsCount')->name('statistic.student.count');
+  Route::get('/statistic/employeers/count', 'StatisticController@employeersCount')->name('statistic.employeers.count');
+  Route::get('/statistic/groups/count', 'StatisticController@groupsCount')->name('statistic.groups.count');
 
 });
