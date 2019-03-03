@@ -72,3 +72,5 @@ Caso você queira utilizar o Piu como base de um projeto maior e pensa em desenv
 Os comandos acima servem para instalar as dependências do node e acompanhar as mudanças no código (build automático), caso pretenda fazer modificações no frontend que é feito em Vuejs.
 
 
+### Os testes unitários estão em desenvolvimento. Fique à vontade para realizar pull requests!
+
