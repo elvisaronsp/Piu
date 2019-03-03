@@ -32,6 +32,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/employeers', 'EmployeerController@index')->name('employeers.index')->middleware('can:view-employeers');
   Route::get('/employeers/create', 'EmployeerController@create')->name('employeers.create')->middleware('can:add-employeers');
   Route::post('/employeers/destroy/{id}', 'EmployeerController@destroy')->name('employeers.destroy')->middleware('can:delete-employeers');
+  Route::get('/employeers/edit/{id}', 'EmployeerController@edit')->name('employeers.edit')->middleware('can:edit-employeers');
+  Route::post('/employeers/update', 'EmployeerController@update')->name('employeers.update')->middleware('can:edit-employeers');
 
   # Students
   Route::get('/students', 'StudentController@index')->name('students.index')->middleware('can:view-students');

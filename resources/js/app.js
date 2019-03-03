@@ -65,5 +65,5 @@ Vue.prototype.$table_custom = {
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });

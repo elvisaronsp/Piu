@@ -2492,23 +2492,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['roles'],
+  props: ['roles', 'employeer', 'role'],
   data: function data() {
     return {
-      sus_card: '',
-      allergic: '',
-      breed: '',
-      formation: '',
-      specialization: '',
-      contract: '',
-      statutory: '',
-      workload: ''
+      em: {
+        id: '',
+        sus_card: '',
+        allergic: '',
+        breed: '',
+        formation: '',
+        specialization: '',
+        contract: '',
+        statutory: '',
+        workload: '',
+        role: ''
+      }
     };
   },
   components: {
     SelectAjaxComponent: _elements_SelectAjaxComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {
+    if (this.employeer) {
+      this.em = this.employeer;
+    }
+
+    if (this.role) {
+      this.em.role = this.role;
+    }
   }
 });
 
@@ -3205,12 +3219,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user'],
   data: function data() {
     return {
-      email: '',
-      password: '',
-      password_confirmation: ''
+      u: {
+        email: '',
+        password: '',
+        password_confirmation: ''
+      }
     };
+  },
+  mounted: function mounted() {
+    this.u = this.user;
   }
 });
 
@@ -76344,9 +76364,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
-                    _vm._v("Card subtitle")
-                  ]),
+                  _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }),
                   _vm._v(" "),
                   _vm._l(_vm.$entities[_vm.entity], function(e) {
                     return _c(
@@ -77085,9 +77103,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("h1", { staticClass: "display-4" }, [
+          _vm._v("Dados do funcionário")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.em.id,
+              expression: "em.id"
+            }
+          ],
+          attrs: { type: "hidden", name: "employeer_id" },
+          domProps: { value: _vm.em.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.em, "id", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "form-group col-md-12" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Nome completo")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.em.name,
+              expression: "em.name"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "name", required: "" },
+          domProps: { value: _vm.em.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.em, "name", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "form-group col-md-6" }, [
@@ -77098,19 +77169,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.sus_card,
-              expression: "sus_card"
+              value: _vm.em.sus_card,
+              expression: "em.sus_card"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", name: "sus_card", required: "" },
-          domProps: { value: _vm.sus_card },
+          domProps: { value: _vm.em.sus_card },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.sus_card = $event.target.value
+              _vm.$set(_vm.em, "sus_card", $event.target.value)
             }
           }
         })
@@ -77124,19 +77195,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.allergic,
-              expression: "allergic"
+              value: _vm.em.allergic,
+              expression: "em.allergic"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", name: "allergic" },
-          domProps: { value: _vm.allergic },
+          domProps: { value: _vm.em.allergic },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.allergic = $event.target.value
+              _vm.$set(_vm.em, "allergic", $event.target.value)
             }
           }
         })
@@ -77154,8 +77225,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.breed,
-                expression: "breed"
+                value: _vm.em.breed,
+                expression: "em.breed"
               }
             ],
             staticClass: "form-control",
@@ -77170,9 +77241,11 @@ var render = function() {
                     var val = "_value" in o ? o._value : o.value
                     return val
                   })
-                _vm.breed = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
+                _vm.$set(
+                  _vm.em,
+                  "breed",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
               }
             }
           },
@@ -77196,8 +77269,33 @@ var render = function() {
         _c(
           "select",
           {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.em.role,
+                expression: "em.role"
+              }
+            ],
             staticClass: "form-control",
-            attrs: { name: "role", placeholder: "Selecione o cargo" }
+            attrs: { name: "role", placeholder: "Selecione o cargo" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.em,
+                  "role",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
           },
           [
             _c("option", { attrs: { value: "" } }, [
@@ -77222,19 +77320,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.formation,
-              expression: "formation"
+              value: _vm.em.formation,
+              expression: "em.formation"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", name: "formation", required: "" },
-          domProps: { value: _vm.formation },
+          domProps: { value: _vm.em.formation },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.formation = $event.target.value
+              _vm.$set(_vm.em, "formation", $event.target.value)
             }
           }
         })
@@ -77252,19 +77350,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.specialization,
-              expression: "specialization"
+              value: _vm.em.specialization,
+              expression: "em.specialization"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", name: "specialization" },
-          domProps: { value: _vm.specialization },
+          domProps: { value: _vm.em.specialization },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.specialization = $event.target.value
+              _vm.$set(_vm.em, "specialization", $event.target.value)
             }
           }
         })
@@ -77278,19 +77376,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.contract,
-              expression: "contract"
+              value: _vm.em.contract,
+              expression: "em.contract"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", name: "contract", required: "" },
-          domProps: { value: _vm.contract },
+          domProps: { value: _vm.em.contract },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.contract = $event.target.value
+              _vm.$set(_vm.em, "contract", $event.target.value)
             }
           }
         })
@@ -77306,19 +77404,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.statutory,
-              expression: "statutory"
+              value: _vm.em.statutory,
+              expression: "em.statutory"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", name: "statutory" },
-          domProps: { value: _vm.statutory },
+          domProps: { value: _vm.em.statutory },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.statutory = $event.target.value
+              _vm.$set(_vm.em, "statutory", $event.target.value)
             }
           }
         })
@@ -77332,19 +77430,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.workload,
-              expression: "workload"
+              value: _vm.em.workload,
+              expression: "em.workload"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "number", name: "workload" },
-          domProps: { value: _vm.workload },
+          domProps: { value: _vm.em.workload },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.workload = $event.target.value
+              _vm.$set(_vm.em, "workload", $event.target.value)
             }
           }
         })
@@ -77352,33 +77450,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("h1", { staticClass: "display-4" }, [_vm._v("Dados do funcionário")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "form-group col-md-12" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Nome completo")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", name: "name", required: "" }
-        })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -78652,8 +78724,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.email,
-              expression: "email"
+              value: _vm.u.email,
+              expression: "u.email"
             }
           ],
           staticClass: "form-control",
@@ -78665,13 +78737,13 @@ var render = function() {
             placeholder: "Digite o e-mail",
             required: ""
           },
-          domProps: { value: _vm.email },
+          domProps: { value: _vm.u.email },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.email = $event.target.value
+              _vm.$set(_vm.u, "email", $event.target.value)
             }
           }
         })
@@ -78694,8 +78766,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.password,
-              expression: "password"
+              value: _vm.u.password,
+              expression: "u.password"
             }
           ],
           staticClass: "form-control",
@@ -78706,13 +78778,13 @@ var render = function() {
             name: "password",
             required: ""
           },
-          domProps: { value: _vm.password },
+          domProps: { value: _vm.u.password },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.password = $event.target.value
+              _vm.$set(_vm.u, "password", $event.target.value)
             }
           }
         })
@@ -78733,8 +78805,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.password_confirmation,
-              expression: "password_confirmation"
+              value: _vm.u.password_confirmation,
+              expression: "u.password_confirmation"
             }
           ],
           staticClass: "form-control",
@@ -78745,13 +78817,13 @@ var render = function() {
             name: "password_confirmation",
             required: ""
           },
-          domProps: { value: _vm.password_confirmation },
+          domProps: { value: _vm.u.password_confirmation },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.password_confirmation = $event.target.value
+              _vm.$set(_vm.u, "password_confirmation", $event.target.value)
             }
           }
         })

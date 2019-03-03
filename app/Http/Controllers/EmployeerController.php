@@ -21,6 +21,7 @@ class EmployeerController extends Controller
       $school_id = Auth::user()->school_id;
       $employeers = Employeer::join('users', 'users.employeer_id', '=', 'employeers.id')
                              ->where('school_id', $school_id)
+                             ->select('employeers.*')
                              ->paginate(20);
       $resource = new EmployeerCollection($employeers);
       return $resource;
@@ -56,6 +57,33 @@ class EmployeerController extends Controller
       $employeer->delete();
       Flash::success('Funcionário apagado com sucesso!');
       return redirect('/');
+    }
+
+    public function edit(Request $request, $id){
+      $employeer = Employeer::findOrFail($id);
+      if(!$this->isOurEmployeer($employeer)){
+        return view('errors.401', 401);
+      }
+      $roles = $this->getRoles();
+      return view('employeers.edit')->with('roles', $roles)->with('employeer', $employeer);
+    }
+
+    public function update(Request $request){
+      $data = $request->all();
+      $employeer = Employeer::findOrFail($data['employeer_id']);
+      if(!$this->isOurEmployeer($employeer)){
+        return view('errors.401', 401);
+      }
+      $employeer->employeer_data->update($data);
+      $employeer->general_registration->update($data);
+      $employeer->address->update($data);
+      $employeer->birth_certificate->update($data);
+      Flash::success("Funcionário {$employeer->employeer_data->name} atualizado com sucesso!");
+      return redirect()->back();
+    }
+
+    private function isOurEmployeer($employeer){
+      return $employeer->user->school_id == Auth::user()->school_id;
     }
 
 }
