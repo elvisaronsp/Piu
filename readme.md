@@ -63,7 +63,7 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
         
 - Agora você está pronto para usar :wink:
 
-# Opcional
+### Opcional
 
 Caso você queira utilizar o Piu como base de um projeto maior e pensa em desenvolver encima dele, então você deverá fazer mais algumas coisas como:
     
