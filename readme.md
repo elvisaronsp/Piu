@@ -54,7 +54,7 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 
         composer install
 
-- Configure o arquivo .env com as informações do banco de dados e do seu servidor de e-mail
+- Configure o arquivo "env.example" com as informações do banco de dados e do seu servidor de e-mail e renomeie-o para ".env"
 
 - Inicie a execução das migrations (criarão a estrutura do seu banco de dados)
 
