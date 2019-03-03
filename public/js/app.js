@@ -3151,16 +3151,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
   },
+  props: ['stuff'],
   data: function data() {
     return {
-      title: '',
-      groups_fetched: '',
-      group: ''
+      s: {
+        id: '',
+        title: '',
+        group_id: ''
+      },
+      groups_fetched: ''
     };
   },
   computed: {
@@ -3181,6 +3186,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.loadGroups();
+
+    if (this.stuff) {
+      this.s = this.stuff;
+    }
   }
 });
 
@@ -78607,6 +78616,27 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.s.id,
+              expression: "s.id"
+            }
+          ],
+          attrs: { type: "hidden", name: "id" },
+          domProps: { value: _vm.s.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.s, "id", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
         _c("label", [_vm._v("Turma")]),
         _vm._v(" "),
         _c(
@@ -78616,8 +78646,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.group,
-                expression: "group"
+                value: _vm.s.group_id,
+                expression: "s.group_id"
               }
             ],
             staticClass: "form-control",
@@ -78632,9 +78662,11 @@ var render = function() {
                     var val = "_value" in o ? o._value : o.value
                     return val
                   })
-                _vm.group = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
+                _vm.$set(
+                  _vm.s,
+                  "group_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
               }
             }
           },
@@ -78661,19 +78693,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.title,
-              expression: "title"
+              value: _vm.s.title,
+              expression: "s.title"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", name: "title" },
-          domProps: { value: _vm.title },
+          domProps: { value: _vm.s.title },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.title = $event.target.value
+              _vm.$set(_vm.s, "title", $event.target.value)
             }
           }
         })

@@ -48,6 +48,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/stuffs', 'StuffController@index')->name('stuffs.index')->middleware('can:view-stuffs');
   Route::get('/stuffs/create', 'StuffController@create')->name('stuffs.create')->middleware('can:add-stuffs');
   Route::post('/stuffs/store', 'StuffController@store')->name('stuffs.store')->middleware('can:add-stuffs');
+  Route::get('/stuffs/edit/{id}', 'StuffController@edit')->name('stuffs.edit')->middleware('can:edit-stuffs');
+  Route::post('/stuffs/update', 'StuffController@update')->name('stuffs.update')->middleware('can:edit-stuffs');
   Route::post('/stuffs/destroy/{id}', 'StuffController@destroy')->name('stuffs.destroy')->middleware('can:delete-stuffs');
 
   # Classes/Groups
