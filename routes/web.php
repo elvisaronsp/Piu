@@ -72,6 +72,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/grades/destroy/{id}', 'GradeController@destroy')->name('grades.destroy')->middleware('can:delete-grades');
   Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart')->name('grades.datachart');
   Route::get('/grades/ata/{group_id}/', 'GradeController@dataAta')->name('grades.ata');
+  Route::get('/grades/edit/{id}', 'GradeController@edit')->name('grades.edit')->middleware('can:edit-grades');
+  Route::post('/grades/update', 'GradeController@update')->name('grades.update')->middleware('can:edit-grades');
 
 
   # Unit

@@ -114,4 +114,26 @@ class GradeController extends Controller
     return view('grades.student_boletim');
   }
 
+  public function edit(Request $request, $id){
+    $grade = Grade::with(['unit', 'stuff'])->findOrFail($id);
+    if($this->isOurGrade($grade)){
+      return view('grades.edit')->with('grade', $grade);
+    }
+    return view('errors.401', 401);
+  }
+
+  public function isOurGrade($grade){
+    return $grade->student_group->group->school_id == Auth::user()->id;
+  }
+
+  public function update(Request $request){
+    $data = $request->all();
+    $grade = Grade::findOrFail($data['id']);
+    if($this->isOurGrade($grade)){
+      $grade->update($data);
+      return response('Nota atualizada com sucesso!', 200);
+    }
+    return response('Você não tem permissão para realizar esta operação', 401);
+  }
+
 }

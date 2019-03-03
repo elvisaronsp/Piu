@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1>Lançamento de notas</h1>
-    <hr>
+    <div v-if="!oldGrade">
+      <h1>Lançamento de notas</h1>
+      <hr>
+    </div>
     <div class="form-group">
       <label><b>Matéria</b></label>
       <v-select v-model="stuff" maxHeight="150px" placeholder="Selecione a matéria" :options="stuffs"></v-select>
@@ -19,7 +21,7 @@
       </div>
     </div>
     <button :class="'btn btn-'+style" v-on:click="submit" :disabled="disabled || notFilled">
-      <moon-loader :loading="loading" color="lightskyblue" size="14px"></moon-loader>
+      <moon-loader :loading="loading" color="white" :size="35"></moon-loader>
       {{ text }}
     </button>
   </div>
@@ -29,7 +31,7 @@
   import MoonLoader from 'vue-spinner/src/MoonLoader.vue'
 
   export default {
-    props: ['studentGroupId', 'groupId'],
+    props: ['studentGroupId', 'groupId', 'oldGrade'],
     data: function(){
       return {
         stuffs: [],
@@ -40,14 +42,34 @@
         style: 'primary',
         text: 'Realizar lançamento',
         disabled: false,
-        loading: false
+        loading: false,
+        unitsLoaded: false,
+        stuffsLoaded: false,
+      }
+    },
+    watch:{
+      unitsLoaded: function(enabled){
+        if(enabled && this.stuffsLoaded){
+          this.loadOldGrade();
+        }
+      },
+      stuffsLoaded: function(enabled){
+        if(enabled && this.unitsLoaded){
+          this.loadOldGrade();
+        }
       }
     },
     mounted(){
       axios.get(this.$routes.stuffs.index+'?group_id='+this.groupId)
-           .then(response => ( this.stuffs = this.toVSelectData(response.data.data) ) );
+           .then(response =>  {
+              this.stuffs = this.toVSelectData(response.data.data);
+              this.stuffsLoaded = true;
+            });
       axios.get(this.$routes.units.index)
-           .then(response => ( this.units = this.toVSelectData(response.data.data) ) );
+           .then(response => {
+             this.units = this.toVSelectData(response.data.data);
+             this.unitsLoaded = true;
+           });
     },
     components: {
       vSelect, MoonLoader
@@ -58,24 +80,46 @@
       }
     },
     methods:{
+      loadOldGrade: function(){
+        if(this.oldGrade){
+          this.unit = { label: this.oldGrade.unit.title, value: this.oldGrade.unit.id };
+          this.stuff = { label: this.oldGrade.stuff.title, value: this.oldGrade.stuff.id };
+          this.grade = this.oldGrade.value;
+        }
+      },
       submit: function(){
         if(parseFloat(this.grade) <= 10){
           this.loading = true;
           this.text = '';
           this.disabled = true;
-          axios.post(this.$routes.grades.store, {
+          let url = '';
+          let data = {
             _token: this.$csrf,
             stuff_id: this.stuff.value,
             student_group_id: this.studentGroupId,
             unit_id: this.unit.value,
             value: this.grade
-          }).then(response => {
+          };
+          if(this.oldGrade){
+            url = this.$routes.grades.update;
+            data['id'] = this.oldGrade.id;
+          }else{
+            url = this.$routes.grades.store;
+          }
+          axios.post(url, data).then(response => {
             this.showMessage('Concluído', 'Nota lançada com sucesso!');
-            this.clearForm();
+            if(!this.oldGrade){
+              this.clearForm();
+            }else{
+              this.disabled = false;
+              this.loading = false;
+              this.text = 'Realizar lançamento';
+            }
           }).catch(err => {
             this.disabled = false;
+            this.loading = false;
             this.text = 'Realizar lançamento';
-            showMessage('Ops! Algo de errado aconteceu', err);
+            this.showMessage('Ops! Algo de errado aconteceu', 'Contate o administrador e informe o problema.');
           });
         }else{
           this.style = 'danger';

@@ -21,7 +21,8 @@ Vue.prototype.$routes = {
         edit: '/grades/edit/:id:',
         datachart: '/grades/data-chart/:group_id:/:unit_id:',
         ata: '/grades/ata/:group_id:',
-        boletim: '/grades/boletim/:student_group_id:'
+        boletim: '/grades/boletim/:student_group_id:',
+        update: '/grades/update'
     },
     employeers: {
         index: '/employeers',

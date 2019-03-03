@@ -2697,10 +2697,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['studentGroupId', 'groupId'],
+  props: ['studentGroupId', 'groupId', 'oldGrade'],
   data: function data() {
     return {
       stuffs: [],
@@ -2711,17 +2713,33 @@ __webpack_require__.r(__webpack_exports__);
       style: 'primary',
       text: 'Realizar lançamento',
       disabled: false,
-      loading: false
+      loading: false,
+      unitsLoaded: false,
+      stuffsLoaded: false
     };
+  },
+  watch: {
+    unitsLoaded: function unitsLoaded(enabled) {
+      if (enabled && this.stuffsLoaded) {
+        this.loadOldGrade();
+      }
+    },
+    stuffsLoaded: function stuffsLoaded(enabled) {
+      if (enabled && this.unitsLoaded) {
+        this.loadOldGrade();
+      }
+    }
   },
   mounted: function mounted() {
     var _this = this;
 
     axios.get(this.$routes.stuffs.index + '?group_id=' + this.groupId).then(function (response) {
-      return _this.stuffs = _this.toVSelectData(response.data.data);
+      _this.stuffs = _this.toVSelectData(response.data.data);
+      _this.stuffsLoaded = true;
     });
     axios.get(this.$routes.units.index).then(function (response) {
-      return _this.units = _this.toVSelectData(response.data.data);
+      _this.units = _this.toVSelectData(response.data.data);
+      _this.unitsLoaded = true;
     });
   },
   components: {
@@ -2734,6 +2752,19 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    loadOldGrade: function loadOldGrade() {
+      if (this.oldGrade) {
+        this.unit = {
+          label: this.oldGrade.unit.title,
+          value: this.oldGrade.unit.id
+        };
+        this.stuff = {
+          label: this.oldGrade.stuff.title,
+          value: this.oldGrade.stuff.id
+        };
+        this.grade = this.oldGrade.value;
+      }
+    },
     submit: function submit() {
       var _this2 = this;
 
@@ -2741,20 +2772,38 @@ __webpack_require__.r(__webpack_exports__);
         this.loading = true;
         this.text = '';
         this.disabled = true;
-        axios.post(this.$routes.grades.store, {
+        var url = '';
+        var data = {
           _token: this.$csrf,
           stuff_id: this.stuff.value,
           student_group_id: this.studentGroupId,
           unit_id: this.unit.value,
           value: this.grade
-        }).then(function (response) {
+        };
+
+        if (this.oldGrade) {
+          url = this.$routes.grades.update;
+          data['id'] = this.oldGrade.id;
+        } else {
+          url = this.$routes.grades.store;
+        }
+
+        axios.post(url, data).then(function (response) {
           _this2.showMessage('Concluído', 'Nota lançada com sucesso!');
 
-          _this2.clearForm();
+          if (!_this2.oldGrade) {
+            _this2.clearForm();
+          } else {
+            _this2.disabled = false;
+            _this2.loading = false;
+            _this2.text = 'Realizar lançamento';
+          }
         }).catch(function (err) {
           _this2.disabled = false;
+          _this2.loading = false;
           _this2.text = 'Realizar lançamento';
-          showMessage('Ops! Algo de errado aconteceu', err);
+
+          _this2.showMessage('Ops! Algo de errado aconteceu', 'Contate o administrador e informe o problema.');
         });
       } else {
         this.style = 'danger';
@@ -77740,9 +77789,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Lançamento de notas")]),
-    _vm._v(" "),
-    _c("hr"),
+    !_vm.oldGrade
+      ? _c("div", [
+          _c("h1", [_vm._v("Lançamento de notas")]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
@@ -77830,7 +77883,7 @@ var render = function() {
       },
       [
         _c("moon-loader", {
-          attrs: { loading: _vm.loading, color: "lightskyblue", size: "14px" }
+          attrs: { loading: _vm.loading, color: "white", size: 35 }
         }),
         _vm._v("\n    " + _vm._s(_vm.text) + "\n  ")
       ],
@@ -78671,6 +78724,32 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("label", [_vm._v("Nome da matéria")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.s.title,
+              expression: "s.title"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "title" },
+          domProps: { value: _vm.s.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.s, "title", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-6" }, [
         _c("input", {
           directives: [
             {
@@ -78738,32 +78817,6 @@ var render = function() {
           ],
           2
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-8" }, [
-        _c("label", [_vm._v("Nome da matéria")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.s.title,
-              expression: "s.title"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", name: "title" },
-          domProps: { value: _vm.s.title },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.s, "title", $event.target.value)
-            }
-          }
-        })
       ])
     ])
   ])
@@ -98093,7 +98146,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   methods: {
     toVSelectData: function toVSelectData(data) {
       var result = [];
-      console.log(data);
 
       if (data !== undefined) {
         data.forEach(function (item, key) {
@@ -98173,7 +98225,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = _defineProperty({
     edit: '/grades/edit/:id:',
     datachart: '/grades/data-chart/:group_id:/:unit_id:',
     ata: '/grades/ata/:group_id:',
-    boletim: '/grades/boletim/:student_group_id:'
+    boletim: '/grades/boletim/:student_group_id:',
+    update: '/grades/update'
   },
   employeers: {
     index: '/employeers',

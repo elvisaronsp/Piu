@@ -20,5 +20,10 @@
       </div>
     </form>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      @yield('out_form')
+    </div>
+  </div>
 </div>
 @endsection
