@@ -24,13 +24,12 @@
         <img src="https://poser.pugx.org/piu/piu/license" alt="Latest Unstable Version">
     </a>
 </p>
-
-<h3 align="center">Atenção - Sistema em desenvolvimento</h3>
 <p align="center">
     <img src="https://github.com/JJS4ntos/Piu/blob/master/piu.gif">
 </p>
-
-Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.
+<p align="center">
+Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.    
+</p>
 
 ### Principais diretrizes
 
@@ -43,21 +42,33 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 
     Requer a instalação da versão estável do [Node.js](https://nodejs.org/). (Somente em desenvolvimento)
     Requer Php >= 7.1.3.
+    Requer MySQL >= 5.6
 
 ### Instalação
 
-Em desenvolvimento...
+- Instale via composer
 
-```sh
-$ composer install
-$ npm install
-$ php artisan migrate
-$ npm run dev
-$ php artisan serve
-```
+        composer create-project piu/piu
+    
+- Realize a instalação das dependências
 
-Em produção...
+        composer install
 
-```sh
-$ php artisan migrate
-```
+- Configure o arquivo .env com as informações do banco de dados e do seu servidor de e-mail
+
+- Inicie a execução das migrations (criarão a estrutura do seu banco de dados)
+
+        php artisan migrate
+        
+- Agora você está pronto para usar :wink:
+
+### Opcional
+
+Caso você queira utilizar o Piu como base de um projeto maior e pensa em desenvolver encima dele, então você deverá fazer mais algumas coisas como:
+    
+    npm install
+    npm run watch
+
+Os comandos acima servem para instalar as dependências do node e acompanhar as mudanças no código (build automático), caso pretenda fazer modificações no frontend que é feito em Vuejs.
+
+
