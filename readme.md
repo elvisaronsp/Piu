@@ -24,13 +24,12 @@
         <img src="https://poser.pugx.org/piu/piu/license" alt="Latest Unstable Version">
     </a>
 </p>
-
-<h3 align="center">Atenção - Sistema em desenvolvimento</h3>
 <p align="center">
     <img src="https://github.com/JJS4ntos/Piu/blob/master/piu.gif">
 </p>
-
-Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.
+<p align="center">
+Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.    
+</p>
 
 ### Principais diretrizes
 
