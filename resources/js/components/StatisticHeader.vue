@@ -1,12 +1,12 @@
 <template>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 hvr-float">
       <card-header :title="students.title" :subtitle="studentsSubTitle" icon="user-check"></card-header>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 hvr-float">
       <card-header :title="groups.title" :subtitle="groupsSubTitle" icon="grid"></card-header>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 hvr-float">
       <card-header :title="employeers.title" :subtitle="employeersSubTitle" icon="users"></card-header>
     </div>
   </div>

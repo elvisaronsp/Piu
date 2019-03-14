@@ -1,7 +1,7 @@
 <template>
   <td>
-    <a :class="'btn btn-primary btn-sm mr-1'" :href="editLink" title="Editar"><feather type="edit-2"></feather></a>
-    <button v-on:click="deleteEntity" class="btn btn-danger btn-sm mr-1" title="Excluir"><feather type="delete"></feather></button>
+    <a :class="'btn btn-primary btn-sm mr-1 hvr-grow'" :href="editLink" title="Editar"><feather type="edit-2"></feather></a>
+    <button v-on:click="deleteEntity" class="btn btn-danger hvr-grow btn-sm mr-1" title="Excluir"><feather type="delete"></feather></button>
     <a v-for="c in custom" :class="'btn btn-sm mr-1 btn-'+c.type" v-on:click="c.click(data.id)" :href="c.url" :title="c.title" :key="c.id"><feather :type="c.icon"></feather></a>
   </td>
 </template>

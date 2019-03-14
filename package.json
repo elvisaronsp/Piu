@@ -26,6 +26,7 @@
   "dependencies": {
     "chart.js": "^2.7.3",
     "feather-icons": "^4.15.0",
+    "hover.css": "^2.3.2",
     "laravel-vue-pagination": "^2.2.0",
     "vue-chartjs": "^3.4.0",
     "vue-feather": "^1.0.0",
