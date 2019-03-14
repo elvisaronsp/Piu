@@ -29,7 +29,9 @@ import VModal from 'vue-js-modal';
 import VueTheMask from 'vue-the-mask';
 import StudentGroupComponent from './forms/StudentGroupComponent';
 import VueMoment from 'vue-moment';
+import Feather from 'vue-feather';
 
+Vue.use(Feather);
 Vue.use(VueMoment);
 Vue.use(VueTheMask);
 Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
@@ -65,5 +67,5 @@ Vue.prototype.$table_custom = {
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });

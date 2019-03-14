@@ -23,7 +23,8 @@ class EmployeerControllerTest extends TestCase
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)->followingRedirects();
         $user = factory(User::class)->make();
-        $response = $response->post(route('employeers.store'),[
+        $response = $response->post(route('employeers.store'),
+        [
           'registration_number' => '123456789',
           'emitter' => 'SSP',
           'registration_emission' => '2000-01-12',
@@ -49,7 +50,7 @@ class EmployeerControllerTest extends TestCase
           'number' => '8',
           'neighborhood' => 'Calabetão',
           'complement' => '',
-          'responsability_id' => 2,
+          'role' => 'admin',
           'email' => $user->email,
           'password' => '12345678',
           'password_confirmation' => '12345678',
@@ -57,5 +58,10 @@ class EmployeerControllerTest extends TestCase
           'name' => 'João do teste'
         ]);
         $response->assertStatus(200);
+    }
+
+    public function testIndex(){
+      $response = $this->authenticated()->get(route('employeers.index'));
+      $response->assertStatus(200);
     }
 }

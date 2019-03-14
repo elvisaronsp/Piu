@@ -29,12 +29,16 @@ class Employeer extends Model
       return $this->belongsTo('App\GeneralRegistration');
     }
 
+    public function user(){
+      return $this->hasOne('App\User');
+    }
+
     public function role(){
       return DB::table('assigned_roles')
-                      ->join('roles', 'roles.id', '=', 'assigned_roles.role_id')
-                      ->where('assigned_roles.entity_id', $this->id)
-                      ->select('roles.*')
-                      ->first();
+                ->join('roles', 'roles.id', '=', 'assigned_roles.role_id')
+                ->where('assigned_roles.entity_id', $this->user->id)
+                ->select('roles.*')
+                ->first();
     }
 
 }

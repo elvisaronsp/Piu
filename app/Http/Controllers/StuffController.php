@@ -68,7 +68,14 @@ class StuffController extends Controller
     public function edit(Request $request, $id)
     {
         $stuff = Stuff::findOrFail($id);
-        return view('stuff.edit')->with('stuff', $stuff);
+        if($this->isOurStuff($stuff)){
+          return view('stuffs.edit')->with('stuff', $stuff);
+        }
+        return view('errors.401', 401);
+    }
+
+    private function isOurStuff($stuff){
+      return $stuff->group->school_id == Auth::user()->school_id;
     }
 
     /**
@@ -78,11 +85,16 @@ class StuffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $stuff = Stuff::findOrFail($id);
-        $stuff = $request->input('title');
-        $stuff->save();
+        $data = $request->all();
+        $stuff = Stuff::findOrFail($data['id']);
+        if($this->isOurStuff($stuff)){
+          $stuff->update($data);
+          Flash::success("Matéria {$stuff->title} atualizada com sucesso!");
+          return redirect()->back();
+        }
+        return view('errors.401', 401);
     }
 
     public function destroy(Request $request, $id)

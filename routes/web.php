@@ -32,6 +32,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/employeers', 'EmployeerController@index')->name('employeers.index')->middleware('can:view-employeers');
   Route::get('/employeers/create', 'EmployeerController@create')->name('employeers.create')->middleware('can:add-employeers');
   Route::post('/employeers/destroy/{id}', 'EmployeerController@destroy')->name('employeers.destroy')->middleware('can:delete-employeers');
+  Route::get('/employeers/edit/{id}', 'EmployeerController@edit')->name('employeers.edit')->middleware('can:edit-employeers');
+  Route::post('/employeers/update', 'EmployeerController@update')->name('employeers.update')->middleware('can:edit-employeers');
 
   # Students
   Route::get('/students', 'StudentController@index')->name('students.index')->middleware('can:view-students');
@@ -46,6 +48,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/stuffs', 'StuffController@index')->name('stuffs.index')->middleware('can:view-stuffs');
   Route::get('/stuffs/create', 'StuffController@create')->name('stuffs.create')->middleware('can:add-stuffs');
   Route::post('/stuffs/store', 'StuffController@store')->name('stuffs.store')->middleware('can:add-stuffs');
+  Route::get('/stuffs/edit/{id}', 'StuffController@edit')->name('stuffs.edit')->middleware('can:edit-stuffs');
+  Route::post('/stuffs/update', 'StuffController@update')->name('stuffs.update')->middleware('can:edit-stuffs');
   Route::post('/stuffs/destroy/{id}', 'StuffController@destroy')->name('stuffs.destroy')->middleware('can:delete-stuffs');
 
   # Classes/Groups
@@ -53,6 +57,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/groups/store', 'GroupController@store')->name('groups.store')->middleware('can:add-groups');
   Route::post('/groups/destroy/{id}', 'GroupController@destroy')->name('groups.destroy')->middleware('can:delete-groups');
   Route::get('/groups/ata/{id}', 'GroupController@ata')->name('groups.ata');
+  Route::get('/groups/edit/{id}', 'GroupController@edit')->name('groups.edit')->middleware('can:edit-groups');
+  Route::post('/groups/update', 'GroupController@update')->name('groups.update')->middleware('can:edit-groups');
 
   # StudentGroup
   Route::get('/student-groups', 'StudentGroupController@index')->name('student_groups.index')->middleware('can:view-student_groups');
@@ -66,6 +72,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/grades/destroy/{id}', 'GradeController@destroy')->name('grades.destroy')->middleware('can:delete-grades');
   Route::get('/grades/data-chart/{group_id}/{unit_id}', 'GradeController@dataChart')->name('grades.datachart');
   Route::get('/grades/ata/{group_id}/', 'GradeController@dataAta')->name('grades.ata');
+  Route::get('/grades/edit/{id}', 'GradeController@edit')->name('grades.edit')->middleware('can:edit-grades');
+  Route::post('/grades/update', 'GradeController@update')->name('grades.update')->middleware('can:edit-grades');
 
 
   # Unit
@@ -79,7 +87,9 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/options/destroy/{id}', 'OptionController@destroy')->name('options.destroy')->middleware('can:delete-options');
   Route::post('/options/update/{name}', 'OptionController@update')->name('options.update')->middleware('can:edit-options');
 
-  #School
-
+  # Statistic
+  Route::get('/statistic/students/count', 'StatisticController@studentsCount')->name('statistic.student.count');
+  Route::get('/statistic/employeers/count', 'StatisticController@employeersCount')->name('statistic.employeers.count');
+  Route::get('/statistic/groups/count', 'StatisticController@groupsCount')->name('statistic.groups.count');
 
 });

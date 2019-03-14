@@ -26,11 +26,27 @@
         @endif
       </div>
     </div>
+<<<<<<< HEAD
     <div class="col-9">
       <!-- Aqui ficará a lógica de exibição de páginas de acordo com o tipo de usuário. As páginas serão componentes Vuejs-->
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 
+=======
+  </div>
+  <div class="col-9">
+    <!-- Aqui ficará a lógica de exibição de páginas de acordo com o tipo de usuário. As páginas serão componentes Vuejs-->
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          @include('welcome')
+      </div>
+      <div class="tab-pane fade" id="v-pills-employeers" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          @include('employeers.index')
+      </div>
+      @if($user->can('view-stuffs') || $user->isAn('admin'))
+        <div class="tab-pane fade" id="v-pills-stuffs" role="tabpanel" aria-labelledby="v-pills-stuffs-tab">
+            @include('stuffs.index')
+>>>>>>> 4a85c871c4463a2400585651bebacd16ad42dffd
         </div>
         <div class="tab-pane fade" id="v-pills-employeers" role="tabpanel" aria-labelledby="v-pills-profile-tab">
             @include('employeers.index')

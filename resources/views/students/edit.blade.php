@@ -7,5 +7,5 @@
 <birth-component :birth="{{ $student->birth_certificate }}"></birth-component>
 <general-registration-component :general-registration="{{ $student->general_registration }}"></general-registration-component>
 <address-component :address="{{ $student->address }}"></address-component>
-<button-bar-component button-label="Registrar aluno"></button-bar-component>
+<button-bar-component button-label="Atualizar aluno"></button-bar-component>
 @endsection

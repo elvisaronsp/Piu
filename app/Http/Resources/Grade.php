@@ -15,6 +15,7 @@ class Grade extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'Lançado por' => $this->reliasedBy(),
             'Nota' => $this->value,
             'Matéria' => $this->stuff->title,
@@ -26,7 +27,7 @@ class Grade extends JsonResource
 
     private function reliasedBy(){
       if($this->employeer_id == 0){
-        return 'Lançado pela instituíção';
+        return 'Lançado pela instituição';
       }
       return $this->employeer->name;
     }

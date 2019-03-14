@@ -66,4 +66,27 @@ class GroupController extends Controller
       return view('groups.ata')->with('group', $group);
     }
 
+    public function edit(Request $request, $id){
+      $group = Group::findOrFail($id);
+      if($this->isOurGroup($group)){
+        return view('groups.edit')->with('group', $group);
+      }
+      return view('errors.401', 401);
+    }
+
+    public function isOurGroup($group){
+      return $group->school_id == Auth::user()->school_id;
+    }
+
+    public function update(Request $request){
+      $data = $request->all();
+      $group = Group::findOrFail($data['id']);
+      if($this->isOurGroup($group)){
+        $group->update($data);
+        Flash::success("Turma {$group->title} atualizada com sucesso!");
+        return redirect()->back();
+      }
+      return view('errors.401', 401);
+    }
+
 }

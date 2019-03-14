@@ -2,15 +2,16 @@
   <div>
     <div class="row">
       <div class="form-group col-md-6">
+        <label>Nome da matéria</label>
+        <input class="form-control" type="text" v-model="s.title" name="title">
+      </div>
+      <div class="form-group col-md-6">
+        <input type="hidden" name="id" v-model="s.id">
         <label>Turma</label>
-        <select class="form-control" name="group_id" v-model="group">
+        <select class="form-control" name="group_id" v-model="s.group_id">
           <option value="">Seleciona a turma</option>
           <option v-for="g in groups" :value="g.value">{{ g.label }}</option>
         </select>
-      </div>
-      <div class="form-group col-md-8">
-        <label>Nome da matéria</label>
-        <input class="form-control" type="text" v-model="title" name="title">
       </div>
     </div>
   </div>
@@ -22,11 +23,16 @@ export default {
   components: {
     vSelect
   },
+  props: ['stuff'],
   data(){
     return {
-      title: '',
+      s: {
+        id: '',
+        title: '',
+        group_id: ''
+      },
       groups_fetched: '',
-      group: ''
+
     };
   },
   computed:{
@@ -44,6 +50,9 @@ export default {
   },
   mounted() {
     this.loadGroups();
+    if(this.stuff){
+      this.s = this.stuff;
+    }
   }
 }
 </script>
