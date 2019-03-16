@@ -60,7 +60,11 @@ Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de
 
         php artisan migrate
         
-- Agora você está pronto para usar :wink:
+- Após a criação o banco de dados o sistema precisa preenchê-lo com algumas configurações.
+
+        php artisan db:seed
+
+- Agora você está pronto para usar, crie suas instituições e gerencie os seus alunos! :wink:
 
 ### Opcional
 
