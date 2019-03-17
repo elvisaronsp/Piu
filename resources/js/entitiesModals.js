@@ -33,7 +33,7 @@ Vue.prototype.$entities = {
             scrollable: true
           });
         },
-        style: 'warning'
+        style: 'primary'
       },
       {
         label: 'Boletim',
@@ -49,11 +49,11 @@ Vue.prototype.$entities = {
         style: 'success'
       },
       {
-        label: 'Cancelar matrícula',
+        label: 'Transferir aluno',
         click: (id, parentId) => {
           
         },
-        style: 'danger'
+        style: 'primary'
       }
     ],
     groups: [

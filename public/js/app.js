@@ -98033,7 +98033,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
         scrollable: true
       });
     },
-    style: 'warning'
+    style: 'primary'
   }, {
     label: 'Boletim',
     click: function click(id, parentId) {
@@ -98049,9 +98049,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$entities = {
     },
     style: 'success'
   }, {
-    label: 'Cancelar matrícula',
+    label: 'Transferir aluno',
     click: function click(id, parentId) {},
-    style: 'danger'
+    style: 'primary'
   }],
   groups: [{
     label: 'Gráfico de rendimento',
