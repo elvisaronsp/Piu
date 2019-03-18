@@ -28,6 +28,15 @@ class SchoolController extends Controller
         $result = new SchoolCollection($schools);
         return response($result, 200);
     }
+  
+    public function get(Request $request){
+      $name = $request->input('name');
+      $schools = [];
+      if( $name !== '' ) {
+          $schools = School::where('name', 'like', '%'.$name.'%')->take(8)->get();
+      }
+      return response()->json($schools);
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -34,7 +34,8 @@ Vue.prototype.$routes = {
         index: '/schools',
         store: '/schools/store',
         destroy: '/schools/destroy/:id:',
-        edit: '/schools/edit/:id:'
+        edit: '/schools/edit/:id:',
+        get: '/schools/:name:'
     },
     students: {
         index: '/students',
@@ -69,9 +70,6 @@ Vue.prototype.$routes = {
         store: '/options/store',
         update: '/options/update/:name:',
         destroy: '/options/destroy/:id:'
-    },
-    schools: {
-        index: '/schools'
     },
     statistic: {
         studentsCount: '/statistic/students/count',

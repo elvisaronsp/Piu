@@ -3329,6 +3329,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3337,15 +3344,31 @@ __webpack_require__.r(__webpack_exports__);
   props: ['studentId'],
   data: function data() {
     return {
+      schools: [],
       toSchool: ''
     };
   },
+  computed: {
+    disabled: function disabled() {
+      return this.toSchool.value !== undefined;
+    }
+  },
   methods: {
-    loadSchools: function loadSchools(name) {
-      return [{
-        label: 'Escola teste',
-        value: 'teste'
-      }];
+    loadSchools: function loadSchools(name, loading) {
+      var _this = this;
+
+      loading(true);
+      axios.get(this.$routes.schools.get.replace(':name:', name)).then(function (response) {
+        _this.schools = _this.toVSelectData(response.data);
+        loading(false);
+      }).catch(function (err) {
+        loading(false);
+
+        _this.showMessage('Ops! Um erro ocorreu', 'Não foi possível carregar a lista de escolas por conta de um erro.');
+      });
+    },
+    transferStudent: function transferStudent() {
+      if (confirm('Você realmente deseja transferir este aluno? Esté é uma operação irreversível, tenha atenção.')) {}
     }
   }
 });
@@ -76669,42 +76692,37 @@ var render = function() {
             ])
           ])
         : _vm._l(_vm.data_computed, function(d) {
-            return _c(
-              "div",
-              { key: d.id, staticClass: "card mb-1 col-md-12" },
-              [
-                _c(
-                  "div",
-                  { staticClass: "card-body" },
-                  [
-                    _c("h5", { staticClass: "card-title mb-2" }, [
-                      _vm._v(
-                        "\n        " + _vm._s(_vm._f("title")(d)) + "\n      "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }),
-                    _vm._v(" "),
-                    _vm._l(_vm.$entities[_vm.entity], function(e) {
-                      return _c(
-                        "button",
-                        {
-                          key: e,
-                          class: "mr-1 btn btn-sm btn-" + e.style,
-                          on: {
-                            click: function($event) {
-                              return e.click(d.id, _vm.parentId)
-                            }
+            return _c("div", { staticClass: "card mb-1 col-md-12" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("h5", { staticClass: "card-title mb-2" }, [
+                    _vm._v(
+                      "\n        " + _vm._s(_vm._f("title")(d)) + "\n      "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }),
+                  _vm._v(" "),
+                  _vm._l(_vm.$entities[_vm.entity], function(e) {
+                    return _c(
+                      "button",
+                      {
+                        class: "mr-1 btn btn-sm btn-" + e.style,
+                        on: {
+                          click: function($event) {
+                            return e.click(d.id, _vm.parentId)
                           }
-                        },
-                        [_vm._v(_vm._s(e.label))]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]
-            )
+                        }
+                      },
+                      [_vm._v(_vm._s(e.label))]
+                    )
+                  })
+                ],
+                2
+              )
+            ])
           })
     ],
     2
@@ -79056,9 +79074,10 @@ var render = function() {
           _vm._v(" "),
           _c("v-select", {
             attrs: {
-              maxHeight: "150px",
+              maxHeight: "200px",
               placeholder: "Para onde o aluno será transferido?",
-              options: _vm.units
+              "on-search": _vm.loadSchools,
+              options: _vm.schools
             },
             model: {
               value: _vm.toSchool,
@@ -79071,6 +79090,20 @@ var render = function() {
         ],
         1
       )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 form-group" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { disabled: _vm.disabled },
+            on: { click: _vm.transferStudent }
+          },
+          [_vm._v("\n            Transferir aluno\n          ")]
+        )
+      ])
     ])
   ])
 }
@@ -99488,10 +99521,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 
       if (data !== undefined) {
         data.forEach(function (item, key) {
-          return result.push({
-            label: item["título"],
-            value: item.id
-          });
+          if (item['título'] !== undefined) {
+            result.push({
+              label: item["título"],
+              value: item.id
+            });
+          } else if (item.name !== undefined) {
+            result.push({
+              label: item.name,
+              value: item.id
+            });
+          }
         });
       }
 
@@ -99539,12 +99579,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-var _Vue$prototype$$route;
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = (_Vue$prototype$$route = {
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
   base: 'http://' + window.location.host,
   //hack to work on codeanywhere
   address: {
@@ -99579,7 +99615,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = (_Vue$prototype$$
     index: '/schools',
     store: '/schools/store',
     destroy: '/schools/destroy/:id:',
-    edit: '/schools/edit/:id:'
+    edit: '/schools/edit/:id:',
+    get: '/schools/:name:'
   },
   students: {
     index: '/students',
@@ -99614,14 +99651,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = (_Vue$prototype$$
     store: '/options/store',
     update: '/options/update/:name:',
     destroy: '/options/destroy/:id:'
+  },
+  statistic: {
+    studentsCount: '/statistic/students/count',
+    groupsCount: '/statistic/groups/count',
+    employeersCount: '/statistic/employeers/count'
   }
-}, _defineProperty(_Vue$prototype$$route, "schools", {
-  index: '/schools'
-}), _defineProperty(_Vue$prototype$$route, "statistic", {
-  studentsCount: '/statistic/students/count',
-  groupsCount: '/statistic/groups/count',
-  employeersCount: '/statistic/employeers/count'
-}), _Vue$prototype$$route);
+};
 
 /***/ }),
 
@@ -100434,8 +100470,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/cabox/workspace/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cabox/workspace/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

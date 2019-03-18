@@ -91,5 +91,8 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/statistic/students/count', 'StatisticController@studentsCount')->name('statistic.student.count');
   Route::get('/statistic/employeers/count', 'StatisticController@employeersCount')->name('statistic.employeers.count');
   Route::get('/statistic/groups/count', 'StatisticController@groupsCount')->name('statistic.groups.count');
+  
+  # Schools
+  Route::get('/schools/{name}', 'SchoolController@get')->name('school.get');
 
 });

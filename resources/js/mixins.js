@@ -6,7 +6,13 @@ Vue.mixin({
     toVSelectData(data){
       let result = [];
       if(data !== undefined){
-        data.forEach((item, key) => result.push({label: item["título"], value: item.id}));
+        data.forEach((item, key) => {
+          if(item['título'] !== undefined){
+            result.push({label: item["título"], value: item.id});  
+          }else if(item.name !== undefined){
+            result.push({label: item.name, value: item.id});  
+          }
+        });
       }
       return result;
     },
