@@ -5,13 +5,13 @@
         Nada encontrado por aqui.
       </div>
     </div>
-    <div v-else class="card mb-1 col-md-12" v-for="d in data_computed">
+    <div v-else class="card mb-1 col-md-12" v-for="d in data_computed" :key="d.id">
       <div class="card-body">
-        <h5 class="card-title">
+        <h5 class="card-title mb-2">
           {{ d | title }}
         </h5>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
-        <button v-for="e in $entities[entity]" v-on:click="e.click(d.id, parentId)" :class="'mr-1 btn btn-'+e.style">{{ e.label }}</button>
+        <button v-for="e in $entities[entity]" v-on:click="e.click(d.id, parentId)" :key="e" :class="'mr-1 btn btn-sm btn-'+e.style">{{ e.label }}</button>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import GradeComponent from './forms/GradeComponent';
 import StudentGradesComponent from './specified/students/StudentGradesComponent';
 import StudentBoletimComponent from './specified/students/StudentBoletimComponent';
 import SelectUnitChartComponent from './specified/units/SelectUnitChartComponent';
+import StudentTransferComponent from './forms/StudentTransferComponent';
 import VModal from 'vue-js-modal';
 
 Vue.use(VModal, {dynamic: true, injectModalsContainer: true, dialog: true});
@@ -50,8 +51,14 @@ Vue.prototype.$entities = {
       },
       {
         label: 'Transferir aluno',
-        click: (id, parentId) => {
-          
+        click: (studentId) => {
+          entities.$modal.show(StudentTransferComponent, {studentId: studentId}, {
+            draggable: true,
+            classes: 'p-4 v--modal',
+            height: 'auto',
+            width: '35%',
+            scrollable: true
+          });
         },
         style: 'primary'
       }
