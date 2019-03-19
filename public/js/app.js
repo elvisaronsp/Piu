@@ -3350,7 +3350,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     disabled: function disabled() {
-      return this.toSchool.value !== undefined;
+      return this.toSchool.value == undefined;
     }
   },
   methods: {
@@ -3368,7 +3368,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     transferStudent: function transferStudent() {
-      if (confirm('Você realmente deseja transferir este aluno? Esté é uma operação irreversível, tenha atenção.')) {}
+      var _this2 = this;
+
+      if (confirm('Você realmente deseja transferir este aluno? Esté é uma operação irreversível, tenha atenção!')) {
+        axios.post(this.$routes.student_transfer.store, {
+          student_id: this.studentId,
+          new_school_id: this.toSchool.value,
+          _token: this.$csrf
+        }).then(function (response) {
+          _this2.showMessage('Operação realizada', 'O aluno foi transferido para a nova instituição de ensino.'.concat(' Você não poderá alterar o cadastro do aluno, matriculá-lo, ou realizar qualquer tipo de operação relacionada.'));
+        }).catch(function (err) {
+          return _this2.showMessage('Ops! Há um erro aqui', 'Ocorreu um erro ao transferir o aluno, você deve contactar o administrador do sistema.');
+        });
+      }
     }
   }
 });
@@ -99624,6 +99636,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
     destroy: '/students/destroy/:id:',
     edit: '/students/edit/:id:'
   },
+  student_transfer: {
+    index: '/student-transfer',
+    store: '/student-transfers/store',
+    view: '/student-transfer/:id:'
+  },
   units: {
     index: '/units',
     store: '/units/store',
@@ -100470,8 +100487,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/cabox/workspace/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/cabox/workspace/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

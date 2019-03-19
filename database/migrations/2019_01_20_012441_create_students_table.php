@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             $table->integer('birth_certificate_id');
             $table->integer('general_registration_id');
             $table->integer('school_id');
+            $table->enum('status', ['transferred', 'canceled', 'registered', 'idle'])->default('idle');
             $table->timestamps();
         });
     }

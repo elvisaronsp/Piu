@@ -95,4 +95,7 @@ Route::group(['middleware'=> ['auth']], function(){
   # Schools
   Route::get('/schools/{name}', 'SchoolController@get')->name('school.get');
 
+  # StudentTransfer
+  Route::post('/student-transfers/store', 'StudentTransferController@store')->name('student_transfers.store');
+
 });

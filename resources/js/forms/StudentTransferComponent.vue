@@ -32,7 +32,7 @@ export default {
     },
     computed: {
       disabled(){
-        return this.toSchool.value !== undefined;
+        return this.toSchool.value == undefined;
       }
     },
     methods: {
@@ -50,8 +50,15 @@ export default {
                   })
         },
         transferStudent(){
-          if(confirm('Você realmente deseja transferir este aluno? Esté é uma operação irreversível, tenha atenção.')){
-            
+          if(confirm('Você realmente deseja transferir este aluno? Esté é uma operação irreversível, tenha atenção!')){
+            axios.post(this.$routes.student_transfer.store, {
+              student_id: this.studentId, 
+              new_school_id: this.toSchool.value,
+              _token: this.$csrf
+            }).then(response => {
+              this.showMessage('Operação realizada', 'O aluno foi transferido para a nova instituição de ensino.'
+              .concat(' Você não poderá alterar o cadastro do aluno, matriculá-lo, ou realizar qualquer tipo de operação relacionada.'))
+            }).catch(err => this.showMessage('Ops! Há um erro aqui', 'Ocorreu um erro ao transferir o aluno, você deve contactar o administrador do sistema.'));   
           }
         }
     }

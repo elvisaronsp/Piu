@@ -8,6 +8,7 @@ use App\Http\Resources\StudentGroupCollection;
 use App\Http\Resources\StudentGroup as StudentGroupResource;
 use Auth;
 use App\Http\Requests\StudentGroupStore;
+use App\Student;
 
 class StudentGroupController extends Controller
 {
@@ -64,6 +65,11 @@ class StudentGroupController extends Controller
                       ])->first();
       if(!$studentGroup){
         $studentGroup = StudentGroup::create($data);
+        if($studentGroup){
+          $student = Student::findOrFail($studentGroup->student_id);
+          $student->status = 'registered';
+          $student->save();
+        }
         return new StudentGroupResource($studentGroup);
       }
       return response('Aluno já matriculado nesta turma', 406);
@@ -71,6 +77,9 @@ class StudentGroupController extends Controller
 
     public function destroy(Request $request, $id){
       $studentGroup = StudentGroup::findOrFail($id);
+      $student = Student::findOrFail($studentGroup->student_id);
+      $student->status = 'idle';
+      $student->save();
       $studentGroup->delete();
       Flash::success('Aluno desmatriculado com sucesso!');
       return redirect('/');

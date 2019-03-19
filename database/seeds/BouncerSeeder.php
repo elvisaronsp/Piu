@@ -72,7 +72,7 @@ class BouncerSeeder extends Seeder
     }
 
     private function createEntitiesAbilities(){
-        $entities = ['students', 'grades', 'stuffs', 'groups', 'options', 'employeers', 'student_groups', 'units'];
+        $entities = ['students', 'grades', 'stuffs', 'groups', 'options', 'employeers', 'student_groups', 'units', 'student_transfers'];
         $actions = ['view'=> 'View', 'delete'=> 'Delete', 'edit'=> 'Edit', 'add'=>'Add'];
         $createds = [];
         foreach ($entities as $entity) {

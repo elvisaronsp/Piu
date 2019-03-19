@@ -41,7 +41,12 @@ Vue.prototype.$routes = {
         index: '/students',
         store: '/students/store',
         destroy: '/students/destroy/:id:',
-        edit: '/students/edit/:id:'
+        edit: '/students/edit/:id:',
+    },
+    student_transfer: {
+        index: '/student-transfer',
+        store: '/student-transfers/store',
+        view: '/student-transfer/:id:'
     },
     units: {
         index: '/units',
