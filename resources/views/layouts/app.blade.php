@@ -48,9 +48,39 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Principal</a>
+                      </li>
+                      <li class="nav-item">
+                        @if($user->can('view-employeers') || $user->isAn('admin'))
+                          <a class="nav-link" id="v-pills-employeers-tab" data-toggle="pill" href="#v-pills-employeers" role="tab" aria-controls="v-pills-employeers" aria-selected="false">Funcionários</a>
+                        @endif
+                      </li>
+                      <li class="nav-item">
+                        @if($user->can('view-stuffs') || $user->isAn('admin'))
+                          <a class="nav-link" id="v-pills-stuffs-tab" data-toggle="pill" href="#v-pills-stuffs" role="tab" aria-controls="v-pills-stuffs" aria-selected="false">Matérias</a>
+                        @endif
+                      </li>
+                      <li class="nav-item">
+                        @if($user->can('view-students') || $user->isAn('admin'))
+                          <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab" aria-controls="v-pills-students" aria-selected="false">Alunos</a>
+                        @endif
+                      </li>
+                      <li class="nav-item">
+                        @if($user->can('view-groups') || $user->isAn('admin'))
+                          <a class="nav-link" id="v-pills-groups-tab" data-toggle="pill" href="#v-pills-groups" role="tab" aria-controls="v-pills-groups" aria-selected="false">Turmas</a>
+                        @endif
+                      </li>
+                      <li class="nav-item">
+                        @if($user->can('view-options') || $user->isAn('admin'))
+                          <a class="nav-link" id="v-pills-configurations-tab" data-toggle="pill" href="#v-pills-configurations" role="tab" aria-controls="v-pills-configurations" aria-selected="false">Configurações</a>
+                        @endif
+                      </li>
+                    </ul>
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav mr-auto nav-pills" id="v-pills-tab" role="tablist">
+                      
                     </ul>
 
                     <!-- Right Side Of Navbar -->
