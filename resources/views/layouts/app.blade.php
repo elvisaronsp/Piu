@@ -49,6 +49,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                      @auth
                       <li class="nav-item">
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Principal</a>
                       </li>
@@ -77,6 +78,7 @@
                           <a class="nav-link" id="v-pills-configurations-tab" data-toggle="pill" href="#v-pills-configurations" role="tab" aria-controls="v-pills-configurations" aria-selected="false">Configurações</a>
                         @endif
                       </li>
+                      @endauth
                     </ul>
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto nav-pills" id="v-pills-tab" role="tablist">
