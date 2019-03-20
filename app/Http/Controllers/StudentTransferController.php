@@ -11,7 +11,11 @@ class StudentTransferController extends Controller
 {
 
     public function index(Request $request){
-      //index de transferências realizadas pela instituição ;)
+      $studentTransfers = StudentTransfer::join('students', 'student_transfers.student_id', '=', 'students.id')
+                     ->join('schools', 'schools.id', '=', 'students.school_id')
+                     ->where('schools.id', '=', Auth::user()->school_id)
+                     ->paginate(10);
+      return view('student_transfers.index')->with('transfers', $studentTransfers);
     }
 
     public function view(Request $request){

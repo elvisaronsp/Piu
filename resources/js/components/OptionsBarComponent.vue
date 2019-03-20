@@ -8,8 +8,14 @@
           </div>
           <div class="col-md-6 text-right">
             <div class="btn-group" role="group" aria-label="Opções">
-              <a v-for="button in buttons" class="btn btn-primary btn-small w-100" :key="button.id" :href="button.url">
-                <feather :type="button.feather_icon"></feather> {{ button.name }}
+              <a
+                v-for="button in buttons"
+                class="btn btn-primary btn-small w-100"
+                :key="button.id"
+                :href="button.url"
+              >
+                <feather :type="button.feather_icon"></feather>
+                {{ button.name }}
               </a>
             </div>
           </div>
@@ -20,11 +26,11 @@
 </template>
 
 <script>
-import Feather from 'vue-feather';
+import Feather from "vue-feather";
 export default {
-  props: ['buttons', 'title'],
+  props: ["buttons", "title"],
   components: {
     Feather
   }
-}
+};
 </script>

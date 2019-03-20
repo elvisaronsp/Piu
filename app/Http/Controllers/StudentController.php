@@ -26,7 +26,9 @@ class StudentController extends Controller
         //$student_group_id = $request->input('student_group_id');
         $school_id = Auth::user()->school_id;
         $where  = [
-          ['students.school_id', '=', $school_id]
+          ['students.school_id', '=', $school_id],
+          ['students.status', '!=', 'transferred'],
+          ['students.status', '!=', 'canceled'],
         ];
         if($student_name){
           $where[] = ['students.name', 'like', '%'.$student_name.'%'];

@@ -97,5 +97,6 @@ Route::group(['middleware'=> ['auth']], function(){
 
   # StudentTransfer
   Route::post('/student-transfers/store', 'StudentTransferController@store')->name('student_transfers.store');
+  Route::get('/student-transfers', 'StudentTransferController@index')->name('student_transfers.index');
 
 });

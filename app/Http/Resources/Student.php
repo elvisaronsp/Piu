@@ -18,7 +18,8 @@ class Student extends JsonResource
           'id' => $this->id,
           'nome' => $this->name,
           'sexo' => $this->genre,
-          //'rua'
+          'status' => __($this->status)
+          
         ];
     }
 }
