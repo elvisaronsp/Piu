@@ -35,6 +35,7 @@ class StudentTransferController extends Controller
       $student->save();
       $student_new = $student->replicate(); //Student in new school
       $student_new->school_id = $data['new_school_id'];
+      $student_new->status = 'idle';
       $student_new->save();
       return response()->json($student);
     }
