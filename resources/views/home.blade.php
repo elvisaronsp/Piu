@@ -65,11 +65,6 @@
                 @include('students.index')
             </div>
           @endif
-          @if($user->can('view-students') || $user->isAn('admin'))
-            <div class="tab-pane fade" id="v-pills-students-groups" role="tabpanel" aria-labelledby="v-pills-students-groups-tab">
-                @include('student_groups.index')
-            </div>
-          @endif
           @if($user->can('view-groups') || $user->isAn('admin'))
             <div class="tab-pane fade" id="v-pills-groups" role="tabpanel" aria-labelledby="v-pills-groups-tab">
                 @include('groups.index')

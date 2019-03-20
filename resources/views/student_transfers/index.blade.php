@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-8">
             <ul class="list-group list-group-flush text-center border">
-                @foreach($transfers as $t)
+                @forelse($transfers as $t)
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-md-12">
@@ -26,7 +26,13 @@
                             </div>
                         </div>
                     </li>
-                @endforeach
+                @empty
+                  <div class="card">
+                    <div class="card-body">
+                      Nenhuma transferência encontrada na sua instituição.
+                    </div>
+                  </div>
+                @endforelse
             </ul>
         </div>
         {{ $transfers->links() }}
