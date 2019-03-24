@@ -1,13 +1,12 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue');
+window.Vue = require("vue");
 
 /**
  * The following block of code may be used to automatically register your
@@ -17,48 +16,58 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i);
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-import './filters';
-import './entitiesModals';
-import './routes';
-import './mixins';
-import './colors';
+const files = require.context("./", true, /\.vue$/i);
+files.keys().map(key =>
+    Vue.component(
+        key
+            .split("/")
+            .pop()
+            .split(".")[0],
+        files(key).default
+    )
+);
+import "./filters";
+import "./entitiesModals";
+import "./routes";
+import "./mixins";
+import "./colors";
 
-import VModal from 'vue-js-modal';
-import VueTheMask from 'vue-the-mask';
-import StudentGroupComponent from './forms/StudentGroupComponent';
-import VueMoment from 'vue-moment';
-import Feather from 'vue-feather';
+import VModal from "vue-js-modal";
+import VueTheMask from "vue-the-mask";
+import StudentGroupComponent from "./forms/StudentGroupComponent";
+import VueMoment from "vue-moment";
+import Feather from "vue-feather";
 
 Vue.use(Feather);
 Vue.use(VueMoment);
 Vue.use(VueTheMask);
 Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
-Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+Vue.prototype.$csrf = document
+    .querySelector('meta[name="csrf-token"]')
+    .getAttribute("content");
 Vue.prototype.$table_custom = {
-  students: [
-    {
-      type: 'warning',
-      title: 'Matricular em uma turma',
-      icon: 'log-in',
-      click: function(id){
-        app.$modal.show(StudentGroupComponent,
-          {
-            entityId: id
-          },
-          {
-            draggable: true,
-            classes: 'p-4 v--modal',
-            width: '600',
-            height: 'auto'
-          });
+    students: [
+        {
+            type: "warning",
+            title: "Matricular em uma turma",
+            icon: "log-in",
+            click: function(id) {
+                app.$modal.show(
+                    StudentGroupComponent,
+                    {
+                        entityId: id
+                    },
+                    {
+                        draggable: true,
+                        classes: "p-4 v--modal",
+                        width: "600",
+                        height: "auto"
+                    }
+                );
+            }
         }
-      }
-  ]
+    ]
 };
-
-
 
 /**
  *  Next, we will create a fresh Vue application instance and attach it to
@@ -67,5 +76,5 @@ Vue.prototype.$table_custom = {
  */
 
 const app = new Vue({
-    el: '#app'
+    el: "#app"
 });

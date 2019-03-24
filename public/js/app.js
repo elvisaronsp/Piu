@@ -2004,17 +2004,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /*
-  Este componente carrega resultados de uma pesquisa em uma série de cards que correspondem a cada unidade de registro retornado.
-  As opções do card ficam no arquivo entities.js no índice da respectiva entidade.
-  Propriedades:
-    data: São os dados que deverão ser carregados,
-    entity: A entidade que será carregada,
-    parentId: Id do dono das entidades. Ex.: Se as entidades são alunos eles podem pertencer a uma determinada turma.
-*/
+    Este componente carrega resultados de uma pesquisa em uma série de cards que correspondem a cada unidade de registro retornado.
+    As opções do card ficam no arquivo entities.js no índice da respectiva entidade.
+    Propriedades:
+      data: São os dados que deverão ser carregados,
+      entity: A entidade que será carregada,
+      parentId: Id do dono das entidades. Ex.: Se as entidades são alunos eles podem pertencer a uma determinada turma.
+  */
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['data', 'entity', 'parentId'],
+  props: ["data", "entity", "parentId"],
   computed: {
     data_computed: function data_computed() {
       return this.data.data;
@@ -2042,8 +2043,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['entityId', 'entity']
+  props: ["entityId", "entity"]
 });
 
 /***/ }),
@@ -2289,6 +2293,85 @@ __webpack_require__.r(__webpack_exports__);
     this.loadGroups();
     this.loadStudents();
     this.loadEmployeers();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_spinner_src_MoonLoader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-spinner/src/MoonLoader.vue */ "./node_modules/vue-spinner/src/MoonLoader.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    MoonLoader: vue_spinner_src_MoonLoader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      loading: true,
+      notifications: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get(this.$routes.student_transfer.pending).then(function (response) {
+      _this.notifications = response.data.data;
+      _this.loading = false;
+    }).catch(function (err) {
+      return showMessage("Ops!", "Ocorreu um erro ao carregar os pedidos de transferência");
+    });
   }
 });
 
@@ -54709,13 +54792,12 @@ function webpackContext(req) {
 	return __webpack_require__(id);
 }
 function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) { // check for number or string
+	if(!__webpack_require__.o(map, req)) {
 		var e = new Error("Cannot find module '" + req + "'");
 		e.code = 'MODULE_NOT_FOUND';
 		throw e;
 	}
-	return id;
+	return map[req];
 }
 webpackContext.keys = function webpackContextKeys() {
 	return Object.keys(map);
@@ -76706,41 +76788,44 @@ var render = function() {
       _vm.data_computed == undefined || _vm.data_computed <= 0
         ? _c("div", { staticClass: "card col-md-12" }, [
             _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n      Nada encontrado por aqui.\n    ")
+              _vm._v("Nada encontrado por aqui.")
             ])
           ])
         : _vm._l(_vm.data_computed, function(d) {
-            return _c("div", { staticClass: "card mb-1 col-md-12" }, [
-              _c(
-                "div",
-                { staticClass: "card-body" },
-                [
-                  _c("h5", { staticClass: "card-title mb-2" }, [
-                    _vm._v(
-                      "\n        " + _vm._s(_vm._f("title")(d)) + "\n      "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }),
-                  _vm._v(" "),
-                  _vm._l(_vm.$entities[_vm.entity], function(e) {
-                    return _c(
-                      "button",
-                      {
-                        class: "mr-1 btn btn-sm btn-" + e.style,
-                        on: {
-                          click: function($event) {
-                            return e.click(d.id, _vm.parentId)
+            return _c(
+              "div",
+              { key: d.id, staticClass: "card mb-1 col-md-12" },
+              [
+                _c(
+                  "div",
+                  { staticClass: "card-body" },
+                  [
+                    _c("h5", { staticClass: "card-title mb-2" }, [
+                      _vm._v(_vm._s(_vm._f("title")(d)))
+                    ]),
+                    _vm._v(" "),
+                    _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }),
+                    _vm._v(" "),
+                    _vm._l(_vm.$entities[_vm.entity], function(e) {
+                      return _c(
+                        "button",
+                        {
+                          key: e.id,
+                          class: "mr-1 btn btn-sm btn-" + e.style,
+                          on: {
+                            click: function($event) {
+                              return e.click(d.id, _vm.parentId)
+                            }
                           }
-                        }
-                      },
-                      [_vm._v(_vm._s(e.label))]
-                    )
-                  })
-                ],
-                2
-              )
-            ])
+                        },
+                        [_vm._v(_vm._s(e.label))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]
+            )
           })
     ],
     2
@@ -76785,7 +76870,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("\n          " + _vm._s(b.label) + "\n      ")]
+              [_vm._v(_vm._s(b.label))]
             )
           }),
           0
@@ -77054,6 +77139,121 @@ var render = function() {
             icon: "users"
           }
         })
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li", { staticClass: "nav-item dropdown" }, [
+    _c(
+      "a",
+      {
+        staticClass: "nav-link remove-arrow",
+        attrs: {
+          href: "#",
+          id: "navbarDropdown",
+          role: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+          title: "Pedidos de confirmação de transferências de alunos"
+        }
+      },
+      [
+        _c("feather", {
+          staticClass: "align-middle",
+          attrs: { type: "user", size: "18" }
+        }),
+        _vm._v(" "),
+        _vm.notifications.length > 0
+          ? _c("span", { staticClass: "badge badge-pill badge-primary" }, [
+              _vm._v(_vm._s(_vm.notifications.length))
+            ])
+          : _vm._e()
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "dropdown-menu dropdown-menu-right notifications-box justify-content-center",
+        attrs: { "aria-labelledby": "navbarDropdown" }
+      },
+      [
+        _vm.loading
+          ? _c("moon-loader", {
+              attrs: { loading: _vm.loading, color: "blue", size: "24px" }
+            })
+          : _c("div", [
+              _vm.notifications.length > 0
+                ? _c(
+                    "div",
+                    _vm._l(_vm.notifications, function(n) {
+                      return _c(
+                        "a",
+                        {
+                          key: n.id,
+                          staticClass: "dropdown-item w-100",
+                          attrs: {
+                            href: _vm.$routes.student_transfer.view.replace(
+                              ":id:",
+                              n.id
+                            )
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n          A instituição de ensino " +
+                              _vm._s(n.old_school_name) +
+                              "\n          "
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "solicitou uma confirmação de transferência\n          "
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "\n          do aluno " +
+                              _vm._s(n.student_name) +
+                              "\n        "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                : _c("div", [
+                    _c(
+                      "a",
+                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      [_vm._v("Nenhuma confirmação de transferência.")]
+                    )
+                  ])
+            ])
       ],
       1
     )
@@ -97264,6 +97464,7 @@ var map = {
 	"./components/ListSearchComponent.vue": "./resources/js/components/ListSearchComponent.vue",
 	"./components/OptionsBarComponent.vue": "./resources/js/components/OptionsBarComponent.vue",
 	"./components/StatisticHeader.vue": "./resources/js/components/StatisticHeader.vue",
+	"./components/StudentTransferNotificationComponent.vue": "./resources/js/components/StudentTransferNotificationComponent.vue",
 	"./forms/AddressComponent.vue": "./resources/js/forms/AddressComponent.vue",
 	"./forms/BirthComponent.vue": "./resources/js/forms/BirthComponent.vue",
 	"./forms/EmployeerDataComponent.vue": "./resources/js/forms/EmployeerDataComponent.vue",
@@ -97302,13 +97503,12 @@ function webpackContext(req) {
 	return __webpack_require__(id);
 }
 function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) { // check for number or string
+	if(!__webpack_require__.o(map, req)) {
 		var e = new Error("Cannot find module '" + req + "'");
 		e.code = 'MODULE_NOT_FOUND';
 		throw e;
 	}
-	return id;
+	return map[req];
 }
 webpackContext.keys = function webpackContextKeys() {
 	return Object.keys(map);
@@ -97361,7 +97561,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
 
 files.keys().map(function (key) {
-  return Vue.component(key.split('/').pop().split('.')[0], files(key).default);
+  return Vue.component(key.split("/").pop().split(".")[0], files(key).default);
 });
 
 
@@ -97380,20 +97580,20 @@ Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_5___default.a, {
   dynamic: true,
   injectModalsContainer: true
 });
-Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+Vue.prototype.$csrf = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 Vue.prototype.$table_custom = {
   students: [{
-    type: 'warning',
-    title: 'Matricular em uma turma',
-    icon: 'log-in',
+    type: "warning",
+    title: "Matricular em uma turma",
+    icon: "log-in",
     click: function click(id) {
       app.$modal.show(_forms_StudentGroupComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
         entityId: id
       }, {
         draggable: true,
-        classes: 'p-4 v--modal',
-        width: '600',
-        height: 'auto'
+        classes: "p-4 v--modal",
+        width: "600",
+        height: "auto"
       });
     }
   }]
@@ -97405,7 +97605,7 @@ Vue.prototype.$table_custom = {
  */
 
 var app = new Vue({
-  el: '#app'
+  el: "#app"
 });
 
 /***/ }),
@@ -98133,6 +98333,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StatisticHeader_vue_vue_type_template_id_0ce85c3c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StatisticHeader_vue_vue_type_template_id_0ce85c3c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StudentTransferNotificationComponent.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/StudentTransferNotificationComponent.vue ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StudentTransferNotificationComponent_vue_vue_type_template_id_208ec597___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597& */ "./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597&");
+/* harmony import */ var _StudentTransferNotificationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentTransferNotificationComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StudentTransferNotificationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StudentTransferNotificationComponent_vue_vue_type_template_id_208ec597___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StudentTransferNotificationComponent_vue_vue_type_template_id_208ec597___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/StudentTransferNotificationComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentTransferNotificationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./StudentTransferNotificationComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentTransferNotificationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentTransferNotificationComponent_vue_vue_type_template_id_208ec597___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentTransferNotificationComponent.vue?vue&type=template&id=208ec597&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentTransferNotificationComponent_vue_vue_type_template_id_208ec597___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentTransferNotificationComponent_vue_vue_type_template_id_208ec597___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -99603,86 +99872,87 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
-  base: 'http://' + window.location.host,
+  base: "http://" + window.location.host,
   //hack to work on codeanywhere
   address: {
-    index: '/address/:id:'
+    index: "/address/:id:"
   },
   stuffs: {
-    index: '/stuffs',
-    store: '/stuffs/store',
-    destroy: '/stuffs/destroy/:id:',
-    edit: '/stuffs/edit/:id:'
+    index: "/stuffs",
+    store: "/stuffs/store",
+    destroy: "/stuffs/destroy/:id:",
+    edit: "/stuffs/edit/:id:"
   },
   student_groups: {
-    indexJson: '/student-groups/json'
+    indexJson: "/student-groups/json"
   },
   grades: {
-    index: '/grades',
-    store: '/grades/store',
-    destroy: '/grades/destroy/:id:',
-    edit: '/grades/edit/:id:',
-    datachart: '/grades/data-chart/:group_id:/:unit_id:',
-    ata: '/grades/ata/:group_id:',
-    boletim: '/grades/boletim/:student_group_id:',
-    update: '/grades/update'
+    index: "/grades",
+    store: "/grades/store",
+    destroy: "/grades/destroy/:id:",
+    edit: "/grades/edit/:id:",
+    datachart: "/grades/data-chart/:group_id:/:unit_id:",
+    ata: "/grades/ata/:group_id:",
+    boletim: "/grades/boletim/:student_group_id:",
+    update: "/grades/update"
   },
   employeers: {
-    index: '/employeers',
-    store: '/employeers/store',
-    destroy: '/employeers/destroy/:id:',
-    edit: '/employeers/edit/:id:'
+    index: "/employeers",
+    store: "/employeers/store",
+    destroy: "/employeers/destroy/:id:",
+    edit: "/employeers/edit/:id:"
   },
   schools: {
-    index: '/schools',
-    store: '/schools/store',
-    destroy: '/schools/destroy/:id:',
-    edit: '/schools/edit/:id:',
-    get: '/schools/:name:'
+    index: "/schools",
+    store: "/schools/store",
+    destroy: "/schools/destroy/:id:",
+    edit: "/schools/edit/:id:",
+    get: "/schools/:name:"
   },
   students: {
-    index: '/students',
-    store: '/students/store',
-    destroy: '/students/destroy/:id:',
-    edit: '/students/edit/:id:'
+    index: "/students",
+    store: "/students/store",
+    destroy: "/students/destroy/:id:",
+    edit: "/students/edit/:id:"
   },
   student_transfer: {
-    index: '/student-transfer',
-    store: '/student-transfers/store',
-    view: '/student-transfer/:id:'
+    index: "/student-transfer",
+    store: "/student-transfers/store",
+    pending: "/student-transfers/pending",
+    view: "/student-transfers/:id:"
   },
   units: {
-    index: '/units',
-    store: '/units/store',
-    destroy: '/units/destroy/:id:',
-    edit: '/units/edit/:id:'
+    index: "/units",
+    store: "/units/store",
+    destroy: "/units/destroy/:id:",
+    edit: "/units/edit/:id:"
   },
   responsability: {
-    index: '/responsabilities',
-    store: '/responsabilities/store',
-    destroy: '/responsabilities/destroy/:id:',
-    edit: '/responsabilities/edit/:id:'
+    index: "/responsabilities",
+    store: "/responsabilities/store",
+    destroy: "/responsabilities/destroy/:id:",
+    edit: "/responsabilities/edit/:id:"
   },
   groups: {
-    index: '/groups',
-    store: '/groups/store',
-    destroy: '/groups/destroy/:id:',
-    edit: '/groups/edit/:id:',
-    ata: '/groups/ata/:id:'
+    index: "/groups",
+    store: "/groups/store",
+    destroy: "/groups/destroy/:id:",
+    edit: "/groups/edit/:id:",
+    ata: "/groups/ata/:id:"
   },
   images: {
-    show: '/images/:fileName:'
+    show: "/images/:fileName:"
   },
   options: {
-    index: '/options',
-    store: '/options/store',
-    update: '/options/update/:name:',
-    destroy: '/options/destroy/:id:'
+    index: "/options",
+    store: "/options/store",
+    update: "/options/update/:name:",
+    destroy: "/options/destroy/:id:"
   },
   statistic: {
-    studentsCount: '/statistic/students/count',
-    groupsCount: '/statistic/groups/count',
-    employeersCount: '/statistic/employeers/count'
+    studentsCount: "/statistic/students/count",
+    groupsCount: "/statistic/groups/count",
+    employeersCount: "/statistic/employeers/count"
   }
 };
 

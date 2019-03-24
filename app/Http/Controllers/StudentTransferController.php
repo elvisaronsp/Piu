@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\StudentTransfer;
 use App\Student;
 use Auth;
+use App\Http\Resources\StudentTransferCollection;
+use Flash;
 
 class StudentTransferController extends Controller
 {
@@ -18,8 +20,12 @@ class StudentTransferController extends Controller
       return view('student_transfers.index')->with('transfers', $studentTransfers);
     }
 
-    public function view(Request $request){
-      //view com detalhes da transferência
+    public function view(Request $request, $id){
+      $transfer = StudentTransfer::where([
+                                   ['id' => $id],
+                                   ['new_school_id', '=', Auth::user()->school_id],
+                                 ])->firstOrFail();
+      return view('student_transfers.view')->with('transfer', $transfer);
     }
 
     public function store(Request $request){
@@ -31,13 +37,38 @@ class StudentTransferController extends Controller
       $data['old_school_id'] = Auth::user()->school_id;
       $data['user_id'] = Auth::user()->id;
       $studentTransfer = StudentTransfer::create($data);
-      $student->status = 'transferred'; //Set status transferred to student and save
-      $student->save();
-      $student_new = $student->replicate(); //Student in new school
-      $student_new->school_id = $data['new_school_id'];
-      $student_new->status = 'idle';
-      $student_new->save();
       return response()->json($student);
+    }
+
+    public function pending(Request $request){
+      $transfers = StudentTransfer::where([
+                      ['new_school_id', '=', Auth::user()->school_id]
+                    ])
+                    ->whereColumn('created_at', 'updated_at')
+                    ->get();
+      $collection = new StudentTransferCollection($transfers);
+      return response()->json($collection);
+    }
+
+    public function update(Request $request, $id){
+      $transfer = StudentTransfer::where([
+                                   ['id' => $id],
+                                   ['new_school_id', '=', Auth::user()->school_id],
+                                 ])->firstOrFail();
+      $transfer->accepted = $request->input('accepted');
+      $transfer->save();
+      if($transfer->accepted){
+        $transfer->student->status = 'transferred'; //Set status transferred to student and save
+        $transfer->student->save();
+        $student_new = $transfer->student->replicate(); //Student in new school
+        $student_new->school_id = $data['new_school_id'];
+        $student_new->status = 'idle';
+        $student_new->save();
+        Flash::success('Aluno aceito com sucesso! Agora você pode manipulá-lo como um dos seus alunos na sua instituição.');
+      }else{
+        Flash::success('Transferência recusada com sucesso! A escola solicitante receberá uma mensagem informando a recusa.');
+      }
+      return redirect()->back();                                 
     }
 
 }

@@ -98,5 +98,8 @@ Route::group(['middleware'=> ['auth']], function(){
   # StudentTransfer
   Route::post('/student-transfers/store', 'StudentTransferController@store')->name('student_transfers.store');
   Route::get('/student-transfers', 'StudentTransferController@index')->name('student_transfers.index');
+  Route::get('/student-transfers/pending', 'StudentTransferController@pending')->name('student_transfers.pending');
+  Route::get('/student-transfers/{id}', 'StudentTransferController@view')->name('student_transfers.view');
+  Route::post('/student-transfers/update/{id}', 'StudentTransferController@update')->name('student_transfers.update');
 
 });

@@ -15057,6 +15057,16 @@ a.text-dark:focus {
   width: 100%;
 }
 
+.remove-arrow::after {
+  display: none;
+}
+
+.notifications-box {
+  max-height: 180px;
+  width: 350px;
+  overflow-y: auto;
+}
+
 .live-edit {
   font-size: 1em !important;
   background-color: transparent;
