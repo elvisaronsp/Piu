@@ -22,7 +22,7 @@ class StudentTransferController extends Controller
 
     public function view(Request $request, $id){
       $transfer = StudentTransfer::where([
-                                   ['id' => $id],
+                                   ['id', '=', $id],
                                    ['new_school_id', '=', Auth::user()->school_id],
                                  ])->firstOrFail();
       return view('student_transfers.view')->with('transfer', $transfer);
@@ -52,7 +52,7 @@ class StudentTransferController extends Controller
 
     public function update(Request $request, $id){
       $transfer = StudentTransfer::where([
-                                   ['id' => $id],
+                                   ['id', '=', $id],
                                    ['new_school_id', '=', Auth::user()->school_id],
                                  ])->firstOrFail();
       $transfer->accepted = $request->input('accepted');
@@ -61,7 +61,7 @@ class StudentTransferController extends Controller
         $transfer->student->status = 'transferred'; //Set status transferred to student and save
         $transfer->student->save();
         $student_new = $transfer->student->replicate(); //Student in new school
-        $student_new->school_id = $data['new_school_id'];
+        $student_new->school_id = $transfer->new_school_id;
         $student_new->status = 'idle';
         $student_new->save();
         Flash::success('Aluno aceito com sucesso! Agora você pode manipulá-lo como um dos seus alunos na sua instituição.');
