@@ -18,7 +18,7 @@ class CreateStudentTransfersTable extends Migration
             $table->integer('student_id');
             $table->integer('old_school_id');
             $table->integer('new_school_id');
-            $table->boolean('accepted')->default(false);
+            $table->boolean('accepted')->nullable()->default(null);
             $table->integer('user_id'); //Quem fez a transferência
             $table->timestamps();
         });

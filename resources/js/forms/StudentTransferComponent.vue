@@ -56,8 +56,8 @@ export default {
               new_school_id: this.toSchool.value,
               _token: this.$csrf
             }).then(response => {
-              this.showMessage('Operação realizada', 'O aluno foi transferido para a nova instituição de ensino.'
-              .concat(' Você não poderá alterar o cadastro do aluno, matriculá-lo, ou realizar qualquer tipo de operação relacionada.'))
+              this.showMessage('Operação realizada', 'Foi enviado um pedido de confirmação de transferência para a instituição selecionada.'
+              .concat(' Após a confirmação da transferência você não poderá manipular quaisquer informações do aluno.'))
             }).catch(err => this.showMessage('Ops! Há um erro aqui', 'Ocorreu um erro ao transferir o aluno, você deve contactar o administrador do sistema.'));   
           }
         }

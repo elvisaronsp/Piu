@@ -11,7 +11,7 @@
                 do aluno(a) {{ $transfer->student->name }} para a sua instituição.
             </p>
         </div>
-        @if($transfer->created_at == $transfer->update_at)
+        @if($transfer->created_at == $transfer->updated_at)
         <div class="col-md-2">
             <form action="{{ route('student_transfers.update', ['id' => $transfer->id]) }}" method="post">
                 @csrf

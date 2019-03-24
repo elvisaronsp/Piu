@@ -1971,8 +1971,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['title', 'subtitle', 'icon']
+  props: ["title", "subtitle", "icon"]
 });
 
 /***/ }),
@@ -2233,19 +2235,19 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       students: {
-        count: '',
-        title: 'Alunos',
-        subtitle: ' aluno(s) cadastrado(s)'
+        count: "",
+        title: "Alunos",
+        subtitle: " aluno(s) cadastrado(s)"
       },
       groups: {
-        count: '',
-        title: 'Turmas',
-        subtitle: ' turma(s) cadastrada(s)'
+        count: "",
+        title: "Turmas",
+        subtitle: " turma(s) cadastrada(s)"
       },
       employeers: {
-        count: '',
-        title: 'Funcionários',
-        subtitle: ' funcionário(s) cadastrado(s)'
+        count: "",
+        title: "Funcionários",
+        subtitle: " funcionário(s) cadastrado(s)"
       }
     };
   },
@@ -2267,7 +2269,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(this.$routes.statistic.studentsCount).then(function (response) {
         return _this.students.count = response.data.count;
       }).catch(function (err) {
-        return _this.showMessage('Ops! Um erro ocorreu', 'Não foi possível carregar a quantidade de alunos.');
+        return _this.showMessage("Ops! Um erro ocorreu", "Não foi possível carregar a quantidade de alunos.");
       });
     },
     loadEmployeers: function loadEmployeers() {
@@ -2276,7 +2278,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(this.$routes.statistic.employeersCount).then(function (response) {
         return _this2.employeers.count = response.data.count;
       }).catch(function (err) {
-        return _this2.showMessage('Ops! Um erro ocorreu', 'Não foi possível carregar a quantidade de funcionários.');
+        return _this2.showMessage("Ops! Um erro ocorreu", "Não foi possível carregar a quantidade de funcionários.");
       });
     },
     loadGroups: function loadGroups() {
@@ -2285,7 +2287,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(this.$routes.statistic.groupsCount).then(function (response) {
         return _this3.groups.count = response.data.count;
       }).catch(function (err) {
-        return _this3.showMessage('Ops! Um erro ocorreu', 'Não foi possível carregar a quantidade de turmas.');
+        return _this3.showMessage("Ops! Um erro ocorreu", "Não foi possível carregar a quantidade de turmas.");
       });
     }
   },
@@ -3465,7 +3467,7 @@ __webpack_require__.r(__webpack_exports__);
           new_school_id: this.toSchool.value,
           _token: this.$csrf
         }).then(function (response) {
-          _this2.showMessage('Operação realizada', 'O aluno foi transferido para a nova instituição de ensino.'.concat(' Você não poderá alterar o cadastro do aluno, matriculá-lo, ou realizar qualquer tipo de operação relacionada.'));
+          _this2.showMessage('Operação realizada', 'Foi enviado um pedido de confirmação de transferência para a instituição selecionada.'.concat(' Após a confirmação da transferência você não poderá manipular quaisquer informações do aluno.'));
         }).catch(function (err) {
           return _this2.showMessage('Ops! Há um erro aqui', 'Ocorreu um erro ao transferir o aluno, você deve contactar o administrador do sistema.');
         });
@@ -76740,12 +76742,12 @@ var render = function() {
     _c("div", { staticClass: "row no-gutters" }, [
       _c(
         "div",
-        { staticClass: "col-md-3 align-self-center text-center" },
+        { staticClass: "col-md-2 align-self-center text-center" },
         [_c("feather", { attrs: { type: _vm.icon, size: "2.5rem" } })],
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-9" }, [
+      _c("div", { staticClass: "col-md-10" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
           _vm._v(" "),

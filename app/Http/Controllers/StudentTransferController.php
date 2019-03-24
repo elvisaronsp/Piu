@@ -66,6 +66,7 @@ class StudentTransferController extends Controller
         $student_new->save();
         Flash::success('Aluno aceito com sucesso! Agora você pode manipulá-lo como um dos seus alunos na sua instituição.');
       }else{
+        $transfer->save();
         Flash::success('Transferência recusada com sucesso! A escola solicitante receberá uma mensagem informando a recusa.');
       }
       return redirect()->back();                                 
