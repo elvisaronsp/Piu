@@ -102,4 +102,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::get('/student-transfers/{id}', 'StudentTransferController@view')->name('student_transfers.view');
   Route::post('/student-transfers/update/{id}', 'StudentTransferController@update')->name('student_transfers.update');
 
+  # Search
+  Route::get('/search/{entity}/{search}', 'SearchController@index')->name('search.index');
+
 });

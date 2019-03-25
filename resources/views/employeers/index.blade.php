@@ -7,6 +7,7 @@
     ]
   ];
 @endphp
+<search-box-component entity="employeers"></search-box-component>
 <div class="row">
   <div class="col-md-12 mb-1">
     <options-bar-component title="Funcionários" :buttons="{{ collect($buttons) }}"></options-bar-component>

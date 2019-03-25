@@ -35,25 +35,50 @@ import "./colors";
 import VModal from "vue-js-modal";
 import VueTheMask from "vue-the-mask";
 import StudentGroupComponent from "./forms/StudentGroupComponent";
+import StudentTransferComponent from "./forms/StudentTransferComponent";
 import VueMoment from "vue-moment";
 import Feather from "vue-feather";
+import store from "./store";
+import Vuex from "vuex";
 
+Vue.use(Vuex);
 Vue.use(Feather);
 Vue.use(VueMoment);
 Vue.use(VueTheMask);
 Vue.use(VModal, { dynamic: true, injectModalsContainer: true });
+
 Vue.prototype.$csrf = document
     .querySelector('meta[name="csrf-token"]')
     .getAttribute("content");
+
 Vue.prototype.$table_custom = {
     students: [
         {
-            type: "warning",
+            type: "success",
             title: "Matricular em uma turma",
-            icon: "log-in",
+            icon: "plus-circle",
             click: function(id) {
                 app.$modal.show(
                     StudentGroupComponent,
+                    {
+                        entityId: id
+                    },
+                    {
+                        draggable: true,
+                        classes: "p-4 v--modal",
+                        width: "600",
+                        height: "auto"
+                    }
+                );
+            }
+        },
+        {
+            type: "warning",
+            title: "Transferir para outra instituição de ensino",
+            icon: "repeat",
+            click: function(id) {
+                app.$modal.show(
+                    StudentTransferComponent,
                     {
                         entityId: id
                     },
@@ -76,5 +101,6 @@ Vue.prototype.$table_custom = {
  */
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
+    store
 });

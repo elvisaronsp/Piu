@@ -81,5 +81,8 @@ Vue.prototype.$routes = {
         studentsCount: "/statistic/students/count",
         groupsCount: "/statistic/groups/count",
         employeersCount: "/statistic/employeers/count"
+    },
+    search: {
+        index: "/search/:entity:/:search:"
     }
 };
