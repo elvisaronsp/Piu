@@ -12,11 +12,11 @@ class StuffsTableSeeder extends Seeder
      */
     public function run()
     {
-        $stuffs = ['Português', 'Matemática', 'Geografia', 'Física', 'Química', 'Literatura', 'Educação Física'];
+        /*$stuffs = ['Português', 'Matemática', 'Geografia', 'Física', 'Química', 'Literatura', 'Educação Física'];
         foreach ($stuffs as $s) {
           DB::table('stuffs')->insert([
             'title' => $s
           ]);
-        }
+        }*/
     }
 }

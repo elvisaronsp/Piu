@@ -1,9 +1,10 @@
 <template>
   <div class="mb-3">
     <v-select
+      v-model="selected"
       :on-search="search"
       placeholder="Digite o que está procurando..."
-      :options="$store.state[entity]"
+      :options="toVSelectData($store.state[entity].data)"
     ></v-select>
   </div>
 </template>
@@ -13,6 +14,11 @@ export default {
   props: ["entity"],
   components: {
     vSelect
+  },
+  data(){
+    return {
+      selected: null
+    }
   },
   methods: {
     search(name, loading) {
@@ -25,4 +31,3 @@ export default {
   }
 };
 </script>
-

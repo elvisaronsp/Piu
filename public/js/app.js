@@ -2227,11 +2227,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["entity"],
   components: {
     vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  data: function data() {
+    return {
+      selected: null
+    };
   },
   methods: {
     search: function search(name, loading) {
@@ -4424,9 +4430,6 @@ __webpack_require__.r(__webpack_exports__);
     TableActionComponent: _TableActionComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['data', 'entity'],
-  data: function data() {
-    return {};
-  },
   computed: {
     data_computed: function data_computed() {
       if (this.data !== undefined) {
@@ -4473,6 +4476,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DinamicTableComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DinamicTableComponent */ "./resources/js/tables/DinamicTableComponent.vue");
 /* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js");
 /* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1__);
+//
 //
 //
 //
@@ -77332,7 +77336,14 @@ var render = function() {
         attrs: {
           "on-search": _vm.search,
           placeholder: "Digite o que está procurando...",
-          options: _vm.$store.state[_vm.entity]
+          options: _vm.toVSelectData(_vm.$store.state[_vm.entity].data)
+        },
+        model: {
+          value: _vm.selected,
+          callback: function($$v) {
+            _vm.selected = $$v
+          },
+          expression: "selected"
         }
       })
     ],
@@ -80743,9 +80754,17 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("dinamic-table-component", {
-        attrs: { data: _vm.data, entity: _vm.entity, custom: _vm.custom }
-      }),
+      _vm.$store.state[_vm.entity].length == 0
+        ? _c("dinamic-table-component", {
+            attrs: { data: _vm.data, entity: _vm.entity, custom: _vm.custom }
+          })
+        : _c("dinamic-table-component", {
+            attrs: {
+              data: _vm.$store.state[_vm.entity],
+              entity: _vm.entity,
+              custom: _vm.custom
+            }
+          }),
       _vm._v(" "),
       _c("pagination", {
         attrs: { data: _vm.data },
@@ -101934,13 +101953,14 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     employeers: [],
     students: [],
     groups: [],
-    stuffs: []
+    stuffs: [],
+    options: []
   },
   mutations: {
     search: function search(state, data) {
       data.loading(true);
       axios.get("/search/".concat(data.entity).concat("/").concat(data.search)).then(function (response) {
-        state[data.entity] = app.toVSelectData(response.data.data);
+        state[data.entity] = response.data;
         data.loading(false);
       }).catch(function (err) {
         console.log("Erro em consulta de pesquisa.");
@@ -102178,8 +102198,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/school_manager/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/school_manager/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -10,7 +10,8 @@ const store = new Vuex.Store({
         employeers: [],
         students: [],
         groups: [],
-        stuffs: []
+        stuffs: [],
+        options: []
     },
     mutations: {
         search(state, data) {
@@ -23,7 +24,7 @@ const store = new Vuex.Store({
                         .concat(data.search)
                 )
                 .then(response => {
-                    state[data.entity] = app.toVSelectData(response.data.data);
+                    state[data.entity] = response.data;
                     data.loading(false);
                 })
                 .catch(err => {

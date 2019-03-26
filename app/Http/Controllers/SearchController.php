@@ -11,10 +11,11 @@ class SearchController extends Controller
 
     private $except = ['id', 'created_at', 'updated_at', 'school_id'];
     private $only = [];
-    
+
     public function index(Request $request, $entity, $search){
         $entity = $this->toCamelCase($entity, true);
-        $entity = 'App\\'.rtrim($entity, 's');
+        $entityName = rtrim($entity, 's');
+        $entity = 'App\\'.$entityName;
         $entity = new $entity();
         $table = $entity->getTable();
         $columns = DB::getSchemaBuilder()->getColumnListing($table);
@@ -29,7 +30,8 @@ class SearchController extends Controller
         }
         //dd($query);
         //dd($array_search);
-        return response()->json($query->paginate(5));
+        $collection = 'App\\Http\\Resources\\'.$entityName.'Collection';
+        return response()->json(new $collection($query->paginate(5)));
     }
 
     private function toCamelCase($string, $capitalizeFirstCharacter = false) {
