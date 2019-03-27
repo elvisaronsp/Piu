@@ -30,11 +30,6 @@
       TableActionComponent
     },
     props: ['data', 'entity'],
-    data(){
-      return {
-
-      }
-    },
     computed: {
       data_computed: function(){
         if(this.data !== undefined){
