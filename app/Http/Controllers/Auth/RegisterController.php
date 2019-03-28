@@ -81,7 +81,7 @@ class RegisterController extends Controller
           'act_creation_date' => $data['act_creation_date'],
           'direc_number' => $data['direc_number'],
           'logo' => $logo,
-          'logo_city' => $logo_city,
+          'city_logo' => $logo_city,
           'address_id' => $address->id
         ]);
         $user = User::create([

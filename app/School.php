@@ -18,7 +18,7 @@ class School extends Model
       'act_creation_date' => ['required'],
       'direc_number' => ['required'],
       'logo' => ['required'],
-      'logo_city' => ['required'],
+      'city_logo' => ['required'],
     ];
 
     protected $dispatchesEvents = [

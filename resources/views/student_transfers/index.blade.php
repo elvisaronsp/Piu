@@ -26,7 +26,11 @@
                         <p class="text-muted text-left">{{ $t->accepted ? 'Transferência concluída ' : 'Aguardando aprovação da escola '. $t->new_school->name }}</p>
                     </a>
                 @empty
-                    Sem transferências
+                    <div class="card">
+                        <div class="card-body text-center">
+                            Não há nenhuma transferência por enquanto.
+                        </div>
+                    </div>
                 @endforelse
             </div>
         </div>

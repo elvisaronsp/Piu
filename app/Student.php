@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
 
-    protected $fillable = ['name', 'address_id', 'birth_certificate_id', 'born_in', 'genre', 'school_id', 'general_registration_id'];
+    protected $fillable = ['name', 'address_id', 'birth_certificate_id', 'born_in', 'genre', 'school_id', 'general_registration_id',
+                           'multi_activity', 'sus', 'bolsa_familia'];
 
     public static $rules = [
       'name' => 'required',
       'born_in' => 'required',
-      'genre' => 'required'
+      'genre' => 'required',
+      'sus' => 'required',
+      'bolsa_familia' => '',
+      'multi_activity' => ''
     ];
 
     public function address(){
@@ -29,6 +33,10 @@ class Student extends Model
 
     public function general_registration(){
       return $this->belongsTo('App\GeneralRegistration');
+    }
+
+    public function school(){
+      return $this->belongsTo('App\School');
     }
 
 }

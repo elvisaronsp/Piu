@@ -3335,13 +3335,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["specialDetails"],
   data: function data() {
     return {
       activity: "",
       shift: "",
       observation: ""
     };
+  },
+  mounted: function mounted() {
+    if (special_details !== undefined) {
+      this.activity = this.special_details.activity;
+      this.shift = this.special_details.shift;
+      this.observation = this.observation;
+    }
   }
 });
 
@@ -3356,6 +3366,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SpecialDetailsComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpecialDetailsComponent */ "./resources/js/forms/SpecialDetailsComponent.vue");
 //
 //
 //
@@ -3403,8 +3414,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["student"],
+  components: {
+    SpecialDetails: _SpecialDetailsComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   mounted: function mounted() {
     var s = this.student;
 
@@ -3414,7 +3471,20 @@ __webpack_require__.r(__webpack_exports__);
       this.genre = s.genre;
       this.born_in = s.born_in;
       this.special = s.special;
+      this.multi_activity = s.multi_activity;
       this.special_report = s.special_report;
+      this.sus = s.sus;
+      this.bolsa_familia = s.bolsa_familia;
+      loadSpecialDetails();
+    }
+  },
+  methods: {
+    loadSpecialDetails: function loadSpecialDetails() {
+      var _this = this;
+
+      axios.get(this.$routes.special_details.index.replace(":id:", this.id)).then(function (response) {
+        _this.special_details = response.data;
+      });
     }
   },
   data: function data() {
@@ -3424,7 +3494,13 @@ __webpack_require__.r(__webpack_exports__);
       genre: "",
       born_in: "",
       special: "",
-      special_report: ""
+      special_report: "",
+      multi_activity: "",
+      special_details: {
+        activity: "",
+        shift: "",
+        observation: ""
+      }
     };
   }
 });
@@ -3459,6 +3535,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3467,16 +3553,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fetched_groups: [],
-      group: '',
+      group: "",
       loading: false,
-      text: 'Matricular aluno',
+      text: "Matricular aluno",
       disabled: false
     };
   },
   watch: {
     loading: function loading(newValue) {
       if (newValue) {
-        this.text = 'Matriculando aluno';
+        this.text = "Matriculando aluno";
         this.disabled = true;
       }
     }
@@ -3496,25 +3582,27 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.loading = true;
-      axios.post('/student-groups/store', {
+      axios.post("/student-groups/store", {
         _token: this.$csrf,
         group_id: this.group.value,
         student_id: this.entityId
       }).then(function (response) {
-        _this2.text = 'Matricular aluno';
+        _this2.text = "Matricular aluno";
         _this2.disabled = false;
         _this2.loading = false;
 
-        _this2.showMessage('Parabéns!', 'Aluno matriculado com sucesso!');
+        _this2.showMessage("Parabéns!", "Aluno matriculado com sucesso!");
+
+        window.location.href = window.location.host + "/students/" + _this2.entityId;
       }).catch(function (err) {
         _this2.disabled = false;
         _this2.loading = false;
 
-        _this2.showMessage('Ops! Há um problema aqui', err.response.data);
+        _this2.showMessage("Ops! Há um problema aqui", err.response.data);
       });
     }
   },
-  props: ['entityId']
+  props: ["entityId"]
 });
 
 /***/ }),
@@ -79211,7 +79299,12 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", name: "name", value: "", required: "" },
+            attrs: {
+              type: "text",
+              name: "name",
+              placeholder: "Digite o nome da instituição",
+              required: ""
+            },
             domProps: { value: _vm.name },
             on: {
               input: function($event) {
@@ -79239,7 +79332,12 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", name: "code", value: "", required: "" },
+            attrs: {
+              type: "text",
+              name: "code",
+              placeholder: "Digite o código da instituição",
+              required: ""
+            },
             domProps: { value: _vm.code },
             on: {
               input: function($event) {
@@ -79274,7 +79372,7 @@ var render = function() {
             attrs: {
               type: "text",
               name: "act_creation",
-              value: "",
+              placeholder: "Informe o ato de criação",
               required: ""
             },
             domProps: { value: _vm.act_creation },
@@ -79313,7 +79411,7 @@ var render = function() {
             attrs: {
               type: "text",
               name: "direc_number",
-              value: "",
+              placeholder: "Informe o direc. número",
               required: ""
             },
             domProps: { value: _vm.direc_number },
@@ -79337,7 +79435,7 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control-file",
-            attrs: { type: "file", name: "logo", value: "", required: "" },
+            attrs: { type: "file", name: "logo", required: "" },
             on: { change: _vm.logo }
           })
         ])
@@ -79351,7 +79449,7 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control-file",
-            attrs: { type: "file", name: "logo_city", value: "", required: "" },
+            attrs: { type: "file", name: "logo_city", required: "" },
             on: { change: _vm.logo_city }
           })
         ])
@@ -79375,7 +79473,7 @@ var staticRenderFns = [
           attrs: {
             type: "date",
             name: "act_creation_date",
-            value: "",
+            placeholder: "Informe a data do ato de criação",
             required: ""
           }
         })
@@ -79422,6 +79520,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          attrs: { required: "" },
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -79439,6 +79538,10 @@ var render = function() {
           }
         },
         [
+          _c("option", { attrs: { value: "" } }, [
+            _vm._v("Selecione o turno...")
+          ]),
+          _vm._v(" "),
           _c("option", { attrs: { value: "morning" } }, [_vm._v("Matutino")]),
           _vm._v(" "),
           _c("option", { attrs: { value: "afternoon" } }, [
@@ -79494,7 +79597,8 @@ var staticRenderFns = [
         attrs: {
           type: "text",
           name: "activity",
-          placeholder: "Digite a atividade que o aluno pratica"
+          placeholder: "Digite a atividade que o aluno pratica",
+          required: ""
         }
       })
     ])
@@ -79679,7 +79783,7 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 form-group form-check pt-4" }, [
+      _c("div", { staticClass: "col-md-3 form-group form-check pt-4" }, [
         _c("input", {
           directives: [
             {
@@ -79690,7 +79794,7 @@ var render = function() {
             }
           ],
           staticClass: "form-check-input",
-          attrs: { type: "checkbox" },
+          attrs: { type: "checkbox", id: "special_report" },
           domProps: {
             checked: Array.isArray(_vm.special_report)
               ? _vm._i(_vm.special_report, null) > -1
@@ -79719,9 +79823,134 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { staticClass: "form-check-label" }, [
-          _vm._v("Possui relatório?")
-        ])
+        _c(
+          "label",
+          { staticClass: "form-check-label", attrs: { for: "special_report" } },
+          [_vm._v("Possui relatório?")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 form-group form-check pt-4" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.multi_activity,
+              expression: "multi_activity"
+            }
+          ],
+          staticClass: "form-check-input",
+          attrs: { type: "checkbox", id: "multi_activity" },
+          domProps: {
+            checked: Array.isArray(_vm.multi_activity)
+              ? _vm._i(_vm.multi_activity, null) > -1
+              : _vm.multi_activity
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.multi_activity,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.multi_activity = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.multi_activity = $$a
+                      .slice(0, $$i)
+                      .concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.multi_activity = $$c
+              }
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "form-check-label", attrs: { for: "multi_activity" } },
+          [_vm._v("Atividade em sala com recurso multifuncional?")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        [
+          _vm.multi_activity
+            ? _c("special-details", {
+                attrs: { "special-details": _vm.special_details }
+              })
+            : _vm._e()
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("label", [_vm._v("Bolsa família")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.bolsa_familia,
+              expression: "bolsa_familia"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "bolsa_familia",
+            placeholder: "Número do cartão do bolsa família"
+          },
+          domProps: { value: _vm.bolsa_familia },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.bolsa_familia = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("label", [_vm._v("Cartão do SUS")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.sus,
+              expression: "sus"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "sus",
+            placeholder: "Informe o número do cartão do SUS",
+            required: ""
+          },
+          domProps: { value: _vm.sus },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.sus = $event.target.value
+            }
+          }
+        })
       ])
     ])
   ])
@@ -101680,6 +101909,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
   },
   search: {
     index: "/search/:entity:/:search:"
+  },
+  special_details: {
+    view: "/special-details/:id:"
   }
 };
 
@@ -102537,8 +102769,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/school_manager/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/school_manager/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

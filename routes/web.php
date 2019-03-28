@@ -43,6 +43,7 @@ Route::group(['middleware'=> ['auth']], function(){
   Route::post('/students/store', 'StudentController@store')->name('students.store')->middleware('can:add-students');
   Route::get('/report-card/{id}', 'StudentController@report_card')->name('students.report_card');
   Route::post('/students/destroy', 'StudentController@destroy')->name('students.delete')->middleware('can:delete-students');
+  Route::get('/students/{id}', 'StudentController@view')->name('students.view')->middleware('can:view-students');
 
   # Stuffs
   Route::get('/stuffs', 'StuffController@index')->name('stuffs.index')->middleware('can:view-stuffs');

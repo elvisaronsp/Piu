@@ -37,17 +37,63 @@
           placeholder="Deixe em branco para alunos não deficientes"
         >
       </div>
-      <div class="col-md-6 form-group form-check pt-4">
-        <input type="checkbox" class="form-check-input" v-model="special_report">
-        <label class="form-check-label">Possui relatório?</label>
+      <div class="col-md-3 form-group form-check pt-4">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="special_report"
+          v-model="special_report"
+        >
+        <label class="form-check-label" for="special_report">Possui relatório?</label>
+      </div>
+      <div class="col-md-3 form-group form-check pt-4">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="multi_activity"
+          v-model="multi_activity"
+        >
+        <label
+          class="form-check-label"
+          for="multi_activity"
+        >Atividade em sala com recurso multifuncional?</label>
+      </div>
+      <div class="col-md-12">
+        <special-details v-if="multi_activity" :special-details="special_details"></special-details>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Bolsa família</label>
+        <input
+          class="form-control"
+          type="text"
+          name="bolsa_familia"
+          v-model="bolsa_familia"
+          placeholder="Número do cartão do bolsa família"
+        >
+      </div>
+      <div class="col-md-6">
+        <label>Cartão do SUS</label>
+        <input
+          class="form-control"
+          type="text"
+          name="sus"
+          v-model="sus"
+          placeholder="Informe o número do cartão do SUS"
+          required
+        >
       </div>
     </div>
   </div>
 </template>
-
 <script>
+import SpecialDetails from "./SpecialDetailsComponent";
 export default {
   props: ["student"],
+  components: {
+    SpecialDetails
+  },
   mounted() {
     let s = this.student;
     if (s) {
@@ -56,7 +102,20 @@ export default {
       this.genre = s.genre;
       this.born_in = s.born_in;
       this.special = s.special;
+      this.multi_activity = s.multi_activity;
       this.special_report = s.special_report;
+      this.sus = s.sus;
+      this.bolsa_familia = s.bolsa_familia;
+      loadSpecialDetails();
+    }
+  },
+  methods: {
+    loadSpecialDetails() {
+      axios
+        .get(this.$routes.special_details.index.replace(":id:", this.id))
+        .then(response => {
+          this.special_details = response.data;
+        });
     }
   },
   data() {
@@ -66,7 +125,13 @@ export default {
       genre: "",
       born_in: "",
       special: "",
-      special_report: ""
+      special_report: "",
+      multi_activity: "",
+      special_details: {
+        activity: "",
+        shift: "",
+        observation: ""
+      }
     };
   }
 };

@@ -84,5 +84,8 @@ Vue.prototype.$routes = {
     },
     search: {
         index: "/search/:entity:/:search:"
+    },
+    special_details: {
+        view: "/special-details/:id:"
     }
 };

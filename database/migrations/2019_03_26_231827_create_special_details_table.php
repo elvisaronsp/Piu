@@ -15,7 +15,6 @@ class CreateSpecialDetailsTable extends Migration
     {
         Schema::create('special_details', function (Blueprint $table) {
             $table->increments('id');
-            //$table->boolean('another_activity');
             $table->string('activity');
             $table->enum('shift', ['morning', 'afternoon', 'nocturnal']);
             $table->longText('observations')->nullable();

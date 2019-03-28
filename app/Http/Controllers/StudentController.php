@@ -11,6 +11,7 @@ use App\Http\Resources\StudentCollection;
 use Auth;
 use Flash;
 use App\GeneralRegistration;
+use App\SpecialDetails;
 
 class StudentController extends Controller
 {
@@ -74,6 +75,9 @@ class StudentController extends Controller
         $general_registration = GeneralRegistration::create($data);
         $data['general_registration_id'] = $general_registration->id;
         $student = Student::create($data);
+        if( !empty($data['special']) ) {
+          $specialDetails = SpecialDetails::create($data);
+        }
         Flash::success('Estudante cadastrado com sucesso! Não esqueça de matriculá-lo em uma turma.');
         return redirect('/students/create');
     }
@@ -122,6 +126,14 @@ class StudentController extends Controller
     public function report_card(Request $request, $id){
         $student = Student::findOrFail($id);
         return view('students.report_card')->with('student', $student);
+    }
+
+    public function view(Request $request, $id){
+        $student =  Student::where([
+                      ['school_id', '=', Auth::user()->school_id],
+                      ['id', '=', $id]
+                    ])->firstOrFail();
+        return view('students.view')->with('student', $student);
     }
     
 }
