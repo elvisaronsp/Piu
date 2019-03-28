@@ -71,7 +71,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $logo = Storage::putFile('logos', $data['logo']);
-        $logo_city = Storage::putFile('logos_cities', $data['logo_city']);
+        $logo_city = Storage::putFile('logos_cities', $data['city_logo']);
         $address = Address::create($data);
 
         $school = School::create([
