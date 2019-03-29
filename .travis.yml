@@ -11,12 +11,11 @@ addons:
   
 env:
   global:
-    CC_TEST_REPORTER_ID=9b5f9ebc336d9e4b149bb4a3a7bdc594c508b5c193d1b65f2480f02a755ecd72
+    CODACY_PROJECT_TOKEN=82fedf73aad342818a0745aa26014f69
 
-before_script: 
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter 
-- chmod +x ./cc-test-reporter 
-- ./cc-test-reporter before-build
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install -n
 
 before_script:
   - composer self-update
@@ -33,9 +32,8 @@ before_script:
   - php artisan db:seed
   
 script:
-  - vendor/bin/codecept run unit --coverage --coverage-xml
+  - php vendor/bin/phpunit --coverage-clover build/coverage/xml
   - npm run production
 
-after_script: 
-- mv tests/_output/coverage.xml clover.xml 
-- ./cc-test-reporter after-build --coverage-input-type clover --id 12345 --exit-code $TRAVIS_TEST_RESULT
+after_script:
+  - php vendor/bin/codacycoverage clover build/coverage/xml
