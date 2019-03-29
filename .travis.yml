@@ -13,11 +13,10 @@ env:
   global:
     CC_TEST_REPORTER_ID=9b5f9ebc336d9e4b149bb4a3a7bdc594c508b5c193d1b65f2480f02a755ecd72
 
-before_install:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  #- export DISPLAY=:99.0                # Display number for xvfb (for headless browser testing)
-  #- sh -e /etc/init.d/xvfb start        # Start xvfb (for headless browser testing)
+before_script: 
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter 
+- chmod +x ./cc-test-reporter 
+- ./cc-test-reporter before-build
 
 before_script:
   - composer self-update
@@ -34,12 +33,9 @@ before_script:
   - php artisan db:seed
   
 script:
-  - vendor/bin/phpunit --coverage-text
+  - vendor/bin/codecept run unit --coverage --coverage-xml
   - npm run production
 
-# Pipe the coverage data to Code Climate
-after_script:
-  - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.backend.json coverage/backend/.resultset.json # Format backend coverage
-  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info  # Format frontend coverage
-  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2                  # Sum both coverage parts into coverage/codeclimate.json
-  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
+after_script: 
+- mv tests/_output/coverage.xml clover.xml 
+- ./cc-test-reporter after-build --coverage-input-type clover --id 12345 --exit-code $TRAVIS_TEST_RESULT
