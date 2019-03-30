@@ -22,7 +22,7 @@ class CreateBouncerTables extends Migration
             $table->integer('entity_id')->unsigned()->nullable();
             $table->string('entity_type')->nullable();
             $table->boolean('only_owned')->default(false);
-            $table->json('options')->nullable();
+            $table->string('options')->nullable();
             $table->integer('scope')->nullable()->index();
             $table->timestamps();
         });
@@ -84,9 +84,9 @@ class CreateBouncerTables extends Migration
      */
     public function down()
     {
-        Schema::drop(Models::table('permissions'));
-        Schema::drop(Models::table('assigned_roles'));
-        Schema::drop(Models::table('roles'));
-        Schema::drop(Models::table('abilities'));
+        Schema::dropIfExists(Models::table('permissions'));
+        Schema::dropIfExists(Models::table('assigned_roles'));
+        Schema::dropIfExists(Models::table('roles'));
+        Schema::dropIfExists(Models::table('abilities'));
     }
 }
