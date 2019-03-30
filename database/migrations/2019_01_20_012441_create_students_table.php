@@ -27,6 +27,8 @@ class CreateStudentsTable extends Migration
             $table->string('special')->nullable();
             $table->boolean('special_report')->default(false);
             $table->boolean('multi_activity')->default(false);
+            $table->string('father_contact')->nullable();
+            $table->string('mother_contact')->nullable();
             $table->enum('status', ['transferred', 'canceled', 'registered', 'idle'])->default('idle');
             $table->timestamps();
         });
