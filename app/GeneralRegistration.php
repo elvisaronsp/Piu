@@ -13,6 +13,6 @@ class GeneralRegistration extends Model
       'registration_number' => 'required',
       'emitter' => 'required',
       'registration_emission' => 'required',
-      'cpf' => 'required'
+      'cpf' => 'required|unique:general_registrations'
     ];
 }

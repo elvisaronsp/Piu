@@ -11,7 +11,8 @@ const store = new Vuex.Store({
         students: [],
         groups: [],
         stuffs: [],
-        options: []
+        options: [],
+        disabled_register: true
     },
     mutations: {
         search(state, data) {

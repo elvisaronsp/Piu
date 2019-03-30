@@ -19,7 +19,7 @@
     <div class="row">
       <div class="form-group col-md-3">
         <label for="leaf">Folha</label>
-        <input class="form-control" type="number" name="leaf" v-model="leaf">
+        <input class="form-control" type="text" name="leaf" v-model="leaf">
       </div>
       <div class="form-group col-md-4">
         <label for="term">Termo</label>
