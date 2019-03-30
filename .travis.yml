@@ -11,7 +11,7 @@ addons:
   
 env:
   global:
-    CODACY_PROJECT_TOKEN=82fedf73aad342818a0745aa26014f69
+    CODACY_PROJECT_TOKEN=77720ad6423143de8bcba89bc6bb8e02
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
