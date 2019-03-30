@@ -3288,7 +3288,7 @@ __webpack_require__.r(__webpack_exports__);
       act_creation_date: '',
       direc_number: '',
       logo: '',
-      logo_city: ''
+      city_logo: ''
     };
   }
 });
@@ -79449,8 +79449,8 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control-file",
-            attrs: { type: "file", name: "logo_city", required: "" },
-            on: { change: _vm.logo_city }
+            attrs: { type: "file", name: "city_logo", required: "" },
+            on: { change: _vm.city_logo }
           })
         ])
       ])
@@ -102769,8 +102769,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/cabox/workspace/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cabox/workspace/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

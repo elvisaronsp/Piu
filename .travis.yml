@@ -8,6 +8,14 @@ php:
 
 addons:
   mariadb: '10.3'
+  
+env:
+  global:
+    CODACY_PROJECT_TOKEN=82fedf73aad342818a0745aa26014f69
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install -n
 
 before_script:
   - composer self-update
@@ -22,6 +30,10 @@ before_script:
   - php artisan key:generate
   - php artisan migrate --step
   - php artisan db:seed
+  
 script:
-  - vendor/bin/phpunit --coverage-text
+  - php vendor/bin/phpunit --coverage-clover build/coverage/xml
   - npm run production
+
+after_script:
+  - php vendor/bin/codacycoverage clover build/coverage/xml
