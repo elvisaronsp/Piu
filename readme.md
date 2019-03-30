@@ -24,9 +24,11 @@
         <img src="https://poser.pugx.org/piu/piu/license" alt="Latest Unstable Version">
     </a>
 </p>
+
 <p align="center">
-    <img src="https://github.com/JJS4ntos/Piu/blob/master/piu.gif">
+    <a href="http://piu-manager.herokuapp.com"><b>DEMO</b></a>
 </p>
+
 <p align="center">
 Sistema para gerenciar escolas ou instituições de ensino fazendo o controle de matrículas, professores, alunos, matérias, etc. O foco do sistema é apresentar uma solução mais simplista possível para o usuário, fazendo com que a curva de aprendizado seja bastante suave.    
 </p>
