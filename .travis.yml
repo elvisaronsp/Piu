@@ -31,7 +31,7 @@ before_script:
   - php artisan db:seed
   
 script:
-  - php vendor/bin/phpunit --coverage-clover build/coverage/xml
+  - php vendor/bin/codacycoverage phpunit
   - npm run production
 
 after_script:
