@@ -10,8 +10,7 @@ addons:
   mariadb: '10.3'
   
 env:
-  global:
-    CODACY_PROJECT_TOKEN=77720ad6423143de8bcba89bc6bb8e02
+  - CODACY_PROJECT_TOKEN=77720ad6423143de8bcba89bc6bb8e02
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
