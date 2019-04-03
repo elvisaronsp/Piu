@@ -15,8 +15,10 @@ class Student extends Model
       'born_in' => 'required',
       'genre' => 'required',
       'sus' => 'required',
-      'bolsa_familia' => '',
-      'multi_activity' => ''
+      'bolsa_familia' => 'nullable',
+      'multi_activity' => 'nullable',
+      'father_contact' => 'nullable',
+      'mother_contact' => 'nullable'
     ];
 
     public function address(){

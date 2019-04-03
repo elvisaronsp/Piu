@@ -10,7 +10,8 @@ class Group extends Model
     protected $fillable = ['title', 'school_id'];
 
     public static $rules = [
-      'title' => 'required'
+      'title' => 'required',
+      'shift' => 'required'
     ];
 
     public function school(){

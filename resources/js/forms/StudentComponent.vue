@@ -85,6 +85,18 @@
         >
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Telefone da Mãe</label>
+        <input class="form-control" :mask="['(##) #####-####']" placeholder="Digite o número da mãe" v-model="mother_contact">
+        <input type="hidden" name="mother_contact" :value="mother_contact">
+      </div>
+      <div class="col-md-6">
+        <label>Telefone do Pai</label>
+        <input class="form-control" :mask="['(##) #####-####']" placeholder="Digite o número do pai" v-model="father_contact">
+        <input type="hidden" name="father_contact" :value="father_contact">
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -104,6 +116,8 @@ export default {
       this.special = s.special;
       this.multi_activity = s.multi_activity;
       this.special_report = s.special_report;
+      this.father_contact = s.father_contact;
+      this.mother_contact = s.mother_contact;
       this.sus = s.sus;
       this.bolsa_familia = s.bolsa_familia;
       loadSpecialDetails();
@@ -127,6 +141,8 @@ export default {
       special: "",
       special_report: "",
       multi_activity: "",
+      father_contact: "",
+      mother_contact: "",
       special_details: {
         activity: "",
         shift: "",
