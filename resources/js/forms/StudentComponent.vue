@@ -131,7 +131,9 @@ export default {
         activity: "",
         shift: "",
         observation: ""
-      }
+      },
+      sus: "",
+      bolsa_familia: ""
     };
   }
 };

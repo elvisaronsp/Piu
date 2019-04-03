@@ -2,7 +2,19 @@ import Vue from "vue";
 const app = new Vue({});
 
 Vue.mixin({
+    mounted(){
+      let data = this.$data;
+      let old = this.old;
+      Object.keys(data).forEach(function(element, index, array){
+        if( typeof(data[element]) == 'string' ){
+            data[element] = old(element);
+        }
+      });
+    },
     methods: {
+        old(key){
+          return old[key] == undefined? '' : old[key];
+        },
         toVSelectData(data) {
             let result = [];
             if (data !== undefined) {

@@ -3500,7 +3500,9 @@ __webpack_require__.r(__webpack_exports__);
         activity: "",
         shift: "",
         observation: ""
-      }
+      },
+      sus: "",
+      bolsa_familia: ""
     };
   }
 });
@@ -78068,7 +78070,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "number", name: "leaf" },
+          attrs: { type: "text", name: "leaf" },
           domProps: { value: _vm.leaf },
           on: {
             input: function($event) {
@@ -101754,7 +101756,29 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
+  mounted: function mounted() {
+    var data = this.$data;
+    var old = this.old;
+    Object.keys(data).forEach(function (element, index, array) {
+      if (typeof data[element] == 'string') {
+        data[element] = old(element);
+      }
+    });
+  },
   methods: {
+    old: function (_old) {
+      function old(_x) {
+        return _old.apply(this, arguments);
+      }
+
+      old.toString = function () {
+        return _old.toString();
+      };
+
+      return old;
+    }(function (key) {
+      return old[key] == undefined ? '' : old[key];
+    }),
     toVSelectData: function toVSelectData(data) {
       var result = [];
 
@@ -102525,7 +102549,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     students: [],
     groups: [],
     stuffs: [],
-    options: []
+    options: [],
+    disabled_register: true
   },
   mutations: {
     search: function search(state, data) {
@@ -102769,8 +102794,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/cabox/workspace/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/cabox/workspace/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
