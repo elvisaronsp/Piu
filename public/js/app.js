@@ -3456,6 +3456,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["student"],
@@ -3473,18 +3485,21 @@ __webpack_require__.r(__webpack_exports__);
       this.special = s.special;
       this.multi_activity = s.multi_activity;
       this.special_report = s.special_report;
+      this.father_contact = s.father_contact;
+      this.mother_contact = s.mother_contact;
       this.sus = s.sus;
       this.bolsa_familia = s.bolsa_familia;
-      loadSpecialDetails();
+      this.loadSpecialDetails();
     }
   },
   methods: {
-    loadSpecialDetails: function loadSpecialDetails() {
-      var _this = this;
+    loadSpecialDetails: function loadSpecialDetails() {//TODO: Corrigir falha nesta requisição
 
-      axios.get(this.$routes.special_details.index.replace(":id:", this.id)).then(function (response) {
-        _this.special_details = response.data;
-      });
+      /*axios
+        .get(this.$routes.special_details.index.replace(":id:", this.id))
+        .then(response => {
+          this.special_details = response.data;
+        });*/
     }
   },
   data: function data() {
@@ -3496,6 +3511,8 @@ __webpack_require__.r(__webpack_exports__);
       special: "",
       special_report: "",
       multi_activity: "",
+      father_contact: "",
+      mother_contact: "",
       special_details: {
         activity: "",
         shift: "",
@@ -3595,7 +3612,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.showMessage("Parabéns!", "Aluno matriculado com sucesso!");
 
-        window.location.href = window.location.host + "/students/" + _this2.entityId;
+        window.location.href = window.location.hostname + "/students/" + _this2.entityId;
       }).catch(function (err) {
         _this2.disabled = false;
         _this2.loading = false;
@@ -4724,9 +4741,13 @@ __webpack_require__.r(__webpack_exports__);
   props: ['data', 'entity'],
   data: function data() {
     return {
-      editLink: '/' + this.entity + '/edit/' + this.data.id,
       custom: []
     };
+  },
+  computed: {
+    editLink: function editLink() {
+      return '/' + this.entity + '/edit/' + this.data.id;
+    }
   },
   methods: {
     deleteEntity: function deleteEntity() {
@@ -79924,7 +79945,7 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "col-md-6 form-group" }, [
         _c("label", [_vm._v("Cartão do SUS")]),
         _vm._v(" "),
         _c("input", {
@@ -79954,6 +79975,66 @@ var render = function() {
           }
         })
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-6" },
+        [
+          _c("label", [_vm._v("Telefone da Mãe")]),
+          _vm._v(" "),
+          _c("the-mask", {
+            staticClass: "form-control",
+            attrs: {
+              mask: ["(##) ####-####", "(##) #####-####"],
+              placeholder: "Digite o número da mãe"
+            },
+            model: {
+              value: _vm.mother_contact,
+              callback: function($$v) {
+                _vm.mother_contact = $$v
+              },
+              expression: "mother_contact"
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "mother_contact" },
+            domProps: { value: _vm.mother_contact }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-6" },
+        [
+          _c("label", [_vm._v("Telefone do Pai")]),
+          _vm._v(" "),
+          _c("the-mask", {
+            staticClass: "form-control",
+            attrs: {
+              mask: ["(##) ####-####", "(##) #####-####"],
+              placeholder: "Digite o número do pai"
+            },
+            model: {
+              value: _vm.father_contact,
+              callback: function($$v) {
+                _vm.father_contact = $$v
+              },
+              expression: "father_contact"
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "father_contact" },
+            domProps: { value: _vm.father_contact }
+          })
+        ],
+        1
+      )
     ])
   ])
 }
@@ -101757,15 +101838,18 @@ __webpack_require__.r(__webpack_exports__);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   mounted: function mounted() {
-    var data = this.$data;
-    var old = this.old;
-    Object.keys(data).forEach(function (element, index, array) {
-      if (typeof data[element] == 'string') {
-        data[element] = old(element);
-      }
-    });
+    this.loadOldInputs();
   },
   methods: {
+    loadOldInputs: function loadOldInputs() {
+      var data = this.$data;
+      var old = this.old;
+      Object.keys(data).forEach(function (element, index, array) {
+        if (typeof data[element] == 'string' && data[element] == '') {
+          data[element] = old(element);
+        }
+      });
+    },
     old: function (_old) {
       function old(_x) {
         return _old.apply(this, arguments);
@@ -101849,7 +101933,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
-  base: "http://" + window.location.host,
+  base: "http://" + window.location.host + ':8090',
   //hack to work on codeanywhere
   address: {
     index: "/address/:id:"
@@ -102794,8 +102878,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/cabox/workspace/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cabox/workspace/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

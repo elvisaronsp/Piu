@@ -16,9 +16,13 @@ export default {
   props: ['data', 'entity'],
   data(){
     return {
-      editLink: '/'+ this.entity +'/edit/'+ this.data.id,
       custom: []
     };
+  },
+  computed:{
+    editLink(){
+      return '/'+ this.entity +'/edit/'+ this.data.id;
+    }
   },
   methods: {
     deleteEntity: function(){

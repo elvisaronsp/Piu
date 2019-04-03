@@ -70,7 +70,7 @@ class StudentController extends Controller
         $address = Address::create($data);
         $data['address_id'] = $address->id;
         $birth = BirthCertificate::create($data);
-        $data['birth_certificate_id'] = $address->id;
+        $data['birth_certificate_id'] = $birth->id;
         $data['school_id'] = Auth::user()->school_id;
         $general_registration = GeneralRegistration::create($data);
         $data['general_registration_id'] = $general_registration->id;

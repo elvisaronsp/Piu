@@ -3,15 +3,18 @@ const app = new Vue({});
 
 Vue.mixin({
     mounted(){
-      let data = this.$data;
-      let old = this.old;
-      Object.keys(data).forEach(function(element, index, array){
-        if( typeof(data[element]) == 'string' ){
-            data[element] = old(element);
-        }
-      });
+      this.loadOldInputs();
     },
     methods: {
+        loadOldInputs(){
+          let data = this.$data;
+          let old = this.old;
+          Object.keys(data).forEach(function(element, index, array){
+            if( typeof(data[element]) == 'string'  && data[element] == ''){
+                data[element] = old(element);
+            }
+          });
+        },
         old(key){
           return old[key] == undefined? '' : old[key];
         },

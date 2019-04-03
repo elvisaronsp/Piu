@@ -8,7 +8,7 @@ class Student extends Model
 {
 
     protected $fillable = ['name', 'address_id', 'birth_certificate_id', 'born_in', 'genre', 'school_id', 'general_registration_id',
-                           'multi_activity', 'sus', 'bolsa_familia'];
+                           'multi_activity', 'sus', 'bolsa_familia', 'father_contact', 'mother_contact'];
 
     public static $rules = [
       'name' => 'required',

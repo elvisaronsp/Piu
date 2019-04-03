@@ -73,7 +73,7 @@
           placeholder="Número do cartão do bolsa família"
         >
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 form-group">
         <label>Cartão do SUS</label>
         <input
           class="form-control"
@@ -88,12 +88,12 @@
     <div class="row">
       <div class="col-md-6">
         <label>Telefone da Mãe</label>
-        <input class="form-control" :mask="['(##) #####-####']" placeholder="Digite o número da mãe" v-model="mother_contact">
+        <the-mask class="form-control" :mask="['(##) ####-####', '(##) #####-####']" placeholder="Digite o número da mãe" v-model="mother_contact"/>
         <input type="hidden" name="mother_contact" :value="mother_contact">
       </div>
       <div class="col-md-6">
         <label>Telefone do Pai</label>
-        <input class="form-control" :mask="['(##) #####-####']" placeholder="Digite o número do pai" v-model="father_contact">
+        <the-mask class="form-control" :mask="['(##) ####-####', '(##) #####-####']" placeholder="Digite o número do pai" v-model="father_contact"/>
         <input type="hidden" name="father_contact" :value="father_contact">
       </div>
     </div>
@@ -120,16 +120,17 @@ export default {
       this.mother_contact = s.mother_contact;
       this.sus = s.sus;
       this.bolsa_familia = s.bolsa_familia;
-      loadSpecialDetails();
+      this.loadSpecialDetails();
     }
   },
   methods: {
     loadSpecialDetails() {
-      axios
+      //TODO: Corrigir falha nesta requisição
+      /*axios
         .get(this.$routes.special_details.index.replace(":id:", this.id))
         .then(response => {
           this.special_details = response.data;
-        });
+        });*/
     }
   },
   data() {
