@@ -46,7 +46,8 @@ class GroupController extends Controller
       $data = $request->validated();
       $group = Group::where([
         ['title', '=', $data['title']],
-        ['shift', '=', $data['shift']]
+        ['shift', '=', $data['shift']],
+        ['school_id', '=', Auth::user()->school_id]
       ])->first();
       if(!$group){
         $data['school_id'] = Auth::user()->school_id;
