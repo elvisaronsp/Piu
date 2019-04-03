@@ -44,10 +44,19 @@ class GroupController extends Controller
 
     public function store(GroupStoreRequest $request){
       $data = $request->validated();
-      $data['school_id'] = Auth::user()->school_id;
-      Group::create($data);
-      Flash::success("Turma {$data['title']} criada com sucesso!");
-      return redirect('/');
+      $group = Group::where([
+        ['title', '=', $data['title']],
+        ['shift', '=', $data['shift']]
+      ])->first();
+      if(!$group){
+        $data['school_id'] = Auth::user()->school_id;
+        Group::create($data);
+        Flash::success("Turma {$data['title']} criada com sucesso!");
+      }else{
+        Flash::error("A turma {$data['title']} já foi criada no turno {$data['shift']}");
+        $request->flash();
+      }
+      return redirect()->back();
     }
 
     public function destroy(Request $request, $id){
