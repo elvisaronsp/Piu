@@ -23,6 +23,7 @@ class CreateSchoolsTable extends Migration
             $table->string('direc_number')->nullable();
             $table->string('logo');
             $table->string('city_logo')->nullable();
+            $table->boolean('enabled')->nullable();
             $table->timestamps();
         });
     }
