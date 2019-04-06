@@ -19,7 +19,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="allergic">Alergia</label>
-        <input class="form-control" type="text" v-model="em.allergic" name="allergic">
+        <input class="form-control" type="text" v-model="em.allergic" name="allergic" required>
       </div>
     </div>
     <div class="row">
@@ -35,7 +35,7 @@
       <div class="form-group col-md-6">
         <!--<select-ajax-component :url="this.$routes.responsability.index" name="responsability_id" placeholder="Selecione o cargo" label="Cargo"></select-ajax-component>-->
         <label>Cargo</label>
-        <select class="form-control" name="role" placeholder="Selecione o cargo" v-model="em.role">
+        <select class="form-control" name="role" placeholder="Selecione o cargo" v-model="em.role" required>
           <option value="">Selecione o cargo</option>
           <option v-for="r in roles" :value="r.name">{{ r.title }}</option>
         </select>
@@ -48,7 +48,7 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label for="specialization">Especialização</label>
-        <input class="form-control" type="text" name="specialization" v-model="em.specialization">
+        <input class="form-control" type="text" name="specialization" v-model="em.specialization" required>
       </div>
       <div class="form-group col-md-6">
         <label for="contract">Contrato</label>
@@ -58,11 +58,11 @@
     <div class="row">
       <div class="form-group col-md-6">
         <label for="statutory">Estatutário</label>
-        <input class="form-control" type="text" name="statutory" v-model="em.statutory">
+        <input class="form-control" type="text" name="statutory" v-model="em.statutory" required>
       </div>
       <div class="form-group col-md-6">
         <label for="workload">Carga horária</label>
-        <input class="form-control" type="number" name="workload" v-model="em.workload">
+        <input class="form-control" type="number" name="workload" v-model="em.workload" required>
       </div>
     </div>
   </div>

@@ -35,7 +35,7 @@
                   @endguest
                   @auth
                       @if(Auth::user()->school)
-                          <img src="{{ Auth::user()->school->urlLogo() }}" width="120" alt="">
+                          <img src="{{ Auth::user()->school->urlLogo() }}" height="90" alt="{{ Auth::user()->school->name }}">
                       @else
                           It's a test!
                       @endif
