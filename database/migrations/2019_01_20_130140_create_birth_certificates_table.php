@@ -16,10 +16,12 @@ class CreateBirthCertificatesTable extends Migration
         Schema::create('birth_certificates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('book');
-            $table->string('birth_number');
+            $table->string('birth_number')->nullable();
             $table->string('leaf');
-            $table->string('term');
+            $table->string('term')->nullable();
             $table->date('birth_emission');
+            $table->string('emission_city');
+            $table->string('emission_state');
             $table->timestamps();
         });
     }

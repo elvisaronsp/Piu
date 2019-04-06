@@ -54,7 +54,8 @@ class GroupController extends Controller
         Group::create($data);
         Flash::success("Turma {$data['title']} criada com sucesso!");
       }else{
-        Flash::error("A turma {$data['title']} já foi criada no turno {$data['shift']}");
+        $shift = __($data['shift']);
+        Flash::error("A turma {$data['title']} já foi criada no turno {$shift}");
         $request->flash();
       }
       return redirect()->back();

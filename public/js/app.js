@@ -2514,89 +2514,7 @@ __webpack_require__.r(__webpack_exports__);
       state: '',
       neighborhood: '',
       number: '',
-      complement: '',
-      states: [{
-        value: "AC",
-        text: "Acre"
-      }, {
-        value: "AL",
-        text: "Alagoas"
-      }, {
-        value: "AP",
-        text: "Amapá"
-      }, {
-        value: "AM",
-        text: "Amazonas"
-      }, {
-        value: "BA",
-        text: "Bahia"
-      }, {
-        value: "CE",
-        text: "Ceará"
-      }, {
-        value: "DF",
-        text: "Distrito Federal"
-      }, {
-        value: "ES",
-        text: "Espírito Santo"
-      }, {
-        value: "GO",
-        text: "Goiás"
-      }, {
-        value: "MA",
-        text: "Maranhão"
-      }, {
-        value: "MT",
-        text: "Mato Grosso"
-      }, {
-        value: "MS",
-        text: "Mato Grosso do Sul"
-      }, {
-        value: "MG",
-        text: "Minas Gerais"
-      }, {
-        value: "PA",
-        text: "Pará"
-      }, {
-        value: "PB",
-        text: "Paraíba"
-      }, {
-        value: "PR",
-        text: "Paraná"
-      }, {
-        value: "PE",
-        text: "Pernambuco"
-      }, {
-        value: "PI",
-        text: "Piauí"
-      }, {
-        value: "RJ",
-        text: "Rio de Janeiro"
-      }, {
-        value: "RN",
-        text: "Rio Grande do Norte"
-      }, {
-        value: "RS",
-        text: "Rio Grande do Sul"
-      }, {
-        value: "RO",
-        text: "Rondônia"
-      }, {
-        value: "RR",
-        text: "Roraima"
-      }, {
-        value: "SC",
-        text: "Santa Catarina"
-      }, {
-        value: "SP",
-        text: "São Paulo"
-      }, {
-        value: "SE",
-        text: "Sergipe"
-      }, {
-        value: "TO",
-        text: "Tocantins"
-      }]
+      complement: ''
     };
   }
 });
@@ -2646,6 +2564,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['birth'],
   mounted: function mounted() {
@@ -2653,19 +2584,23 @@ __webpack_require__.r(__webpack_exports__);
 
     if (birth) {
       this.book = birth.book;
-      this.birth_number = birth.birth_number;
+      this.birthNumber = birth.birth_number;
       this.leaf = birth.leaf;
       this.term = birth.term;
-      this.birth_emission = birth.birth_emission;
+      this.birthEmission = birth.birth_emission;
+      this.emissionCity = birth.emission_city;
+      this.emissionState = birth.emission_state;
     }
   },
   data: function data() {
     return {
       book: '',
-      birth_number: '',
+      birthNumber: '',
       leaf: '',
       term: '',
-      birth_emission: ''
+      birthEmission: '',
+      emissionCity: '',
+      emissionState: ''
     };
   }
 });
@@ -78035,7 +77970,11 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "book" },
+          attrs: {
+            type: "text",
+            name: "book",
+            placeholder: "Informe o livro da certidão"
+          },
           domProps: { value: _vm.book },
           on: {
             input: function($event) {
@@ -78058,19 +77997,24 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.birth_number,
-              expression: "birth_number"
+              value: _vm.birthNumber,
+              expression: "birthNumber"
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "birth_number" },
-          domProps: { value: _vm.birth_number },
+          attrs: {
+            type: "text",
+            name: "birth_number",
+            placeholder: "Informe o número da certidão",
+            disabled: _vm.term.length > 0
+          },
+          domProps: { value: _vm.birthNumber },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.birth_number = $event.target.value
+              _vm.birthNumber = $event.target.value
             }
           }
         })
@@ -78091,7 +78035,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "leaf" },
+          attrs: { type: "text", name: "leaf", placeholder: "Informe a folha" },
           domProps: { value: _vm.leaf },
           on: {
             input: function($event) {
@@ -78117,7 +78061,12 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "term" },
+          attrs: {
+            type: "text",
+            name: "term",
+            placeholder: "Informe o termo da certidão",
+            disabled: _vm.birthNumber.length > 0
+          },
           domProps: { value: _vm.term },
           on: {
             input: function($event) {
@@ -78131,29 +78080,111 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-4" }, [
-        _c("label", { attrs: { for: "emission" } }, [_vm._v("Emissão")]),
+        _c("label", { attrs: { for: "emission" } }, [
+          _vm._v("Data de emissão")
+        ]),
         _vm._v(" "),
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.birth_emission,
-              expression: "birth_emission"
+              value: _vm.birthEmission,
+              expression: "birthEmission"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "date", name: "birth_emission" },
-          domProps: { value: _vm.birth_emission },
+          domProps: { value: _vm.birthEmission },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.birth_emission = $event.target.value
+              _vm.birthEmission = $event.target.value
             }
           }
         })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("label", [_vm._v("Cidade da emissão")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.emissionCity,
+              expression: "emissionCity"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "emission_city",
+            placeholder: "Digite a cidade de emissão",
+            required: ""
+          },
+          domProps: { value: _vm.emissionCity },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.emissionCity = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("label", [_vm._v("Estado da emissão")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.emissionState,
+                expression: "emissionState"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "state", required: "" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.emissionState = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("Selecione o estado...")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.states, function(state) {
+              return _c("option", { domProps: { value: state.value } }, [
+                _vm._v(_vm._s(state.text))
+              ])
+            })
+          ],
+          2
+        )
       ])
     ])
   ])
@@ -101840,6 +101871,92 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   mounted: function mounted() {
     this.loadOldInputs();
   },
+  data: function data() {
+    return {
+      states: [{
+        value: "AC",
+        text: "Acre"
+      }, {
+        value: "AL",
+        text: "Alagoas"
+      }, {
+        value: "AP",
+        text: "Amapá"
+      }, {
+        value: "AM",
+        text: "Amazonas"
+      }, {
+        value: "BA",
+        text: "Bahia"
+      }, {
+        value: "CE",
+        text: "Ceará"
+      }, {
+        value: "DF",
+        text: "Distrito Federal"
+      }, {
+        value: "ES",
+        text: "Espírito Santo"
+      }, {
+        value: "GO",
+        text: "Goiás"
+      }, {
+        value: "MA",
+        text: "Maranhão"
+      }, {
+        value: "MT",
+        text: "Mato Grosso"
+      }, {
+        value: "MS",
+        text: "Mato Grosso do Sul"
+      }, {
+        value: "MG",
+        text: "Minas Gerais"
+      }, {
+        value: "PA",
+        text: "Pará"
+      }, {
+        value: "PB",
+        text: "Paraíba"
+      }, {
+        value: "PR",
+        text: "Paraná"
+      }, {
+        value: "PE",
+        text: "Pernambuco"
+      }, {
+        value: "PI",
+        text: "Piauí"
+      }, {
+        value: "RJ",
+        text: "Rio de Janeiro"
+      }, {
+        value: "RN",
+        text: "Rio Grande do Norte"
+      }, {
+        value: "RS",
+        text: "Rio Grande do Sul"
+      }, {
+        value: "RO",
+        text: "Rondônia"
+      }, {
+        value: "RR",
+        text: "Roraima"
+      }, {
+        value: "SC",
+        text: "Santa Catarina"
+      }, {
+        value: "SP",
+        text: "São Paulo"
+      }, {
+        value: "SE",
+        text: "Sergipe"
+      }, {
+        value: "TO",
+        text: "Tocantins"
+      }]
+    };
+  },
   methods: {
     loadOldInputs: function loadOldInputs() {
       var data = this.$data;
@@ -102878,8 +102995,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/cabox/workspace/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/cabox/workspace/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
