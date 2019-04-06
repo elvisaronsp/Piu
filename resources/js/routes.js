@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 Vue.prototype.$routes = {
-    base: "http://" + window.location.host + ':8090', //hack to work on codeanywhere
+    base: "http://" + window.location.host , //hack to work on codeanywhere
     address: {
         index: "/address/:id:"
     },

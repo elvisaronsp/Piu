@@ -101933,7 +101933,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$routes = {
-  base: "http://" + window.location.host + ':8090',
+  base: "http://" + window.location.host,
   //hack to work on codeanywhere
   address: {
     index: "/address/:id:"
