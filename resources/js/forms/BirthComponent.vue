@@ -9,7 +9,7 @@
     <div class="row">
       <div class="form-group col-md-4">
         <label for="book">Livro</label>
-        <input class="form-control" type="text" name="book" v-model="book" placeholder="Informe o livro da certidão">
+        <input class="form-control" type="text" name="book" v-model="book" placeholder="Informe o livro da certidão" required>
       </div>
       <div class="form-group col-md-8">
         <label for="birth_number">Número da certidão</label>
@@ -19,7 +19,7 @@
     <div class="row">
       <div class="form-group col-md-3">
         <label for="leaf">Folha</label>
-        <input class="form-control" type="text" name="leaf" v-model="leaf" placeholder="Informe a folha">
+        <input class="form-control" type="text" name="leaf" v-model="leaf" placeholder="Informe a folha" required>
       </div>
       <div class="form-group col-md-4">
         <label for="term">Termo</label>
@@ -27,7 +27,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="emission">Data de emissão</label>
-        <input class="form-control" type="date" name="birth_emission" v-model="birthEmission">
+        <input class="form-control" type="date" name="birth_emission" v-model="birthEmission" required>
       </div>
     </div>
     <div class="row">
@@ -37,7 +37,7 @@
       </div>
       <div class="form-group col-md-6">
         <label>Estado da emissão</label>
-        <select class="form-control" name="state" v-model="emissionState" required>
+        <select class="form-control" name="emission_state" v-model="emissionState" required>
           <option value="">Selecione o estado...</option>
           <option v-bind:value="state.value" v-for="state in states">{{ state.text }}</option>
         </select>

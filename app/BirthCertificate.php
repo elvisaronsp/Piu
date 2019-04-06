@@ -11,7 +11,7 @@ class BirthCertificate extends Model
 
     public static $rules = [
       'book' => 'required',
-      'birth_number' => ['required'],
+      'birth_number' => 'required',
       'leaf' => 'required',
       'birth_emission' => 'required',
       'term' => 'required',
