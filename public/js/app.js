@@ -2602,6 +2602,15 @@ __webpack_require__.r(__webpack_exports__);
       emissionCity: '',
       emissionState: ''
     };
+  },
+  computed: {
+    filledTerm: function filledTerm() {
+      if (this.term !== null) {
+        return this.term.length > 0;
+      }
+
+      return false;
+    }
   }
 });
 
@@ -3515,8 +3524,6 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading = false;
 
         _this2.showMessage("Parabéns!", "Aluno matriculado com sucesso!");
-
-        window.location.href = window.location.hostname + "/students/" + _this2.entityId;
       }).catch(function (err) {
         _this2.disabled = false;
         _this2.loading = false;
@@ -77976,7 +77983,7 @@ var render = function() {
             type: "text",
             name: "birth_number",
             placeholder: "Informe o número da certidão",
-            disabled: _vm.term.length > 0
+            disabled: _vm.filledTerm
           },
           domProps: { value: _vm.birthNumber },
           on: {
@@ -78040,7 +78047,7 @@ var render = function() {
             type: "text",
             name: "term",
             placeholder: "Informe o termo da certidão",
-            disabled: _vm.birthNumber.length > 0
+            disabled: !_vm.filledTerm
           },
           domProps: { value: _vm.term },
           on: {
@@ -102891,8 +102898,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/piu/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/piu/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/school_manager/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/school_manager/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

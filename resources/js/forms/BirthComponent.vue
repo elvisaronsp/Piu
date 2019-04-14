@@ -13,7 +13,7 @@
       </div>
       <div class="form-group col-md-8">
         <label for="birth_number">Número da certidão</label>
-        <input class="form-control" type="text" name="birth_number" v-model="birthNumber" placeholder="Informe o número da certidão" :disabled="term.length > 0">
+        <input class="form-control" type="text" name="birth_number" v-model="birthNumber" placeholder="Informe o número da certidão" :disabled="filledTerm">
       </div>
     </div>
     <div class="row">
@@ -23,7 +23,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="term">Termo</label>
-        <input class="form-control" type="text" name="term" v-model="term" placeholder="Informe o termo da certidão" :disabled="birthNumber.length > 0">
+        <input class="form-control" type="text" name="term" v-model="term" placeholder="Informe o termo da certidão" :disabled="!filledTerm">
       </div>
       <div class="form-group col-md-4">
         <label for="emission">Data de emissão</label>
@@ -69,6 +69,14 @@ export default {
         birthEmission: '',
         emissionCity: '',
         emissionState: ''
+      }
+    },
+    computed: {
+      filledTerm(){
+        if( this.term !== null ) {
+            return this.term.length > 0;
+        }
+        return false;
       }
     }
 }

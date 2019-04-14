@@ -70,8 +70,6 @@ export default {
           this.disabled = false;
           this.loading = false;
           this.showMessage("Parabéns!", "Aluno matriculado com sucesso!");
-          window.location.href =
-            window.location.hostname + "/students/" + this.entityId;
         })
         .catch(err => {
           this.disabled = false;

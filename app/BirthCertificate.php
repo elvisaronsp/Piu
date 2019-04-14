@@ -11,10 +11,10 @@ class BirthCertificate extends Model
 
     public static $rules = [
       'book' => 'required',
-      'birth_number' => 'required',
+      'birth_number' => 'required_if:term,',
       'leaf' => 'required',
       'birth_emission' => 'required',
-      'term' => 'required',
+      'term' => 'required_if:birth_number,',
       'emission_city' => 'required',
       'emission_state' => 'required'
     ];
