@@ -21,7 +21,7 @@
       </div>
     </div>
     <button :class="'btn btn-'+style" v-on:click="submit" :disabled="disabled || notFilled">
-      <moon-loader :loading="loading" color="white" :size="35"></moon-loader>
+      <moon-loader :loading="loading" color="white" size="35"></moon-loader>
       {{ text }}
     </button>
   </div>

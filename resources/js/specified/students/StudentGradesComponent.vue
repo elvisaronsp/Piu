@@ -20,8 +20,8 @@
     props: ['studentGroupId'],
     data: function(){
       return {
-        grades: '',
-        student: ''
+        grades: {},
+        student: {}
       };
     },
     mounted() {

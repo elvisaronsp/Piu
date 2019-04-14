@@ -12,6 +12,7 @@ const store = new Vuex.Store({
         groups: [],
         stuffs: [],
         options: [],
+        //grades: [],
         disabled_register: true
     },
     mutations: {

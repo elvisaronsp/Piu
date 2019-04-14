@@ -1,7 +1,10 @@
 <template>
   <div>
-    <dinamic-table-component v-if="$store.state[entity].length == 0" :data="data" :entity="entity" :custom="custom"></dinamic-table-component>
-    <dinamic-table-component v-else :data="$store.state[entity]" :entity="entity" :custom="custom"></dinamic-table-component>
+    <div v-if="!manual">
+      <dinamic-table-component v-if="$store.state[entity].length == 0" :data="data" :entity="entity" :custom="custom"></dinamic-table-component>
+      <dinamic-table-component v-else :data="$store.state[entity]" :entity="entity" :custom="custom"></dinamic-table-component>
+    </div>
+    <dinamic-table-component v-else :data="manualData" :entity="entity" :custom="custom"></dinamic-table-component>
     <pagination :data="data" @pagination-change-page="getResults"></pagination>
   </div>
 </template>

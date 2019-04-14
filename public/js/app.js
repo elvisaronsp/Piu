@@ -4244,8 +4244,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['studentGroupId'],
   data: function data() {
     return {
-      grades: '',
-      student: ''
+      grades: {},
+      student: {}
     };
   },
   mounted: function mounted() {
@@ -4571,6 +4571,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DinamicTableComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DinamicTableComponent */ "./resources/js/tables/DinamicTableComponent.vue");
 /* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js");
 /* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
 //
 //
 //
@@ -78881,7 +78884,7 @@ var render = function() {
       },
       [
         _c("moon-loader", {
-          attrs: { loading: _vm.loading, color: "white", size: 35 }
+          attrs: { loading: _vm.loading, color: "white", size: "35" }
         }),
         _vm._v("\n    " + _vm._s(_vm.text) + "\n  ")
       ],
@@ -81309,13 +81312,31 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.$store.state[_vm.entity].length == 0
-        ? _c("dinamic-table-component", {
-            attrs: { data: _vm.data, entity: _vm.entity, custom: _vm.custom }
-          })
+      !_vm.manual
+        ? _c(
+            "div",
+            [
+              _vm.$store.state[_vm.entity].length == 0
+                ? _c("dinamic-table-component", {
+                    attrs: {
+                      data: _vm.data,
+                      entity: _vm.entity,
+                      custom: _vm.custom
+                    }
+                  })
+                : _c("dinamic-table-component", {
+                    attrs: {
+                      data: _vm.$store.state[_vm.entity],
+                      entity: _vm.entity,
+                      custom: _vm.custom
+                    }
+                  })
+            ],
+            1
+          )
         : _c("dinamic-table-component", {
             attrs: {
-              data: _vm.$store.state[_vm.entity],
+              data: _vm.manualData,
               entity: _vm.entity,
               custom: _vm.custom
             }
@@ -102654,6 +102675,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     groups: [],
     stuffs: [],
     options: [],
+    //grades: [],
     disabled_register: true
   },
   mutations: {
