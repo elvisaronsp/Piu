@@ -1,41 +1,48 @@
 <template>
-  <div class="card">
-    <div class="card-header">
-      <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
-          <img :src="logo" height="100" alt="">
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
-          <h5>{{ data_fetched.group.school.name }}</h5>
-          <p>
-            {{ address }}<br>
-            Turma: {{ data_fetched.group.title }}<br>
-          </p>
-          <h4 class="text-center">BOLETIM {{ data_fetched.created_at | moment('YYYY') }} </h4>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
-          <img :src="city_logo" height="100" alt="">
+  <div>
+    <div class="col-md-3 no-print">
+      <button class="btn btn-warning" type="button" @click="print">
+        <feather type="printer"></feather>
+      </button>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+            <img :src="logo" height="100" alt="">
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+            <h5>{{ data_fetched.group.school.name }}</h5>
+            <p>
+              {{ address }}<br>
+              Turma: {{ data_fetched.group.title }}<br>
+            </p>
+            <h4 class="text-center">BOLETIM {{ data_fetched.created_at | moment('YYYY') }} </h4>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+            <img :src="city_logo" height="100" alt="">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card-body">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Disciplinas</th>
-            <th v-for="u in units" :key="u.id">{{ u['título'] }}</th>
-            <th>Resultado Final</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="s in data_fetched.group.stuffs" :key="s.id">
-            <td>{{ s.title }}</td>
-            <td v-for="g in s.grades" :key="g.id">{{ g.value }}</td>
-            <td v-for="r in (units.length - s.grades.length)"> - </td>
-            <td>{{ result(s.grades) }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Disciplinas</th>
+              <th v-for="u in units" :key="u.id">{{ u['título'] }}</th>
+              <th>Resultado Final</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="s in data_fetched.group.stuffs" :key="s.id">
+              <td>{{ s.title }}</td>
+              <td v-for="g in s.grades" :key="g.id">{{ g.value }}</td>
+              <td v-for="r in (units.length - s.grades.length)"> - </td>
+              <td>{{ result(s.grades) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

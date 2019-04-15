@@ -3960,7 +3960,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StudentAtaHeaderComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentAtaHeaderComponent */ "./resources/js/specified/students/StudentAtaHeaderComponent.vue");
+/* harmony import */ var vue_feather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-feather */ "./node_modules/vue-feather/dist/vue-feather.js");
+/* harmony import */ var vue_feather__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_feather__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _StudentAtaHeaderComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentAtaHeaderComponent */ "./resources/js/specified/students/StudentAtaHeaderComponent.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3970,10 +3979,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['group'],
   components: {
-    StudentAtaHeaderComponent: _StudentAtaHeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+    StudentAtaHeaderComponent: _StudentAtaHeaderComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Feather: vue_feather__WEBPACK_IMPORTED_MODULE_0___default.a
   }
 });
 
@@ -4097,6 +4108,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -80659,17 +80677,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c("student-ata-header-component", { attrs: { group: _vm.group } }),
-        _vm._v(" "),
-        _c("student-ata-body-component", { attrs: { group: _vm.group } })
-      ],
-      1
-    )
+  return _c("div", [
+    _c("div", { staticClass: "col-md-3 no-print" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning",
+          attrs: { type: "button" },
+          on: { click: _vm.print }
+        },
+        [_c("feather", { attrs: { type: "printer" } })],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card" }, [
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("student-ata-header-component", { attrs: { group: _vm.group } }),
+          _vm._v(" "),
+          _c("student-ata-body-component", { attrs: { group: _vm.group } })
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -80850,82 +80883,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-3 col-lg-3" }, [
-          _c("img", { attrs: { src: _vm.logo, height: "100", alt: "" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6 col-sm-6 col-xs-6 col-lg-6" }, [
-          _c("h5", [_vm._v(_vm._s(_vm.data_fetched.group.school.name))]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("\n          " + _vm._s(_vm.address)),
-            _c("br"),
-            _vm._v(
-              "\n          Turma: " + _vm._s(_vm.data_fetched.group.title)
-            ),
-            _c("br")
-          ]),
-          _vm._v(" "),
-          _c("h4", { staticClass: "text-center" }, [
-            _vm._v(
-              "BOLETIM " +
-                _vm._s(_vm._f("moment")(_vm.data_fetched.created_at, "YYYY")) +
-                " "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-3 col-lg-3" }, [
-          _c("img", { attrs: { src: _vm.city_logo, height: "100", alt: "" } })
-        ])
-      ])
+  return _c("div", [
+    _c("div", { staticClass: "col-md-3 no-print" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning",
+          attrs: { type: "button" },
+          on: { click: _vm.print }
+        },
+        [_c("feather", { attrs: { type: "printer" } })],
+        1
+      )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("table", { staticClass: "table table-hover" }, [
-        _c("thead", [
-          _c(
-            "tr",
-            [
-              _c("th", [_vm._v("Disciplinas")]),
-              _vm._v(" "),
-              _vm._l(_vm.units, function(u) {
-                return _c("th", { key: u.id }, [_vm._v(_vm._s(u["título"]))])
-              }),
-              _vm._v(" "),
-              _c("th", [_vm._v("Resultado Final")])
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.data_fetched.group.stuffs, function(s) {
-            return _c(
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-3 col-lg-3" }, [
+            _c("img", { attrs: { src: _vm.logo, height: "100", alt: "" } })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 col-sm-6 col-xs-6 col-lg-6" }, [
+            _c("h5", [_vm._v(_vm._s(_vm.data_fetched.group.school.name))]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v("\n            " + _vm._s(_vm.address)),
+              _c("br"),
+              _vm._v(
+                "\n            Turma: " + _vm._s(_vm.data_fetched.group.title)
+              ),
+              _c("br")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "text-center" }, [
+              _vm._v(
+                "BOLETIM " +
+                  _vm._s(
+                    _vm._f("moment")(_vm.data_fetched.created_at, "YYYY")
+                  ) +
+                  " "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-3 col-lg-3" }, [
+            _c("img", { attrs: { src: _vm.city_logo, height: "100", alt: "" } })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("table", { staticClass: "table table-hover" }, [
+          _c("thead", [
+            _c(
               "tr",
-              { key: s.id },
               [
-                _c("td", [_vm._v(_vm._s(s.title))]),
+                _c("th", [_vm._v("Disciplinas")]),
                 _vm._v(" "),
-                _vm._l(s.grades, function(g) {
-                  return _c("td", { key: g.id }, [_vm._v(_vm._s(g.value))])
+                _vm._l(_vm.units, function(u) {
+                  return _c("th", { key: u.id }, [_vm._v(_vm._s(u["título"]))])
                 }),
                 _vm._v(" "),
-                _vm._l(_vm.units.length - s.grades.length, function(r) {
-                  return _c("td", [_vm._v(" - ")])
-                }),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm.result(s.grades)))])
+                _c("th", [_vm._v("Resultado Final")])
               ],
               2
             )
-          }),
-          0
-        )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.data_fetched.group.stuffs, function(s) {
+              return _c(
+                "tr",
+                { key: s.id },
+                [
+                  _c("td", [_vm._v(_vm._s(s.title))]),
+                  _vm._v(" "),
+                  _vm._l(s.grades, function(g) {
+                    return _c("td", { key: g.id }, [_vm._v(_vm._s(g.value))])
+                  }),
+                  _vm._v(" "),
+                  _vm._l(_vm.units.length - s.grades.length, function(r) {
+                    return _c("td", [_vm._v(" - ")])
+                  }),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.result(s.grades)))])
+                ],
+                2
+              )
+            }),
+            0
+          )
+        ])
       ])
     ])
   ])
@@ -101890,6 +101940,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
           data[element] = old(element);
         }
       });
+    },
+    print: function print() {
+      window.print();
     },
     old: function (_old) {
       function old(_x) {

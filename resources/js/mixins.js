@@ -48,6 +48,9 @@ Vue.mixin({
             }
           });
         },
+        print(){
+          window.print();
+        },
         old(key){
           return old[key] == undefined? '' : old[key];
         },
